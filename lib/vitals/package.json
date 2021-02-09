@@ -1,0 +1,40 @@
+{
+  "name": "@auburnsummer/vitals",
+  "version": "0.6.4",
+  "description": "produce a short summary of an rdzip",
+  "main": "lib/index.js",
+  "bin": "lib/cli.js",
+  "homepage": "https://github.com/auburnsummer/vitals",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auburnsummer/vitals.git"
+  },
+  "files": [
+    "lib/*"
+  ],
+  "scripts": {
+    "test": "npx eslint ."
+  },
+  "author": "auburnsummer",
+  "license": "AGPL-3.0-or-later",
+  "devDependencies": {
+    "ajv": "^7.0.3",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "tap": "^14.10.6"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "backblaze-b2": "^0.9.12",
+    "base-x": "^3.0.8",
+    "blake3": "^2.1.4",
+    "bluebird": "^3.7.2",
+    "dotenv": "^8.2.0",
+    "form-data": "^3.0.0",
+    "js-sha256": "^0.9.0",
+    "jszip": "^3.2.2",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.5"
+  }
+}
