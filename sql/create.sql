@@ -19,7 +19,7 @@ CREATE TABLE level (
     id              TEXT    REFERENCES status(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
     artist          TEXT    NOT NULL,
     song            TEXT    NOT NULL,
-    difficulty      TEXT    NOT NULL,
+    difficulty      INTEGER NOT NULL,
     seizure_warning TEXT    NOT NULL,
     description     TEXT    NOT NULL,
     max_bpm         REAL    NOT NULL,
