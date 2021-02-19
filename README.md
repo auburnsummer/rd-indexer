@@ -29,7 +29,7 @@ The sources are defined in a YAML file.
 
    (or just copy paste the script in)
 
-10. Exit the shell.
+10. Exit the shell (Ctrl-D).
 
 11. Run this command (replacing `<path to db>` with the path to the database file you made earlier):
 

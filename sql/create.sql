@@ -20,7 +20,7 @@ CREATE TABLE level (
     artist          TEXT    NOT NULL,
     song            TEXT    NOT NULL,
     difficulty      INTEGER NOT NULL,
-    seizure_warning TEXT    NOT NULL,
+    seizure_warning INTEGER NOT NULL,
     description     TEXT    NOT NULL,
     max_bpm         REAL    NOT NULL,
     min_bpm         REAL    NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE level (
 CREATE TABLE level_tag (
     id      TEXT    REFERENCES level(id) ON DELETE CASCADE,
     tag     TEXT    NOT NULL,
-    seq     TEXT    NOT NULL, -- index of this tag
+    seq     INTEGER NOT NULL, -- index of this tag
     primary key (id, tag, seq)
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE level_tag (
 CREATE TABLE level_author (
     id      TEXT    REFERENCES level(id) ON DELETE CASCADE,
     author  TEXT    NOT NULL,
-    seq     TEXT    NOT NULL, -- index of this tag
+    seq     INTEGER NOT NULL, -- index of this tag
     primary key (id, author, seq)
 );
 
