@@ -43,3 +43,5 @@ The sources are defined in a YAML file.
 13. Check that it's fine and didn't explode
 
 14. Once we're sure it works, you can run it without the DONT_UPLOAD flag and it will upload it
+
+15. You can also run with FORCE_UPLOAD=true to force it to upload even if no changes were made
