@@ -33,13 +33,13 @@ The sources are defined in a YAML file.
 
 11. Run this command (replacing `<path to db>` with the path to the database file you made earlier):
 
-        node lib/cli.js index <path to db> conf/sources.yml
+        DONT_UPLOAD=true node lib/cli.js <path to db> conf/sources.yml
 
 12. It will run and make the database.
 
     * Right now sometimes it randomly freezes and I don't know why (Programming!). If this happens you can exit it with CTRL-C
       and start it again. It will resume from where it froze.
 
-13. Upload it with
+13. Check that it's fine and didn't explode
 
-        node lib/cli.js upload <path to db>
+14. Once we're sure it works, you can run it without the DONT_UPLOAD flag and it will upload it
