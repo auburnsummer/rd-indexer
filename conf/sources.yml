@@ -2,3 +2,11 @@
 - id: "yeoldesheet"
   driverName: "legacySheet"
   args: {}
+# RDL
+- id: "rdl"
+  driverName: "discord"
+  args:
+    # environment variables are inserted like this
+    botToken: "{env!DISCORD_BOT_TOKEN}"
+    channelID: "611380148431749151"
+    after: "812128531924385813"
