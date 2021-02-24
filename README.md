@@ -15,7 +15,8 @@ The sources are defined in a YAML file.
    * `HOSTED_FILES_PREFIX` is anything that goes before the filename in the URL of your files. For
      instance, if your file URLs look like `https://example.com/files/ehfaioehaowef.png` the
      `HOSTED_FILES_PREFIX` is `https://example.com/files/`
-
+   * `LODGE_TOKEN` and `LODGE_URL` are from [lodge.seelie.dev](lodge.seelie.dev) which is my wip
+     website
 5. Install node.js and SQLite3 on your OS.
 6. In this directory, run `npm install` to install the JavaScript dependencies.
 7. If there isn't a directory called `db` in this directory, create it.
