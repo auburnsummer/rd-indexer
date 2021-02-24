@@ -4,6 +4,7 @@ const {default: axios} = require('axios');
 const { flatten } = require('lodash');
 
 (async () => {
+    // get data...
     const data = await axios({
         method: "GET",
         url: API_URL
@@ -13,6 +14,7 @@ const { flatten } = require('lodash');
         });
     
     const payload = data
+        // if verified doesn't exist, we haven't bothered with it b4
         .filter(level => level.verified != null)
         .map(level => {
             if (level.verified) {
@@ -65,6 +67,17 @@ const { flatten } = require('lodash');
         });
 
     const payload2 = flatten(payload);
-    console.log(payload2);
+  
+    await axios({
+        method: "PATCH",
+        data: payload2,
+        url: process.env.LODGE_URL,
+        headers: {
+            authorization: `Token ${process.env.LODGE_TOKEN}`
+        }
+    })
+
+    console.log("done")
+
 
 })();
