@@ -10,3 +10,8 @@
     botToken: "{env!DISCORD_BOT_TOKEN}"
     channelID: "611380148431749151"
     after: "812128531924385813"
+# Steam Workshop
+- id: "workshop"
+  driverName: "workshop"
+  args:
+    bluebell: "http://127.0.0.1:8000"
