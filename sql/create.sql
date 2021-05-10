@@ -9,6 +9,12 @@ CREATE TABLE status (
     uploaded            INTEGER NOT NULL,
     -- Approval level.
     approval            INTEGER NOT NULL DEFAULT 0,
+    -- Number of "likes".
+    -- Not used yet.
+    kudos               INTEGER NOT NULL DEFAULT 0,
+    -- Difficulty, community-based, 1-20 scale.
+    -- Not used yet.
+    piu_difficulty      REAL NOT NULL DEFAULT 10.0,
     -- text that can appear regarding the approval level.
     -- for instance, this might show the reason a level has a star ("comp 8 winner"), or why a level was rejected ("oneshots incorrectly cued")
     approval_message    TEXT
