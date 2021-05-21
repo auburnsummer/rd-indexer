@@ -2,27 +2,8 @@
 --          TABLES
 -- ##########################
 
--- Persistent data related to a level.
-CREATE TABLE status (
-    id                  TEXT    PRIMARY KEY,
-    -- When the level was scraped.
-    uploaded            INTEGER NOT NULL,
-    -- Approval level.
-    approval            INTEGER NOT NULL DEFAULT 0,
-    -- Number of "likes".
-    -- Not used yet.
-    kudos               INTEGER NOT NULL DEFAULT 0,
-    -- Difficulty, community-based, 1-20 scale.
-    -- Not used yet.
-    piu_difficulty      REAL NOT NULL DEFAULT 10.0,
-    -- text that can appear regarding the approval level.
-    -- for instance, this might show the reason a level has a star ("comp 8 winner"), or why a level was rejected ("oneshots incorrectly cued")
-    approval_message    TEXT
-);
-
--- Data directly from vitals.
 CREATE TABLE level (
-    id              TEXT    REFERENCES status(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
+    id              TEXT    NOT NULL,
     artist          TEXT    NOT NULL,
     song            TEXT    NOT NULL,
     difficulty      INTEGER NOT NULL,
@@ -82,4 +63,40 @@ END;
 CREATE TRIGGER level_au AFTER UPDATE ON level BEGIN
   INSERT INTO ft(ft, rowid, artist, song, description) VALUES ('delete', old._rowid_, old.artist, old.song, old.description);
   INSERT INTO ft(rowid, artist, song, description) VALUES (new._rowid_, new.artist, new.song, new.description);
+END;
+
+--- status
+CREATE TABLE status (
+    id                  TEXT  REFERENCES level(id) ON DELETE CASCADE,
+    -- When the level was scraped.
+    uploaded            INTEGER NOT NULL,
+    -- Approval level.
+    approval            INTEGER NOT NULL DEFAULT 0,
+    -- Number of "likes". managed by a trigger.
+    kudos               INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE user (
+    id          TEXT        PRIMARY KEY,
+    permission  INTEGER     DEFAULT 1
+);
+
+CREATE TABLE user_level (
+    "level"      TEXT    REFERENCES status(id),
+    user         TEXT     REFERENCES user(id),
+    kudo         INTEGER  NOT NULL DEFAULT 0,
+    PRIMARY KEY ("level", user)   
+);
+
+CREATE TRIGGER user_level_ai AFTER INSERT ON user_level BEGIN
+  UPDATE status SET kudos = (SELECT sum(kudo) FROM user_level WHERE level = NEW.level) WHERE id = NEW.level;
+END;
+
+CREATE TRIGGER user_level_ad AFTER INSERT ON user_level BEGIN
+  UPDATE status SET kudos = (SELECT sum(kudo) FROM user_level WHERE level = OLD.level) WHERE id = OLD.level;
+END;
+
+CREATE TRIGGER user_level_au AFTER INSERT ON user_level BEGIN
+  UPDATE status SET kudos = (SELECT sum(kudo) FROM user_level WHERE level = NEW.level) WHERE id = NEW.level;
 END;
