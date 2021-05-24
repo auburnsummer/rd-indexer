@@ -77,13 +77,15 @@ CREATE TABLE status (
     PRIMARY KEY (id)
 );
 
+-- a discord user.
 CREATE TABLE user (
     id          TEXT        PRIMARY KEY,
     permission  INTEGER     DEFAULT 1
 );
 
+-- join table between discord user and a status table.
 CREATE TABLE user_level (
-    "level"      TEXT    REFERENCES status(id),
+    "level"      TEXT     REFERENCES status(id),
     user         TEXT     REFERENCES user(id),
     kudo         INTEGER  NOT NULL DEFAULT 0,
     PRIMARY KEY ("level", user)   
@@ -93,10 +95,10 @@ CREATE TRIGGER user_level_ai AFTER INSERT ON user_level BEGIN
   UPDATE status SET kudos = (SELECT sum(kudo) FROM user_level WHERE level = NEW.level) WHERE id = NEW.level;
 END;
 
-CREATE TRIGGER user_level_ad AFTER INSERT ON user_level BEGIN
+CREATE TRIGGER user_level_ad AFTER DELETE ON user_level BEGIN
   UPDATE status SET kudos = (SELECT sum(kudo) FROM user_level WHERE level = OLD.level) WHERE id = OLD.level;
 END;
 
-CREATE TRIGGER user_level_au AFTER INSERT ON user_level BEGIN
+CREATE TRIGGER user_level_au AFTER UPDATE ON user_level BEGIN
   UPDATE status SET kudos = (SELECT sum(kudo) FROM user_level WHERE level = NEW.level) WHERE id = NEW.level;
 END;
