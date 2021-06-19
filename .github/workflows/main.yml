@@ -80,3 +80,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Download the current db
+        run: mkdir db && curl http://api.rhythm.cafe/orchard.db > db/orchard.db
+        
+      - name: Print out the sha1sum of the current db
+        run: sha1sum db/orchard.db
