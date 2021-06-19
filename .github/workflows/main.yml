@@ -62,7 +62,9 @@ jobs:
       # ls
       - name: run bluebell as a backgrounded process
         working-directory: ./bluebell
-        run: python3 main.py &
+        run: |
+          mkdir ./tmp
+          python3 main.py > ./tmp/bluebelllog &
         env:
           STEAM_USER: ${{ secrets.STEAM_USER }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
@@ -85,3 +87,6 @@ jobs:
         
       - name: Print out the sha1sum of the current db
         run: sha1sum db/orchard.db
+        
+      - name: See how the bluebell logs are doing
+        run: cat ./tmp/bluebelllog
