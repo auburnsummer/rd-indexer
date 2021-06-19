@@ -55,9 +55,13 @@ jobs:
       - name: Install bluebell prereqs
         run: sudo pip3 install sanic scrapy dateparser rsa
         
-      # test
-      - name: test
-        run: echo $STEAM_USER | sha1sum
-        env:
-          STEAM_USER: ${{ secrets.STEAM_USER }}
+      # clone bluebell
+      - name: clone bluebell
+        run: git clone https://github.com/auburnsummer/bluebell.git
+        
+      # ls
+      - name: ls for now
+        working-directory: ./bluebell
+        run: ls
+        
 
