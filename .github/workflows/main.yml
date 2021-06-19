@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: we do a little actions
+name: Index
 
 # Controls when the action will run. 
 on:
@@ -60,8 +60,14 @@ jobs:
         run: git clone https://github.com/auburnsummer/bluebell.git
         
       # ls
-      - name: ls for now
+      - name: run bluebell as a backgrounded process
         working-directory: ./bluebell
-        run: ls
+        run: python3 main.py &
+        env:
+          STEAM_USER: ${{ secrets.STEAM_USER }}
+          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
         
+      # test
+      - name: Testing bluebell is working
+        run: curl localhost:8000/774181/levels
 
