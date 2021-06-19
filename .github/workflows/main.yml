@@ -58,4 +58,6 @@ jobs:
       # test
       - name: test
         run: echo $STEAM_USER | sha1sum
+        env:
+          STEAM_USER: ${{ secrets.STEAM_USER }}
 
