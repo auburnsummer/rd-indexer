@@ -54,4 +54,8 @@ jobs:
       # install bluebell prereqs
       - name: Install bluebell prereqs
         run: sudo pip3 install sanic scrapy dateparser rsa
+        
+      # test
+      - name: test
+        run: echo $STEAM_USER | sha1sum
 
