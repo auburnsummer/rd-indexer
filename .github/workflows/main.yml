@@ -64,7 +64,7 @@ jobs:
         working-directory: ./bluebell
         run: |
           mkdir ./tmp
-          python3 main.py > ./tmp/bluebelllog &
+          python3 main.py &> ./tmp/bluebelllog &
         env:
           STEAM_USER: ${{ secrets.STEAM_USER }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
