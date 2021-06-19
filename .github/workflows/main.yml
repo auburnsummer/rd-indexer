@@ -49,9 +49,9 @@ jobs:
       
       # install python3 stuff
       - name: Install python3
-        run: apt-get -y install libarchive-tools python3 python3-pip curl sqlite3
+        run: sudo apt-get -y install libarchive-tools python3 python3-pip curl sqlite3
 
       # install bluebell prereqs
       - name: Install bluebell prereqs
-        run: pip3 install sanic scrapy dateparser rsa
+        run: sudo pip3 install sanic scrapy dateparser rsa
 
