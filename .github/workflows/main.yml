@@ -89,5 +89,5 @@ jobs:
       - name: Print out the sha1sum of the current db
         run: sha1sum db/orchard.db
         
-      - name: See how the bluebell logs are doing
-        run: pm2 logs bluebell
+      - name: See how the pm2 logs are doing
+        run: pm2 logs --lines 99999 --nostream
