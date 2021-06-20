@@ -71,7 +71,7 @@ jobs:
       # ls
       - name: run bluebell as a PM2 process
         working-directory: ./bluebell
-        run: sudo pm2 start main.py --name bluebell 
+        run: pm2 start main.py --name bluebell 
         env:
           STEAM_USER: ${{ secrets.STEAM_USER }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
@@ -90,4 +90,4 @@ jobs:
         run: sha1sum db/orchard.db
         
       - name: See how the pm2 logs are doing
-        run: sudo pm2 logs --lines 99999 --nostream
+        run: pm2 logs --lines 99999 --nostream
