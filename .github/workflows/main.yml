@@ -78,7 +78,7 @@ jobs:
         
       # test
       - name: Testing bluebell is working
-        run: curl localhost:8000/774181/levels
+        run: sleep 10 && curl localhost:8000/774181/levels
 
       - name: Install dependencies
         run: npm install
