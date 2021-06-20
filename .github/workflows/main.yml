@@ -71,7 +71,7 @@ jobs:
       # ls
       - name: run bluebell as a PM2 process
         working-directory: ./bluebell
-        run: pm2 start main.py --name bluebell
+        run: sudo pm2 start main.py --name bluebell 
         env:
           STEAM_USER: ${{ secrets.STEAM_USER }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
