@@ -49,7 +49,16 @@ jobs:
       
       # install python3 stuff
       - name: Install python3
-        run: sudo apt-get -y install libarchive-tools python3 python3-pip curl sqlite3
+        run: sudo apt-get -y install libarchive-tools python3 python3-pip curl sqlite3 python-is-python3
+        
+      # install node stuff
+      - name: Setup node.js
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ">=15"
+          
+      - name: Install PM2
+        run: sudo npm install pm2 -g
 
       # install bluebell prereqs
       - name: Install bluebell prereqs
@@ -60,11 +69,9 @@ jobs:
         run: git clone https://github.com/auburnsummer/bluebell.git
         
       # ls
-      - name: run bluebell as a backgrounded process
+      - name: run bluebell as a PM2 process
         working-directory: ./bluebell
-        run: |
-          mkdir ./tmp
-          python3 main.py &> ./tmp/bluebelllog &
+        run: pm2 start main.py --name bluebell
         env:
           STEAM_USER: ${{ secrets.STEAM_USER }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
@@ -72,13 +79,7 @@ jobs:
       # test
       - name: Testing bluebell is working
         run: curl localhost:8000/774181/levels
-        
-      # okay, next...
-      - name: Setup node.js
-        uses: actions/setup-node@v2.1.5
-        with:
-          node-version: ">=15"
-      
+
       - name: Install dependencies
         run: npm install
 
@@ -89,4 +90,4 @@ jobs:
         run: sha1sum db/orchard.db
         
       - name: See how the bluebell logs are doing
-        run: cat ./tmp/bluebelllog
+        run: pm2 logs bluebell
