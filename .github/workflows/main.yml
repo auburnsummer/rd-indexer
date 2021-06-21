@@ -91,6 +91,12 @@ jobs:
         
       - name: The index!
         run: node lib/cli.js db/orchard.db conf/sources.yml
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
         
       - name: See how the pm2 logs are doing
         run: pm2 logs --lines 99999 --nostream
