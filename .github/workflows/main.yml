@@ -89,6 +89,9 @@ jobs:
         run: |
           echo "FLYCTL_INSTALL="/home/runner/.fly" >> $GITHUB_ENV
           echo "PATH="$FLYCTL_INSTALL/bin:${{ env.PATH }}" >> $GITHUB_ENV
+          
+      - name: test
+        run: echo $PATH
 
       - name: Check current status
         run: flyctl status --app orchard
