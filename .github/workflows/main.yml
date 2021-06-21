@@ -79,6 +79,18 @@ jobs:
       # test
       - name: Testing bluebell is working
         run: sleep 10 && curl localhost:8000/774181/levels
+        
+      ### FLYCTL ###
+      
+      - name: Install flyctl
+        run: curl -L https://fly.io/install.sh | sh
+        
+      - name: Check current status
+        run: flyctl status --app orchard
+        env:
+          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
+      
+      ### RD INDEXER ###
 
       - name: Install dependencies
         run: npm install
@@ -90,7 +102,7 @@ jobs:
         run: sha1sum db/orchard.db
         
       - name: The index!
-        run: node lib/cli.js db/orchard.db conf/sources.yml
+        run: timeout 15m node lib/cli.js db/orchard.db conf/sources.yml
         env:
           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
           B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
