@@ -85,6 +85,11 @@ jobs:
       - name: Install flyctl
         run: curl -L https://fly.io/install.sh | sh
         
+      - name: Update flytcl env variables
+        run: |
+          echo "FLYCTL_INSTALL="/home/runner/.fly" >> $GITHUB_ENV
+          echo "PATH="$FLYCTL_INSTALL/bin:${{ env.PATH }}" >> $GITHUB_ENV
+
       - name: Check current status
         run: flyctl status --app orchard
         env:
