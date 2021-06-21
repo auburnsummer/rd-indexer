@@ -89,5 +89,8 @@ jobs:
       - name: Print out the sha1sum of the current db
         run: sha1sum db/orchard.db
         
+      - name: The index!
+        run: node lib/cli.js db/orchard.db conf/sources.yml
+        
       - name: See how the pm2 logs are doing
         run: pm2 logs --lines 99999 --nostream
