@@ -95,6 +95,11 @@ jobs:
         run: flyctl status --app orchard
         env:
           FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
+          
+      ### DATASETTE ###
+      
+      - name: Install Datasette
+        run: sudo pip3 install datasette datasette-publish-fly
       
       ### RD INDEXER ###
 
@@ -103,6 +108,9 @@ jobs:
 
       - name: Download the current db
         run: mkdir db && curl http://api.rhythm.cafe/orchard.db > db/orchard.db
+        
+      - name: Make a copy of it for later
+        run: cp db/orchard.db db/orchard_orig.db
         
       - name: Print out the sha1sum of the current db
         run: sha1sum db/orchard.db
@@ -115,6 +123,9 @@ jobs:
           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
+          
+      - name: Print out the diff
+        run: sqldiff db/orchard.db db/orchard_orig.db
         
       - name: See how the pm2 logs are doing
         run: pm2 logs --lines 99999 --nostream
