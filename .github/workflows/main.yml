@@ -129,6 +129,8 @@ jobs:
         
       - name: Publish using Datasette
         run: datasette publish fly db/orchard.db --app="orchard"
+        env:
+          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
         
       - name: See how the pm2 logs are doing
         run: pm2 logs --lines 99999 --nostream
