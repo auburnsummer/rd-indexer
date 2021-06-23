@@ -127,5 +127,8 @@ jobs:
       - name: Print out the diff
         run: sqldiff db/orchard.db db/orchard_orig.db
         
+      - name: Publish using Datasette
+        run: datasette publish fly db/orchard.db --app="orchard"
+        
       - name: See how the pm2 logs are doing
         run: pm2 logs --lines 99999 --nostream
