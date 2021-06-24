@@ -124,6 +124,11 @@ jobs:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
           
+      - name: merge, for now it's like this
+        run: |
+          cp db/orchard.db db/orchard1.db
+          node lib/cli.js merge db/orchard.db db/orchard1.db
+          
       - name: Print out the diff
         run: sqldiff db/orchard.db db/orchard_orig.db
         
