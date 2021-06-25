@@ -116,7 +116,7 @@ jobs:
         run: sha1sum db/orchard.db
         
       - name: The index!
-        run: timeout 15m node lib/cli.js db/orchard.db conf/sources.yml
+        run: timeout 15m node lib/cli.js db/orchard.db conf/sources.yml || true
         env:
           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
           B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
