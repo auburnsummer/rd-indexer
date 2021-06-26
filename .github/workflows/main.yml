@@ -131,7 +131,7 @@ jobs:
           node lib/cli.js merge db/orchard.db db/orchard1.db
           
       - name: Print out the diff
-        run: sqldiff db/orchard.db db/orchard_orig.db
+        run: sqldiff --primarykey db/orchard.db db/orchard_orig.db
         
       - name: Publish using Datasette
         run: datasette publish fly db/orchard.db --app="orchard"
