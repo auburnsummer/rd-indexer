@@ -151,6 +151,7 @@ jobs:
         
       - name: download current db if it exists...
         run: b2 download-file-by-name rhythm-cafe orchard-main.db db/local.db
+        continue-on-error: true
         
       - name: make db if it doesnt exist
         if: ${{ failure() }}
