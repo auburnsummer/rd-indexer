@@ -172,14 +172,15 @@ jobs:
 #       - name: Print out the sha1sum of the current db
 #         run: sha1sum db/orchard.db
         
-#       - name: The index!
-#         run: timeout 15m node lib/cli.js db/orchard.db conf/sources.yml || true
-#         env:
-#           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
-#           B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
-#           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
-#           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-#           HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
+      - name: The index!
+        run: timeout 15m node lib/cli.js db/local.db conf/sources.yml
+        continue-on-error: true
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
           
 #       - name: merge, for now it's like this
 #         run: |
