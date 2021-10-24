@@ -166,12 +166,6 @@ jobs:
       - name: Print out the sha1sum of the current db
         run: sha1sum db/local.db
         
-#       - name: Make a copy of it for later
-#         run: cp db/orchard.db db/orchard_orig.db
-        
-#       - name: Print out the sha1sum of the current db
-#         run: sha1sum db/orchard.db
-        
       - name: The index!
         run: timeout 15m node lib/cli.js db/local.db conf/sources.yml
         continue-on-error: true
@@ -181,6 +175,9 @@ jobs:
           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
+          
+      - name: Upload to B2
+        run: b2 upload-file rhythm-cafe db/local.db orchard-${{ env.GITHUB_REF_SLUG }}.db
           
 #       - name: merge, for now it's like this
 #         run: |
