@@ -154,7 +154,7 @@ jobs:
         
       - name: make db if it doesnt exist
         if: ${{ failure() }}
-        run: sqlite3 db/local.db < sql/create.sql
+        run: sqlite3 db/local.db < sql/levels.sql
         
       - name: Print out the sha1sum of the current db
         run: sha1sum db/local.db
