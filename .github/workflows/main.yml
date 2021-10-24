@@ -104,6 +104,12 @@ jobs:
       - name: Testing bluebell is working
         run: sleep 10 && curl localhost:8000/774181/levels
         
+      ### B2 ###
+      
+      # install b2
+      - name: Install B2 CLI client
+        run: pip3 install --upgrade b2
+        
       ### FLYCTL ###
       
       - name: Install flyctl
