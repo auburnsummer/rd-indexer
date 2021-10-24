@@ -110,6 +110,16 @@ jobs:
       - name: Install B2 CLI client
         run: pip3 install --upgrade b2
         
+      - name: Authorize
+        run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          
+      - name: Acct info
+        run: b2 get-account-info
+        
       ### FLYCTL ###
       
       - name: Install flyctl
