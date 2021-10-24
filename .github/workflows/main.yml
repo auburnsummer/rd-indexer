@@ -153,8 +153,14 @@ jobs:
         run: b2 download-file-by-name rhythm-cafe orchard-main.db db/local.db
         continue-on-error: true
         
+      - name: did the previous step complete?
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "db/local.db"
+        
       - name: make db if it doesnt exist
-        if: ${{ failure() }}
+        if: steps.check_files.outputs.files_exists == 'false'
         run: sqlite3 db/local.db < sql/levels.sql
         
       - name: Print out the sha1sum of the current db
