@@ -146,11 +146,18 @@ jobs:
       - name: Install dependencies
         run: npm install
         
-      - name: taafwefopaweofjapw
+      - name: mkdir db
+        run: mkdir db
+        
+      - name: download current db if it exists...
         run: b2 download-file-by-name rhythm-cafe orchard-main.db db/local.db
-          
-#       - name: Download the current db
-#         run: mkdir db && curl http://api.rhythm.cafe/orchard.db > db/orchard.db
+        
+      - name: make db if it doesnt exist
+        if: ${{ failure() }}
+        run: sqlite3 db/local.db < sql/create.sql
+        
+      - name: Print out the sha1sum of the current db
+        run: sha1sum db/local.db
         
 #       - name: Make a copy of it for later
 #         run: cp db/orchard.db db/orchard_orig.db
