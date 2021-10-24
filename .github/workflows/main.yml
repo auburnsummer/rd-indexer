@@ -150,7 +150,7 @@ jobs:
         run: mkdir db
         
       - name: download current db if it exists...
-        run: b2 download-file-by-name rhythm-cafe orchard-main.db db/local.db
+        run: b2 download-file-by-name rhythm-cafe orchard-${{ env.GITHUB_REF_SLUG }}.db db/local.db
         continue-on-error: true
         
       - name: did the previous step complete?
