@@ -34,7 +34,7 @@ jobs:
           echo steam steam/question select "I AGREE" | sudo debconf-set-selections
           echo steam steam/license note '' | sudo debconf-set-selections
           
-      # Install SteamCMD, will this really work??
+      # Install SteamCMD
       - name: Install SteamCMD
         run: |
           sudo add-apt-repository multiverse
@@ -107,36 +107,36 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Download the current db
-        run: mkdir db && curl http://api.rhythm.cafe/orchard.db > db/orchard.db
+#       - name: Download the current db
+#         run: mkdir db && curl http://api.rhythm.cafe/orchard.db > db/orchard.db
         
-      - name: Make a copy of it for later
-        run: cp db/orchard.db db/orchard_orig.db
+#       - name: Make a copy of it for later
+#         run: cp db/orchard.db db/orchard_orig.db
         
-      - name: Print out the sha1sum of the current db
-        run: sha1sum db/orchard.db
+#       - name: Print out the sha1sum of the current db
+#         run: sha1sum db/orchard.db
         
-      - name: The index!
-        run: timeout 15m node lib/cli.js db/orchard.db conf/sources.yml || true
-        env:
-          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
-          B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
-          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
+#       - name: The index!
+#         run: timeout 15m node lib/cli.js db/orchard.db conf/sources.yml || true
+#         env:
+#           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+#           B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
+#           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+#           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+#           HOSTED_FILES_PREFIX: ${{ secrets.HOSTED_FILES_PREFIX }}
           
-      - name: merge, for now it's like this
-        run: |
-          cp db/orchard.db db/orchard1.db
-          node lib/cli.js merge db/orchard.db db/orchard1.db
+#       - name: merge, for now it's like this
+#         run: |
+#           cp db/orchard.db db/orchard1.db
+#           node lib/cli.js merge db/orchard.db db/orchard1.db
           
-      - name: Print out the diff
-        run: sqldiff --primarykey db/orchard.db db/orchard_orig.db
+#       - name: Print out the diff
+#         run: sqldiff --primarykey db/orchard.db db/orchard_orig.db
         
-      - name: Publish using Datasette
-        run: datasette publish fly db/orchard.db --app="orchard"
-        env:
-          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
+#       - name: Publish using Datasette
+#         run: datasette publish fly db/orchard.db --app="orchard"
+#         env:
+#           FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
         
-      - name: See how the pm2 logs are doing
-        run: pm2 logs --lines 99999 --nostream
+#       - name: See how the pm2 logs are doing
+#         run: pm2 logs --lines 99999 --nostream
