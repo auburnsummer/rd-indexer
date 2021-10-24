@@ -146,11 +146,8 @@ jobs:
       - name: Install dependencies
         run: npm install
         
-#       - name: Download artifact
-#         uses: dawidd6/action-download-artifact@v2
-#         with:
-#           workflow: main.yml
-#           branch: 
+      - name: taafwefopaweofjapw
+        run: b2 download-file-by-name rhythm-cafe orchard-main.db db/local.db
           
 #       - name: Download the current db
 #         run: mkdir db && curl http://api.rhythm.cafe/orchard.db > db/orchard.db
