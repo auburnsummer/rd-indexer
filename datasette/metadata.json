@@ -1,0 +1,6 @@
+{
+    "title": "Rhythm Cafe API",
+    "description": "API for Rhythm Cafe, powered by datasette",
+    "license": "ODbL",
+    "license_url": "https://opendatacommons.org/licenses/odbl/"
+}

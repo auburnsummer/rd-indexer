@@ -1,7 +1,6 @@
 -- ##########################
 --          TABLES
 -- ##########################
-
 CREATE TABLE level (
     id              TEXT    NOT NULL,
     artist          TEXT    NOT NULL,
@@ -19,6 +18,8 @@ CREATE TABLE level (
     url2            TEXT    NOT NULL, -- Rehosted url, always exists.
     icon            TEXT    DEFAULT NULL,
     hue             REAL    NOT NULL,
+    tags            TEXT    NOT NULL, -- json, empty list [] if nothing
+    authors         TEXT    NOT NULL, -- json, empty list [] if nothing
     has_classics    INTEGER NOT NULL, -- 0 = false, 1 = true
     has_oneshots    INTEGER NOT NULL, -- 0 = false, 1 = true
     has_squareshots INTEGER NOT NULL, -- 0 = false, 1 = true
@@ -30,40 +31,6 @@ CREATE TABLE level (
     PRIMARY KEY (id)
 );
 
--- level tags, which are just strings. these are from the rdzip, so we don't make any more assumptions
-CREATE TABLE level_tag (
-    id      TEXT    REFERENCES level(id) ON DELETE CASCADE,
-    tag     TEXT    NOT NULL,
-    seq     INTEGER NOT NULL, -- index of this tag
-    primary key (id, tag, seq)
-);
-
--- level authors
-CREATE TABLE level_author (
-    id      TEXT    REFERENCES level(id) ON DELETE CASCADE,
-    author  TEXT    NOT NULL,
-    seq     INTEGER NOT NULL, -- index of this tag
-    primary key (id, author, seq)
-);
-
-CREATE VIEW levels
-AS
-SELECT * FROM level INNER JOIN status ON level.id = status.id;
-
--- Search.
-CREATE VIRTUAL TABLE ft USING fts5(artist, song, description, content=level, content_rowid=_rowid_);
-
--- Triggers to keep the FTS index up to date.
-CREATE TRIGGER level_ai AFTER INSERT ON level BEGIN
-  INSERT INTO ft(rowid, artist, song, description) VALUES (new._rowid_, new.artist, new.song, new.description);
-END;
-CREATE TRIGGER level_ad AFTER DELETE ON level BEGIN
-  INSERT INTO ft(ft, rowid, artist, song, description) VALUES ('delete', old._rowid_, old.artist, old.song, old.description);
-END;
-CREATE TRIGGER level_au AFTER UPDATE ON level BEGIN
-  INSERT INTO ft(ft, rowid, artist, song, description) VALUES ('delete', old._rowid_, old.artist, old.song, old.description);
-  INSERT INTO ft(rowid, artist, song, description) VALUES (new._rowid_, new.artist, new.song, new.description);
-END;
 
 --- status
 CREATE TABLE status (
@@ -102,3 +69,23 @@ END;
 CREATE TRIGGER user_level_au AFTER UPDATE ON user_level BEGIN
   UPDATE status SET kudos = (SELECT sum(kudo) FROM user_level WHERE level = NEW.level) WHERE id = NEW.level;
 END;
+
+
+-- CREATE VIEW levels
+-- AS
+-- SELECT * FROM level INNER JOIN status ON level.id = status.id;
+
+-- -- Search.
+-- CREATE VIRTUAL TABLE ft USING fts5(artist, song, description, content=level, content_rowid=_rowid_);
+
+-- -- Triggers to keep the FTS index up to date.
+-- CREATE TRIGGER level_ai AFTER INSERT ON level BEGIN
+--   INSERT INTO ft(rowid, artist, song, description) VALUES (new._rowid_, new.artist, new.song, new.description);
+-- END;
+-- CREATE TRIGGER level_ad AFTER DELETE ON level BEGIN
+--   INSERT INTO ft(ft, rowid, artist, song, description) VALUES ('delete', old._rowid_, old.artist, old.song, old.description);
+-- END;
+-- CREATE TRIGGER level_au AFTER UPDATE ON level BEGIN
+--   INSERT INTO ft(ft, rowid, artist, song, description) VALUES ('delete', old._rowid_, old.artist, old.song, old.description);
+--   INSERT INTO ft(rowid, artist, song, description) VALUES (new._rowid_, new.artist, new.song, new.description);
+-- END;
