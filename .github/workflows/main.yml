@@ -178,6 +178,10 @@ jobs:
           
       - name: Upload to B2
         run: b2 upload-file rhythm-cafe db/local.db orchard-${{ env.GITHUB_REF_SLUG }}.db
+        
+      - name: test
+        if: ${{ env.GITHUB_REF_SLUG }} == 'main'
+        run: ls
           
 #       - name: merge, for now it's like this
 #         run: |
