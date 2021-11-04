@@ -135,11 +135,6 @@ jobs:
         run: flyctl status --app orchard
         env:
           FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
-          
-      ### DATASETTE ###
-      
-      - name: Install Datasette
-        run: sudo pip3 install datasette datasette-publish-fly
       
       ### RD INDEXER ###
 
@@ -179,27 +174,51 @@ jobs:
       - name: Upload to B2
         run: b2 upload-file rhythm-cafe db/local.db orchard-${{ env.GITHUB_REF_SLUG }}.db
         
+      - name: See how the pm2 logs are doing
+        run: pm2 logs --lines 99999 --nostream
+        
   merge-and-upload:
     needs: collect-levels
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
-      - name: what files do we have?
-        run: ls
-          
-#       - name: merge, for now it's like this
-#         run: |
-#           cp db/orchard.db db/orchard1.db
-#           node lib/cli.js merge db/orchard.db db/orchard1.db
-          
-#       - name: Print out the diff
-#         run: sqldiff --primarykey db/orchard.db db/orchard_orig.db
+      - uses: actions/checkout@v2
+      
+      - name: Install python3
+        run: sudo apt-get -y install libarchive-tools python3 python3-pip curl sqlite3 python-is-python3
+      
+      - name: Install Datasette
+        run: sudo pip3 install datasette datasette-publish-fly sqlite-utils
+    
+      - name: Setup node.js
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ">=15"
+      
+      - name: Install dependencies
+        run: npm install
         
-#       - name: Publish using Datasette
-#         run: datasette publish fly db/orchard.db --app="orchard"
-#         env:
-#           FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
+      - name: mkdir db
+        run: mkdir db
+
+      - name: Download the db from the previous workflow
+        run: curl http://codex.rhythm.cafe/orchard-main.db -o db/local.db
         
-#       - name: See how the pm2 logs are doing
-#         run: pm2 logs --lines 99999 --nostream
+      - name: Download the hub db
+        run: curl https://bot2.auburn.dev/orchard.db -o db/hub.db
+        
+      - name: merge, for now it's like this
+        run: node lib/cli.js merge db/local.db db/hub.db
+        
+      - name: FTS indexes
+        run: python datasette/process.py db/local.db
+        
+      - name: uh
+        run: cp db/local.db db/orchard.db
+        
+      - name: Publish using Datasette
+        run: datasette publish fly db/orchard.db --app="orchard"
+        env:
+          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
+        
