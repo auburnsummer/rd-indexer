@@ -119,22 +119,6 @@ jobs:
           
       - name: Acct info
         run: b2 get-account-info
-        
-      ### FLYCTL ###
-      
-      - name: Install flyctl
-        run: curl -L https://fly.io/install.sh | sh
-        
-      - name: Update flytcl path
-        run: echo /home/runner/.fly/bin >> $GITHUB_PATH
-          
-      - name: test
-        run: echo $PATH
-
-      - name: Check current status
-        run: flyctl status --app orchard
-        env:
-          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
       
       ### RD INDEXER ###
 
@@ -183,6 +167,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
+    
       - uses: actions/checkout@v2
       
       - name: Install python3
@@ -190,6 +175,20 @@ jobs:
       
       - name: Install Datasette
         run: sudo pip3 install datasette datasette-publish-fly sqlite-utils
+      
+      - name: Install flyctl
+        run: curl -L https://fly.io/install.sh | sh
+        
+      - name: Update flytcl path
+        run: echo /home/runner/.fly/bin >> $GITHUB_PATH
+          
+      - name: test
+        run: echo $PATH
+
+      - name: Check current status
+        run: flyctl status --app orchard
+        env:
+          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
     
       - name: Setup node.js
         uses: actions/setup-node@v2.1.5
