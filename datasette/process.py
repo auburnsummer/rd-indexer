@@ -43,8 +43,11 @@ def enable_counts(db):
 def vac(db):
     db.vacuum()
 
+def add_levels_view(db):
+    db.create_view("levels", "select * from level left join status", replace=True)
+
 
 if __name__ == "__main__":
     db = Database(sys.argv[1])
-    for f in [add_indexes, enable_fts, enable_counts, vac]:
+    for f in [add_levels_view, add_indexes, enable_fts, enable_counts, vac]:
         f(db)
