@@ -44,7 +44,7 @@ def vac(db):
     db.vacuum()
 
 def add_levels_view(db):
-    db.create_view("levels", "select * from level left join status", replace=True)
+    db.create_view("levels", "select * from level left join status ON level.id = status.id", replace=True)
 
 
 if __name__ == "__main__":
