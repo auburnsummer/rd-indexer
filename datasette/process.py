@@ -1,9 +1,13 @@
 from sqlite_utils import Database
 import sys
 
+# create an aggregate table combining level and status
+def make_aggregate(db):
+    db.execute("CREATE TABLE levels AS SELECT * FROM level LEFT JOIN status ON level.id = status.id")
+
 def add_indexes(db):
     indexes = {
-        "level" : [
+        "levels" : [
             "difficulty",
             "seizure_warning",
             "last_updated",
@@ -14,9 +18,7 @@ def add_indexes(db):
             "has_squareshots",
             "has_swing",
             "has_freetimes",
-            "has_holds"
-        ],
-        "status": [
+            "has_holds",
             "uploaded",
             "approval",
             "kudos"
@@ -34,8 +36,8 @@ def enable_fts(db):
         "tags",
         "authors"
     ]
-    db["level"].enable_fts(cols, create_triggers=True)
-    db["level"].optimize()
+    db["levels"].enable_fts(cols, create_triggers=True)
+    db["levels"].optimize()
 
 def enable_counts(db):
     db.enable_counts()
@@ -43,11 +45,8 @@ def enable_counts(db):
 def vac(db):
     db.vacuum()
 
-def add_levels_view(db):
-    db.create_view("levels", "select * from level left join status ON level.id = status.id", replace=True)
-
 
 if __name__ == "__main__":
     db = Database(sys.argv[1])
-    for f in [add_levels_view, add_indexes, enable_fts, enable_counts, vac]:
+    for f in [make_aggregate, add_indexes, enable_fts, enable_counts, vac]:
         f(db)
