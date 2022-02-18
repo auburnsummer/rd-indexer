@@ -1,0 +1,20 @@
+{
+    auto_https off
+}
+
+
+:80 {
+    @onlygets {
+        method GET
+    }
+    rewrite /datasette /datasette/
+    rewrite /typesense /typesense/
+    handle_path /datasette/* {
+        reverse_proxy * http://localhost:5100
+    }
+    handle_path /typesense/* {
+        reverse_proxy @onlygets http://localhost:5000
+    }
+    root * /app/www
+    file_server
+}
