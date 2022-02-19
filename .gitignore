@@ -155,3 +155,7 @@ cython_debug/
 *.rdzip
 
 .DS_Store
+
+*.db
+*.db-journal
+*.jsonl

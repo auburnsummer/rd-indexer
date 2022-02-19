@@ -19,6 +19,7 @@ async def passcode(body):
             # branch where we're generating a passcode
             passcode = keys.gen_passcode()
 
+            # only the caller can see the actual passcode, the visible message is an emoji
             await i.edit(M().content("🙈"), "@original")
 
             await i.post(M().content(passcode).ephemeral())

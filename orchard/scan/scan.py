@@ -101,7 +101,7 @@ def main(db: Database):
                 logger.info(traceback.format_exc())
 
         for index, iid in enumerate(iids_to_delete):
-            logger.info(f"Deleting iid {iid} ({index} / {len(iids_to_delete)})")
+            logger.info(f"Deleting iid {iid} ({index+1} / {len(iids_to_delete)})")
             orchard.delete_level(source_id, iid)
 
 

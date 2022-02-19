@@ -1,25 +1,25 @@
-import httpx
-
+import logging
+import sys
 from collections import defaultdict
 
+import uvicorn
+from nacl.exceptions import BadSignatureError
+from nacl.signing import VerifyKey
+from sqlite_utils import Database
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 from starlette.routing import Route
-from starlette.middleware.cors import CORSMiddleware
-import uvicorn
 
-from nacl.signing import VerifyKey
-from nacl.exceptions import BadSignatureError
-
-from orchard.bot.slash_router import SlashOption, SlashOptionPermission, SlashRoute, SlashRouter
-from orchard.bot.constants import DB_PATH, DB_URL, PATHLAB_ROLE, OptionType, PUBLIC_KEY, PermissionType, ResponseType
-from orchard.bot.register import get_command_to_id_mapping, update_slash_commands, update_slash_permissions
-from pathlib import Path
-
-from orchard.bot import commands as commands
-import orchard.bot.handlers as handlers
 import orchard.bot.crosscode as crosscode
+from orchard.bot import commands as commands
+from orchard.bot.constants import PATHLAB_ROLE, OptionType, PUBLIC_KEY, PermissionType, ResponseType
+from orchard.bot.register import get_command_to_id_mapping, update_slash_commands, update_slash_permissions
+from orchard.bot.slash_router import SlashOption, SlashOptionPermission, SlashRoute, SlashRouter
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # All the routes we're using go here.
 router = SlashRouter(routes=[
@@ -84,14 +84,16 @@ async def interaction_handler(request):
     # under our model, all components are per-interaction (we don't have "permanent" buttons)
     if body['type'] == 3:
         return await crosscode.handle(body)
-    
+
+    # usually we shouldn't reach here
     print(body)
     return JSONResponse({'hello': 'world'})
 
 
 async def prerun_update_slash_commands():
     """
-    Before launching, update the slash commands defined by the router.  
+    Before launching, update the slash commands defined by the router to the discord API.
+    This has to be done in two steps, calling the /commands and then /commands/permissions
     """
     print("updating slash commands...")
     payload = router.api()
@@ -106,6 +108,12 @@ async def prerun_update_slash_commands():
     print((await update_slash_permissions(payload2)).json())
     print("done!")
 
+async def prerun_check_db():
+    db = app.state.db
+    if 'status' not in db.table_names():
+        logger.info("Status table not found, making it now...")
+
+
 
 # two identical routes. this is so i can change it in discord developer options to check
 # we are handling ping and auth correctly.
@@ -115,7 +123,8 @@ app = Starlette(debug=True, routes=[
     # Route('/orchard.db', handlers.orchard_dot_db, methods=['GET']),
     # Route('/approval/{id}', handlers.set_approval, methods=['POST', 'GET'])
 ], on_startup=[
-    prerun_update_slash_commands
+    prerun_update_slash_commands,
+    prerun_check_db,
 ], middleware=[
     Middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['*'], allow_headers=['*'])
 ])
@@ -123,4 +132,6 @@ app = Starlette(debug=True, routes=[
 # Discord requires HTTPS. Suggest using a localhost https proxy such as ngrok
 # e.g. run seperately: ngrok http 8000
 if __name__ == '__main__':
+    db = Database(sys.argv[1])
+    app.state.db = db
     uvicorn.run(app, host='0.0.0.0', port=8000)
