@@ -6,11 +6,11 @@ STATUS_SCHEMA = {
     "id": str,
     "approval": int,
     "approval_reasons": str,
-    "indexed": datetime.datetime
+    "indexed": datetime.datetime  # when it was first approved, or null otherwise.
 }
 
 def make_schema(db: Database):
-    db["level"].create(
+    db["status"].create(
         STATUS_SCHEMA,
         pk="id",
     )

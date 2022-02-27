@@ -1,5 +1,3 @@
-import hashlib
-from pprint import pprint
 import sys
 import zipfile
 from typing import BinaryIO
@@ -16,8 +14,10 @@ from orchard.vitals.facets.tags_facet import tags_facet
 from orchard.vitals.facets.thumbnail_facet import thumbnail_facet
 from orchard.vitals.facets.updated_facet import updated_facet
 
+
 class VitalsException(Exception):
     pass
+
 
 def main(f: BinaryIO):
     facets = {
@@ -33,7 +33,7 @@ def main(f: BinaryIO):
         ("single_player", "two_player"):    player_facet,
         "last_updated":                     updated_facet,
         "tags":                             tags_facet,
-        ("image", "thumb"):             thumbnail_facet,
+        ("image", "thumb"):                 thumbnail_facet,
         "icon":                             icon_facet,
         (
             "has_classics",
@@ -63,7 +63,7 @@ def main(f: BinaryIO):
                             final[key] = result
                     except Exception as e:
                         raise VitalsException(f"vitals: An unhandled error occured in a facet: {e}")
-                
+
                 return final
 
     except zipfile.BadZipFile:

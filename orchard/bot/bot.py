@@ -13,17 +13,18 @@ from starlette.responses import JSONResponse
 from starlette.routing import Route
 
 import orchard.bot.crosscode as crosscode
-from orchard.bot import commands as commands
+import orchard.bot.commands as commands
 from orchard.bot.constants import PATHLAB_ROLE, OptionType, PUBLIC_KEY, PermissionType, ResponseType
 from orchard.bot.register import get_command_to_id_mapping, update_slash_commands, update_slash_permissions
+from orchard.bot.schema import make_schema
 from orchard.bot.slash_router import SlashOption, SlashOptionPermission, SlashRoute, SlashRouter
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from orchard.bot import handlers
 
 # All the routes we're using go here.
 router = SlashRouter(routes=[
     SlashRoute(name='ping', description='responds with pong!', handler=commands.ping),
+    SlashRoute(name='version', description='print the version of this bot', handler=commands.version),
     SlashRoute(
         name='plpasscode',
         description='return a passcode for pathlab use (pathlab people only)',
@@ -35,6 +36,16 @@ router = SlashRouter(routes=[
         ],
         default_permission=False,
         handler=commands.passcode,
+        defer=True
+    ),
+    SlashRoute(
+        name='levelbyid',
+        description='get a level by its id',
+        options=[
+            SlashOption(type=OptionType.STRING, name="id", description="id of the level", required=True),
+        ],
+        default_permission=True,
+        handler=commands.levelbyid,
         defer=True
     ),
     SlashRoute(
@@ -78,7 +89,7 @@ async def interaction_handler(request):
 
     # handle slash commands...
     if body['type'] == 2:
-        return router.handle(body)
+        return router.handle(body, request)
 
     # handle components (button clicks, etc...)
     # under our model, all components are per-interaction (we don't have "permanent" buttons)
@@ -111,16 +122,15 @@ async def prerun_update_slash_commands():
 async def prerun_check_db():
     db = app.state.db
     if 'status' not in db.table_names():
-        logger.info("Status table not found, making it now...")
-
-
+        print("Status table not found, making it now...")
+        make_schema(db)
 
 # two identical routes. this is so i can change it in discord developer options to check
 # we are handling ping and auth correctly.
 app = Starlette(debug=True, routes=[
     Route('/interactions', interaction_handler, methods=['POST']),
     Route('/interactions2', interaction_handler, methods=['POST']),
-    # Route('/orchard.db', handlers.orchard_dot_db, methods=['GET']),
+    Route('/status.db', handlers.status_dot_db, methods=['GET']),
     # Route('/approval/{id}', handlers.set_approval, methods=['POST', 'GET'])
 ], on_startup=[
     prerun_update_slash_commands,
@@ -130,7 +140,7 @@ app = Starlette(debug=True, routes=[
 ])
 
 # Discord requires HTTPS. Suggest using a localhost https proxy such as ngrok
-# e.g. run seperately: ngrok http 8000
+# e.g. run separately: ngrok http 8000
 if __name__ == '__main__':
     db = Database(sys.argv[1])
     app.state.db = db

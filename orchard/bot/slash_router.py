@@ -2,6 +2,7 @@ from typing import Dict, List
 from starlette.background import BackgroundTask
 from orchard.bot.constants import ResponseType
 from starlette.responses import JSONResponse
+from inspect import signature
 
 class SlashOptionPermission:
     def __init__(self, id, type, permission):
@@ -89,17 +90,17 @@ class SlashRouter:
     def permission_api(self, mapping):
         return [r.permission_api(mapping[r._name]) for r in self._routes if r._permissions is not None]
 
-    def handle(self, body):
+    def handle(self, body, request):
         # Get the route name from the body. The body is a dictionary. The route name is located under the key "data.name"
         route_name = body['data']['name']
         # Check if the route name is present in the mapping.
         if route_name in self._route_map:
             # Execute the associated handler. If it's not deferred, we just return it straightaway.
             if not self._route_map[route_name]._defer:
-                return self._route_map[route_name]._handler(body)
+                return self._route_map[route_name]._handler(body, request)
             else:
                 # Return a deferred response, which is type 5.
-                deferred_task = BackgroundTask(self._route_map[route_name]._handler, body)
+                deferred_task = BackgroundTask(self._route_map[route_name]._handler, body, request)
                 return JSONResponse({"type": ResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE}, background=deferred_task)
         else:
             # Otherwise, return a default response. The default response has a 200 return code.

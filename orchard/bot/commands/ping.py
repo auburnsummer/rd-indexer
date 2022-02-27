@@ -2,7 +2,7 @@
 from orchard.bot.constants import ResponseType
 from starlette.responses import JSONResponse
 
-def ping(body):
+def ping(body, _):
     # Using the JSONResponse constructor, return a response as follows:
     #  - the return code should be 200
     #  - the response body should be a JSON object with a key 'type' whose value is 4

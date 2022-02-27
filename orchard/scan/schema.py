@@ -51,7 +51,11 @@ class OrchardDatabase:
         self.db["level"].insert(level, pk="id")
 
     def delete_level(self, source_id, source_iid):
-        self.db["level"].delete_where("source = ? AND source_iid = ?", [source_id, source_iid])
+        iter = self.db["level"].rows_where("source = ? AND source_iid = ?", [source_id, source_iid])
+        iter = list(iter)
+        if iter:
+            row = iter[0]
+            self.db["level"].delete(row['id'])
 
     def does_level_exist(self, id):
         try:

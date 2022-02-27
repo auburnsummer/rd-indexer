@@ -15,6 +15,13 @@ class MessageBuilder:
         self._dict["flags"] = 64 if yes else 0
         return self
 
+    def embed(self, embed):
+        if "embeds" not in self._dict:
+            self._dict["embeds"] = []
+
+        self._dict["embeds"].append(embed.payload())
+        return self
+
     def payload(self):
         print(self._dict)
         return self._dict
@@ -28,6 +35,45 @@ class MessageBuilder:
     def clear_rows(self):
         self._dict["components"] = []
         return self
+
+class Embed:
+    def __init__(self):
+        self._dict = {}
+
+    def payload(self):
+        return self._dict
+
+    def title(self, title):
+        self._dict['title'] = title
+        return self
+
+    def url(self, url):
+        self._dict['url'] = url
+        return self
+
+    def image(self, url):
+        self._dict['image'] = {'url': url}
+        return self
+
+    def description(self, description):
+        self._dict['description'] = description
+        return self
+
+    def color(self, color):
+        self._dict['color'] = color
+        return self
+
+    def field(self, name, value, inline = False):
+        if 'fields' not in self._dict:
+            self._dict['fields'] = []
+
+        self._dict['fields'].append({
+            'name': name,
+            'value': value,
+            'inline': inline
+        })
+        return self;
+
 
 class ActionRow:
     def __init__(self, *components):

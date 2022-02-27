@@ -1,5 +1,5 @@
 import sqlite3
-from orchard.bot.constants import DB_PATH
+import itertools
 
 def get_slash_args(args, body):
     """
@@ -17,22 +17,10 @@ def get_slash_args(args, body):
 def get_id_from_response(res):
     return res.json()['id']
 
-def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
-
-# from stackoverflow
-class hub_conn():
-    def __init__(self):
-        self.file=DB_PATH
-
-    def __enter__(self):
-        self.conn = sqlite3.connect(self.file)
-        self.conn.row_factory = dict_factory
-        return self.conn.cursor()
-        
-    def __exit__(self, type, value, traceback):
-        self.conn.commit()
-        self.conn.close()
+def grouper(n, iterable):
+    it = iter(iterable)
+    while True:
+        chunk = tuple(itertools.islice(it, n))
+        if not chunk:
+            return
+        yield chunk

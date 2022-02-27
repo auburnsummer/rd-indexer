@@ -4,7 +4,7 @@ from orchard.bot.interactions import Interactor
 import orchard.bot.keys as keys
 from orchard.bot.message_builder import MessageBuilder as M
 
-async def passcode(body):
+async def passcode(body, _):
     [check] = get_slash_args(["check"], body)
 
     async with Interactor(body["token"]) as i:

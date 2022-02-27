@@ -4,22 +4,24 @@ load_dotenv()
 import os
 from pathlib import Path
 
+BOT_VERSION = "0.0.1"
+
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 PUBLIC_KEY = os.environ["PUBLIC_KEY"]
 DISCORD_API_URL = "https://discord.com/api/v8"
 
 # If specified, register guild-specific commands instead of global.
 # this is because guild commands refresh instantly whereas global takes ~1 hr
-DEV_GUILD = os.environ["DEV_GUILD"] if "DEV_GUILD" in os.environ else False
+DEV_GUILD = os.environ["DEV_GUILD"]
 APPLICATION_ID = os.environ["APPLICATION_ID"]
 PATHLAB_ROLE = os.environ["PATHLAB_ROLE"]
 
 SECRET_KEY_ORCH = bytes.fromhex(os.environ["SECRET_KEY_ORCH"])
 
-DB_PATH = Path.cwd() / "orchard.db"
-DB_URL = "https://f000.backblazeb2.com/file/rhythm-cafe/orchard-main.db"
-
 ORCHARD_API_URL = "https://api.rhythm.cafe/orchard.json"
+
+TYPESENSE_URL = os.environ["TYPESENSE_URL"]
+TYPESENSE_API_KEY = "nicolebestgirl"
 
 class ComponentType:
     ACTION_ROW = 1

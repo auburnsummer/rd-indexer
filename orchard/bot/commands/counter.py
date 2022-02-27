@@ -3,7 +3,7 @@ from orchard.bot.utils import get_id_from_response, get_slash_args
 from orchard.bot.interactions import Interactor
 from orchard.bot.message_builder import ActionRow, Button, MessageBuilder as M
 
-async def counter(body):
+async def counter(body, _):
     [incr] = get_slash_args(['increment'], body)
 
 

@@ -4,7 +4,7 @@ from orchard.bot.message_builder import ActionRow, Button, MessageBuilder as M
 
 import orchard.bot.crosscode as cc
 
-async def dtest(body):
+async def dtest(body, _):
     async with Interactor(body["token"]) as i:
 
         await i.edit(M().content("ayayayayayaya"), "@original")
