@@ -2,10 +2,11 @@ from orchard.parse.rdlevelListener import rdlevelListener
 from orchard.parse.rdlevelParser import rdlevelParser
 from orchard.parse.utils import update
 
+
 class MyCustomListener(rdlevelListener):
     def __init__(self):
         self.accum = None
-        self.currentPath = [] # indicates root.
+        self.currentPath = []  # indicates root.
 
     def set(self, value):
         self.accum = update(self.accum, self.currentPath, value)
@@ -18,7 +19,7 @@ class MyCustomListener(rdlevelListener):
 
     def enterAnArray(self, ctx: rdlevelParser.AnArrayContext):
         self.set([])
-        self.currentPath.append(-1) # indicator we're in an array.
+        self.currentPath.append(-1)  # indicator we're in an array.
 
     def exitAnArray(self, ctx: rdlevelParser.AnArrayContext):
         self.currentPath.pop()
@@ -29,13 +30,15 @@ class MyCustomListener(rdlevelListener):
 
     def enterAnObject(self, ctx: rdlevelParser.AnObjectContext):
         self.set({})
-        self.currentPath.append("") # current object key. will be replaced in enterPair.
+        self.currentPath.append(
+            ""
+        )  # current object key. will be replaced in enterPair.
 
     def exitAnObject(self, ctx: rdlevelParser.AnObjectContext):
         self.currentPath.pop()
 
     def enterBooleanValue(self, ctx: rdlevelParser.BooleanValueContext):
-        value = ctx.getText() == 'true'
+        value = ctx.getText() == "true"
         self.set(value)
 
     def enterNumberValue(self, ctx: rdlevelParser.NumberValueContext):

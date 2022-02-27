@@ -5,6 +5,7 @@ def dig(dig_list, obj):
         final = final[prop]
     return final
 
+
 def update(obj, key, value):
     if obj is None:
         return value

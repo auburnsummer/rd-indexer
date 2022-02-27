@@ -1,5 +1,3 @@
-
-
 from math import ceil
 from zipfile import ZipFile
 from PIL import Image
@@ -15,7 +13,7 @@ def thumbnail_facet(obj, z: ZipFile):
 
     orig_file_p = BytesIO()
     thumb_file_p = BytesIO()
-    with z.open(image_name, 'r') as image_buffer:
+    with z.open(image_name, "r") as image_buffer:
         image = Image.open(image_buffer)
         orig = image.copy()
         image.thumbnail((THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT), Image.LANCZOS)

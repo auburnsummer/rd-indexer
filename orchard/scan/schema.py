@@ -32,8 +32,9 @@ LEVEL_SCHEMA = {
     "has_freetimes": bool,
     "has_holds": bool,
     "source": str,
-    "source_iid": str
+    "source_iid": str,
 }
+
 
 def make_schema(db: Database):
 
@@ -43,6 +44,7 @@ def make_schema(db: Database):
         not_null=set(LEVEL_SCHEMA.keys()) - {"thumb, url, icon"},
     )
 
+
 class OrchardDatabase:
     def __init__(self, db: Database):
         self.db = db
@@ -51,11 +53,13 @@ class OrchardDatabase:
         self.db["level"].insert(level, pk="id")
 
     def delete_level(self, source_id, source_iid):
-        iter = self.db["level"].rows_where("source = ? AND source_iid = ?", [source_id, source_iid])
+        iter = self.db["level"].rows_where(
+            "source = ? AND source_iid = ?", [source_id, source_iid]
+        )
         iter = list(iter)
         if iter:
             row = iter[0]
-            self.db["level"].delete(row['id'])
+            self.db["level"].delete(row["id"])
 
     def does_level_exist(self, id):
         try:
@@ -65,4 +69,7 @@ class OrchardDatabase:
             return False
 
     def get_source_set(self, source_id):
-        return set(r['source_iid'] for r in self.db["level"].rows_where("source = ?", [source_id]))
+        return set(
+            r["source_iid"]
+            for r in self.db["level"].rows_where("source = ?", [source_id])
+        )

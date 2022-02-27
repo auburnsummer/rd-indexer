@@ -4,7 +4,8 @@ from orchard.parse.utils import dig
 
 logger = logging.getLogger(__name__)
 
-def make_key_facet(path, fallback = None):
+
+def make_key_facet(path, fallback=None):
     def inner(obj, _):
         try:
             return dig(path, obj)

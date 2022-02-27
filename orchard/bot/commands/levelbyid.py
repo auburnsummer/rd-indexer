@@ -10,12 +10,14 @@ from orchard.bot.message_builder import MessageBuilder as M, Embed
 
 async def levelbyid(body, _):
     async with Interactor(body["token"]) as i:
-        [id] = get_slash_args(['id'], body)
+        [id] = get_slash_args(["id"], body)
         id = id.rstrip()
         try:
             data = await get_by_id(id)
         except httpx.HTTPError:
-            await i.edit(M().content(f"Could not find a level with id {id}"), "@original")
+            await i.edit(
+                M().content(f"Could not find a level with id {id}"), "@original"
+            )
         else:
             # todo: format this nicely instead of just chucking it all in an embed
             embeds = []

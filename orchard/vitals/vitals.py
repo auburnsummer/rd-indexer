@@ -21,34 +21,34 @@ class VitalsException(Exception):
 
 def main(f: BinaryIO):
     facets = {
-        "id":                               id_facet,
-        "artist":                           make_key_facet(["settings", "artist"]),
-        "song":                             make_key_facet(["settings", "song"]),
-        "seizure_warning":                  make_key_facet(["settings", "seizureWarning"], True),
-        "description":                      make_key_facet(["settings", "description"]),
-        "hue":                              make_key_facet(["settings", "songNameHue"], 0.0),
-        "authors":                          author_facet,
-        ("max_bpm", "min_bpm"):             bpm_facet,
-        "difficulty":                       difficulty_facet,
-        ("single_player", "two_player"):    player_facet,
-        "last_updated":                     updated_facet,
-        "tags":                             tags_facet,
-        ("image", "thumb"):                 thumbnail_facet,
-        "icon":                             icon_facet,
+        "id": id_facet,
+        "artist": make_key_facet(["settings", "artist"]),
+        "song": make_key_facet(["settings", "song"]),
+        "seizure_warning": make_key_facet(["settings", "seizureWarning"], True),
+        "description": make_key_facet(["settings", "description"]),
+        "hue": make_key_facet(["settings", "songNameHue"], 0.0),
+        "authors": author_facet,
+        ("max_bpm", "min_bpm"): bpm_facet,
+        "difficulty": difficulty_facet,
+        ("single_player", "two_player"): player_facet,
+        "last_updated": updated_facet,
+        "tags": tags_facet,
+        ("image", "thumb"): thumbnail_facet,
+        "icon": icon_facet,
         (
             "has_classics",
             "has_oneshots",
             "has_squareshots",
             "has_freezeshots",
             "has_freetimes",
-            "has_holds"
-        ):                                  beat_type_facet
+            "has_holds",
+        ): beat_type_facet,
     }
 
     try:
         with zipfile.ZipFile(f) as z:
-            with z.open('main.rdlevel', 'r') as rdlevel:
-                text = rdlevel.read().decode('utf-8-sig')
+            with z.open("main.rdlevel", "r") as rdlevel:
+                text = rdlevel.read().decode("utf-8-sig")
                 parsed = parse(text)
 
                 final = {}
@@ -62,19 +62,24 @@ def main(f: BinaryIO):
                         else:
                             final[key] = result
                     except Exception as e:
-                        raise VitalsException(f"vitals: An unhandled error occured in a facet: {e}")
+                        raise VitalsException(
+                            f"vitals: An unhandled error occured in a facet: {e}"
+                        )
 
                 return final
 
     except zipfile.BadZipFile:
-        raise VitalsException("vitals: this is not a zip file, or we couldn't decode it for some reason.")
+        raise VitalsException(
+            "vitals: this is not a zip file, or we couldn't decode it for some reason."
+        )
     except KeyError:
         raise VitalsException("vitals: there is no main.rdlevel in the zip.")
+
 
 if __name__ == "__main__":
     try:
         file_name = sys.argv[1]
-        with open(file_name, 'rb') as f:
+        with open(file_name, "rb") as f:
             vit = main(f)
     except IndexError:
         print("Did you pass a file name in?")

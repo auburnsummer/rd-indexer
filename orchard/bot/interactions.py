@@ -7,10 +7,12 @@ import orchard.bot.crosscode as cc
 
 base_url = f"{DISCORD_API_URL}/webhooks/{APPLICATION_ID}"
 
+
 class Interactor:
     """
     A class that contains methods for handling a slash command interaction.
     """
+
     def __init__(self, token):
         self._token = token
         self.client = httpx.AsyncClient()
@@ -27,20 +29,19 @@ class Interactor:
         # if there's an exception, edit the message with a default thing.
         if exc_type is not None:
             await self.edit(
-                MessageBuilder()
-                .content(f"An unknown error occured! This is a bug. {repr(exc_type)} {exc_value}"),
-                "@original"
-        )
+                MessageBuilder().content(
+                    f"An unknown error occured! This is a bug. {repr(exc_type)} {exc_value}"
+                ),
+                "@original",
+            )
         await self.client.aclose()
-        return True # don't propogate any error
+        return True  # don't propogate any error
 
     async def get(self, id):
         """
         Wrapper around discord API get message (from this webhook)
         """
-        return await self.client.get(
-            f"{base_url}/{self._token}/messages/{id}"
-        )
+        return await self.client.get(f"{base_url}/{self._token}/messages/{id}")
 
     async def edit(self, mb: MessageBuilder, id):
         """
@@ -49,8 +50,7 @@ class Interactor:
         https://discord.com/developers/docs/resources/webhook#edit-webhook-message
         """
         return await self.client.patch(
-            f"{base_url}/{self._token}/messages/{id}",
-            json=mb.payload()
+            f"{base_url}/{self._token}/messages/{id}", json=mb.payload()
         )
 
     async def post(self, mb: MessageBuilder):
@@ -59,18 +59,13 @@ class Interactor:
 
         https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message
         """
-        return await self.client.post(
-            f"{base_url}/{self._token}",
-            json=mb.payload()
-        )
+        return await self.client.post(f"{base_url}/{self._token}", json=mb.payload())
 
     async def delete(self, id):
         """
         Wrapper around discord API delete message.
         """
-        return await self.client.delete(
-            f"{base_url}/{self._token}/messages/{id}"
-        )
+        return await self.client.delete(f"{base_url}/{self._token}/messages/{id}")
 
     async def uuid(self):
         """

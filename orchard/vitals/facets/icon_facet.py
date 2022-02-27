@@ -1,5 +1,3 @@
-
-
 from math import ceil
 from zipfile import ZipFile
 from PIL import Image
@@ -21,7 +19,7 @@ def icon_facet(obj, z: ZipFile):
 
     file_p = BytesIO()
     try:
-        with z.open(image_name, 'r') as image_buffer:
+        with z.open(image_name, "r") as image_buffer:
             image = Image.open(image_buffer)
             image.save(file_p, format="png")
 

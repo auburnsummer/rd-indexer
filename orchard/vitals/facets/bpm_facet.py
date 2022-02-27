@@ -1,12 +1,13 @@
 def is_bpm_event(evt):
-    return evt['type'] in ['PlaySong', 'SetBeatsPerMinute']
+    return evt["type"] in ["PlaySong", "SetBeatsPerMinute"]
+
 
 def get_bpm_from_event(evt):
     # then, the bpm is either in the ["bpm"] or ["beatsPerMinute"] key
     try:
-        return evt['bpm']
+        return evt["bpm"]
     except KeyError:
-        return evt['beatsPerMinute']
+        return evt["beatsPerMinute"]
 
 
 def bpm_facet(obj, _):

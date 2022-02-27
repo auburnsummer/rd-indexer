@@ -7,10 +7,11 @@ from sqlite_utils import Database
 import itertools
 from orchard.scan.schema import LEVEL_SCHEMA
 
+
 def make_json_from_row(row):
     type_transformers = {
-        bool : lambda n : True if n > 0 else False,
-        datetime : lambda s : floor(datetime.fromisoformat(s).timestamp()),
+        bool: lambda n: True if n > 0 else False,
+        datetime: lambda s: floor(datetime.fromisoformat(s).timestamp()),
     }
     key_transformers = {
         "tags": lambda s: json.loads(s),
@@ -32,6 +33,7 @@ def package(db: Database):
             processed = make_json_from_row(row)
             s = json.dumps(processed)
             f.write(s + "\n")
+
 
 if __name__ == "__main__":
     file = sys.argv[1]

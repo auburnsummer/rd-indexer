@@ -8,6 +8,7 @@ import base58
 
 # the final hash is only 8 bytes long. we're not using this for security reasons.
 
+
 def id_facet(obj, z: ZipFile):
     song = obj["settings"]["song"]
 
@@ -23,7 +24,7 @@ def id_facet(obj, z: ZipFile):
     omnihash = "".join(sorted(hashes))
 
     # and has the result.
-    omnihash2 = blake2s(omnihash.encode('utf-8'), digest_size=8)
-    omnihash3 = base58.b58encode(omnihash2.digest()).decode('utf-8')
+    omnihash2 = blake2s(omnihash.encode("utf-8"), digest_size=8)
+    omnihash3 = base58.b58encode(omnihash2.digest()).decode("utf-8")
 
-    return slugify(song, max_length=8) + '-' + omnihash3
+    return slugify(song, max_length=8) + "-" + omnihash3

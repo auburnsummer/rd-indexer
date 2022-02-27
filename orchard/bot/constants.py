@@ -23,9 +23,11 @@ ORCHARD_API_URL = "https://api.rhythm.cafe/orchard.json"
 TYPESENSE_URL = os.environ["TYPESENSE_URL"]
 TYPESENSE_API_KEY = "nicolebestgirl"
 
+
 class ComponentType:
     ACTION_ROW = 1
     BUTTON = 2
+
 
 class OptionType:
     SUB_COMMAND = 1
@@ -38,6 +40,7 @@ class OptionType:
     ROLE = 8
     MENTIONABLE = 9
 
+
 class ResponseType:
     PONG = 1
     CHANNEL_MESSAGE_WITH_SOURCE = 4
@@ -45,12 +48,14 @@ class ResponseType:
     DEFERRED_UPDATE_MESSAGE = 6
     UPDATE_MESSAGE = 7
 
+
 class ButtonStyle:
     PRIMARY = 1
     SECONDARY = 2
     SUCCESS = 3
     DANGER = 4
     LINK = 5
+
 
 class PermissionType:
     ROLE = 1
