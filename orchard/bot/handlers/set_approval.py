@@ -1,8 +1,9 @@
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse
 
-from orchard.bot.db import get_status, set_status
+from orchard.bot.db import get_or_default, set_status
 from orchard.bot import keys
+from orchard.bot.typesense import get_by_id
 
 
 async def set_approval(request):
@@ -18,18 +19,20 @@ async def set_approval(request):
     except Exception as e:
         return JSONResponse({"error": str(e)}, 401)
 
-    # return JSONResponse({'hello': 'world'}, 200);
-
     # get stuff out from the body?
     id = request.path_params["id"]
+    db = request.app.state.db
+
 
     try:
+        # the level needs to exist
+        await get_by_id(id)
         if request.method.lower() == "post":
             body = await request.json()
-            await set_status(id, body)
-            return JSONResponse(await get_status(id))
+            set_status(db, id, body)
+            return JSONResponse(get_or_default(db, id))
         else:
             # it's a get request.
-            return JSONResponse(await get_status(id))
+            return JSONResponse(get_or_default(db, id))
     except Exception as e:
         return JSONResponse({"error": str(e)}, 500)

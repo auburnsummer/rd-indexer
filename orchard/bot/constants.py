@@ -60,3 +60,6 @@ class ButtonStyle:
 class PermissionType:
     ROLE = 1
     USER = 2
+
+
+DEFAULT_DB_VALUE = {"approval": 0}
