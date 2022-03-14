@@ -69,5 +69,5 @@ jobs:
         run: poetry run python scan.py orchard.db
         working-directory: ./orchard/scan
         env:
-          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
-          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_ACCESS_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          KEY_ID: ${{ secrets.B2_KEY_ID }}
