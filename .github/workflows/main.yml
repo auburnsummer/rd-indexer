@@ -16,6 +16,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+        
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout
         uses: actions/checkout@v2
@@ -51,3 +54,20 @@ jobs:
  
       - name: print b2 account info
         run: b2 get-account-info
+        
+      - name: download current db if it exists...
+        run: b2 download-file-by-name rdcodex orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
+        working-directory: ./orchard/scan
+        continue-on-error: true
+        
+      - name: Print out the sha1sum of the current db
+        run: sha1sum orchard.db
+        working-directory: ./orchard/scan
+        continue-on-error: true
+        
+      - name: scan
+        run: python scan.py orchard.db
+        working-directory: ./orchard/scan
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
