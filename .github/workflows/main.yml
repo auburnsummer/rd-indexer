@@ -26,7 +26,10 @@ jobs:
           python-version: 'pypy-3.7'
     
       - name: install poetry
-        uses: snok/install-poetry@v1
+        uses: abatilo/actions-poetry@v2.0.0
       
       - name: install deps
         run: poetry install --no-interaction
+
+      - name: b2
+        run: pip3 install b2
