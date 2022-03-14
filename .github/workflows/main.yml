@@ -32,15 +32,15 @@ jobs:
       - name: install poetry
         uses: snok/install-poetry@v1
 
-#       - name: load cached venv
-#         id: cached-poetry-dependencies
-#         uses: actions/cache@v2
-#         with:
-#           path: .venv
-#           key: venv-${{ runner.os }}-${{ steps.setup-pypy.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      - name: load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: /home/runner/.cache/pypoetry/virtualenvs
+          key: venv-${{ runner.os }}-${{ steps.setup-pypy.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       
       - name: install deps if cache miss
-#         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
 
       - name: install b2
