@@ -66,7 +66,7 @@ jobs:
         continue-on-error: true
         
       - name: scan
-        run: python scan.py orchard.db
+        run: poetry run python scan.py orchard.db
         working-directory: ./orchard/scan
         env:
           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
