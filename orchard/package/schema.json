@@ -114,6 +114,26 @@
 			"index": true,
 			"name": "two_player",
 			"type": "bool"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "approval",
+			"type": "int32"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "indexed",
+			"type": "int64",
+			"optional": true
+		},
+		{
+			"facet": false,
+			"index": false,
+			"name": "approval_reasons",
+			"type": "string",
+			"optional": true
 		}
 	]
 }

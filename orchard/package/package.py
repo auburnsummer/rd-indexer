@@ -8,21 +8,35 @@ from sqlite_utils import Database
 import itertools
 
 from orchard.bot.constants import DEFAULT_DB_VALUE
+from orchard.bot.schema import STATUS_SCHEMA
 from orchard.scan.schema import LEVEL_SCHEMA
 from orchard.scan.sources.old_sheet import SHEET_API_URL
 
 
+def none_or(func):
+    def inner(value):
+        if value is None:
+            return None
+        else:
+            return func(value)
+    return inner
+
+
 def make_json_from_row(row):
+    combined_schema = {
+        **LEVEL_SCHEMA,
+        **STATUS_SCHEMA
+    }
     type_transformers = {
         bool: lambda n: True if n > 0 else False,
-        datetime: lambda s: floor(datetime.fromisoformat(s).timestamp()),
+        datetime: none_or(lambda s: floor(datetime.fromisoformat(s).timestamp()))
     }
     key_transformers = {
         "tags": lambda s: json.loads(s),
         "authors": lambda s: json.loads(s),
     }
     for col_name, col_value in row.items():
-        col_type = LEVEL_SCHEMA[col_name]
+        col_type = combined_schema[col_name]
         if col_type in type_transformers.keys():
             row[col_name] = type_transformers[col_type](col_value)
         if col_name in key_transformers.keys():
@@ -63,7 +77,7 @@ def package(db: Database, status_db: Database):
         })
 
     with open("./orchard.jsonl", "w") as f:
-        for row in db["level"].rows:
+        for row in combined:
             processed = make_json_from_row(row)
             s = json.dumps(processed)
             f.write(s + "\n")

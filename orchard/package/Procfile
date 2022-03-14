@@ -1,3 +1,3 @@
 typesense: /bin/typesense-server --config=./typesense-config.ini
-datasette: datasette -i ./orchard.db --setting hash_urls 1 --setting base_url /datasette/ -h 0.0.0.0 -p 5100
+datasette: datasette -i ./orchard.db ./status.db --setting hash_urls 1 --setting base_url /datasette/ -h 0.0.0.0 -p 5100
 caddy: caddy run
