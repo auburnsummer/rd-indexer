@@ -31,5 +31,15 @@ jobs:
       - name: install deps
         run: poetry install --no-interaction
 
-      - name: b2
+      - name: install b2
         run: pip3 install b2
+        
+      - name: configure b2
+        run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+ 
+      - name: print b2 account info
+        run: b2 get-account-info
