@@ -47,7 +47,6 @@ jobs:
         run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
         env:
           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
-          B2_BUCKET_ID: ${{ secrets.B2_BUCKET_ID }}
           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
  
       - name: print b2 account info
