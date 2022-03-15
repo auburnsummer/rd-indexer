@@ -66,8 +66,13 @@ jobs:
         continue-on-error: true
         
       - name: scan
-        run: poetry run python scan.py orchard.db
+        run: timeout 5m poetry run python scan.py orchard.db
         working-directory: ./orchard/scan
+        continue-on-error: true
         env:
           B2_ACCESS_KEY: ${{ secrets.B2_APPLICATION_KEY }}
           KEY_ID: ${{ secrets.B2_KEY_ID }}
+
+      - name: upload to b2
+        run: b2 upload-file rdcodex orchard.db orchard-${{ env.GITHUB_REF_SLUG }}.db
+        working-directory: ./orchard/scan
