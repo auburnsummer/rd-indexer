@@ -1,0 +1,19 @@
+name: Deploy the bot
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'orchard/bot/**'
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: awefawefawefa
+      run: echo fehipofhwepofhaopwefopawef
