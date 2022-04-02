@@ -1,3 +1,5 @@
+# todo: download current status.db and upload it to new instance.
+
 name: Deploy the bot
 
 on:
@@ -15,5 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: awefawefawefa
-      run: echo fehipofhwepofhaopwefopawef
+    - name: DigitalOcean App Platform deployment
+      uses: digitalocean/app_action@main
+      with:
+        app_name: orchard-bot
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
