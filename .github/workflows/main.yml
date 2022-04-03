@@ -120,3 +120,18 @@ jobs:
       - name: print out hashes of the aforementioned dbs
         run: sha1sum *.db
         working-directory: ./orchard/package  
+        
+      - name: package...
+        run: poetry run python package.py orchard.db status.db
+        working-directory: ./orchard/package
+        
+      - name: print out hashes of the resulting jsonl file
+        run: sha1sum orchard.jsonl
+        working-directory: ./orchard/package
+        
+      - name: install flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      
+      - name: fly me to the moon
+        run: flyctl deploy --remote-only
+        working-directory: ./orchard/package
