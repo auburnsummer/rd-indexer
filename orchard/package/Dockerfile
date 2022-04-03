@@ -1,6 +1,7 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
   python3 \
   python3-pip \
@@ -9,7 +10,7 @@ RUN apt-get update && apt-get install -y \
   jq \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip install datasette
+RUN pip install "datasette~=0.61.1"
 
 RUN mkdir /etc/ts /etc/logs
 
@@ -27,14 +28,14 @@ RUN curl --location --output /bin/overmind.gz https://github.com/DarthSim/overmi
 RUN curl --location --output /bin/caddy.tar.gz https://github.com/caddyserver/caddy/releases/download/v2.4.6/caddy_2.4.6_linux_amd64.tar.gz \
   && tar -xvf /bin/caddy.tar.gz --directory /bin
 
-RUN ls /bin
-
 COPY . /app
 WORKDIR /app
 
 RUN sh setup_typesense.sh
 
-EXPOSE 80
+RUN rm -f .overmind.sock
+
+EXPOSE 8080
 
 CMD ["overmind", "start"]
 

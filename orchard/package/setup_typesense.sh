@@ -35,5 +35,6 @@ curl 'localhost:5000/keys' \
     -H 'Content-Type: application/json' \
     -d @./typesense-key.json
 
+sleep 1
 overmind stop typesense
 overmind quit

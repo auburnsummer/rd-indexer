@@ -3,7 +3,7 @@
 }
 
 
-:80 {
+http://orchard.fly.dev:8080, :8080 {
     @onlygets {
         method GET
     }
