@@ -25,6 +25,8 @@ ORCHARD_API_URL = "https://api.rhythm.cafe/orchard.json"
 TYPESENSE_URL = const_from_env("TYPESENSE_URL")
 TYPESENSE_API_KEY = "nicolebestgirl"
 
+POST_STATUS_DOT_DB_TOKEN = const_from_env("POST_STATUS_DOT_DB_TOKEN")
+
 
 class ComponentType:
     ACTION_ROW = 1

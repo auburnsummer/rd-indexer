@@ -1,6 +1,10 @@
+import asyncio
 import sqlite3
 import itertools
 
+
+# wrap a function that takes a httpx.client that calls discord. if discord asks for more time, give it and retry later.
+import httpx
 
 def get_slash_args(args, body):
     """
