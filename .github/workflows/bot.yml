@@ -27,6 +27,9 @@ jobs:
     - uses: cygnetdigital/wait_for_response@v2.0.0
       with:
         url: 'https://botprod.auburn.dev/status.db'
-    - name: hmmmmmmmmm
-      run: curl https://botprod.auburn.dev/status.db
-      
+    - name: post the db we downloaded back
+      run: |
+        curl --data @status.db \
+        --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
+        --header 'Content-Type: application/octet-stream' \
+        --url https://botprod.auburn.dev/status.db
