@@ -17,8 +17,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Download the old DB
+      run: curl https://botprod.auburn.dev/status.db -o status.db
     - name: DigitalOcean App Platform deployment
       uses: digitalocean/app_action@main
       with:
         app_name: orchard-bot
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - uses: cygnetdigital/wait_for_response@v2.0.0
+      with:
+        url: 'https://botprod.auburn.dev/status.db'
+    - name: post the db we downloaded back
+      run: |
+        curl --request POST --data @status.db \
+        --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
+        --header 'Content-Type: application/octet-stream' \
+        --url https://botprod.auburn.dev/status.db
