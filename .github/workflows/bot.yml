@@ -29,7 +29,7 @@ jobs:
         url: 'https://botprod.auburn.dev/status.db'
     - name: post the db we downloaded back
       run: |
-        curl --data @status.db \
+        curl --request POST --data @status.db \
         --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
         --header 'Content-Type: application/octet-stream' \
         --url https://botprod.auburn.dev/status.db
