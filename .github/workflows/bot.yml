@@ -22,3 +22,6 @@ jobs:
       with:
         app_name: orchard-bot
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - name: hmm try to download it maybe?
+      run: curl https://botprod.auburn.dev/status.db
+      
