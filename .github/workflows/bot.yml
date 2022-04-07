@@ -33,4 +33,4 @@ jobs:
         --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
         --header 'Content-Type: application/octet-stream' \
         --url https://botprod.auburn.dev/status.db \
-        --fail-with-body
+        --verbose
