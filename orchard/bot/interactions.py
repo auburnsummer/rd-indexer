@@ -1,3 +1,5 @@
+import logging
+
 from orchard.bot.message_builder import MessageBuilder
 import httpx
 
@@ -7,6 +9,7 @@ import orchard.bot.crosscode as cc
 
 base_url = f"{DISCORD_API_URL}/webhooks/{APPLICATION_ID}"
 
+logger = logging.getLogger(__name__)
 
 class Interactor:
     """
@@ -28,6 +31,7 @@ class Interactor:
             cc.clean(uuid)
         # if there's an exception, edit the message with a default thing.
         if exc_type is not None:
+            logger.error("Error", exc_info=True)
             await self.edit(
                 MessageBuilder().content(
                     f"An unknown error occured! This is a bug. {repr(exc_type)} {exc_value}"
