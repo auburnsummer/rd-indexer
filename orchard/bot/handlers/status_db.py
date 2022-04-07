@@ -1,7 +1,7 @@
 import os
 
 from sqlite_utils import Database
-from starlette.responses import FileResponse, JSONResponse
+from starlette.responses import FileResponse, JSONResponse, Response
 import sys
 
 from orchard.bot.constants import POST_STATUS_DOT_DB_TOKEN
@@ -32,6 +32,7 @@ async def post_status_dot_db(request):
 
 async def status_dot_db(request):
     if request.method.lower() == 'post':
-        return post_status_dot_db(request)
+        await post_status_dot_db(request)
+        return Response(status_code=204)
     else:
         return FileResponse(sys.argv[1], media_type="application/x-sqlite3")

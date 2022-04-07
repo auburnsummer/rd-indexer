@@ -1,6 +1,9 @@
 alerts:
 - rule: DEPLOYMENT_FAILED
 - rule: DOMAIN_FAILED
+domains:
+- domain: botprod.auburn.dev
+  type: PRIMARY
 name: orchard-bot
 region: sfo
 services:
@@ -8,10 +11,10 @@ services:
   envs:
   - key: BOT_TOKEN
     scope: RUN_AND_BUILD_TIME
-    value: [redacted]
+    value: "[redacted]"
   - key: PUBLIC_KEY
     scope: RUN_AND_BUILD_TIME
-    value: [redacted]
+    value: "[redacted]"
   - key: APPLICATION_ID
     scope: RUN_AND_BUILD_TIME
     value: "[redacted]"
@@ -26,7 +29,7 @@ services:
     value: [redacted]
   - key: TYPESENSE_URL
     scope: RUN_AND_BUILD_TIME
-    value: [redacted]
+    value: https://api.rhythm.cafe/typesense
   github:
     branch: main
     repo: auburnsummer/rd-indexer

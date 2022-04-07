@@ -182,7 +182,7 @@ app = Starlette(
     routes=[
         Route("/interactions", interaction_handler, methods=["POST"]),
         Route("/interactions2", interaction_handler, methods=["POST"]),
-        Route("/status.db", handlers.status_dot_db, methods=["GET"]),
+        Route("/status.db", handlers.status_dot_db, methods=["GET", "POST"]),
         Route('/approval/{id}', handlers.set_approval, methods=['POST', 'GET'])
     ],
     on_startup=[

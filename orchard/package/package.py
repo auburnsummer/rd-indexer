@@ -48,14 +48,14 @@ def make_json_from_row(row):
 def prerun_import_oldsheet(db: Database, status_db: Database):
     resp = httpx.get(SHEET_API_URL, follow_redirects=True)
     resp_json = resp.json()
-    approved_iids = [x['download_url'] for x in resp_json if 'verified' in x and x['verified']]
-    for iid in approved_iids:
+    iids = [(x['download_url'], x['verified']) for x in resp_json if 'verified' in x]
+    for (iid, v) in iids:
         q = list(db['level'].rows_where("source_iid = :iid", {'iid': iid}))
         if q:
             id = q[0]['id']
             status_db['status'].upsert({
                 'id': id,
-                'approval': 10
+                'approval': 10 if v else -1
             }, pk='id')
 
 
