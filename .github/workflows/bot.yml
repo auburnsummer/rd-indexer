@@ -32,4 +32,5 @@ jobs:
         curl --request POST --data @status.db \
         --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
         --header 'Content-Type: application/octet-stream' \
-        --url https://botprod.auburn.dev/status.db
+        --url https://botprod.auburn.dev/status.db \
+        --fail-with-body
