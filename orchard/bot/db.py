@@ -4,11 +4,11 @@ from sqlite_utils.db import NotFoundError
 from orchard.bot.constants import DEFAULT_DB_VALUE
 
 
-def get_or_default(db: Database, id):
+def get_or_default(db: Database, id, approval):
     try:
         db["status"].get(id)
     except NotFoundError:
-        db["status"].insert({"id": id, **DEFAULT_DB_VALUE})
+        db["status"].insert({"id": id, **DEFAULT_DB_VALUE, "approval": approval})
     finally:
         return db["status"].get(id)
 

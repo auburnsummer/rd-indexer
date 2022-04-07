@@ -26,7 +26,7 @@ async def approve(body, request):
             else:
                 # setting approval route
                 db.set_status(request.app.state.db, id, {'approval': approval})
-            local_data = db.get_or_default(request.app.state.db, id)
+            local_data = db.get_or_default(request.app.state.db, id, data['approval'])
             message = M()
             embed = (
                 Embed()
