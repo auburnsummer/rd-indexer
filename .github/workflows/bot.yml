@@ -19,6 +19,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Download the old DB
       run: curl https://botprod.auburn.dev/status.db -o status.db
+    - name: shasum of it
+      run: sha1sum status.db
     - name: DigitalOcean App Platform deployment
       uses: digitalocean/app_action@main
       with:
