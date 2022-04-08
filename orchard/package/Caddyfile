@@ -4,8 +4,8 @@
 
 
 http://orchard.fly.dev:8080, :8080 {
-    @onlygets {
-        method GET
+    @readonly {
+        method GET HEAD OPTIONS TRACE
     }
     rewrite /datasette /datasette/
     rewrite /typesense /typesense/
@@ -13,7 +13,7 @@ http://orchard.fly.dev:8080, :8080 {
         reverse_proxy * http://localhost:5100
     }
     handle_path /typesense/* {
-        reverse_proxy @onlygets http://localhost:5000
+        reverse_proxy @readonly http://localhost:5000
     }
     root * /app/www
     file_server
