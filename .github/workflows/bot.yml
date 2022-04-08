@@ -19,6 +19,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Download the old DB
       run: curl https://botprod.auburn.dev/status.db -o status.db
+    - name: shasum of it
+      run: sha1sum status.db
     - name: DigitalOcean App Platform deployment
       uses: digitalocean/app_action@main
       with:
@@ -27,9 +29,12 @@ jobs:
     - uses: cygnetdigital/wait_for_response@v2.0.0
       with:
         url: 'https://botprod.auburn.dev/status.db'
+    - name: ls
+      run: ls -Alh
     - name: post the db we downloaded back
       run: |
-        curl --request POST --data @status.db \
+        curl --request POST --data-binary @status.db \
         --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
         --header 'Content-Type: application/octet-stream' \
-        --url https://botprod.auburn.dev/status.db
+        --url https://botprod.auburn.dev/status.db \
+        --verbose
