@@ -2,7 +2,7 @@
 	"name": "levels",
 	"fields": [
 		{
-			"facet": false,
+			"facet": true,
 			"index": true,
 			"name": "artist",
 			"type": "string"
