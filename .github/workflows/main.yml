@@ -9,8 +9,14 @@ concurrency:
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      timeout:
+        description: How long to run the scraper for.
+        required: true
+        default: 45m
+        type: string
   schedule:
-    - cron: 12 * * * *
+    - cron: '12 * * * *'
   
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -65,7 +71,7 @@ jobs:
         continue-on-error: true
         
       - name: scan
-        run: timeout 45m poetry run python scan.py orchard.db
+        run: timeout ${{ github.event.inputs.deployment_prefix || '45m' }} poetry run python scan.py orchard.db
         working-directory: ./orchard/scan
         continue-on-error: true
         env:
