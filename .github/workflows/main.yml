@@ -4,7 +4,6 @@ name: CI
 
 concurrency: 
   group: mygroup
-  cancel-in-progress: true
 
 # Controls when the workflow will run
 on:
