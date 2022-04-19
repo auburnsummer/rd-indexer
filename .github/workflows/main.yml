@@ -3,8 +3,7 @@
 name: CI
 
 concurrency: 
-  group: mygroup
-  cancel-in-progress: true
+  group: ${{ github.ref_name }}
 
 # Controls when the workflow will run
 on:
@@ -79,6 +78,7 @@ jobs:
   prepare-and-upload:
     needs: search-and-index
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     
     steps:
       - name: Inject slug/short variables
