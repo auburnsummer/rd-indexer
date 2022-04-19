@@ -26,7 +26,7 @@ def is_freezeshot(evt):
     return evt["type"] == "AddOneshotBeat" and "delay" in evt and evt["delay"] > 0
 
 
-def beat_type_facet(obj, _):
+def beat_type_facet(obj, *_):
     events = obj["events"]
 
     return (

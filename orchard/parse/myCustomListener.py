@@ -50,7 +50,9 @@ class MyCustomListener(rdlevelListener):
         self.set(value)
 
     def enterStringValue(self, ctx: rdlevelParser.StringValueContext):
-        self.set(ctx.getText().strip('"'))
+        # strip leading and ending "'s
+        # and remove escape characters
+        self.set("".join(c for c in ctx.getText()[1:-1] if c != "\\"))
 
     def enterNullValue(self, ctx: rdlevelParser.NullValueContext):
         self.set(None)
