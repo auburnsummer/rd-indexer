@@ -10,7 +10,7 @@ def get_bpm_from_event(evt):
         return evt["beatsPerMinute"]
 
 
-def bpm_facet(obj, _):
+def bpm_facet(obj, *_):
     bpms = [get_bpm_from_event(e) for e in obj["events"] if is_bpm_event(e)]
     # then, the bpm is either in the ["bpm"] or ["beatsPerMinute"] key
     if len(bpms) == 0:

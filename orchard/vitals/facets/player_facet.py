@@ -1,4 +1,4 @@
-def player_facet(obj, _):
+def player_facet(obj, *_):
     s = obj["settings"]["canBePlayedOn"]
     single_player = s in ["OnePlayerOnly", "BothModes"]
     two_player = s in ["TwoPlayerOnly", "BothModes"]

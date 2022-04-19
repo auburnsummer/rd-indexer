@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def make_key_facet(path, fallback=None):
-    def inner(obj, _):
+    def inner(obj, *_):
         try:
             return dig(path, obj)
         except KeyError:
