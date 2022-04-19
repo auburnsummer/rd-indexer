@@ -3,7 +3,7 @@
 name: CI
 
 concurrency: 
-  group: mygroup
+  group: ${{ github.ref_name }}
 
 # Controls when the workflow will run
 on:
