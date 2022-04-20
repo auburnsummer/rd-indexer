@@ -130,6 +130,7 @@ jobs:
           --header 'Content-Type: application/octet-stream' \
           --url https://botprod.auburn.dev/status.db \
           --verbose
+        working-directory: ./orchard/package
         
       - name: print out hashes of the resulting jsonl file
         run: sha1sum orchard.jsonl
