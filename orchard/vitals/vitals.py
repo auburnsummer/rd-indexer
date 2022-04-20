@@ -1,7 +1,9 @@
+import pprint
 import sys
 import zipfile
 from typing import BinaryIO
 from orchard.parse import parse
+from orchard.vitals.facets.sha1_facet import sha1_facet
 from orchard.vitals.facets.author_facet import author_facet
 from orchard.vitals.facets.beat_types_facet import beat_type_facet
 from orchard.vitals.facets.bpm_facet import bpm_facet
@@ -43,6 +45,7 @@ def main(f: BinaryIO):
             "has_freetimes",
             "has_holds",
         ): beat_type_facet,
+        "sha1": sha1_facet
     }
 
     try:
@@ -54,7 +57,7 @@ def main(f: BinaryIO):
                 final = {}
                 for key, func in facets.items():
                     try:
-                        result = func(parsed, z)
+                        result = func(parsed, z, f)
                         if isinstance(key, tuple):
                             # multiple keys with (expected) multiple values that map to the keys.
                             for k, v in zip(key, result):
@@ -81,5 +84,6 @@ if __name__ == "__main__":
         file_name = sys.argv[1]
         with open(file_name, "rb") as f:
             vit = main(f)
+            pprint.pprint(vit)
     except IndexError:
         print("Did you pass a file name in?")

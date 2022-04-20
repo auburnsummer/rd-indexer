@@ -2,6 +2,8 @@ from orchard.parse.rdlevelListener import rdlevelListener
 from orchard.parse.rdlevelParser import rdlevelParser
 from orchard.parse.utils import update
 
+from codecs import escape_decode
+
 
 class MyCustomListener(rdlevelListener):
     def __init__(self):
@@ -50,7 +52,11 @@ class MyCustomListener(rdlevelListener):
         self.set(value)
 
     def enterStringValue(self, ctx: rdlevelParser.StringValueContext):
-        self.set(ctx.getText().strip('"'))
+        # strip leading and ending "'s
+        s1 = ctx.getText()[1:-1]
+        # magical bullshit python function
+        s2 = escape_decode(s1.encode('utf-8'))[0].decode('utf-8')
+        self.set(s2)
 
     def enterNullValue(self, ctx: rdlevelParser.NullValueContext):
         self.set(None)

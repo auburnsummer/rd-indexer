@@ -134,6 +134,13 @@
 			"name": "approval_reasons",
 			"type": "string",
 			"optional": true
+		},
+		{
+			"facet": false,
+			"index": false,
+			"name": "sha1",
+			"type": "string",
+			"optional": true
 		}
 	]
 }

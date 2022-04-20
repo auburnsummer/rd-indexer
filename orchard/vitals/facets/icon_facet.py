@@ -8,7 +8,7 @@ THUMBNAIL_WIDTH = 300
 THUMBNAIL_HEIGHT = 168
 
 # return two fake file objects, one for the thumbnail and the original.
-def icon_facet(obj, z: ZipFile):
+def icon_facet(obj, z: ZipFile, _):
     try:
         image_name = obj["settings"]["syringeIcon"]
     except:

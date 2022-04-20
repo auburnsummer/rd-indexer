@@ -8,7 +8,7 @@ THUMBNAIL_WIDTH = 300
 THUMBNAIL_HEIGHT = 168
 
 # return two fake file objects, one for the thumbnail and the original.
-def thumbnail_facet(obj, z: ZipFile):
+def thumbnail_facet(obj, z: ZipFile, _):
     image_name = obj["settings"]["previewImage"]
 
     orig_file_p = BytesIO()

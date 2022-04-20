@@ -33,6 +33,7 @@ LEVEL_SCHEMA = {
     "has_holds": bool,
     "source": str,
     "source_iid": str,
+    "sha1": str
 }
 
 

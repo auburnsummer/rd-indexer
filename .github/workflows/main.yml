@@ -9,8 +9,14 @@ concurrency:
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      timeout:
+        description: How long to run the scraper for.
+        required: true
+        default: 45m
+        type: string
   schedule:
-    - cron: 12 * * * *
+    - cron: '12 * * * *'
   
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -65,7 +71,7 @@ jobs:
         continue-on-error: true
         
       - name: scan
-        run: timeout 45m poetry run python scan.py orchard.db
+        run: timeout ${{ github.event.inputs.timeout || '45m' }} poetry run python scan.py orchard.db
         working-directory: ./orchard/scan
         continue-on-error: true
         env:
@@ -115,6 +121,15 @@ jobs:
         
       - name: package...
         run: poetry run python package.py orchard.db status.db
+        working-directory: ./orchard/package
+        
+      - name: The status.db can change here, so post it back
+        run: |
+          curl --request POST --data-binary @status.db \
+          --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
+          --header 'Content-Type: application/octet-stream' \
+          --url https://botprod.auburn.dev/status.db \
+          --verbose
         working-directory: ./orchard/package
         
       - name: print out hashes of the resulting jsonl file

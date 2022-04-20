@@ -9,7 +9,7 @@ import base58
 # the final hash is only 8 bytes long. we're not using this for security reasons.
 
 
-def id_facet(obj, z: ZipFile):
+def id_facet(obj, z: ZipFile, _):
     song = obj["settings"]["song"]
 
     hashes = []
