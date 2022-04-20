@@ -1,0 +1,42 @@
+# Backup the status.db daily
+# because status.db contains important info!!
+# we can always regenerate orchard.db, but not status.db
+
+name: Backup status.db
+
+# Controls when the workflow will run
+on:
+  # once a day
+  schedule:
+    - cron: '32 05 * * *'
+  
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  backup:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: install b2
+        run: pipx install b2
+        
+      - name: configure b2
+        run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+ 
+      - name: print b2 account info
+        run: b2 get-account-info
+      - name: Download the old DB
+        run: curl https://botprod.auburn.dev/status.db -o status.db
+      - name: shasum of it
+        run: sha1sum status.db
+      - name: upload to b2
+        run: b2 upload-file rdcodex status.db status-backup.db        
