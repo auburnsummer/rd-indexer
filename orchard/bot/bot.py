@@ -3,8 +3,9 @@ import sys
 from collections import defaultdict
 
 import uvicorn
-from nacl.exceptions import BadSignatureError
-from nacl.signing import VerifyKey
+from cryptography.exceptions import InvalidSignature
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+
 from sqlite_utils import Database
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
@@ -22,14 +23,11 @@ from orchard.bot.constants import (
     ResponseType,
 )
 from orchard.bot.register import (
-    get_command_to_id_mapping,
-    update_slash_commands,
-    update_slash_permissions,
+    update_slash_commands
 )
 from orchard.bot.schema import make_schema
 from orchard.bot.slash_router import (
     SlashOption,
-    SlashOptionPermission,
     SlashRoute,
     SlashRouter,
 )
@@ -40,12 +38,13 @@ from orchard.bot import handlers
 router = SlashRouter(
     routes=[
         SlashRoute(
-            name="ping", description="responds with pong!", handler=commands.ping
+            name="ping", description="responds with pong!", handler=commands.ping, default_permission=False
         ),
         SlashRoute(
             name="version",
             description="print the version of this bot",
             handler=commands.version,
+            default_permission=False
         ),
         SlashRoute(
             name="plpasscode",
@@ -56,11 +55,6 @@ router = SlashRouter(
                     name="check",
                     description="put a passcode here to check it",
                     required=False,
-                )
-            ],
-            permissions=[
-                SlashOptionPermission(
-                    id=PATHLAB_ROLE, type=PermissionType.ROLE, permission=True
                 )
             ],
             default_permission=False,
@@ -78,7 +72,7 @@ router = SlashRouter(
                     required=True,
                 ),
             ],
-            default_permission=True,
+            default_permission=False,
             handler=commands.levelbyid,
             defer=True,
         ),
@@ -99,11 +93,6 @@ router = SlashRouter(
                     required=False,
                 ),
             ],
-            permissions=[
-                SlashOptionPermission(
-                    id=PATHLAB_ROLE, type=PermissionType.ROLE, permission=True
-                )
-            ],
             default_permission=False,
             handler=commands.approve,
             defer=True,
@@ -117,15 +106,19 @@ async def interaction_handler(request):
     Starlette handler for the /interactions endpoint.
     """
     # Check the headers are correct: https://discord.com/developers/docs/interactions/slash-commands#security-and-authorization
-    verify_key = VerifyKey(bytes.fromhex(PUBLIC_KEY))
+    verify_key = Ed25519PublicKey.from_public_bytes(bytes.fromhex(PUBLIC_KEY))
+
     rheaders = defaultdict(str, request.headers)
     signature = rheaders["x-signature-ed25519"]
+
     timestamp = rheaders["x-signature-timestamp"]
     payload = await request.body()
+    # concat bytes together
+    to_verify = timestamp.encode('ascii') + payload
 
     try:
-        verify_key.verify(timestamp.encode() + payload, bytes.fromhex(signature))
-    except BadSignatureError:
+        verify_key.verify(bytes.fromhex(signature), to_verify)
+    except InvalidSignature:
         return JSONResponse({"error": "Invalid request signature"}, status_code=401)
 
     # If we've gotten here, headers are valid. now respond...
@@ -152,20 +145,14 @@ async def interaction_handler(request):
 async def prerun_update_slash_commands():
     """
     Before launching, update the slash commands defined by the router to the discord API.
-    This has to be done in two steps, calling the /commands and then /commands/permissions
+    This is done by calling /commands. note that bot can no longer update their own
+    permissions in permissions v2.
     """
     print("updating slash commands...")
     payload = router.api()
     print(payload)
     resp = (await update_slash_commands(payload)).json()
     print(resp)
-
-    mapping = get_command_to_id_mapping(resp)
-    print("updating permissions...")
-    payload2 = router.permission_api(mapping)
-    print(payload2)
-    print((await update_slash_permissions(payload2)).json())
-    print("done!")
 
 
 async def prerun_check_db():

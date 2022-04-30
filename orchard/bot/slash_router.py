@@ -2,18 +2,9 @@ from typing import Dict, List
 from starlette.background import BackgroundTask
 from orchard.bot.constants import ResponseType
 from starlette.responses import JSONResponse
-from inspect import signature
 
-
-class SlashOptionPermission:
-    def __init__(self, id, type, permission):
-        self._id = id
-        self._type = type
-        self._permission = permission
-
-    def permission_api(self):
-        return {"id": self._id, "type": self._type, "permission": self._permission}
-
+EVERY_PERMISSION = str(2**41 - 1)
+NO_PERMISSIONS = str(0)
 
 class SlashOptionChoice:
     def __init__(self, name, value):
@@ -52,10 +43,9 @@ class SlashRoute:
         name,
         description,
         handler,
-        default_permission=True,
+        default_permission=False,
         options=None,
-        defer=False,
-        permissions=None,
+        defer=False
     ):
         self._name = name
         self._description = description
@@ -63,24 +53,17 @@ class SlashRoute:
         self._default_permission = default_permission
         self._options = options
         self._defer = defer
-        self._permissions = permissions
 
     def api(self):
         output = {
             "name": self._name,
             "description": self._description,
-            "default_permission": self._default_permission,
+            "default_member_permissions": EVERY_PERMISSION if self._default_permission else NO_PERMISSIONS
         }
         if self._options is not None:
             output["options"] = [o.api() for o in self._options]
 
         return output
-
-    def permission_api(self, id):
-        return {
-            "id": id,
-            "permissions": [p.permission_api() for p in self._permissions],
-        }
 
 
 class SlashRouter:
@@ -93,13 +76,6 @@ class SlashRouter:
 
     def api(self):
         return [r.api() for r in self._routes]
-
-    def permission_api(self, mapping):
-        return [
-            r.permission_api(mapping[r._name])
-            for r in self._routes
-            if r._permissions is not None
-        ]
 
     def handle(self, body, request):
         # Get the route name from the body. The body is a dictionary. The route name is located under the key "data.name"
