@@ -30,9 +30,9 @@ async def set_approval(request):
         if request.method.lower() == "post":
             body = await request.json()
             set_status(db, id, body)
-            return JSONResponse(get_or_default(db, id))
+            return JSONResponse(get_or_default(db, id, 0))
         else:
             # it's a get request.
-            return JSONResponse(get_or_default(db, id))
+            return JSONResponse(get_or_default(db, id, 0))
     except Exception as e:
         return JSONResponse({"error": str(e)}, 500)
