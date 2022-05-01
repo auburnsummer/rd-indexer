@@ -170,7 +170,8 @@ app = Starlette(
         Route("/interactions", interaction_handler, methods=["POST"]),
         Route("/interactions2", interaction_handler, methods=["POST"]),
         Route("/status.db", handlers.status_dot_db, methods=["GET", "POST"]),
-        Route('/approval/{id}', handlers.set_approval, methods=['POST', 'GET'])
+        Route('/approval/{id}', handlers.set_approval, methods=['POST', 'GET']),
+        Route('/multi/approval', handlers.get_approval_multi, methods=['POST'])
     ],
     on_startup=[
         prerun_update_slash_commands,
