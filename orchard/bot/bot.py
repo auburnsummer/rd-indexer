@@ -97,6 +97,13 @@ router = SlashRouter(
             handler=commands.approve,
             defer=True,
         ),
+        SlashRoute(
+            name="plsausage",
+            description="trigger a rescan now!",
+            default_permission=False,
+            handler=commands.sausage,
+            defer=True
+        )
     ]
 )
 

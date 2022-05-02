@@ -6,3 +6,4 @@ from .passcode import passcode
 from .levelbyid import levelbyid
 from .approve import approve
 from .version import version
+from .sausage import sausage
