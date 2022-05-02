@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlite_utils import Database
 from sqlite_utils.db import NotFoundError
 
@@ -14,5 +16,8 @@ def get_or_default(db: Database, id, default_approval):
 
 
 def set_status(db: Database, id, value):
-    get_or_default(db, id, 0)  # ensure it exists
+    current = get_or_default(db, id, 0)  # ensure it exists
+    # update indexed if this is newly approved.
+    if "approval" in value and value['approval'] >= 10 and current['approval'] < 10:
+        value['indexed'] = datetime.now()
     db["status"].update(id, value)
