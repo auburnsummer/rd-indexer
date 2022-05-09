@@ -2,7 +2,7 @@
   - !!python/name:orchard.scan.sources.discord.DiscordScraper
   - bot_token: !!python/object/apply:orchard.utils.env.const_from_env ["BOT_TOKEN"]
     channel_id: 611380148431749151
-    after: 972916061706002441
+    after: 973188856134377532
 - - yeoldesheet
   - !!python/name:orchard.scan.sources.old_sheet.OldSheetScraper
   - {}
