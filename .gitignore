@@ -159,3 +159,5 @@ cython_debug/
 *.db
 *.db-journal
 *.jsonl
+
+*.dev.yml

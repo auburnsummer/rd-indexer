@@ -1,3 +1,4 @@
+import asyncio
 from io import BytesIO
 import logging
 import sys
@@ -8,7 +9,7 @@ from orchard.scan.schema import make_schema, OrchardDatabase
 from orchard.scan.sources.old_sheet import OldSheetScraper
 from orchard.vitals import analyze
 import traceback
-
+import yaml
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,9 +17,13 @@ logger = logging.getLogger(__name__)
 
 CODEX = "https://codex.rhythm.cafe"
 
+SCRAPER_MAP = {
+    "OldSheetScraper": OldSheetScraper
+}
 
-def main(db: Database):
-    sources = [("yeoldesheet", OldSheetScraper)]
+
+async def main(db: Database, sources):
+    # sources = [["yeoldesheet", OldSheetScraper, {}]]
 
     if "level" not in db.table_names():
         logger.info("The DB doesn't contain a 'level' table. Making it now...")
@@ -26,11 +31,11 @@ def main(db: Database):
 
     orchard = OrchardDatabase(db)
 
-    for source_id, scraper_class in sources:
+    for source_id, scraper_class, kwargs in sources:
         # Initiate the scraper and get the current list of iids.
-        scraper = scraper_class()
+        scraper = scraper_class(**kwargs)
         logger.info(f"Beginning scrape for source {source_id}...")
-        iids = scraper.get_iids()
+        iids = await scraper.get_iids()
         logger.info(f"{len(iids)} iids found.")
 
         # Calculate the diff between the db's current iids and the given list.
@@ -49,7 +54,7 @@ def main(db: Database):
             try:
                 logger.info(f"Processing iid {iid}... ({index+1} / {len(iids_to_add)})")
                 # Download the level and wrap it in a file object.
-                buf = scraper.download_iid(iid)
+                buf = await scraper.download_iid(iid)
                 file = BytesIO(buf)
 
                 # Run vitals on the file.
@@ -81,7 +86,7 @@ def main(db: Database):
 
                 # Add to database.
                 to_add = {
-                    "url": scraper.get_url(iid),  # even if this is None that's fine
+                    "url": await scraper.get_url(iid),  # even if this is None that's fine
                     "url2": f"{CODEX}/{rdzip_url}",
                     "image": f"{CODEX}/{image_url}",
                     "thumb": f"{CODEX}/{thumbnail_url}",
@@ -93,7 +98,9 @@ def main(db: Database):
                 if vit["icon"]:
                     to_add["icon"] = f"{CODEX}/{icon_url}"
 
-                orchard.add_level({**vit, **to_add})
+                level = {**vit, **to_add}
+                orchard.add_level(level)
+                await scraper.on_index(level)
 
             except Exception as e:
                 logger.info(f"Error when processing iid {iid}: {e}")
@@ -102,8 +109,13 @@ def main(db: Database):
         for index, iid in enumerate(iids_to_delete):
             logger.info(f"Deleting iid {iid} ({index+1} / {len(iids_to_delete)})")
             orchard.delete_level(source_id, iid)
+            await scraper.on_delete(iid)
 
 
 if __name__ == "__main__":
+    database_file_name = sys.argv[1]
+    sources_file_name = sys.argv[2]
     db = Database(sys.argv[1])
-    main(db)
+    with open(sources_file_name, 'r') as f:
+        loaded_sources = yaml.load(f.read(), Loader=yaml.Loader),
+    asyncio.run(main(db, loaded_sources[0]))

@@ -1,8 +1,6 @@
-import os
-import httpx
-
-from .client import Client
-from .constants import BOT_TOKEN, APPLICATION_ID, DISCORD_API_URL, DEV_GUILD
+from orchard.utils.client import Client
+from .constants import BOT_TOKEN, APPLICATION_ID, DEV_GUILD
+from orchard.utils.constants import DISCORD_API_URL
 
 bot_auth = {"Authorization": f"Bot {BOT_TOKEN}"}
 

@@ -1,6 +1,9 @@
 import asyncio
+import logging
 
 import httpx
+
+logger = logging.getLogger(__name__)
 
 def wrapper(fn):
     """
@@ -15,6 +18,11 @@ def wrapper(fn):
             await asyncio.sleep(time_to_wait)
             resp = await fn(*args, **kwargs)
 
+        # wait a little longer, perhaps
+        if float(resp.headers['x-ratelimit-remaining']) < 1:
+            additional_wait_time = float(resp.headers['x-ratelimit-reset-after'])
+            logger.info(f"A ratelimit is imminent! waiting {additional_wait_time} seconds to avoid it...")
+            await asyncio.sleep(additional_wait_time)
         return resp
 
     return inner

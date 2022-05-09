@@ -71,7 +71,7 @@ jobs:
         continue-on-error: true
         
       - name: scan
-        run: timeout ${{ github.event.inputs.timeout || '45m' }} poetry run python scan.py orchard.db
+        run: timeout ${{ github.event.inputs.timeout || '45m' }} poetry run python scan.py orchard.db sources.yml
         working-directory: ./orchard/scan
         continue-on-error: true
         env:

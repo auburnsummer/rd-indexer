@@ -3,7 +3,8 @@ import logging
 from orchard.bot.message_builder import MessageBuilder
 import httpx
 
-from .constants import APPLICATION_ID, DISCORD_API_URL
+from .constants import APPLICATION_ID
+from orchard.utils.constants import DISCORD_API_URL
 
 import orchard.bot.crosscode as cc
 
