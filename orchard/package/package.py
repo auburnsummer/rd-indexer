@@ -11,6 +11,11 @@ from orchard.bot.constants import DEFAULT_DB_VALUE
 from orchard.bot.schema import STATUS_SCHEMA
 from orchard.scan.schema import LEVEL_SCHEMA
 
+COMBINED_SCHEMA = {
+    **LEVEL_SCHEMA,
+    **STATUS_SCHEMA
+}
+
 
 def none_or(func):
     def inner(value):
@@ -22,10 +27,6 @@ def none_or(func):
 
 
 def make_json_from_row(row):
-    combined_schema = {
-        **LEVEL_SCHEMA,
-        **STATUS_SCHEMA
-    }
     type_transformers = {
         bool: lambda n: True if n > 0 else False,
         datetime: none_or(lambda s: floor(datetime.fromisoformat(s).timestamp()))
@@ -35,7 +36,7 @@ def make_json_from_row(row):
         "authors": lambda s: json.loads(s),
     }
     for col_name, col_value in row.items():
-        col_type = combined_schema[col_name]
+        col_type = COMBINED_SCHEMA[col_name]
         if col_type in type_transformers.keys():
             row[col_name] = type_transformers[col_type](col_value)
         if col_name in key_transformers.keys():
@@ -71,6 +72,10 @@ def make_json_from_row(row):
 #                 'id': row['id'],
 #                 'indexed': time,
 #             }, pk='id')
+def prerun_make_combined_db(rows):
+    combined = Database("./combined.db")
+    combined['levels'].create(COMBINED_SCHEMA, pk='id')
+    combined['levels'].insert_all(rows)
 
 
 def package(db: Database, status_db: Database):
@@ -90,6 +95,8 @@ def package(db: Database, status_db: Database):
             **DEFAULT_DB_VALUE,
             **status
         })
+
+    prerun_make_combined_db(combined)
 
     with open("./orchard.jsonl", "w") as f:
         for row in combined:
