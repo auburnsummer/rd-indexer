@@ -2,6 +2,9 @@ import pprint
 import sys
 import zipfile
 from typing import BinaryIO
+
+import toml
+
 from orchard.parse import parse
 from orchard.vitals.facets.sha1_facet import sha1_facet
 from orchard.vitals.facets.author_facet import author_facet
@@ -53,6 +56,21 @@ def main(f: BinaryIO):
             with z.open("main.rdlevel", "r") as rdlevel:
                 text = rdlevel.read().decode("utf-8-sig")
                 parsed = parse(text)
+
+                # # get the TOML comment if there is one.
+                # # there can be only one
+                # comments = [evt for evt in parsed['events'] if evt['type'] == 'Comment']
+                # toml_comment = None
+                # for comment in comments:
+                #     try:
+                #         content = comment['text']
+                #         if "#orchard" not in content:
+                #             continue
+                #         toml_comment = toml.loads(content)
+                #         break # only consider the first valid comment we find.
+                #     except:
+                #         # it's fine if there isn't a comment.
+                #         continue
 
                 final = {}
                 for key, func in facets.items():

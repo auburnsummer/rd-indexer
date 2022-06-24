@@ -1,0 +1,170 @@
+# name: test_haha_awesome[./fixtures\\Andrew_Huang_-_Know_You.rdzip]
+  dict({
+    'artist': 'Andrew Huang',
+    'authors': list([
+      'lugi',
+    ]),
+    'description': 'Two lonely stars, wandering in the dark...',
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_squareshots': False,
+    'hue': 0.47,
+    'icon': BytesIO(
+      closed=False,
+    ),
+    'id': 'know-you-2zRJRCjPqJx',
+    'image': BytesIO(
+      closed=False,
+    ),
+    'last_updated': datetime.datetime(2020, 6, 24, 15, 6, 48),
+    'max_bpm': 78.5,
+    'min_bpm': 78.5,
+    'seizure_warning': False,
+    'sha1': 'f2ad0f76bbfedf96bec3451eb9ead014accb3047',
+    'single_player': True,
+    'song': 'Know You',
+    'tags': list([
+      'slow',
+      'pop',
+    ]),
+    'thumb': BytesIO(
+      closed=False,
+    ),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\Hot_Freaks_-_Pull.rdzip]
+  dict({
+    'artist': 'Hot Freaks',
+    'authors': list([
+      'Labyrinth',
+    ]),
+    'description': "It's not something easy to admit.",
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': False,
+    'has_squareshots': False,
+    'hue': 0.88,
+    'icon': BytesIO(
+      closed=False,
+    ),
+    'id': 'pull-EpgEYcGYPnU',
+    'image': BytesIO(
+      closed=False,
+    ),
+    'last_updated': datetime.datetime(2022, 6, 16, 0, 8, 26),
+    'max_bpm': 89,
+    'min_bpm': 88,
+    'seizure_warning': False,
+    'sha1': '5fca6cbf5fbfdea8ba1f746663d279113134f858',
+    'single_player': True,
+    'song': 'Pull',
+    'tags': list([
+      '1p',
+      '2p',
+      'gimmick',
+    ]),
+    'thumb': BytesIO(
+      closed=False,
+    ),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\Quree_-_One_Forgotten_Night.rdzip]
+  dict({
+    'artist': 'Quree',
+    'authors': list([
+      'BluPen',
+    ]),
+    'description': "Patient experiencing sudden heart strain again. Solve the patient's concerns.",
+    'difficulty': 2,
+    'has_classics': True,
+    'has_freetimes': False,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_squareshots': False,
+    'hue': 0.1,
+    'icon': BytesIO(
+      closed=False,
+    ),
+    'id': 'one-forg-LJfg3wQANR7',
+    'image': BytesIO(
+      closed=False,
+    ),
+    'last_updated': datetime.datetime(2021, 5, 20, 21, 9, 22),
+    'max_bpm': 173,
+    'min_bpm': 100,
+    'seizure_warning': False,
+    'sha1': '130f087813967e8fa7979ef903c5b9ecd137806f',
+    'single_player': True,
+    'song': 'One Forgotten Night',
+    'tags': list([
+      'quree',
+      'window dance',
+    ]),
+    'thumb': BytesIO(
+      closed=False,
+    ),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\placeboing_-_BANAS.rdzip]
+  dict({
+    'artist': 'placeboing',
+    'authors': list([
+      "April's Only Fool",
+    ]),
+    'description': '''
+      This level works under the assumption that you know how 8beat, 6beat, and Temporal Shift works.
+      
+      Hope you all have a wonderful April Fools Day!
+      
+      Hollaback Girl by Gwen Stefani x Donkey Kong Country 2 OST
+      
+      Banana CC by Pyre
+      Banana Tile by Het
+    ''',
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_squareshots': False,
+    'hue': 0.17,
+    'icon': BytesIO(
+      closed=False,
+    ),
+    'id': 'banas-QbMoyaG2nfK',
+    'image': BytesIO(
+      closed=False,
+    ),
+    'last_updated': datetime.datetime(2022, 4, 9, 16, 40, 34),
+    'max_bpm': 147,
+    'min_bpm': 143.5,
+    'seizure_warning': False,
+    'sha1': '14c64b180f25457fb2c226c18de3f90bfd0d6431',
+    'single_player': True,
+    'song': 'BANAS',
+    'tags': list([
+      'April Fools',
+      'banana',
+      'banas',
+      'temporal shift',
+      '8beat',
+      '6beat',
+    ]),
+    'thumb': BytesIO(
+      closed=False,
+    ),
+    'two_player': False,
+  })
+# ---
