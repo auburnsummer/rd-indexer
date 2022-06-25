@@ -124,15 +124,6 @@ jobs:
         run: poetry run python package.py orchard.db status.db
         working-directory: ./orchard/package
         
-      - name: The status.db can change here, so post it back
-        run: |
-          curl --request POST --data-binary @status.db \
-          --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
-          --header 'Content-Type: application/octet-stream' \
-          --url https://botprod.auburn.dev/status.db \
-          --verbose
-        working-directory: ./orchard/package
-        
       - name: print out hashes of the resulting jsonl file
         run: sha1sum orchard.jsonl
         working-directory: ./orchard/package
