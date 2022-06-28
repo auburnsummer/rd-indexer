@@ -5,6 +5,14 @@ def dig(dig_list, obj):
         final = final[prop]
     return final
 
+def try_dig(dig_list, obj):
+    if obj is None:
+        return None
+    try:
+        return dig(dig_list, obj)
+    except KeyError:
+        return None
+
 
 def update(obj, key, value):
     if obj is None:

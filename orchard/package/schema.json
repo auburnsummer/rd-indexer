@@ -10,6 +10,12 @@
 		{
 			"facet": true,
 			"index": true,
+			"name": "artist_tokens",
+			"type": "string[]"
+		},
+		{
+			"facet": true,
+			"index": true,
 			"name": "authors",
 			"type": "string[]"
 		},
@@ -59,6 +65,18 @@
 			"facet": true,
 			"index": true,
 			"name": "has_squareshots",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_skipshots",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_window_dance",
 			"type": "bool"
 		},
 		{

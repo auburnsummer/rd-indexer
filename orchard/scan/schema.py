@@ -8,6 +8,7 @@ from sqlite_utils.db import NotFoundError
 LEVEL_SCHEMA = {
     "id": str,
     "artist": str,
+    "artist_tokens": str,
     "song": str,
     "seizure_warning": bool,
     "description": str,
@@ -30,7 +31,9 @@ LEVEL_SCHEMA = {
     "has_squareshots": bool,
     "has_freezeshots": bool,
     "has_freetimes": bool,
+    "has_skipshots": bool,
     "has_holds": bool,
+    "has_window_dance": bool,
     "source": str,
     "source_iid": str,
     "sha1": str

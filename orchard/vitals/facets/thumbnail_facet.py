@@ -4,11 +4,15 @@ from PIL import Image
 
 from io import BytesIO
 
+from orchard.vitals.arguments_decorator import with_arguments
+
 THUMBNAIL_WIDTH = 300
 THUMBNAIL_HEIGHT = 168
 
-# return two fake file objects, one for the thumbnail and the original.
-def thumbnail_facet(obj, z: ZipFile, _):
+
+@with_arguments("obj", "zip")
+def thumbnail_facet(obj, z: ZipFile):
+    """return two file objects, one for the thumbnail and the original."""
     image_name = obj["settings"]["previewImage"]
 
     orig_file_p = BytesIO()

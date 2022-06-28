@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 
 
 def get_iid_info(iid):
-    channel_id, message_id, index = [int(s) for s in iid.split("|")]
-    return channel_id, message_id, index
+    message_id, attachment_id = [int(s) for s in iid.split("|")]
+    return message_id, attachment_id
 
 
 class DiscordScraper(RDLevelScraper):
@@ -100,10 +100,13 @@ class DiscordScraper(RDLevelScraper):
                     for i, attachment in enumerate(post['attachments']):
                         if attachment['filename'].endswith(".rdzip"):
                             # the iid is a concatenation of:
-                            #  channel id, message id, index
-                            iid = f"{self.channel_id}|{post['id']}|{i}"
+                            #  message id, attachment id
+                            #  note: the channel id is not required because channels are immutable by source id.
+                            #  note2: attachment id is required because it's possible to delete an attachment
+                            #         w/o deleting the post.
+                            iid = f"{post['id']}|{attachment['id']}"
                             #  the iid doesn't encode the actual download url.
-                            # self.iid_url_map[iid] = attachment['url']
+                            self.iid_url_map[iid] = attachment['url']
                             iids.append(iid)
 
                 print('', end='')  # <-- for a breakpoint
@@ -116,6 +119,6 @@ class DiscordScraper(RDLevelScraper):
             "user-agent": USER_AGENT,
             "Authorization": f"Bot {self.bot_token}"
         }
-        channel_id, message_id, index = get_iid_info(level['source_iid'])
+        message_id, index = get_iid_info(level['source_iid'])
         async with Client() as client:
-            await client.put(f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}/reactions/%E2%9C%85/@me", headers=headers)
+            await client.put(f"{DISCORD_API_URL}/channels/{self.channel_id}/messages/{message_id}/reactions/%E2%9C%85/@me", headers=headers)

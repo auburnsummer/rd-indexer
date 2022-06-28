@@ -6,9 +6,10 @@ from typing import BinaryIO
 import toml
 
 from orchard.parse import parse
+from orchard.vitals.facets.artist_list_facet import artist_list_facet
 from orchard.vitals.facets.sha1_facet import sha1_facet
 from orchard.vitals.facets.author_facet import author_facet
-from orchard.vitals.facets.beat_types_facet import beat_type_facet
+from orchard.vitals.facets.event_type_facet import event_type_facet
 from orchard.vitals.facets.bpm_facet import bpm_facet
 from orchard.vitals.facets.difficulty_facet import difficulty_facet
 from orchard.vitals.facets.icon_facet import icon_facet
@@ -19,7 +20,6 @@ from orchard.vitals.facets.tags_facet import tags_facet
 from orchard.vitals.facets.thumbnail_facet import thumbnail_facet
 from orchard.vitals.facets.updated_facet import updated_facet
 
-
 class VitalsException(Exception):
     pass
 
@@ -28,6 +28,7 @@ def main(f: BinaryIO):
     facets = {
         "id": id_facet,
         "artist": make_key_facet(["settings", "artist"]),
+        "artist_tokens": artist_list_facet,
         "song": make_key_facet(["settings", "song"]),
         "seizure_warning": make_key_facet(["settings", "seizureWarning"], True),
         "description": make_key_facet(["settings", "description"]),
@@ -47,7 +48,9 @@ def main(f: BinaryIO):
             "has_freezeshots",
             "has_freetimes",
             "has_holds",
-        ): beat_type_facet,
+            "has_skipshots",
+            "has_window_dance"
+        ): event_type_facet,
         "sha1": sha1_facet
     }
 
@@ -57,25 +60,30 @@ def main(f: BinaryIO):
                 text = rdlevel.read().decode("utf-8-sig")
                 parsed = parse(text)
 
-                # # get the TOML comment if there is one.
-                # # there can be only one
-                # comments = [evt for evt in parsed['events'] if evt['type'] == 'Comment']
-                # toml_comment = None
-                # for comment in comments:
-                #     try:
-                #         content = comment['text']
-                #         if "#orchard" not in content:
-                #             continue
-                #         toml_comment = toml.loads(content)
-                #         break # only consider the first valid comment we find.
-                #     except:
-                #         # it's fine if there isn't a comment.
-                #         continue
+                # get the TOML comment if there is one.
+                # there can be only one
+                comments = [evt for evt in parsed['events'] if evt['type'] == 'Comment']
+                toml_comment = None
+                for comment in comments:
+                    try:
+                        content = comment['text']
+                        if "#orchard" not in content:
+                            continue
+                        toml_comment = toml.loads(content)
+                        break # only consider the first valid comment we find.
+                    except:
+                        # it's fine if there isn't a comment.
+                        continue
 
                 final = {}
                 for key, func in facets.items():
                     try:
-                        result = func(parsed, z, f)
+                        result = func({
+                            "obj": parsed,
+                            "zip": z,
+                            "file": f,
+                            "toml": toml_comment
+                        })
                         if isinstance(key, tuple):
                             # multiple keys with (expected) multiple values that map to the keys.
                             for k, v in zip(key, result):
