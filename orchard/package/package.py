@@ -34,6 +34,7 @@ def make_json_from_row(row):
     key_transformers = {
         "tags": lambda s: json.loads(s),
         "authors": lambda s: json.loads(s),
+        "artist_tokens": lambda s: json.loads(s),
     }
     for col_name, col_value in row.items():
         col_type = COMBINED_SCHEMA[col_name]
