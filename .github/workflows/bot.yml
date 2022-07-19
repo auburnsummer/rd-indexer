@@ -29,6 +29,7 @@ jobs:
         DEV_GUILD=${{ secrets.DEV_GUILD }}
         PATHLAB_ROLE=${{ secrets.PATHLAB_ROLE }}
         SECRET_KEY_ORCH=${{ secrets.SECRET_KEY_ORCH }}
+        POST_STATUS_DOT_DB_TOKEN=${{ secrets.POST_STATUS_DOT_DB_TOKEN }}
         TYPESENSE_URL=https://api.rhythm.cafe/typesense
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
