@@ -40,4 +40,6 @@ RUN ls
 RUN poetry install --no-dev
 
 EXPOSE 8000
+
+RUN chmod +x "./orchard/bot/run.sh"
 CMD [ "./orchard/bot/run.sh" ]
