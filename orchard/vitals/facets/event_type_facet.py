@@ -1,3 +1,6 @@
+from orchard.vitals.arguments_decorator import with_arguments
+
+
 def is_hold(evt):
     return "hold" in evt and evt["hold"] > 0
 
@@ -22,11 +25,22 @@ def is_squareshot(evt):
     )
 
 
+def is_skipshot(evt):
+    return evt["type"] == "AddOneshotBeat" and (
+        "skipshot" in evt and evt["skipshot"]  # it exists and is True
+    )
+
+
 def is_freezeshot(evt):
     return evt["type"] == "AddOneshotBeat" and "delay" in evt and evt["delay"] > 0
 
 
-def beat_type_facet(obj, *_):
+def is_window_dance(evt):
+    return evt["type"] == "NewWindowDance"
+
+
+@with_arguments("obj")
+def event_type_facet(obj):
     events = obj["events"]
 
     return (
@@ -38,5 +52,7 @@ def beat_type_facet(obj, *_):
             is_freezeshot,
             is_freetime,
             is_hold,
+            is_skipshot,
+            is_window_dance
         ]
     )

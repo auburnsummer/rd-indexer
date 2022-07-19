@@ -34,6 +34,7 @@ def make_json_from_row(row):
     key_transformers = {
         "tags": lambda s: json.loads(s),
         "authors": lambda s: json.loads(s),
+        "artist_tokens": lambda s: json.loads(s),
     }
     for col_name, col_value in row.items():
         col_type = COMBINED_SCHEMA[col_name]
@@ -44,34 +45,6 @@ def make_json_from_row(row):
 
     return row
 
-
-# def prerun_import_oldsheet(db: Database, status_db: Database):
-#     resp = httpx.get(SHEET_API_URL, follow_redirects=True)
-#     resp_json = resp.json()
-#     iids = [(x['download_url'], x['verified']) for x in resp_json if 'verified' in x]
-#     for (iid, will_approve) in iids:
-#         level_row = list(db['level'].rows_where("source_iid = :iid", {'iid': iid}))
-#         if level_row:
-#             level_row = level_row[0]
-#             id = level_row['id']
-#             # rules: if it has gone from (-1 | 0) -> 10, update the index.
-#             to_upsert = {
-#                 'id': id,
-#                 'approval': 10 if will_approve else -1,
-#             }
-#             status_db['status'].upsert(to_upsert, pk='id')
-#
-# def prerun_update_indexed_column(db: Database, status_db: Database):
-#
-#     approved_rows = status_db['status'].rows_where("approval >= 10")
-#     time = datetime.now()
-#     for row in approved_rows:
-#         indexed = row['indexed']
-#         if indexed is None:
-#             status_db['status'].upsert({
-#                 'id': row['id'],
-#                 'indexed': time,
-#             }, pk='id')
 def prerun_make_combined_db(rows):
     combined = Database("./combined.db")
     combined['levels'].create(COMBINED_SCHEMA, pk='id')
@@ -79,11 +52,6 @@ def prerun_make_combined_db(rows):
 
 
 def package(db: Database, status_db: Database):
-    # db.attach("status", status_db)
-
-    # prerun_import_oldsheet(db, status_db)
-    # prerun_update_indexed_column(db, status_db)
-
     # map status id to the rest of the object.
     statuses = { r['id']: {k: v for k, v in r.items() if k != 'id'} for r in status_db['status'].rows }
     combined = []

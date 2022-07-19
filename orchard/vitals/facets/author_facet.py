@@ -1,4 +1,5 @@
 import re
+from orchard.vitals.arguments_decorator import with_arguments
 
 # Get things like
 # donte, ladybug
@@ -10,7 +11,8 @@ import re
 AUTHOR_REGEX = r"\s*?(?:,|&|\/|\\|,? ,?and )\s*?"
 
 
-def author_facet(obj, *_):
+@with_arguments("obj")
+def author_facet(obj):
     author_raw = obj["settings"]["author"]
     authors = [
         s.strip() for s in re.split(AUTHOR_REGEX, author_raw) if s

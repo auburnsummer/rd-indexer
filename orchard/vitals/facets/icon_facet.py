@@ -1,14 +1,13 @@
-from math import ceil
 from zipfile import ZipFile
 from PIL import Image
 
 from io import BytesIO
 
-THUMBNAIL_WIDTH = 300
-THUMBNAIL_HEIGHT = 168
+from orchard.vitals.arguments_decorator import with_arguments
 
-# return two fake file objects, one for the thumbnail and the original.
-def icon_facet(obj, z: ZipFile, _):
+
+@with_arguments("obj", "zip")
+def icon_facet(obj, z: ZipFile):
     try:
         image_name = obj["settings"]["syringeIcon"]
     except:

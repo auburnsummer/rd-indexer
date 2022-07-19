@@ -2,6 +2,8 @@ from zipfile import ZipFile
 from slugify import slugify
 from hashlib import blake2s
 import base58
+from orchard.vitals.arguments_decorator import with_arguments
+
 
 # id is a slug of the song + a cumulative hash of each internal file.
 # this is so that identical zips that just have different metadata still resolve to the same id.
@@ -9,7 +11,8 @@ import base58
 # the final hash is only 8 bytes long. we're not using this for security reasons.
 
 
-def id_facet(obj, z: ZipFile, _):
+@with_arguments("obj", "zip")
+def id_facet(obj, z: ZipFile):
     song = obj["settings"]["song"]
 
     hashes = []

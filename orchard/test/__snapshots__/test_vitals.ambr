@@ -1,0 +1,351 @@
+# name: test_haha_awesome[./fixtures\\Andrew_Huang_-_Know_You.rdzip]
+  dict({
+    'artist': 'Andrew Huang',
+    'artist_tokens': list([
+      'Andrew Huang',
+    ]),
+    'authors': list([
+      'lugi',
+    ]),
+    'description': 'Two lonely stars, wandering in the dark...',
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0.47,
+    'id': 'know-you-2zRJRCjPqJx',
+    'last_updated': datetime.datetime(2020, 6, 24, 15, 6, 48),
+    'max_bpm': 78.5,
+    'min_bpm': 78.5,
+    'seizure_warning': False,
+    'sha1': 'f2ad0f76bbfedf96bec3451eb9ead014accb3047',
+    'single_player': True,
+    'song': 'Know You',
+    'tags': list([
+      'slow',
+      'pop',
+    ]),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\Hot_Freaks_-_Pull.rdzip]
+  dict({
+    'artist': 'Hot Freaks',
+    'artist_tokens': list([
+      'Hot Freaks',
+    ]),
+    'authors': list([
+      'Labyrinth',
+    ]),
+    'description': "It's not something easy to admit.",
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': False,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0.88,
+    'id': 'pull-EpgEYcGYPnU',
+    'last_updated': datetime.datetime(2022, 6, 16, 0, 8, 26),
+    'max_bpm': 89,
+    'min_bpm': 88,
+    'seizure_warning': False,
+    'sha1': '229e4a42f2e69db34d851fd6d66618c58ca076e4',
+    'single_player': True,
+    'song': 'Pull',
+    'tags': list([
+      '1p',
+      '2p',
+      'gimmick',
+    ]),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\Pseuu_-_ennui.rdzip]
+  dict({
+    'artist': 'Pseuu',
+    'artist_tokens': list([
+      'Pseuu',
+    ]),
+    'authors': list([
+      'Pseuu',
+    ]),
+    'description': '''
+      uh... no comment. level made in about 3-4 working hours
+      
+      - tricky oneshot patterns
+      - skipshots
+      - holds
+    ''',
+    'difficulty': 2,
+    'has_classics': False,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': True,
+    'has_oneshots': True,
+    'has_skipshots': True,
+    'has_squareshots': False,
+    'has_window_dance': True,
+    'hue': 0.42,
+    'id': 'ennui-og-3VFE7LSmzSo',
+    'last_updated': datetime.datetime(2022, 1, 3, 23, 19, 26),
+    'max_bpm': 126,
+    'min_bpm': 126,
+    'seizure_warning': False,
+    'sha1': '3031e6cd0842aedec80d9a0dbd8866f25cc58ec2',
+    'single_player': True,
+    'song': 'ennui.ogg',
+    'tags': list([
+      'chiptune',
+      'short',
+      '2p',
+      'oneshots',
+      'skipshots',
+      'holds',
+    ]),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\Quree_-_One_Forgotten_Night.rdzip]
+  dict({
+    'artist': 'Quree',
+    'artist_tokens': list([
+      'Quree',
+    ]),
+    'authors': list([
+      'BluPen',
+    ]),
+    'description': "Patient experiencing sudden heart strain again. Solve the patient's concerns.",
+    'difficulty': 2,
+    'has_classics': True,
+    'has_freetimes': False,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': True,
+    'hue': 0.1,
+    'id': 'one-forg-LJfg3wQANR7',
+    'last_updated': datetime.datetime(2021, 5, 20, 21, 9, 22),
+    'max_bpm': 173,
+    'min_bpm': 100,
+    'seizure_warning': False,
+    'sha1': '68f8771d0898813755bdc26cb6c79bd822824cb5',
+    'single_player': True,
+    'song': 'One Forgotten Night',
+    'tags': list([
+      'quree',
+      'window dance',
+    ]),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\Samario (Making A Mistake) - One Uncued Tresillo.rdzip]
+  dict({
+    'artist': 'Samario (Making A Mistake)',
+    'artist_tokens': list([
+      'Samario',
+    ]),
+    'authors': list([
+      'Samario (Making A Mistake)',
+    ]),
+    'description': '''
+      One Uncued Tresillo
+      (song edited from [...]Machinegun Psystyle[...], by Camellia)
+    ''',
+    'difficulty': 0,
+    'has_classics': False,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': False,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0,
+    'id': 'one-uncu-i64TVVfB93P',
+    'last_updated': datetime.datetime(2022, 6, 27, 21, 27, 12),
+    'max_bpm': 70,
+    'min_bpm': 40,
+    'seizure_warning': False,
+    'sha1': '024b74e8a3ce6ae1215b49ec2025cd75e0a6b468',
+    'single_player': True,
+    'song': 'One Uncued Tresillo',
+    'tags': list([
+      'uncued tresillo',
+      'samario please stop doing this',
+    ]),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\Samario_Making_A_Mistake_-_One_Uncued_Tresillo orig.rdzip]
+  dict({
+    'artist': 'Samario (Making A Mistake)',
+    'artist_tokens': list([
+      'Samario (Making A Mistake)',
+    ]),
+    'authors': list([
+      'Samario (Making A Mistake)',
+    ]),
+    'description': '''
+      One Uncued Tresillo
+      (song edited from [...]Machinegun Psystyle[...], by Camellia)
+    ''',
+    'difficulty': 0,
+    'has_classics': False,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': False,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0,
+    'id': 'one-uncu-eqSkB1ZX7Xz',
+    'last_updated': datetime.datetime(2021, 1, 2, 3, 52, 10),
+    'max_bpm': 160,
+    'min_bpm': 160,
+    'seizure_warning': False,
+    'sha1': 'd7fb093e54173c553a9603929df7267b27267d1f',
+    'single_player': True,
+    'song': 'One Uncued Tresillo',
+    'tags': list([
+      'uncued tresillo',
+      'samario please stop doing this',
+    ]),
+    'two_player': True,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\auburnsummer - Triplet Testaaaaa.rdzip]
+  dict({
+    'artist': 'auburnsummer',
+    'artist_tokens': list([
+      'auburnsummer',
+    ]),
+    'authors': list([
+      'auburnsummer',
+      'Xeno',
+    ]),
+    'description': 'A two-handed level. The eloquent blend between thirds and halves.',
+    'difficulty': 2,
+    'has_classics': True,
+    'has_freetimes': False,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_skipshots': False,
+    'has_squareshots': True,
+    'has_window_dance': False,
+    'hue': 0.66,
+    'id': 'triplet-LrxHzPMLamy',
+    'last_updated': datetime.datetime(2022, 6, 27, 23, 25, 28),
+    'max_bpm': 110,
+    'min_bpm': 110,
+    'seizure_warning': False,
+    'sha1': '4de04dc0c7e6ba30438368cacbd8a24678666841',
+    'single_player': True,
+    'song': 'Triplet Test',
+    'tags': list([
+      'Piano',
+      '2p',
+      'Two-handed',
+    ]),
+    'two_player': False,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\placeboing_-_BANAS.rdzip]
+  dict({
+    'artist': 'placeboing',
+    'artist_tokens': list([
+      'placeboing',
+    ]),
+    'authors': list([
+      "April's Only Fool",
+    ]),
+    'description': '''
+      This level works under the assumption that you know how 8beat, 6beat, and Temporal Shift works.
+      
+      Hope you all have a wonderful April Fools Day!
+      
+      Hollaback Girl by Gwen Stefani x Donkey Kong Country 2 OST
+      
+      Banana CC by Pyre
+      Banana Tile by Het
+    ''',
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_skipshots': True,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0.17,
+    'id': 'banas-QbMoyaG2nfK',
+    'last_updated': datetime.datetime(2022, 4, 9, 16, 40, 34),
+    'max_bpm': 147,
+    'min_bpm': 143.5,
+    'seizure_warning': False,
+    'sha1': '053aac4ed9987f1a6e8bdf12df120a9d607879f7',
+    'single_player': True,
+    'song': 'BANAS',
+    'tags': list([
+      'April Fools',
+      'banana',
+      'banas',
+      'temporal shift',
+      '8beat',
+      '6beat',
+    ]),
+    'two_player': False,
+  })
+# ---
+# name: test_haha_awesome[./fixtures\\toonlink_Kenichi_Nishikami_Takeru_Kanazaki_-_Jimmys_Aesthetics.rdzip]
+  dict({
+    'artist': 'toonlink, Kenichi Nishikami, Takeru Kanazaki',
+    'artist_tokens': list([
+      'toonlink',
+      'Kenichi Nishikami',
+      'Takeru Kanazaki',
+    ]),
+    'authors': list([
+      'Szprycha',
+    ]),
+    'description': 'A neat song from WarioWare DIY',
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': False,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0.19,
+    'id': 'jimmy-s-Ccby1RK3XJK',
+    'last_updated': datetime.datetime(2020, 6, 20, 23, 9, 28),
+    'max_bpm': 125,
+    'min_bpm': 125,
+    'seizure_warning': False,
+    'sha1': '8da77730d1fcd96d73590505b2a502d0dd05807c',
+    'single_player': True,
+    'song': "Jimmy's Aesthetics",
+    'tags': list([
+      'siivagunner',
+      'nintendo',
+      'warioware',
+      'body rock',
+    ]),
+    'two_player': False,
+  })
+# ---
