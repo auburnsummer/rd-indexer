@@ -1,5 +1,3 @@
-# todo: download current status.db and upload it to new instance.
-
 name: Deploy the bot
 
 on:
@@ -17,24 +15,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Download the old DB
-      run: curl https://botprod.auburn.dev/status.db -o status.db
-    - name: shasum of it
-      run: sha1sum status.db
-    - name: DigitalOcean App Platform deployment
-      uses: digitalocean/app_action@main
-      with:
-        app_name: orchard-bot
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-    - uses: cygnetdigital/wait_for_response@v2.0.0
-      with:
-        url: 'https://botprod.auburn.dev/status.db'
-    - name: ls
-      run: ls -Alh
-    - name: post the db we downloaded back
-      run: |
-        curl --request POST --data-binary @status.db \
-        --header 'Authorization: Bearer ${{ secrets.POST_STATUS_DOT_DB_TOKEN }}' \
-        --header 'Content-Type: application/octet-stream' \
-        --url https://botprod.auburn.dev/status.db \
-        --verbose
+    - name: install flyctl
+      uses: superfly/flyctl-actions/setup-flyctl@master
+
+    - name: fly me to the moon
+      run: flyctl deploy --remote-only --config ./orchard/bot/fly.toml --dockerfile ./orchard/bot/Dockerfile --env "LITESTREAM_ACCESS_KEY_ID=${{ secrets.B2_KEY_ID }}" --env "LITESTREAM_SECRET_ACCESS_KEY=${{ secrets.B2_APPLICATION_KEY }}" .
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      working-directory: .
