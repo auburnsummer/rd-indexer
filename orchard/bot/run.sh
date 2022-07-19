@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-ls
-
-cat ./orchard/bot/litestream.yaml
-
 echo $LITESTREAM_ACCESS_KEY_ID
 echo $LITESTREAM_SECRET_ACCESS_KEY
 
