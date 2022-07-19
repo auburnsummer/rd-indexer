@@ -30,9 +30,6 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 # prepend poetry to path
 ENV PATH="/root/.local/bin:${PATH}"
 
-ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.8/litestream-v0.3.8-linux-amd64-static.tar.gz /tmp/litestream.tar.gz
-RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
-
 COPY . /app
 WORKDIR /app
 

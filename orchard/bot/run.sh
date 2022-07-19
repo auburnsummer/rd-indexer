@@ -1,18 +1,6 @@
 #!/bin/bash
 set -e
 
-echo $LITESTREAM_ACCESS_KEY_ID
-echo $LITESTREAM_SECRET_ACCESS_KEY
+curl https://f000.backblazeb2.com/file/rdcodex/status-backup.db > orchard/bot/status.db
 
-# Restore the database if it does not already exist.
-if [ -f "./orchard/bot/status.db" ]; then
-	echo "Database already exists, skipping restore"
-
-else
-	echo "No database found, restoring from replica if exists"
-	litestream restore -v -config "./orchard/bot/litestream.yaml" -if-replica-exists "./orchard/bot/status.db"
-fi
-
-# Run litestream with your app as the subprocess.
-# poetry run python3 orchard/bot/bot.py orchard/bot/status.db
-exec litestream replicate -config "./orchard/bot/litestream.yaml" -exec "poetry run python3 orchard/bot/bot.py orchard/bot/status.db"
+poetry run python3 orchard/bot/bot.py orchard/bot/status.db
