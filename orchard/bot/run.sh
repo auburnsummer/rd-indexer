@@ -5,9 +5,13 @@ ls
 
 cat ./orchard/bot/litestream.yaml
 
+echo $LITESTREAM_ACCESS_KEY_ID
+echo $LITESTREAM_SECRET_ACCESS_KEY
+
 # Restore the database if it does not already exist.
 if [ -f "./orchard/bot/status.db" ]; then
 	echo "Database already exists, skipping restore"
+
 else
 	echo "No database found, restoring from replica if exists"
 	litestream restore -v -config "./orchard/bot/litestream.yaml" -if-replica-exists "./orchard/bot/status.db"
