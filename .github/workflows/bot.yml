@@ -21,15 +21,15 @@ jobs:
     - name: set up secrets
       run: >
         flyctl secrets set --config ./orchard/bot/fly.toml
-          LITESTREAM_ACCESS_KEY_ID=${{ secrets.B2_LITESTREAM_KEY_ID }}
-          LITESTREAM_SECRET_ACCESS_KEY=${{ secrets.B2_LITESTREAM_SECRET }}
-          BOT_TOKEN=${{ secrets.BOT_TOKEN }}
-          PUBLIC_KEY=${{ secrets.PUBLIC_KEY }}
-          APPLICATION_ID=${{ secrets.APPLICATION_ID }}
-          DEV_GUILD=${{ secrets.DEV_GUILD }}
-          PATHLAB_ROLE=${{ secrets.PATHLAB_ROLE }}
-          SECRET_KEY_ORCH=${{ secrets.SECRET_KEY_ORCH }}
-          TYPESENSE_URL=https://api.rhythm.cafe/typesense
+        LITESTREAM_ACCESS_KEY_ID=${{ secrets.B2_LITESTREAM_KEY_ID }}
+        LITESTREAM_SECRET_ACCESS_KEY=${{ secrets.B2_LITESTREAM_SECRET }}
+        BOT_TOKEN=${{ secrets.BOT_TOKEN }}
+        PUBLIC_KEY=${{ secrets.PUBLIC_KEY }}
+        APPLICATION_ID=${{ secrets.APPLICATION_ID }}
+        DEV_GUILD=${{ secrets.DEV_GUILD }}
+        PATHLAB_ROLE=${{ secrets.PATHLAB_ROLE }}
+        SECRET_KEY_ORCH=${{ secrets.SECRET_KEY_ORCH }}
+        TYPESENSE_URL=https://api.rhythm.cafe/typesense
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       continue-on-error: true
