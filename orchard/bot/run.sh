@@ -14,4 +14,5 @@ else
 fi
 
 # Run litestream with your app as the subprocess.
-exec litestream replicate -config "./orchard/bot/litestream.yaml" -exec "poetry run python3 orchard/bot/bot.py orchard/bot/status.db"
+poetry run python3 orchard/bot/bot.py orchard/bot/status.db
+# exec litestream replicate -config "./orchard/bot/litestream.yaml" -exec "poetry run python3 orchard/bot/bot.py orchard/bot/status.db"
