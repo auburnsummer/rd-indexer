@@ -8,7 +8,7 @@ name: Backup status.db
 on:
   # once a day
   schedule:
-    - cron: '32 05 * * *'
+    - cron: '30 * * * *'
   
 
   # Allows you to run this workflow manually from the Actions tab
