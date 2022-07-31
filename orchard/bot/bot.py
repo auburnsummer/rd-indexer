@@ -198,5 +198,7 @@ app = Starlette(
 # e.g. run separately: ngrok http 8000
 if __name__ == "__main__":
     db = Database(sys.argv[1])
+    db.enable_wal()
+    db.execute("PRAGMA busy_timeout = 5000")
     app.state.db = db
     uvicorn.run(app, host="0.0.0.0", port=8000)

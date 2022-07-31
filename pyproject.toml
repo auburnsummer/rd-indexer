@@ -20,6 +20,7 @@ httpx = "^0.22.0"
 cryptography = "^36.0.2"
 PyYAML = "^6.0"
 toml = "^0.10.2"
+peewee = "^3.15.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
