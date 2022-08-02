@@ -2,7 +2,10 @@ import asyncio
 from io import BytesIO
 import logging
 import sys
-from sqlite_utils import Database
+
+from playhouse.sqlite_ext import SqliteExtDatabase
+
+from orchard.db.models import Level
 from orchard.scan.b2 import upload
 
 from orchard.scan.schema import make_schema, OrchardDatabase
@@ -22,12 +25,14 @@ SCRAPER_MAP = {
 }
 
 
-async def main(db: Database, sources):
+async def main(db: SqliteExtDatabase, sources):
     # sources = [["yeoldesheet", OldSheetScraper, {}]]
 
-    if "level" not in db.table_names():
+    if not db.table_exists("level"):
         logger.info("The DB doesn't contain a 'level' table. Making it now...")
-        make_schema(db)
+        db.create_tables([Level])
+
+    Level.bind(db)
 
     orchard = OrchardDatabase(db)
 
@@ -48,6 +53,7 @@ async def main(db: Database, sources):
         logger.info(
             f"Adding {len(iids_to_add)} iids, removing {len(iids_to_delete)} iids"
         )
+        return
 
         # start adding iids.
         for index, iid in enumerate(iids_to_add):
@@ -115,7 +121,13 @@ async def main(db: Database, sources):
 if __name__ == "__main__":
     database_file_name = sys.argv[1]
     sources_file_name = sys.argv[2]
-    db = Database(sys.argv[1])
+    db = SqliteExtDatabase(database_file_name, pragmas=(
+        ('cache_size', -1024 * 64),
+        ('journal_mode', 'wal')
+    ))
     with open(sources_file_name, 'r') as f:
-        loaded_sources = yaml.load(f.read(), Loader=yaml.Loader),
+        loaded_sources = yaml.load(f.read(), Loader=yaml.Loader)
+        print("breakpoint!")
+
+    db.connect()
     asyncio.run(main(db, loaded_sources[0]))

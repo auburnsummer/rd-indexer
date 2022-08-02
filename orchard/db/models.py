@@ -1,4 +1,4 @@
-from playhouse.sqlite_ext import SqliteExtDatabase, JSONField
+from playhouse.sqlite_ext import JSONField
 from peewee import *
 
 # A level is a representation of the output of vitals.
@@ -36,4 +36,13 @@ class Level(Model):
     url = TextField()
     url2 = TextField()
 
-# a status is stateful data about a level. 
+# a status is stateful data about a level.
+# statuses map to levels. a level can have at most one status.
+# however, a status can be 'free-floating', i.e. it does not point to a level that exists.
+class Status(Model):
+    id = TextField(primary_key=True)  # usually an FK to level
+    approval = IntegerField()
+    approval_reasons = TextField(null=True)
+    indexed = DateTimeField(null=True)
+
+

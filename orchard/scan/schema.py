@@ -1,9 +1,11 @@
 # Given an empty db, create a schema for it.
-
+from playhouse.sqlite_ext import SqliteExtDatabase
 from sqlite_utils import Database
 import datetime
 
 from sqlite_utils.db import NotFoundError
+
+from orchard.db.models import Level
 
 LEVEL_SCHEMA = {
     "id": str,
@@ -50,7 +52,7 @@ def make_schema(db: Database):
 
 
 class OrchardDatabase:
-    def __init__(self, db: Database):
+    def __init__(self, db: SqliteExtDatabase):
         self.db = db
 
     def add_level(self, level):
@@ -73,7 +75,8 @@ class OrchardDatabase:
             return False
 
     def get_source_set(self, source_id):
-        return set(
-            r["source_iid"]
-            for r in self.db["level"].rows_where("source = ?", [source_id])
-        )
+        return set(row.source_iid for row in Level.select().where(Level.source == source_id))
+        # return set(
+        #     r["source_iid"]
+        #     for r in self.db["level"].rows_where("source = ?", [source_id])
+        # )
