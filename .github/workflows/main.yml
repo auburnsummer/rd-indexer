@@ -42,7 +42,7 @@ jobs:
         id: setup-pypy
         uses: actions/setup-python@v3
         with:
-          python-version: 'pypy-3.7'
+          python-version: 'pypy-3.8'
           cache: 'poetry'
   
       - name: install deps 
