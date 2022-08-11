@@ -3,10 +3,8 @@ from dotenv import load_dotenv
 from orchard.utils.env import const_from_env
 
 load_dotenv()
-import os
-from pathlib import Path
 
-BOT_VERSION = "0.0.1"
+BOT_VERSION = "0.0.2"
 
 BOT_TOKEN = const_from_env("BOT_TOKEN")
 PUBLIC_KEY = const_from_env("PUBLIC_KEY")
@@ -65,4 +63,4 @@ class PermissionType:
     USER = 2
 
 
-DEFAULT_DB_VALUE = {"approval": 0}
+DEFAULT_DB_STATUS_VALUE = {"approval": 0}

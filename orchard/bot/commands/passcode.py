@@ -1,8 +1,8 @@
-from orchard.bot.utils import get_slash_args
-from orchard.bot.interactions import Interactor
+from orchard.bot.lib.utils import get_slash_args
+from orchard.bot.lib.interactions import Interactor
 
-import orchard.bot.keys as keys
-from orchard.bot.message_builder import MessageBuilder as M
+import orchard.bot.lib.keys as keys
+from orchard.bot.lib.message_builder import MessageBuilder as M
 
 
 async def passcode(body, _):

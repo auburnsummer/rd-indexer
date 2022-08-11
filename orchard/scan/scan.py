@@ -8,7 +8,7 @@ from playhouse.sqlite_ext import SqliteExtDatabase
 from orchard.db.models import Level
 from orchard.scan.b2 import upload
 
-from orchard.scan.schema import make_schema, OrchardDatabase
+from orchard.scan.db_funcs import get_source_set, level_exists, add_level, delete_level
 from orchard.scan.sources.old_sheet import OldSheetScraper
 from orchard.vitals import analyze
 import traceback
@@ -26,15 +26,12 @@ SCRAPER_MAP = {
 
 
 async def main(db: SqliteExtDatabase, sources):
-    # sources = [["yeoldesheet", OldSheetScraper, {}]]
+
+    Level.bind(db)
 
     if not db.table_exists("level"):
         logger.info("The DB doesn't contain a 'level' table. Making it now...")
         db.create_tables([Level])
-
-    Level.bind(db)
-
-    orchard = OrchardDatabase(db)
 
     for source_id, scraper_class, kwargs in sources:
         # Initiate the scraper and get the current list of iids.
@@ -44,7 +41,7 @@ async def main(db: SqliteExtDatabase, sources):
         logger.info(f"{len(iids)} iids found.")
 
         # Calculate the diff between the db's current iids and the given list.
-        current_set = orchard.get_source_set(source_id)
+        current_set = get_source_set(source_id)
         our_set = set(iids)
 
         iids_to_add = our_set - current_set
@@ -53,7 +50,6 @@ async def main(db: SqliteExtDatabase, sources):
         logger.info(
             f"Adding {len(iids_to_add)} iids, removing {len(iids_to_delete)} iids"
         )
-        return
 
         # start adding iids.
         for index, iid in enumerate(iids_to_add):
@@ -70,7 +66,7 @@ async def main(db: SqliteExtDatabase, sources):
                 )
 
                 # Does this id already exist? This could happen if the same level is in multiple sources.
-                if orchard.does_level_exist(vit["id"]):
+                if level_exists(vit["id"]):
                     logger.info("this level already exists in the db. Bailing out now.")
                     continue
 
@@ -105,7 +101,7 @@ async def main(db: SqliteExtDatabase, sources):
                     to_add["icon"] = f"{CODEX}/{icon_url}"
 
                 level = {**vit, **to_add}
-                orchard.add_level(level)
+                add_level(level)
                 await scraper.on_index(level)
 
             except Exception as e:
@@ -114,20 +110,16 @@ async def main(db: SqliteExtDatabase, sources):
 
         for index, iid in enumerate(iids_to_delete):
             logger.info(f"Deleting iid {iid} ({index+1} / {len(iids_to_delete)})")
-            orchard.delete_level(source_id, iid)
+            delete_level(source_id, iid)
             await scraper.on_delete(iid)
 
 
 if __name__ == "__main__":
     database_file_name = sys.argv[1]
     sources_file_name = sys.argv[2]
-    db = SqliteExtDatabase(database_file_name, pragmas=(
-        ('cache_size', -1024 * 64),
-        ('journal_mode', 'wal')
-    ))
+    db = SqliteExtDatabase(database_file_name)
     with open(sources_file_name, 'r') as f:
         loaded_sources = yaml.load(f.read(), Loader=yaml.Loader)
-        print("breakpoint!")
 
     db.connect()
-    asyncio.run(main(db, loaded_sources[0]))
+    asyncio.run(main(db, loaded_sources))

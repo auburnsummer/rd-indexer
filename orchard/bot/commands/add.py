@@ -1,7 +1,7 @@
 from orchard.bot.constants import ResponseType
 from starlette.responses import JSONResponse
 
-from orchard.bot.utils import get_slash_args
+from orchard.bot.lib.utils import get_slash_args
 
 
 def add(body, _):

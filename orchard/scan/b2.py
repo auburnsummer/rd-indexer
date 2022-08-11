@@ -1,4 +1,6 @@
 import logging
+
+import httpx
 from dotenv import load_dotenv
 import os
 from b2sdk.v2 import *
@@ -22,6 +24,13 @@ else:
     logger.info("B2 environment variables not found. Disabling B2 uploads.")
     b2_authenticated = False
 
+
+def file_exists(filename):
+    url = f"https://f000.backblazeb2.com/file/{BUCKET_NAME}/{filename}"
+    resp = httpx.head(url)
+    return resp.status_code == httpx.codes.OK
+
+
 # map of filenames to bytes
 def upload(obj):
     if not b2_authenticated:
@@ -29,11 +38,7 @@ def upload(obj):
         return
 
     for filename, bytes in obj.items():
-        # check it's not already there.
-        try:
-            bucket.get_file_info_by_name(filename)
-        except exception.FileNotPresent:
-            # happy path is here actually
+        if not file_exists(filename):
             bytes.seek(0)
             bucket.upload_bytes(bytes.read(), filename)
         else:

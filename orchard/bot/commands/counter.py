@@ -1,7 +1,7 @@
-from orchard.bot.crosscode import button_press
-from orchard.bot.utils import get_id_from_response, get_slash_args
-from orchard.bot.interactions import Interactor
-from orchard.bot.message_builder import ActionRow, Button, MessageBuilder as M
+from orchard.bot.lib.crosscode import button_press
+from orchard.bot.lib.utils import get_id_from_response, get_slash_args
+from orchard.bot.lib.interactions import Interactor
+from orchard.bot.lib.message_builder import ActionRow, Button, MessageBuilder as M
 
 
 async def counter(body, _):

@@ -1,31 +1,29 @@
-import logging
 import sys
 from collections import defaultdict
 
 import uvicorn
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+from playhouse.sqlite_ext import SqliteExtDatabase
 
-from sqlite_utils import Database
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 from starlette.routing import Route
 
-import orchard.bot.crosscode as crosscode
+import orchard.bot.lib.crosscode as crosscode
+
 import orchard.bot.commands as commands
 from orchard.bot.constants import (
-    PATHLAB_ROLE,
     OptionType,
     PUBLIC_KEY,
-    PermissionType,
     ResponseType,
 )
-from orchard.bot.register import (
+from orchard.bot.lib.register import (
     update_slash_commands
 )
-from orchard.bot.schema import make_schema
+
 from orchard.bot.slash_router import (
     SlashOption,
     SlashRoute,
@@ -35,6 +33,8 @@ from orchard.bot.slash_router import (
 from orchard.bot import handlers
 
 # All the routes we're using go here.
+from orchard.db.models import Status
+
 router = SlashRouter(
     routes=[
         SlashRoute(
@@ -164,9 +164,9 @@ async def prerun_update_slash_commands():
 
 async def prerun_check_db():
     db = app.state.db
-    if "status" not in db.table_names():
+    if not db.table_exists("status"):
         print("Status table not found, making it now...")
-        make_schema(db)
+        db.create_tables([Status])
 
 
 # two identical routes. this is so i can change it in discord developer options to check
@@ -176,7 +176,7 @@ app = Starlette(
     routes=[
         Route("/interactions", interaction_handler, methods=["POST"]),
         Route("/interactions2", interaction_handler, methods=["POST"]),
-        Route("/status.db", handlers.status_dot_db, methods=["GET", "POST"]),
+        Route("/status.db", handlers.status_dot_db, methods=["GET"]),
         Route('/approval/{id}', handlers.set_approval, methods=['POST', 'GET']),
         Route('/multi/approval', handlers.get_approval_multi, methods=['POST'])
     ],
@@ -197,8 +197,8 @@ app = Starlette(
 # Discord requires HTTPS. Suggest using a localhost https proxy such as ngrok
 # e.g. run separately: ngrok http 8000
 if __name__ == "__main__":
-    db = Database(sys.argv[1])
-    db.enable_wal()
-    db.execute("PRAGMA busy_timeout = 5000")
+    db = SqliteExtDatabase(sys.argv[1])
+    Status.bind(db)
     app.state.db = db
+    # noinspection PyTypeChecker
     uvicorn.run(app, host="0.0.0.0", port=8000)

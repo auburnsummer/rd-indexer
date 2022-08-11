@@ -1,11 +1,9 @@
-import json
-
 import httpx
 
-from orchard.bot.interactions import Interactor
-from orchard.bot.typesense import get_by_id
-from orchard.bot.utils import get_slash_args, grouper
-from orchard.bot.message_builder import MessageBuilder as M, Embed
+from orchard.bot.lib.interactions import Interactor
+from orchard.bot.lib.typesense import ts_get_by_id
+from orchard.bot.lib.utils import get_slash_args, grouper
+from orchard.bot.lib.message_builder import MessageBuilder as M, Embed
 
 
 async def levelbyid(body, _):
@@ -13,7 +11,7 @@ async def levelbyid(body, _):
         [id] = get_slash_args(["id"], body)
         id = id.rstrip()
         try:
-            data = await get_by_id(id)
+            data = await ts_get_by_id(id)
         except httpx.HTTPError:
             await i.edit(
                 M().content(f"Could not find a level with id {id}"), "@original"

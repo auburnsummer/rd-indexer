@@ -1,8 +1,8 @@
-from orchard.bot.utils import get_id_from_response
-from orchard.bot.interactions import Interactor
-from orchard.bot.message_builder import ActionRow, Button, MessageBuilder as M
+from orchard.bot.lib.utils import get_id_from_response
+from orchard.bot.lib.interactions import Interactor
+from orchard.bot.lib.message_builder import ActionRow, Button, MessageBuilder as M
 
-import orchard.bot.crosscode as cc
+import orchard.bot.lib.crosscode as cc
 
 
 async def dtest(body, _):
