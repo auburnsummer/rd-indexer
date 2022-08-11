@@ -29,6 +29,11 @@ class DiscordScraper(RDLevelScraper):
         self.channel_id = channel_id
         self.after = after
         self.iid_url_map = {}
+        resp = httpx.get(f"{DISCORD_API_URL}/users/@me", headers={
+            "user-agent": USER_AGENT,
+            "Authorization": f"Bot {self.bot_token}"
+        })
+        self.bot_id = resp.json()['id']
 
     async def download_iid(self, iid):
         url = await self.get_url(iid)
@@ -40,15 +45,15 @@ class DiscordScraper(RDLevelScraper):
         else:
             # if we haven't recorded the URL in the map, that's fine!
             # we can still retrieve a URL from an iid, but it needs an API request.
-            channel_id, message_id, index = get_iid_info(iid)
+            message_id, attachment_id = get_iid_info(iid)
             async with Client() as client:
                 headers = {
                     "user-agent": USER_AGENT,
                     "Authorization": f"Bot {self.bot_token}"
                 }
-                resp = await client.get(f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}",
+                resp = await client.get(f"{DISCORD_API_URL}/channels/{self.channel_id}/messages/{message_id}",
                                         headers=headers)
-                attachment = resp.json()['attachments'][index]
+                attachment = next(a for a in resp.json()['attachments'] if a['id'] == attachment_id)
                 return attachment['url']
 
     async def get_iids(self):
@@ -91,7 +96,7 @@ class DiscordScraper(RDLevelScraper):
                                     f"{DISCORD_API_URL}/channels/{self.channel_id}/messages/{post['id']}/reactions/%F0%9F%9A%AB",
                                     headers=headers, params=react_params)
                                 for reactor in reactors.json():
-                                    if reactor['id'] == post['author']['id']:
+                                    if reactor['id'] == post['author']['id'] or reactor['id'] == self.bot_id:
                                         has_no_entry = True
                                         break
                                 break
