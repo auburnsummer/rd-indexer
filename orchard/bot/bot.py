@@ -200,5 +200,9 @@ if __name__ == "__main__":
     db = SqliteExtDatabase(sys.argv[1])
     Status.bind(db)
     app.state.db = db
+    if len(sys.argv) >= 2:
+        port = int(sys.argv[2])
+    else:
+        port = 8000
     # noinspection PyTypeChecker
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
