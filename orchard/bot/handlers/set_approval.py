@@ -1,3 +1,4 @@
+from playhouse.shortcuts import model_to_dict
 from starlette.responses import JSONResponse
 
 from orchard.bot.lib.db import set_status
@@ -32,7 +33,7 @@ async def set_approval(request):
             set_status(id, body)
 
         # then get it back.
-        return Status.get_by_id(id)
+        return JSONResponse(model_to_dict(Status.get_by_id(id)))
 
     except Exception as e:
         return JSONResponse({"error": str(e)}, 500)

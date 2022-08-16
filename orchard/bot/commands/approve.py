@@ -1,6 +1,8 @@
 import httpx
 
+from orchard.bot.constants import DEFAULT_DB_STATUS_VALUE
 from orchard.bot.lib import db
+from orchard.bot.lib.db import get_status
 from orchard.bot.lib.interactions import Interactor
 from orchard.bot.lib.message_builder import MessageBuilder as M, Embed
 from orchard.bot.lib.typesense import ts_get_by_id
@@ -28,17 +30,15 @@ async def approve(body, request):
                 # setting approval route
                 db.set_status(id, {'approval': approval})
 
-            local_data = Status.get_by_id(id)
+            local_data = get_status(id)
             message = M()
             embed = (
                 Embed()
                     .field("id", id)
                     .field("song", data["song"])
                     .field("authors", str(data["authors"]))
-                    .field("approval", local_data["approval"])
-                    .field("approval_reasons", str(local_data["approval_reasons"]))
+                    .field("approval", local_data.approval)
+                    .field("approval_reasons", str(local_data.approval_reasons))
             )
             message.embed(embed)
             await i.edit(message, "@original")
-
-

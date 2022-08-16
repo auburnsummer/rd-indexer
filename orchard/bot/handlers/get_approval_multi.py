@@ -1,3 +1,4 @@
+from playhouse.shortcuts import model_to_dict
 from starlette.responses import JSONResponse
 
 from orchard.bot.constants import DEFAULT_DB_STATUS_VALUE
@@ -20,10 +21,10 @@ async def get_approval_multi(request):
     body = await request.json()
 
     result = [
-        Status.get_or_create(
+        model_to_dict(Status.get_or_create(
             id=id,
             defaults=DEFAULT_DB_STATUS_VALUE
-        )[0] for id in body
+        )[0]) for id in body
     ]
 
     return JSONResponse(result)

@@ -1,5 +1,11 @@
+import functools
+import json
+
 from playhouse.sqlite_ext import JSONField
 from peewee import *
+
+my_json_dumps = functools.partial(json.dumps, ensure_ascii=False)
+MyJsonField = functools.partial(JSONField, json_dumps=my_json_dumps)
 
 # A level is a representation of the output of vitals.
 # this is entirely deterministic based on the rdzip. there is no stateful data here.
@@ -7,8 +13,8 @@ from peewee import *
 
 class Level(Model):
     artist = TextField()
-    artist_tokens = JSONField()
-    authors = TextField()
+    artist_tokens = MyJsonField()
+    authors = MyJsonField()
     description = TextField()
     difficulty = IntegerField()
     has_classics = BooleanField()
@@ -20,7 +26,7 @@ class Level(Model):
     has_squareshots = BooleanField()
     has_window_dance = BooleanField()
     hue = FloatField()
-    icon = TextField()
+    icon = TextField(null=True)
     id = TextField(primary_key=True)
     image = TextField()
     last_updated = DateTimeField()
@@ -32,10 +38,10 @@ class Level(Model):
     song = TextField()
     source = TextField()
     source_iid = TextField()
-    tags = JSONField()
-    thumb = TextField()
+    tags = MyJsonField()
+    thumb = TextField(null=True)
     two_player = BooleanField()
-    url = TextField()
+    url = TextField(null=True)
     url2 = TextField()
 
 # a status is stateful data about a level.
@@ -55,8 +61,8 @@ class Status(Model):
 # big hack time. define an empty model...
 class Combined(Model):
     artist = TextField()
-    artist_tokens = JSONField()
-    authors = TextField()
+    artist_tokens = MyJsonField()
+    authors = MyJsonField()
     description = TextField()
     difficulty = IntegerField()
     has_classics = BooleanField()
@@ -68,7 +74,7 @@ class Combined(Model):
     has_squareshots = BooleanField()
     has_window_dance = BooleanField()
     hue = FloatField()
-    icon = TextField()
+    icon = TextField(null=True)
     id = TextField(primary_key=True)
     image = TextField()
     last_updated = DateTimeField()
@@ -80,10 +86,10 @@ class Combined(Model):
     song = TextField()
     source = TextField()
     source_iid = TextField()
-    tags = JSONField()
-    thumb = TextField()
+    tags = MyJsonField()
+    thumb = TextField(null=True)
     two_player = BooleanField()
-    url = TextField()
+    url = TextField(null=True)
     url2 = TextField()
     # STATUS
     approval = IntegerField()
