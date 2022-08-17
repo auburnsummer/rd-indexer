@@ -200,7 +200,7 @@ if __name__ == "__main__":
     db = SqliteExtDatabase(sys.argv[1])
     Status.bind(db)
     app.state.db = db
-    if len(sys.argv) >= 2:
+    if len(sys.argv) >= 3:
         port = int(sys.argv[2])
     else:
         port = 8000
