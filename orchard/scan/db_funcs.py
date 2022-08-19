@@ -6,7 +6,7 @@ def add_level(level):
 
 
 def delete_level(source_id, source_iid):
-    Level.delete().where(Level.source == source_id & Level.source_iid == source_iid)
+    Level.delete().where(Level.source == source_id & Level.source_iid == source_iid).execute()
 
 
 def level_exists( id):

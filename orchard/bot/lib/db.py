@@ -16,5 +16,5 @@ def set_status(id, value):
     if "approval" in value and value["approval"] >= 10 and current.approval < 10:
         value["indexed"] = datetime.now()
 
-    q = current.update(**value)
+    q = Status.update(**value).where(Status.id == id)
     q.execute()
