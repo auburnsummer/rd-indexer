@@ -16,7 +16,11 @@ def make_jsonl_from_combined(combined):
     def datetime_to_epoch(s):
         if s is None:
             return None
-        return floor(datetime.fromisoformat(s).timestamp())
+        if isinstance(s, str):
+            return floor(datetime.fromisoformat(s).timestamp())
+        if isinstance(s, datetime):
+            return s.timestamp()
+        return None
     # dict of keys to functions that transform the value.
     transformers = {
         "last_updated": datetime_to_epoch,
