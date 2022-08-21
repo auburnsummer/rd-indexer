@@ -19,7 +19,7 @@ def make_jsonl_from_combined(combined):
         if isinstance(s, str):
             return floor(datetime.fromisoformat(s).timestamp())
         if isinstance(s, datetime):
-            return s.timestamp()
+            return floor(s.timestamp())
         return None
     # dict of keys to functions that transform the value.
     transformers = {
