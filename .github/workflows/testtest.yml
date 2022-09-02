@@ -39,3 +39,5 @@ jobs:
         
       - name: ls
         run: ls
+        working-directory: ./orchard/vitals
+
