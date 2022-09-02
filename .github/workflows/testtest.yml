@@ -33,6 +33,9 @@ jobs:
         run: curl https://cdn.discordapp.com/attachments/611380148431749151/1006805725558874153/a_bad_apple_a_day_keeps_the_rhythm_doctor_away.rdzip > apple.rdzip
         working-directory: ./orchard/vitals
 
-      - name: try
-        run: poetry run python vitals.py apple.rdzip
+      - name: extract it?
+        run: unzip apple.rdzip
         working-directory: ./orchard/vitals
+        
+      - name: ls
+        run: ls
