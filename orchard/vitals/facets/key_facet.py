@@ -1,6 +1,6 @@
 import logging
 
-from orchard.parse.utils import dig
+from orchard.utils.dig import dig
 from orchard.vitals.arguments_decorator import with_arguments
 
 logger = logging.getLogger(__name__)

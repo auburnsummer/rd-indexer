@@ -1,25 +1,25 @@
-from orchard.parse.rdlevel import parse
+from orchard.parse import parse
 
 
 def test_scalar_1():
     s = """
-        2
+        {"value": 2}
     """
-    assert parse(s) == 2
+    assert parse(s) == {"value": 2}
 
 
 def test_scalar_2():
     s = """
-        "hello world"
+        {"value": "hello world"}
     """
-    assert parse(s) == "hello world"
+    assert parse(s) == {"value": "hello world"}
 
 
 def test_scalar_3():
     s = """
-        false
+        {"value": false}
     """
-    assert parse(s) is False
+    assert parse(s) == {"value": False}
 
 
 def test_array_1():
@@ -36,7 +36,8 @@ def test_array_2():
         5,
         1,
         "hello world",
-        {"a": 4}
+        {"a": 4},
+        ]
     """
     assert parse(s) == [3, 4, 5, 1, "hello world", {"a": 4}]
 
@@ -52,9 +53,9 @@ def test_obj_1():
                     "g": "even further",
                     "h": [
                         "i", "j", "k"
-                    ]
+                    ],
                 }
-            }
+            },
         }
     """
     assert parse(s) == {
@@ -85,18 +86,7 @@ def test_literal_newlines():
         {
             "a": "this is a valid value
 in an rdlevel even though
-it has literal newlines"
+it has literal newlines!"
         }
     """
-    assert parse(s) == {"a": "this is a valid value\nin an rdlevel even though\nit has literal newlines"}
-
-
-def test_space_seperator_keys():
-    s = r""" 
-    {"a": 2 "b": 3 "c": 4
-    """
-    assert parse(s) == {
-        "a": 2,
-        "b": 3,
-        "c": 4
-    }
+    assert parse(s) == {"a": "this is a valid value\nin an rdlevel even though\nit has literal newlines!"}

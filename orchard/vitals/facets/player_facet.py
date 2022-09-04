@@ -1,4 +1,4 @@
-from orchard.parse.utils import try_dig
+from orchard.utils.dig import try_dig
 from orchard.vitals.arguments_decorator import with_arguments
 
 

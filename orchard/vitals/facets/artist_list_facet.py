@@ -7,7 +7,7 @@ import re
 
 # note that for authors, we only store the list, but for artists, we still need to store the original string.
 # the
-from orchard.parse.utils import try_dig
+from orchard.utils.dig import try_dig
 from orchard.vitals.arguments_decorator import with_arguments
 
 ARTIST_REGEX = r"\s*?(?:ft\.|feat\.|×|,)\s*?"
