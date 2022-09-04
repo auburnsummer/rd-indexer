@@ -343,7 +343,10 @@ def parse(file):
     token_stream = tokenize(file)
     val, token_type, token = __parse(token_stream, next(token_stream))
     if token is not None:
-        raise ValueError("Improperly closed JSON object")
+        if token == ',':
+            pass
+        else:
+            raise ValueError("Improperly closed JSON object")
     try:
         next(token_stream)
     except StopIteration:

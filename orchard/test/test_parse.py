@@ -56,7 +56,9 @@ def test_obj_1():
                     ],
                 }
             },
-        }
+        },
+        
+        
     """
     assert parse(s) == {
         "a": "hello",
