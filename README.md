@@ -1,7 +1,7 @@
 # rd-indexer
 
-This is a set of Python scripts that produce [api.rhythm.cafe](api.rhythm.cafe),
-the backend for [rhythm.cafe](rhythm.cafe).
+This is a set of Python scripts that produce [api.rhythm.cafe](https://api.rhythm.cafe),
+the backend for [rhythm.cafe](https://rhythm.cafe).
 
 It consists of the following submodules:
 
