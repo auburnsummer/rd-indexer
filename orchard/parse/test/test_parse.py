@@ -41,6 +41,7 @@ def test_array_2():
     """
     assert parse(s) == [3, 4, 5, 1, "hello world", {"a": 4}]
 
+
 def test_obj_1():
     s = """
         {
@@ -57,8 +58,8 @@ def test_obj_1():
                 }
             },
         },
-        
-        
+
+
     """
     assert parse(s) == {
         "a": "hello",

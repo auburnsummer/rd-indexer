@@ -79,7 +79,6 @@ async def main(db: SqliteExtDatabase, sources):
                 to_upload = {
                     image_url: vit["image"],
                     thumbnail_url: vit["thumb"],
-                    rdzip_url: file,
                 }
                 if vit["icon"]:
                     to_upload[icon_url] = vit["icon"]

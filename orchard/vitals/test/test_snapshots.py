@@ -13,7 +13,7 @@ EXCLUDE_FROM_SNAPSHOT = [
 ]
 
 
-def test_haha_awesome(rdzip, snapshot):
+def test_snapshot(rdzip, snapshot):
     with open(rdzip, "rb") as f:
         assert main(f) == snapshot(exclude=lambda prop, path: prop in EXCLUDE_FROM_SNAPSHOT)
 
