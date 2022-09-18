@@ -77,6 +77,7 @@ async def main(db: SqliteExtDatabase, sources):
                 icon_url = f"{vit['id']}_icon.png"
 
                 to_upload = {
+                    rdzip_url: file,
                     image_url: vit["image"],
                     thumbnail_url: vit["thumb"],
                 }
