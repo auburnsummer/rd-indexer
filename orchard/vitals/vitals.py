@@ -7,6 +7,7 @@ import toml
 
 from orchard.parse import parse
 from orchard.vitals.facets.artist_list_facet import artist_list_facet
+from orchard.vitals.facets.rdlevel_sha1_facet import rdlevel_sha1_facet
 from orchard.vitals.facets.sha1_facet import sha1_facet
 from orchard.vitals.facets.author_facet import author_facet
 from orchard.vitals.facets.event_type_facet import event_type_facet
@@ -14,11 +15,12 @@ from orchard.vitals.facets.bpm_facet import bpm_facet
 from orchard.vitals.facets.difficulty_facet import difficulty_facet
 from orchard.vitals.facets.icon_facet import icon_facet
 from orchard.vitals.facets.id_facet import id_facet
-from orchard.vitals.facets.key_facet import make_key_facet
+from orchard.vitals.facets.key_facet import make_key_facet, make_color_enabled_key_facet
 from orchard.vitals.facets.player_facet import player_facet
 from orchard.vitals.facets.tags_facet import tags_facet
 from orchard.vitals.facets.thumbnail_facet import thumbnail_facet
 from orchard.vitals.facets.updated_facet import updated_facet
+
 
 class VitalsException(Exception):
     pass
@@ -29,9 +31,9 @@ def main(f: BinaryIO):
         "id": id_facet,
         "artist": make_key_facet(["settings", "artist"]),
         "artist_tokens": artist_list_facet,
-        "song": make_key_facet(["settings", "song"]),
+        ("song", "song_ct"): make_color_enabled_key_facet(["settings", "song"]),
         "seizure_warning": make_key_facet(["settings", "seizureWarning"], True),
-        "description": make_key_facet(["settings", "description"]),
+        ("description", "description_ct"): make_color_enabled_key_facet(["settings", "description"]),
         "hue": make_key_facet(["settings", "songNameHue"], 0.0),
         "authors": author_facet,
         ("max_bpm", "min_bpm"): bpm_facet,
@@ -51,7 +53,8 @@ def main(f: BinaryIO):
             "has_skipshots",
             "has_window_dance"
         ): event_type_facet,
-        "sha1": sha1_facet
+        "sha1": sha1_facet,
+        "rdlevel_sha1": rdlevel_sha1_facet
     }
 
     try:

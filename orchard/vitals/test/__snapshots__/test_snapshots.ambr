@@ -8,6 +8,12 @@
       'lugi',
     ]),
     'description': 'Two lonely stars, wandering in the dark...',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 42,
+      }),
+    ]),
     'difficulty': 1,
     'has_classics': True,
     'has_freetimes': True,
@@ -22,10 +28,17 @@
     'last_updated': datetime.datetime(2020, 6, 24, 15, 6, 48),
     'max_bpm': 78.5,
     'min_bpm': 78.5,
+    'rdlevel_sha1': 'f67aa02893fdb5ccfad0e445486bd6595801ecdc',
     'seizure_warning': False,
     'sha1': 'f2ad0f76bbfedf96bec3451eb9ead014accb3047',
     'single_player': True,
     'song': 'Know You',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 8,
+      }),
+    ]),
     'tags': list([
       'slow',
       'pop',
@@ -43,6 +56,12 @@
       'Labyrinth',
     ]),
     'description': "It's not something easy to admit.",
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 33,
+      }),
+    ]),
     'difficulty': 1,
     'has_classics': True,
     'has_freetimes': True,
@@ -57,10 +76,17 @@
     'last_updated': datetime.datetime(2022, 6, 16, 0, 8, 26),
     'max_bpm': 89,
     'min_bpm': 88,
+    'rdlevel_sha1': 'f51edf3794b98bb414072b3db73780b6bde78986',
     'seizure_warning': False,
     'sha1': '229e4a42f2e69db34d851fd6d66618c58ca076e4',
     'single_player': True,
     'song': 'Pull',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 4,
+      }),
+    ]),
     'tags': list([
       '1p',
       '2p',
@@ -85,6 +111,12 @@
       - skipshots
       - holds
     ''',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 102,
+      }),
+    ]),
     'difficulty': 2,
     'has_classics': False,
     'has_freetimes': True,
@@ -99,10 +131,17 @@
     'last_updated': datetime.datetime(2022, 1, 3, 23, 19, 26),
     'max_bpm': 126,
     'min_bpm': 126,
+    'rdlevel_sha1': 'eded1e2ef4c611af5087ff6bf723bfcfa8b58814',
     'seizure_warning': False,
     'sha1': '3031e6cd0842aedec80d9a0dbd8866f25cc58ec2',
     'single_player': True,
     'song': 'ennui.ogg',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 9,
+      }),
+    ]),
     'tags': list([
       'chiptune',
       'short',
@@ -124,6 +163,12 @@
       'BluPen',
     ]),
     'description': "Patient experiencing sudden heart strain again. Solve the patient's concerns.",
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 77,
+      }),
+    ]),
     'difficulty': 2,
     'has_classics': True,
     'has_freetimes': False,
@@ -138,10 +183,17 @@
     'last_updated': datetime.datetime(2021, 5, 20, 21, 9, 22),
     'max_bpm': 173,
     'min_bpm': 100,
+    'rdlevel_sha1': '42fc1dc1831e7ec9125d5682becc9169b084a2ff',
     'seizure_warning': False,
     'sha1': '68f8771d0898813755bdc26cb6c79bd822824cb5',
     'single_player': True,
     'song': 'One Forgotten Night',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 19,
+      }),
+    ]),
     'tags': list([
       'quree',
       'window dance',
@@ -162,6 +214,12 @@
       One Uncued Tresillo
       (song edited from [...]Machinegun Psystyle[...], by Camellia)
     ''',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 81,
+      }),
+    ]),
     'difficulty': 0,
     'has_classics': False,
     'has_freetimes': True,
@@ -176,10 +234,17 @@
     'last_updated': datetime.datetime(2022, 6, 27, 21, 27, 12),
     'max_bpm': 70,
     'min_bpm': 40,
+    'rdlevel_sha1': '655760a6711792700527a7623edaaa666102e122',
     'seizure_warning': False,
     'sha1': '024b74e8a3ce6ae1215b49ec2025cd75e0a6b468',
     'single_player': True,
     'song': 'One Uncued Tresillo',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 19,
+      }),
+    ]),
     'tags': list([
       'uncued tresillo',
       'samario please stop doing this',
@@ -200,6 +265,12 @@
       One Uncued Tresillo
       (song edited from [...]Machinegun Psystyle[...], by Camellia)
     ''',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 81,
+      }),
+    ]),
     'difficulty': 0,
     'has_classics': False,
     'has_freetimes': True,
@@ -214,10 +285,17 @@
     'last_updated': datetime.datetime(2021, 1, 2, 3, 52, 10),
     'max_bpm': 160,
     'min_bpm': 160,
+    'rdlevel_sha1': '9556c7350721fc7117bcd229fa48bccc7a12fe7e',
     'seizure_warning': False,
     'sha1': 'd7fb093e54173c553a9603929df7267b27267d1f',
     'single_player': True,
     'song': 'One Uncued Tresillo',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 19,
+      }),
+    ]),
     'tags': list([
       'uncued tresillo',
       'samario please stop doing this',
@@ -236,6 +314,12 @@
       'Xeno',
     ]),
     'description': 'A two-handed level. The eloquent blend between thirds and halves.',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 65,
+      }),
+    ]),
     'difficulty': 2,
     'has_classics': True,
     'has_freetimes': False,
@@ -250,10 +334,17 @@
     'last_updated': datetime.datetime(2022, 6, 27, 23, 25, 28),
     'max_bpm': 110,
     'min_bpm': 110,
+    'rdlevel_sha1': '7e3f5d28f8865e3e8bc3982b2f72e5d6a9dbddf0',
     'seizure_warning': False,
     'sha1': '4de04dc0c7e6ba30438368cacbd8a24678666841',
     'single_player': True,
     'song': 'Triplet Test',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 12,
+      }),
+    ]),
     'tags': list([
       'Piano',
       '2p',
@@ -281,6 +372,12 @@
       Banana CC by Pyre
       Banana Tile by Het
     ''',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 241,
+      }),
+    ]),
     'difficulty': 1,
     'has_classics': True,
     'has_freetimes': True,
@@ -295,10 +392,17 @@
     'last_updated': datetime.datetime(2022, 4, 9, 16, 40, 34),
     'max_bpm': 147,
     'min_bpm': 143.5,
+    'rdlevel_sha1': '4a628e03105151edc70ac70a3186ed9fd265c65f',
     'seizure_warning': False,
     'sha1': '053aac4ed9987f1a6e8bdf12df120a9d607879f7',
     'single_player': True,
     'song': 'BANAS',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 5,
+      }),
+    ]),
     'tags': list([
       'April Fools',
       'banana',
@@ -322,6 +426,12 @@
       'Szprycha',
     ]),
     'description': 'A neat song from WarioWare DIY',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 30,
+      }),
+    ]),
     'difficulty': 1,
     'has_classics': True,
     'has_freetimes': False,
@@ -336,10 +446,17 @@
     'last_updated': datetime.datetime(2020, 6, 20, 23, 9, 28),
     'max_bpm': 125,
     'min_bpm': 125,
+    'rdlevel_sha1': 'd886e1db351210003240b2066ec4356256f1d5ef',
     'seizure_warning': False,
     'sha1': '8da77730d1fcd96d73590505b2a502d0dd05807c',
     'single_player': True,
     'song': "Jimmy's Aesthetics",
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 18,
+      }),
+    ]),
     'tags': list([
       'siivagunner',
       'nintendo',

@@ -16,6 +16,7 @@ class Level(Model):
     artist_tokens = MyJsonField()
     authors = MyJsonField()
     description = TextField()
+    description_ct = MyJsonField()
     difficulty = IntegerField()
     has_classics = BooleanField()
     has_freetimes = BooleanField()
@@ -36,6 +37,7 @@ class Level(Model):
     sha1 = TextField()
     single_player = BooleanField()
     song = TextField()
+    song_ct = MyJsonField()
     source = TextField()
     source_iid = TextField()
     tags = MyJsonField()
@@ -43,6 +45,7 @@ class Level(Model):
     two_player = BooleanField()
     url = TextField(null=True)
     url2 = TextField()
+
 
 # a status is stateful data about a level.
 # statuses map to levels. a level can have at most one status.
@@ -58,12 +61,12 @@ class Status(Model):
 # the combined model combines a Level and Status.'
 # this is only used for the Datasette representation in package.py.
 
-# big hack time. define an empty model...
 class Combined(Model):
     artist = TextField()
     artist_tokens = MyJsonField()
     authors = MyJsonField()
     description = TextField()
+    description_ct = MyJsonField()
     difficulty = IntegerField()
     has_classics = BooleanField()
     has_freetimes = BooleanField()
@@ -84,6 +87,7 @@ class Combined(Model):
     sha1 = TextField()
     single_player = BooleanField()
     song = TextField()
+    song_ct = MyJsonField()
     source = TextField()
     source_iid = TextField()
     tags = MyJsonField()
