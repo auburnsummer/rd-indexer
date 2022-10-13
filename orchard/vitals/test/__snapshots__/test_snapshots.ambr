@@ -76,9 +76,9 @@
     'last_updated': datetime.datetime(2022, 6, 16, 0, 8, 26),
     'max_bpm': 89,
     'min_bpm': 88,
-    'rdlevel_sha1': 'f51edf3794b98bb414072b3db73780b6bde78986',
+    'rdlevel_sha1': '9f576dd7ed2430c85d3fed185f259eb13b861669',
     'seizure_warning': False,
-    'sha1': '229e4a42f2e69db34d851fd6d66618c58ca076e4',
+    'sha1': '8110b16e256491dcef0baf38bf155609afa60f55',
     'single_player': True,
     'song': 'Pull',
     'song_ct': list([
@@ -131,9 +131,9 @@
     'last_updated': datetime.datetime(2022, 1, 3, 23, 19, 26),
     'max_bpm': 126,
     'min_bpm': 126,
-    'rdlevel_sha1': 'eded1e2ef4c611af5087ff6bf723bfcfa8b58814',
+    'rdlevel_sha1': '1097fb08074c3a5ce13b015c7733701d16dfa45d',
     'seizure_warning': False,
-    'sha1': '3031e6cd0842aedec80d9a0dbd8866f25cc58ec2',
+    'sha1': 'c6cc78306d7eaf83fcf3c34817aceeca8fb75e5d',
     'single_player': True,
     'song': 'ennui.ogg',
     'song_ct': list([
@@ -183,9 +183,9 @@
     'last_updated': datetime.datetime(2021, 5, 20, 21, 9, 22),
     'max_bpm': 173,
     'min_bpm': 100,
-    'rdlevel_sha1': '42fc1dc1831e7ec9125d5682becc9169b084a2ff',
+    'rdlevel_sha1': 'd93a57d9dc914ec374a62a7d95af166c7a2ae068',
     'seizure_warning': False,
-    'sha1': '68f8771d0898813755bdc26cb6c79bd822824cb5',
+    'sha1': '64353589d469c1775ac71295fd614a39e489ee52',
     'single_player': True,
     'song': 'One Forgotten Night',
     'song_ct': list([
@@ -234,9 +234,9 @@
     'last_updated': datetime.datetime(2022, 6, 27, 21, 27, 12),
     'max_bpm': 70,
     'min_bpm': 40,
-    'rdlevel_sha1': '655760a6711792700527a7623edaaa666102e122',
+    'rdlevel_sha1': 'f1eae432ab0f175352a74d5b220d92a70df88e97',
     'seizure_warning': False,
-    'sha1': '024b74e8a3ce6ae1215b49ec2025cd75e0a6b468',
+    'sha1': '6d5fbb3e3e376c3a034e9df30761029beb927bc1',
     'single_player': True,
     'song': 'One Uncued Tresillo',
     'song_ct': list([
@@ -285,9 +285,9 @@
     'last_updated': datetime.datetime(2021, 1, 2, 3, 52, 10),
     'max_bpm': 160,
     'min_bpm': 160,
-    'rdlevel_sha1': '9556c7350721fc7117bcd229fa48bccc7a12fe7e',
+    'rdlevel_sha1': 'f06b38214d9eac029688a0b21e4b80bf99fe58b6',
     'seizure_warning': False,
-    'sha1': 'd7fb093e54173c553a9603929df7267b27267d1f',
+    'sha1': 'e94097f69ba42b8706bb09f3e3e5061d7efa7763',
     'single_player': True,
     'song': 'One Uncued Tresillo',
     'song_ct': list([
@@ -311,7 +311,7 @@
     ]),
     'authors': list([
       'auburnsummer',
-      'Xeno',
+      ' Xeno',
     ]),
     'description': 'A two-handed level. The eloquent blend between thirds and halves.',
     'description_ct': list([
@@ -349,6 +349,74 @@
       'Piano',
       '2p',
       'Two-handed',
+    ]),
+    'two_player': False,
+  })
+# ---
+# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\color-ff-XsSFVSBp2hH.rdzip]
+  dict({
+    'artist': '遊助',
+    'artist_tokens': list([
+      '遊助',
+    ]),
+    'authors': list([
+      '来因洛特',
+    ]),
+    'description': '这次的这个谱我真的花了很长时间，大概有......差不多50个小时吧。歌词因为是CC，只能全用平假名了，看起来麻烦也抱歉了...希望这次能取得比上次更好的结果吧。来来回回也看了很多次，感觉想不到有什么能加的了，就这样交了吧。也希望你也能像歌词一样开开心心的，活着本身没有意义，但就是为了知道是为了什么我们才会活着呀。（录的时候请把轨道分成八行）',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 172,
+      }),
+    ]),
+    'difficulty': 0,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': False,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0.17,
+    'id': 'color-ff-XsSFVSBp2hH',
+    'last_updated': datetime.datetime(2022, 8, 25, 22, 29, 56),
+    'max_bpm': 138,
+    'min_bpm': 138,
+    'rdlevel_sha1': 'a04ccd13fb8ab685880d4223737d943c0e494376',
+    'seizure_warning': True,
+    'sha1': '72b6e91fe98ff2db4b5f6ff08d75eb0fda71eca1',
+    'single_player': True,
+    'song': '''
+      一笑懸命
+    ''',
+    'song_ct': list([
+      dict({
+        'color': '#FF7C8A',
+        'len': 1,
+      }),
+      dict({
+        'color': '#FECD66',
+        'len': 1,
+      }),
+      dict({
+        'color': '#C3F3FD',
+        'len': 1,
+      }),
+      dict({
+        'color': '#FFA3D6',
+        'len': 1,
+      }),
+      dict({
+        'color': 'default',
+        'len': 1,
+      }),
+    ]),
+    'tags': list([
+      'easy',
+      'CNcompo 1',
+      'relaxing',
+      'lyrics',
     ]),
     'two_player': False,
   })
@@ -392,9 +460,9 @@
     'last_updated': datetime.datetime(2022, 4, 9, 16, 40, 34),
     'max_bpm': 147,
     'min_bpm': 143.5,
-    'rdlevel_sha1': '4a628e03105151edc70ac70a3186ed9fd265c65f',
+    'rdlevel_sha1': '3b556ebb445f4ecf1a67161e71cbbdf2f287c7b3',
     'seizure_warning': False,
-    'sha1': '053aac4ed9987f1a6e8bdf12df120a9d607879f7',
+    'sha1': '2aeb6b013f3cf230f6ba37872d88e08917a46067',
     'single_player': True,
     'song': 'BANAS',
     'song_ct': list([
@@ -446,9 +514,9 @@
     'last_updated': datetime.datetime(2020, 6, 20, 23, 9, 28),
     'max_bpm': 125,
     'min_bpm': 125,
-    'rdlevel_sha1': 'd886e1db351210003240b2066ec4356256f1d5ef',
+    'rdlevel_sha1': '701b10117b2a4427a985b338e76b80945178b200',
     'seizure_warning': False,
-    'sha1': '8da77730d1fcd96d73590505b2a502d0dd05807c',
+    'sha1': '850a86618d572cd35e5925df53723abc1e6e1e36',
     'single_player': True,
     'song': "Jimmy's Aesthetics",
     'song_ct': list([

@@ -11,7 +11,7 @@ TAG_FINDER = re.compile(r"(<color=([a-zA-Z0-9#]+)>)|(</color>)")
 
 
 def parse_color_tagged_string(s: str):
-    matches = list(TAG_FINDER.finditer(s))
+    matches = list(TAG_FINDER.finditer(s.strip()))
 
     color_stack = ["default"]
 
