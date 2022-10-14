@@ -341,16 +341,14 @@ def parse_string(string):
 
 def parse(file):
     token_stream = tokenize(file)
-    token_stream2 = list(token_stream)
-    token_stream3 = iter(token_stream2)
-    val, token_type, token = __parse(token_stream3, next(token_stream3))
+    val, token_type, token = __parse(token_stream, next(token_stream))
     if token is not None:
         if token == ',':
             pass
         else:
             raise ValueError("Improperly closed JSON object")
     try:
-        next(token_stream3)
+        next(token_stream)
     except StopIteration:
         return val
     raise ValueError("Additional string after end of JSON")
