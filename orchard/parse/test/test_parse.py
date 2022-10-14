@@ -93,3 +93,14 @@ it has literal newlines!"
         }
     """
     assert parse(s) == {"a": "this is a valid value\nin an rdlevel even though\nit has literal newlines!"}
+
+
+def test_space_seperated_key_value_pairs():
+    s = r"""{ "bar": 1, "beat": 1.01, "endOpacity": 100 "ease": "Linear" }"""
+
+    assert parse(s) == {
+        "bar": 1,
+        "beat": 1.01,
+        "endOpacity": 100,
+        "ease": "Linear"
+    }

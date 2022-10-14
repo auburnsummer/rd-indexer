@@ -95,6 +95,61 @@
     'two_player': True,
   })
 # ---
+# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\JustMe_-_Swing.rdzip]
+  dict({
+    'artist': 'JustMe',
+    'artist_tokens': list([
+      'JustMe',
+    ]),
+    'authors': list([
+      'Xeno',
+    ]),
+    'description': "Printin' twang.",
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 15,
+      }),
+    ]),
+    'difficulty': 1,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0.08,
+    'id': 'swing-c2QGYcw8GLq',
+    'last_updated': datetime.datetime(2020, 12, 1, 18, 30, 20),
+    'max_bpm': 130,
+    'min_bpm': 130,
+    'rdlevel_sha1': 'a8fd55c9e69a331a72f2c10a396ebde920b91315',
+    'seizure_warning': False,
+    'sha1': '3536805b7678006664d4f45856c4ce8959eb4a15',
+    'single_player': True,
+    'song': 'Swing',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 5,
+      }),
+    ]),
+    'tags': list([
+      'Printing',
+      'CMYK',
+      'Swing',
+      'Bounce',
+      'syncopation',
+      'gimmick',
+      '1p',
+      '2p',
+      'XenOnly',
+    ]),
+    'two_player': True,
+  })
+# ---
 # name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Pseuu_-_ennui.rdzip]
   dict({
     'artist': 'Pseuu',
@@ -131,9 +186,9 @@
     'last_updated': datetime.datetime(2022, 1, 3, 23, 19, 26),
     'max_bpm': 126,
     'min_bpm': 126,
-    'rdlevel_sha1': '1097fb08074c3a5ce13b015c7733701d16dfa45d',
+    'rdlevel_sha1': 'c3435bd5e2362805b1ff15629757693ad985083c',
     'seizure_warning': False,
-    'sha1': 'c6cc78306d7eaf83fcf3c34817aceeca8fb75e5d',
+    'sha1': 'fd9bf6a51ce68fd87d3d6b269c792386f86c4c3b',
     'single_player': True,
     'song': 'ennui.ogg',
     'song_ct': list([
@@ -183,9 +238,9 @@
     'last_updated': datetime.datetime(2021, 5, 20, 21, 9, 22),
     'max_bpm': 173,
     'min_bpm': 100,
-    'rdlevel_sha1': 'd93a57d9dc914ec374a62a7d95af166c7a2ae068',
+    'rdlevel_sha1': '9c1236f7939cc820b294dabe8904679701e1011b',
     'seizure_warning': False,
-    'sha1': '64353589d469c1775ac71295fd614a39e489ee52',
+    'sha1': '365fc035a0024c9fe69d51e938fa3d6952b302db',
     'single_player': True,
     'song': 'One Forgotten Night',
     'song_ct': list([
@@ -234,9 +289,9 @@
     'last_updated': datetime.datetime(2022, 6, 27, 21, 27, 12),
     'max_bpm': 70,
     'min_bpm': 40,
-    'rdlevel_sha1': 'f1eae432ab0f175352a74d5b220d92a70df88e97',
+    'rdlevel_sha1': '45b791ffa43c995db620315f968047c6d9c7bb21',
     'seizure_warning': False,
-    'sha1': '6d5fbb3e3e376c3a034e9df30761029beb927bc1',
+    'sha1': '03a597ff04c86c751e6b12d79d6308b18d1c68f3',
     'single_player': True,
     'song': 'One Uncued Tresillo',
     'song_ct': list([
@@ -285,9 +340,9 @@
     'last_updated': datetime.datetime(2021, 1, 2, 3, 52, 10),
     'max_bpm': 160,
     'min_bpm': 160,
-    'rdlevel_sha1': 'f06b38214d9eac029688a0b21e4b80bf99fe58b6',
+    'rdlevel_sha1': '6ff955c37225bb5ed9282b3f813cb16dd7504fd3',
     'seizure_warning': False,
-    'sha1': 'e94097f69ba42b8706bb09f3e3e5061d7efa7763',
+    'sha1': '7546233f165a8842b335404d8df3d977888fce50',
     'single_player': True,
     'song': 'One Uncued Tresillo',
     'song_ct': list([
@@ -460,9 +515,9 @@
     'last_updated': datetime.datetime(2022, 4, 9, 16, 40, 34),
     'max_bpm': 147,
     'min_bpm': 143.5,
-    'rdlevel_sha1': '3b556ebb445f4ecf1a67161e71cbbdf2f287c7b3',
+    'rdlevel_sha1': '77bc7d7ea5203e1befdf0bc24ae2fad0e5b0346e',
     'seizure_warning': False,
-    'sha1': '2aeb6b013f3cf230f6ba37872d88e08917a46067',
+    'sha1': '0c55a1c001072adcfbc9c1946dbee439b091f00f',
     'single_player': True,
     'song': 'BANAS',
     'song_ct': list([
@@ -514,9 +569,9 @@
     'last_updated': datetime.datetime(2020, 6, 20, 23, 9, 28),
     'max_bpm': 125,
     'min_bpm': 125,
-    'rdlevel_sha1': '701b10117b2a4427a985b338e76b80945178b200',
+    'rdlevel_sha1': 'd61958f09545cf365b4d0c23d12ace8942bc20ec',
     'seizure_warning': False,
-    'sha1': '850a86618d572cd35e5925df53723abc1e6e1e36',
+    'sha1': '857f166d1a8d30a2bd810de4113eb19260acab5e',
     'single_player': True,
     'song': "Jimmy's Aesthetics",
     'song_ct': list([
