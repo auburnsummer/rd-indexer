@@ -104,3 +104,21 @@ def test_space_seperated_key_value_pairs():
         "endOpacity": 100,
         "ease": "Linear"
     }
+
+def test_space_seperated_after_array_control():
+    s = r"""{ "bar": 9, "rooms": [0], "strength": "High" }"""
+
+    assert parse(s) == {
+        "bar": 9,
+        "rooms": [0],
+        "strength": "High"
+    }
+
+def test_space_seperated_after_array():
+    s = r"""{ "bar": 9, "rooms": [0] "strength": "High" }"""
+
+    assert parse(s) == {
+        "bar": 9,
+        "rooms": [0],
+        "strength": "High"
+    }
