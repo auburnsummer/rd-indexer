@@ -1,4 +1,8 @@
+import pytest
+from syrupy.extensions.single_file import SingleFileSnapshotExtension
+
 from orchard.vitals.vitals import main
+from syrupy.filters import props
 
 # for vitals, we just test with snapshots.
 # all levels used for snapshots are in the "fixtures" directory.
@@ -13,7 +17,12 @@ EXCLUDE_FROM_SNAPSHOT = [
 ]
 
 
+@pytest.fixture
+def snapshot_ss(snapshot):
+    return snapshot.use_extension(SingleFileSnapshotExtension)
+
 def test_snapshot(rdzip, snapshot):
     with open(rdzip, "rb") as f:
-        assert main(f) == snapshot(exclude=lambda prop, path: prop in EXCLUDE_FROM_SNAPSHOT)
+        actual = main(f)
+        assert actual == snapshot(exclude=props(*EXCLUDE_FROM_SNAPSHOT))
 

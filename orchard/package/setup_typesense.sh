@@ -1,5 +1,6 @@
 set -x
 
+
 overmind start -D -l typesense
 sleep 1
 

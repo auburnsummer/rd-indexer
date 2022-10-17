@@ -21,14 +21,12 @@ even though it has newlines"
 },
 ```
 
-In addition, for about 2 versions of Rhythm Doctor from circa 2018, key pairs in objects
-could be seperated via whitespace:
+Key pairs in objects can be seperated by whitespace:
 
 ```
 {"key": 2, "key2": 3 "key3": 4}
 ```
 
-There are very few levels that were made in these versions so I'm not supporting this.
 
 # Implementation
 

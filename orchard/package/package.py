@@ -24,7 +24,9 @@ def make_jsonl_from_combined(combined):
     # dict of keys to functions that transform the value.
     transformers = {
         "last_updated": datetime_to_epoch,
-        "indexed": datetime_to_epoch
+        "indexed": datetime_to_epoch,
+        "song_ct": json.dumps,
+        "description_ct": json.dumps
     }
     for col_name, col_value in combined_dict.items():
         if col_name in transformers.keys():
@@ -43,7 +45,6 @@ def package():
     for row in Level.select():
         status, _ = Status.get_or_create(id=row.id, defaults=DEFAULT_DB_STATUS_VALUE)
         print(row)
-        print(status)
         to_insert = {
             **model_to_dict(row),
             **model_to_dict(status)

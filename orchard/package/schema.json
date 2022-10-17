@@ -26,6 +26,13 @@
 			"type": "string"
 		},
 		{
+			"facet": false,
+			"index": false,
+			"name": "description_ct",
+			"type": "string",
+			"optional": true
+		},
+		{
 			"facet": true,
 			"index": true,
 			"name": "difficulty",
@@ -114,6 +121,13 @@
 			"index": true,
 			"name": "song",
 			"type": "string"
+		},
+		{
+			"facet": false,
+			"index": false,
+			"name": "song_ct",
+			"type": "string",
+			"optional": true
 		},
 		{
 			"facet": true,

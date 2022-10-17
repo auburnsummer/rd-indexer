@@ -379,6 +379,10 @@ def __parse(token_stream, first_token):
     else:
         raise ValueError("Expected object or array.  Got '{}'".format(token))
 
+    # override the next token, if needed for recovery.
+    override_stack = []
+    # next_override = None
+
     last_type, last_token = token_type, token
     try:
         token_type, token = next(token_stream)
@@ -436,12 +440,19 @@ def __parse(token_stream, first_token):
                         else:
                             raise ValueError("Array items must be followed by a comma or closing bracket.  "
                                              "Got '{}'".format(value))
+                        # if what's following is a string, we're running into the next key without
+                        # a comma. emit the comma now to compensate.
+                        if token_type == TOKEN_TYPE.STRING:
+                            override_stack.append((token_type, token))
+                            override_stack.append((TOKEN_TYPE.OPERATOR, ','))
                     elif last_token == "}":
                         raise ValueError("Array closed with a '}'")
                     else:
                         raise ValueError("Array should not contain ':'")
                 else:
-                    raise ValueError("Unknown Error")
+                    # if it's not an TOKEN_TYPE.OPERATOR, it's a value!
+                    override_stack.append((token_type, token))
+
             elif isinstance(stack[-1], dict):
                 if last_type == TOKEN_TYPE.OPERATOR:
                     if last_token == "{":
@@ -498,7 +509,14 @@ def __parse(token_stream, first_token):
                         raise ValueError("Object key value pairs should be separated by comma, not ':'")
             elif isinstance(stack[-1], KVP):
                 if stack[-1].set:
-                    if token_type == TOKEN_TYPE.OPERATOR:
+                    if token_type == TOKEN_TYPE.OPERATOR or token_type == TOKEN_TYPE.STRING:
+                        if token_type == TOKEN_TYPE.STRING:
+                            # we went straight into another string! this is the key of the next pair
+                            # prepare that string for next iteration...
+                            override_stack.append((token_type, token))
+                            # and emit a comma instead now.
+                            token = ","
+                            token_type = TOKEN_TYPE.OPERATOR
                         if token != "}" and token != ",":
                             raise ValueError("Object key value pairs should be followed by ',' or '}'.  Got '"
                                              + token + "'")
@@ -545,7 +563,10 @@ def __parse(token_stream, first_token):
                                      "Got '{}'".format(value))
 
             last_type, last_token = token_type, token
-            token_type, token = next(token_stream)
+            if override_stack:
+                token_type, token = override_stack.pop()
+            else:
+                token_type, token = next(token_stream)
     except StopIteration as e:
         if len(stack) == 1:
             return stack[0], None, None
