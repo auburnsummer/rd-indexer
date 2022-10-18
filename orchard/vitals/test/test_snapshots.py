@@ -21,8 +21,8 @@ EXCLUDE_FROM_SNAPSHOT = [
 def snapshot_ss(snapshot):
     return snapshot.use_extension(SingleFileSnapshotExtension)
 
-def test_snapshot(rdzip, snapshot):
-    with open(rdzip, "rb") as f:
+def test_snapshot(rdzip, snapshot, rdzip_path_map):
+    with open(rdzip_path_map[rdzip], "rb") as f:
         actual = main(f)
         assert actual == snapshot(exclude=props(*EXCLUDE_FROM_SNAPSHOT))
 

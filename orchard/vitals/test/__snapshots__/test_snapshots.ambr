@@ -1,4 +1,4 @@
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Andrew_Huang_-_Know_You.rdzip]
+# name: test_snapshot[Andrew_Huang_-_Know_You.rdzip]
   dict({
     'artist': 'Andrew Huang',
     'artist_tokens': list([
@@ -28,9 +28,9 @@
     'last_updated': datetime.datetime(2020, 6, 24, 15, 6, 48),
     'max_bpm': 78.5,
     'min_bpm': 78.5,
-    'rdlevel_sha1': 'f67aa02893fdb5ccfad0e445486bd6595801ecdc',
+    'rdlevel_sha1': 'b0296f2c23f02f19a2b3ff3aa5d48219a1cdbcb3',
     'seizure_warning': False,
-    'sha1': 'f2ad0f76bbfedf96bec3451eb9ead014accb3047',
+    'sha1': 'bca6d99b3fd9dd4af8eedb530cb0d194bfaab7fe',
     'single_player': True,
     'song': 'Know You',
     'song_ct': list([
@@ -46,7 +46,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Hot_Freaks_-_Pull.rdzip]
+# name: test_snapshot[Hot_Freaks_-_Pull.rdzip]
   dict({
     'artist': 'Hot Freaks',
     'artist_tokens': list([
@@ -76,9 +76,9 @@
     'last_updated': datetime.datetime(2022, 6, 16, 0, 8, 26),
     'max_bpm': 89,
     'min_bpm': 88,
-    'rdlevel_sha1': '9f576dd7ed2430c85d3fed185f259eb13b861669',
+    'rdlevel_sha1': '893d958d5745b9e548bfef61bda1399d363953dd',
     'seizure_warning': False,
-    'sha1': '8110b16e256491dcef0baf38bf155609afa60f55',
+    'sha1': '767a60b5ab9381541478b5f814f0a8938b325b89',
     'single_player': True,
     'song': 'Pull',
     'song_ct': list([
@@ -95,7 +95,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\JustMe_-_Swing.rdzip]
+# name: test_snapshot[JustMe_-_Swing.rdzip]
   dict({
     'artist': 'JustMe',
     'artist_tokens': list([
@@ -125,9 +125,9 @@
     'last_updated': datetime.datetime(2020, 12, 1, 18, 30, 20),
     'max_bpm': 130,
     'min_bpm': 130,
-    'rdlevel_sha1': 'a8fd55c9e69a331a72f2c10a396ebde920b91315',
+    'rdlevel_sha1': '8c27a0d002340c6274593825639ca3c2b725c131',
     'seizure_warning': False,
-    'sha1': '3536805b7678006664d4f45856c4ce8959eb4a15',
+    'sha1': 'c4d48b3bb5b99589f486722e4ef48c8cbc053c92',
     'single_player': True,
     'song': 'Swing',
     'song_ct': list([
@@ -150,7 +150,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Masssive_New_Krew_-_Sol_e_Mar.rdzip]
+# name: test_snapshot[Masssive_New_Krew_-_Sol_e_Mar.rdzip]
   dict({
     'artist': 'Masssive New Krew',
     'artist_tokens': list([
@@ -180,9 +180,9 @@
     'last_updated': datetime.datetime(2021, 8, 21, 12, 15, 10),
     'max_bpm': 150,
     'min_bpm': 150,
-    'rdlevel_sha1': 'd12888002447762e559798fe58b18b4e802eb9bc',
+    'rdlevel_sha1': 'ca72907847f34087e10d1e8bb62e241d0b152e4a',
     'seizure_warning': False,
-    'sha1': 'b5c1041aa92043dfba14bf26ac36dee788e6cf11',
+    'sha1': '113935f95b4beca84c8e80893df8efbdd4acc8ab',
     'single_player': True,
     'song': 'Sol e Mar',
     'song_ct': list([
@@ -196,7 +196,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Pseuu_-_ennui.rdzip]
+# name: test_snapshot[Pseuu_-_ennui.rdzip]
   dict({
     'artist': 'Pseuu',
     'artist_tokens': list([
@@ -232,9 +232,9 @@
     'last_updated': datetime.datetime(2022, 1, 3, 23, 19, 26),
     'max_bpm': 126,
     'min_bpm': 126,
-    'rdlevel_sha1': 'b76efb4e1ccdd14339ac5e62edcb2dbabfcf3933',
+    'rdlevel_sha1': 'a721f4e2569337e6096dcb4b1bc6761632e259da',
     'seizure_warning': False,
-    'sha1': '2c236c786a7d9879d6a07ea9cd2d967b620e9e05',
+    'sha1': 'efe31be4ea55a583fcbe2230dbdbd00f98affe63',
     'single_player': True,
     'song': 'ennui.ogg',
     'song_ct': list([
@@ -254,7 +254,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Quree_-_One_Forgotten_Night.rdzip]
+# name: test_snapshot[Quree_-_One_Forgotten_Night.rdzip]
   dict({
     'artist': 'Quree',
     'artist_tokens': list([
@@ -284,9 +284,9 @@
     'last_updated': datetime.datetime(2021, 5, 20, 21, 9, 22),
     'max_bpm': 173,
     'min_bpm': 100,
-    'rdlevel_sha1': '935e73b81bf65a204b3194eb22b00ebb6fd7cc02',
+    'rdlevel_sha1': '41e55ab2dc023ab842114f48a97bc901f99a36c2',
     'seizure_warning': False,
-    'sha1': '9a30c288c11e086ee1dd0f3ee960d9373e46e0fd',
+    'sha1': '52ac2e6c384d3a0f01257571d794a240fe6d123e',
     'single_player': True,
     'song': 'One Forgotten Night',
     'song_ct': list([
@@ -302,7 +302,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Samario (Making A Mistake) - One Uncued Tresillo.rdzip]
+# name: test_snapshot[Samario (Making A Mistake) - One Uncued Tresillo.rdzip]
   dict({
     'artist': 'Samario (Making A Mistake)',
     'artist_tokens': list([
@@ -335,9 +335,9 @@
     'last_updated': datetime.datetime(2022, 6, 27, 21, 27, 12),
     'max_bpm': 70,
     'min_bpm': 40,
-    'rdlevel_sha1': '481669cf1626c94748dc5d153147f683ed5cb802',
+    'rdlevel_sha1': 'c5b03e74dc6aa055fefc56933c3596803b55e171',
     'seizure_warning': False,
-    'sha1': '270561dd205e1e62b1bfacbe56762e5d3aa13750',
+    'sha1': 'f9b524bd511cf867c8c580847a7eaaf4c8a7c9f2',
     'single_player': True,
     'song': 'One Uncued Tresillo',
     'song_ct': list([
@@ -353,7 +353,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\Samario_Making_A_Mistake_-_One_Uncued_Tresillo orig.rdzip]
+# name: test_snapshot[Samario_Making_A_Mistake_-_One_Uncued_Tresillo orig.rdzip]
   dict({
     'artist': 'Samario (Making A Mistake)',
     'artist_tokens': list([
@@ -386,9 +386,9 @@
     'last_updated': datetime.datetime(2021, 1, 2, 3, 52, 10),
     'max_bpm': 160,
     'min_bpm': 160,
-    'rdlevel_sha1': 'a1ffe356379732ee265fd4d454b5fd63ded804aa',
+    'rdlevel_sha1': '5c1eaa07f8cc3216446cc4d79c84a722d39c9e47',
     'seizure_warning': False,
-    'sha1': 'f6b69e5bcb04165e4b42f4aad0063bac2f802e0f',
+    'sha1': 'a9a522aea24b1c9354b509da2bacdabc95d535e9',
     'single_player': True,
     'song': 'One Uncued Tresillo',
     'song_ct': list([
@@ -404,7 +404,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\auburnsummer - Triplet Testaaaaa.rdzip]
+# name: test_snapshot[auburnsummer - Triplet Testaaaaa.rdzip]
   dict({
     'artist': 'auburnsummer',
     'artist_tokens': list([
@@ -435,9 +435,9 @@
     'last_updated': datetime.datetime(2022, 6, 27, 23, 25, 28),
     'max_bpm': 110,
     'min_bpm': 110,
-    'rdlevel_sha1': '7e3f5d28f8865e3e8bc3982b2f72e5d6a9dbddf0',
+    'rdlevel_sha1': '333e8337033bd01e6d99025503bbe0be1a75c171',
     'seizure_warning': False,
-    'sha1': '4de04dc0c7e6ba30438368cacbd8a24678666841',
+    'sha1': 'd1f0c475dc0f560a92557af48c75d36e15d4816f',
     'single_player': True,
     'song': 'Triplet Test',
     'song_ct': list([
@@ -454,7 +454,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\color-ff-XsSFVSBp2hH.rdzip]
+# name: test_snapshot[color-ff-XsSFVSBp2hH.rdzip]
   dict({
     'artist': '遊助',
     'artist_tokens': list([
@@ -484,9 +484,9 @@
     'last_updated': datetime.datetime(2022, 8, 25, 22, 29, 56),
     'max_bpm': 138,
     'min_bpm': 138,
-    'rdlevel_sha1': 'a04ccd13fb8ab685880d4223737d943c0e494376',
+    'rdlevel_sha1': '847389cd125dbc3a33e62f5071f725db72460fbe',
     'seizure_warning': True,
-    'sha1': '72b6e91fe98ff2db4b5f6ff08d75eb0fda71eca1',
+    'sha1': '2d3169e476eb89085dfc7829fbe5ec55ee23a745',
     'single_player': True,
     'song': '''
       一笑懸命
@@ -522,7 +522,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\placeboing_-_BANAS.rdzip]
+# name: test_snapshot[placeboing_-_BANAS.rdzip]
   dict({
     'artist': 'placeboing',
     'artist_tokens': list([
@@ -561,9 +561,9 @@
     'last_updated': datetime.datetime(2022, 4, 9, 16, 40, 34),
     'max_bpm': 147,
     'min_bpm': 143.5,
-    'rdlevel_sha1': 'fb2dffe08d0cee4f705e0f810931065a79b193ac',
+    'rdlevel_sha1': '7d310919307cc3c95c893415a3bc575321ea7d36',
     'seizure_warning': False,
-    'sha1': '0703ce248985d021f9cb60e0bcbed4ff86d2d326',
+    'sha1': 'b25d108c54a36e6c15bce9d140c650a8c93ff591',
     'single_player': True,
     'song': 'BANAS',
     'song_ct': list([
@@ -583,7 +583,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[C:/Users/auburn/PycharmProjects/rd-indexer/orchard/vitals/test/fixtures\\toonlink_Kenichi_Nishikami_Takeru_Kanazaki_-_Jimmys_Aesthetics.rdzip]
+# name: test_snapshot[toonlink_Kenichi_Nishikami_Takeru_Kanazaki_-_Jimmys_Aesthetics.rdzip]
   dict({
     'artist': 'toonlink, Kenichi Nishikami, Takeru Kanazaki',
     'artist_tokens': list([
@@ -615,9 +615,9 @@
     'last_updated': datetime.datetime(2020, 6, 20, 23, 9, 28),
     'max_bpm': 125,
     'min_bpm': 125,
-    'rdlevel_sha1': '9dd95f0511d0737e581d18a70a76c8f495ea9dc5',
+    'rdlevel_sha1': '00bd2014b924355e937c3d43e9c7bc4442c2e447',
     'seizure_warning': False,
-    'sha1': 'caabfba97509f2a60677e3ad91d55add0c7a5fff',
+    'sha1': 'b444395282875d2b1d8b6aae1f907f2110d30d51',
     'single_player': True,
     'song': "Jimmy's Aesthetics",
     'song_ct': list([
