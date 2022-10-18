@@ -20,7 +20,7 @@ version of it.
 # Install
 
 This repo uses Python 3.8+, and Poetry to define dependencies. Each submodule shares a single
-dependency lockfile
+dependency lockfile.
 
  1. Install poetry via [these directions](https://python-poetry.org/docs/#installation)
  2. Run `poetry install` in the root directory of this repo.
