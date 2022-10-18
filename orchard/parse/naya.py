@@ -379,9 +379,9 @@ def __parse(token_stream, first_token):
     else:
         raise ValueError("Expected object or array.  Got '{}'".format(token))
 
-    # override the next token, if needed for recovery.
+    # this lets us "insert" additional tokens into the token stream as required to fix the rdlevel
+    # for instance inserting commas in places, etc
     override_stack = []
-    # next_override = None
 
     last_type, last_token = token_type, token
     try:
