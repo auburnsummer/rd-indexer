@@ -5,4 +5,4 @@ to scan, such as `sources.yml`.
 
 # usage
 
-`poetry run ./orchard/scan/scan.py <path to db> <path to yml>`
+`python ./orchard/scan/scan.py <path to db> <path to yml>`
