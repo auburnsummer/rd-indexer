@@ -46,6 +46,61 @@
     'two_player': True,
   })
 # ---
+# name: test_snapshot[Green_wisteria_-_RGB.rdzip]
+  dict({
+    'artist': 'Green wisteria',
+    'artist_tokens': list([
+      'Green wisteria',
+    ]),
+    'authors': list([
+      'Delta',
+      'Xeno',
+    ]),
+    'description': '''
+      (CW: Body Horror)
+      A white lily bloomed, a black maw devoured.
+    ''',
+    'description_ct': list([
+      dict({
+        'color': 'default',
+        'len': 61,
+      }),
+    ]),
+    'difficulty': 2,
+    'has_classics': True,
+    'has_freetimes': True,
+    'has_freezeshots': False,
+    'has_holds': False,
+    'has_oneshots': True,
+    'has_skipshots': False,
+    'has_squareshots': False,
+    'has_window_dance': False,
+    'hue': 0.66,
+    'id': 'rgb-7krFijAGF4D',
+    'last_updated': datetime.datetime(2022, 9, 23, 9, 27, 28),
+    'max_bpm': 204,
+    'min_bpm': 100,
+    'rdlevel_sha1': '17a41d4c9b575d3202b8832a9d21c3b873d959e5',
+    'seizure_warning': True,
+    'sha1': '88f48cdbd6a63773fcf44a38f5ed1ece00f399be',
+    'single_player': True,
+    'song': 'RGB',
+    'song_ct': list([
+      dict({
+        'color': 'default',
+        'len': 3,
+      }),
+    ]),
+    'tags': list([
+      'compo19',
+      'competition 19',
+      'weird',
+      'red green blue',
+      'namine ritsu',
+    ]),
+    'two_player': False,
+  })
+# ---
 # name: test_snapshot[Hot_Freaks_-_Pull.rdzip]
   dict({
     'artist': 'Hot Freaks',
@@ -412,7 +467,7 @@
     ]),
     'authors': list([
       'auburnsummer',
-      ' Xeno',
+      'Xeno',
     ]),
     'description': 'A two-handed level. The eloquent blend between thirds and halves.',
     'description_ct': list([
