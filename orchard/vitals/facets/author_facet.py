@@ -19,6 +19,6 @@ def author_facet(obj):
     # we just strip out the color tag and that's it
     authors, _ = parse_color_tagged_string(author_raw.strip())
 
-    author_tokens = [s for s in re.split(AUTHOR_REGEX, authors) if s]
+    author_tokens = [s.strip() for s in re.split(AUTHOR_REGEX, authors) if s]
 
     return author_tokens
