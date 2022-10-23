@@ -39,4 +39,4 @@ jobs:
       - name: shasum of it
         run: sha1sum status.db
       - name: upload to b2
-        run: b2 upload-file rdsqlite status.db backups/status-backup.db        
+        run: b2 upload-file rdsqlite status.db backups/status.db        
