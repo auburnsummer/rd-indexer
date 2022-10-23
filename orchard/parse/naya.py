@@ -125,6 +125,11 @@ def tokenize(stream):
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, 0)
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, 0)
+                advance = True
             else:
                 raise ValueError("A 0 must be followed by a '.' or a 'e'.  Got '{0}'".format(char))
         elif state == __TOKENIZER_STATE.INTEGER_SIGN:
@@ -150,6 +155,11 @@ def tokenize(stream):
                 now_token = (TOKEN_TYPE.NUMBER, float("".join(token)))
                 next_state = __TOKENIZER_STATE.WHITESPACE
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, 0)
+                advance = True
             else:
                 raise ValueError("A number exponent must consist only of digits.  Got '{}'".format(char))
         elif state == __TOKENIZER_STATE.FLOATING_POINT:
@@ -163,6 +173,11 @@ def tokenize(stream):
                 now_token = (TOKEN_TYPE.NUMBER, float("".join(token)))
                 next_state = __TOKENIZER_STATE.WHITESPACE
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, 0)
+                advance = True
             else:
                 raise ValueError("A number must include only digits")
         elif state == __TOKENIZER_STATE.FLOATING_POINT_0:
@@ -346,17 +361,14 @@ def parse_string(string):
 
 def parse(file):
     token_stream = tokenize(file)
-    token_stream2 = list(token_stream)
-    print(token_stream2)
-    token_stream3 = iter(token_stream2)
-    val, token_type, token = __parse(token_stream3, next(token_stream3))
+    val, token_type, token = __parse(token_stream, next(token_stream))
     if token is not None:
         if token == ',':
             pass
         else:
             raise ValueError("Improperly closed JSON object")
     try:
-        next(token_stream3)
+        next(token_stream)
     except StopIteration:
         return val
     raise ValueError("Additional string after end of JSON")
