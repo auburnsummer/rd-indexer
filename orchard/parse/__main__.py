@@ -8,7 +8,7 @@ def with_first_file_or_stdin(func):
             # no arg
             func(sys.stdin)
         else:
-            with open(sys.argv[1], 'r') as f:
+            with open(sys.argv[1], 'r', encoding='utf-8-sig') as f:
                 func(f)
     return inner
 

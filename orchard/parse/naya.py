@@ -106,6 +106,11 @@ def tokenize(stream):
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, int("".join(token)))
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, int("".join(token)))
+                advance = True
             else:
                 raise ValueError("A number must contain only digits.  Got '{}'".format(char))
         elif state == __TOKENIZER_STATE.INTEGER_0:
@@ -341,14 +346,17 @@ def parse_string(string):
 
 def parse(file):
     token_stream = tokenize(file)
-    val, token_type, token = __parse(token_stream, next(token_stream))
+    token_stream2 = list(token_stream)
+    print(token_stream2)
+    token_stream3 = iter(token_stream2)
+    val, token_type, token = __parse(token_stream3, next(token_stream3))
     if token is not None:
         if token == ',':
             pass
         else:
             raise ValueError("Improperly closed JSON object")
     try:
-        next(token_stream)
+        next(token_stream3)
     except StopIteration:
         return val
     raise ValueError("Additional string after end of JSON")
