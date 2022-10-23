@@ -31,6 +31,12 @@ even though it has newlines"
 {"key": 2, "key2": 3 "key3": 4, "key4": [1, 2, 3] "key5": "hello world"}
 ```
 
+**Key pairs in objects can be implicitly continued**:
+
+```
+{"key": 2"key2": 3"key3": 4}
+```
+
 # Implementation
 
 This is a modified version of [naya](https://github.com/danielyule/naya) to add the relevant

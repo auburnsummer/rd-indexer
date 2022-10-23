@@ -122,3 +122,13 @@ def test_space_seperated_after_array():
         "rooms": [0],
         "strength": "High"
     }
+
+
+def test_seperated_by_nothing_at_all():
+    s = r"""{ "bar": 3"foo": 4"foobar": 5}"""
+
+    assert parse(s) == {
+        "bar": 3,
+        "foo": 4,
+        "foobar": 5
+    }

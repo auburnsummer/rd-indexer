@@ -106,6 +106,11 @@ def tokenize(stream):
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, int("".join(token)))
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, int("".join(token)))
+                advance = True
             else:
                 raise ValueError("A number must contain only digits.  Got '{}'".format(char))
         elif state == __TOKENIZER_STATE.INTEGER_0:
@@ -120,6 +125,11 @@ def tokenize(stream):
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, 0)
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, 0)
+                advance = True
             else:
                 raise ValueError("A 0 must be followed by a '.' or a 'e'.  Got '{0}'".format(char))
         elif state == __TOKENIZER_STATE.INTEGER_SIGN:
@@ -145,6 +155,11 @@ def tokenize(stream):
                 now_token = (TOKEN_TYPE.NUMBER, float("".join(token)))
                 next_state = __TOKENIZER_STATE.WHITESPACE
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, 0)
+                advance = True
             else:
                 raise ValueError("A number exponent must consist only of digits.  Got '{}'".format(char))
         elif state == __TOKENIZER_STATE.FLOATING_POINT:
@@ -158,6 +173,11 @@ def tokenize(stream):
                 now_token = (TOKEN_TYPE.NUMBER, float("".join(token)))
                 next_state = __TOKENIZER_STATE.WHITESPACE
                 advance = False
+            elif char == "\"":
+                next_state = __TOKENIZER_STATE.STRING
+                completed = True
+                now_token = (TOKEN_TYPE.NUMBER, 0)
+                advance = True
             else:
                 raise ValueError("A number must include only digits")
         elif state == __TOKENIZER_STATE.FLOATING_POINT_0:
