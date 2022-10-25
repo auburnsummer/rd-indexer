@@ -61,7 +61,7 @@ jobs:
         run: b2 get-account-info
         
       - name: download current db if it exists...
-        run: b2 download-file-by-name rdcodex orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
+        run: b2 download-file-by-name rdsqlite backups/orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
         working-directory: ./orchard/scan
         continue-on-error: true
         
@@ -80,7 +80,7 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
 
       - name: upload to b2
-        run: b2 upload-file rdcodex orchard.db orchard-${{ env.GITHUB_REF_SLUG }}.db
+        run: b2 upload-file rdsqlite orchard.db backups/orchard-${{ env.GITHUB_REF_SLUG }}.db
         working-directory: ./orchard/scan
   prepare-and-upload:
     needs: search-and-index
@@ -107,9 +107,21 @@ jobs:
   
       - name: install deps 
         run: poetry install --no-interaction
+
+      - name: install b2
+        run: pipx install b2
+        
+      - name: configure b2
+        run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+ 
+      - name: print b2 account info
+        run: b2 get-account-info
       
       - name: download DB from previous job
-        run: curl https://codex.rhythm.cafe/orchard-${{ env.GITHUB_REF_SLUG }}.db -o orchard.db
+        run: b2 download-file-by-name rdsqlite backups/orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
         working-directory: ./orchard/package
         
       - name: download status DB from bot
