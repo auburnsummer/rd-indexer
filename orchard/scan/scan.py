@@ -95,6 +95,7 @@ async def main(db: SqliteExtDatabase, sources):
                     "icon": f"{CODEX}/{icon_url}",
                     "source": source_id,
                     "source_iid": iid,
+                    "source_metadata": await scraper.get_metadata(iid)
                 }
 
                 if vit["icon"]:

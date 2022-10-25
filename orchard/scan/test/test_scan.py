@@ -12,7 +12,8 @@ async def test_scan(empty_db, make_mock_scraper, caplog, patch_vitals):
             'mock',
             make_mock_scraper,
             {
-                "iids": ["a", "b", "c", "d", "e"]
+                "iids": ["a", "b", "c", "d", "e"],
+                "enable_metadata": False
             }
         ]
     ]
@@ -30,7 +31,8 @@ async def test_scan_removes_an_iid_if_the_source_no_longer_provides_it(empty_db,
             'mock',
             make_mock_scraper,
             {
-                "iids": ["a", "b", "c", "d", "e"]
+                "iids": ["a", "b", "c", "d", "e"],
+                "enable_metadata": False
             }
         ]
     ]
@@ -44,10 +46,32 @@ async def test_scan_removes_an_iid_if_the_source_no_longer_provides_it(empty_db,
             'mock',
             make_mock_scraper,
             {
-                "iids": ["a", "b", "c", "d"]  # no e!
+                "iids": ["a", "b", "c", "d"],   # no e!
+                "enable_metadata": False
             }
         ]
     ]
     await main(empty_db, sources)
     ids = set(level.id for level in Level.select())
     assert "unittest_e" not in ids
+
+
+@pytest.mark.asyncio
+async def test_scan_inserts_source_metadata_if_given(empty_db, make_mock_scraper, caplog, patch_vitals):
+    caplog.set_level(logging.INFO)
+    sources = [
+        [
+            'mock',
+            make_mock_scraper,
+            {
+                "iids": ["az", "by", "cx", "dw", "ev"],
+                "enable_metadata": True
+            }
+        ]
+    ]
+    await main(empty_db, sources)
+    level_a = Level.get_by_id("unittest_az")
+    assert level_a.source_metadata == {
+        "first_letter": "a",
+        "last_letter": "z"
+    }

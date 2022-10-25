@@ -47,8 +47,9 @@ def patch_vitals():
 @pytest.fixture
 def make_mock_scraper():
     class MockLevelScraper(RDLevelScraper):
-        def __init__(self, iids):
+        def __init__(self, iids, enable_metadata):
             self.iids = iids
+            self.enable_metadata = enable_metadata
 
         async def get_iids(self):
             return self.iids
@@ -58,7 +59,15 @@ def make_mock_scraper():
             return iid.encode('utf-8')
 
         async def get_url(self, iid):
-            return f"this.is.a.mock.url.com/{iid}"            
+            return f"this.is.a.mock.url.com/{iid}"       
+
+        async def get_metadata(self, iid):
+            if self.enable_metadata:
+                return {
+                    "first_letter": iid[0],
+                    "last_letter": iid[-1]
+                }
+            return None
     
     return MockLevelScraper
 

@@ -21,6 +21,11 @@ class RDLevelScraper(ABC):
     async def get_url(self, iid):
         pass
 
+    # if any external metadata is available for this iid, return that, or None otherwise.
+    # note that the output of this should be JSON serializable.
+    async def get_metadata(self, iid):
+        pass
+
     # optional callback function that gets called whenever orchard indexes a level from this source.
     # Note that on_index receives a full level object
     async def on_index(self, level):

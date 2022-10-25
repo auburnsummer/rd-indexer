@@ -28,7 +28,9 @@ class DiscordScraper(RDLevelScraper):
         self.bot_token = bot_token
         self.channel_id = channel_id
         self.after = after
-        self.iid_url_map = {}
+        self.iid_cache = {}  # cache of iids to discord Message objects.
+        # self.iid_url_map = {}
+        # get our id.
         resp = httpx.get(f"{DISCORD_API_URL}/users/@me", headers={
             "user-agent": USER_AGENT,
             "Authorization": f"Bot {self.bot_token}"
@@ -39,13 +41,13 @@ class DiscordScraper(RDLevelScraper):
         url = await self.get_url(iid)
         return httpx.get(url).content
 
-    async def get_url(self, iid):
-        if iid in self.iid_url_map:
-            return self.iid_url_map[iid]
+    async def get_message(self, iid):
+        "Get the discord Message object relating to an iid. Has an internal cache."
+        if iid in self.iid_cache:
+            return self.iid_cache[iid]
         else:
-            # if we haven't recorded the URL in the map, that's fine!
-            # we can still retrieve a URL from an iid, but it needs an API request.
-            message_id, attachment_id = get_iid_info(iid)
+            # we need to do an API request to get the message.
+            message_id, _ = get_iid_info(iid)
             async with Client() as client:
                 headers = {
                     "user-agent": USER_AGENT,
@@ -53,8 +55,25 @@ class DiscordScraper(RDLevelScraper):
                 }
                 resp = await client.get(f"{DISCORD_API_URL}/channels/{self.channel_id}/messages/{message_id}",
                                         headers=headers)
-                attachment = next(a for a in resp.json()['attachments'] if a['id'] == attachment_id)
-                return attachment['url']
+                message = resp.json()
+                # put it in the cache before we keep going.
+                self.iid_cache[iid] = message
+                return message
+
+    async def get_url(self, iid):
+        _, attachment_id = get_iid_info(iid)
+        message = await self.get_message(iid)
+                
+        attachment = next(a for a in message['attachments'] if a['id'] == attachment_id)
+        return attachment['url']
+
+    async def get_metadata(self, iid):
+        message = await self.get_message(iid)
+
+        return {
+            "user_id": message['author']['id'],
+            "timestamp": message['timestamp']
+        }
 
     async def get_iids(self):
         iids = []
@@ -110,8 +129,8 @@ class DiscordScraper(RDLevelScraper):
                             #  note2: attachment id is required because it's possible to delete an attachment
                             #         w/o deleting the post.
                             iid = f"{post['id']}|{attachment['id']}"
-                            #  the iid doesn't encode the actual download url.
-                            self.iid_url_map[iid] = attachment['url']
+                            #  cache of message objects for later use, if needed.
+                            self.iid_cache[iid] = post
                             iids.append(iid)
 
                 print('', end='')  # <-- for a breakpoint
