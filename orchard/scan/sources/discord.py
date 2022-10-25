@@ -63,8 +63,8 @@ class DiscordScraper(RDLevelScraper):
     async def get_url(self, iid):
         _, attachment_id = get_iid_info(iid)
         message = await self.get_message(iid)
-                
-        attachment = next(a for a in message['attachments'] if a['id'] == attachment_id)
+
+        attachment = next(a for a in message['attachments'] if int(a['id']) == attachment_id)
         return attachment['url']
 
     async def get_metadata(self, iid):
