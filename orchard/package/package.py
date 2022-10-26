@@ -21,18 +21,40 @@ def make_jsonl_from_combined(combined):
         if isinstance(s, datetime):
             return floor(s.timestamp())
         return None
-    # dict of keys to functions that transform the value.
-    transformers = {
-        "last_updated": datetime_to_epoch,
-        "indexed": datetime_to_epoch,
-        "song_ct": json.dumps,
-        "description_ct": json.dumps
-    }
-    for col_name, col_value in combined_dict.items():
-        if col_name in transformers.keys():
-            combined_dict[col_name] = transformers[col_name](col_value)
 
-    return json.dumps(combined_dict, ensure_ascii=False)
+    def default_step(col_name, col_value, final_dict):
+        final_dict[col_name] = col_value
+        return final_dict
+
+    def with_func(func):
+        def inner(col_name, col_value, final_dict):
+            final_dict[col_name] = func(col_value)
+            return final_dict
+        return inner
+
+    def source_metadata_step(col_name, col_value, final_dict):
+        if col_value is None:
+            return final_dict
+        final_dict["discord_metadata__user_id"] = col_value["user_id"]
+        final_dict["discord_metadata__timestamp"] = col_value["timestamp"]
+        return final_dict
+        
+    # dict of keys to functions that do stuff with the value.
+    # we run through the functions to build a final object which then gets JSON serialised into the jsonl.
+    steps = {
+        "last_updated": with_func(datetime_to_epoch),
+        "indexed": with_func(datetime_to_epoch),
+        "song_ct": with_func(json.dumps),
+        "description_ct": with_func(json.dumps),
+        "source_metadata": source_metadata_step
+    }
+
+    final_dict = {}
+    for col_name, col_value in combined_dict.items():
+        step = steps[col_name] if col_name in steps else default_step
+        final_dict = step(col_name, col_value, final_dict)
+
+    return json.dumps(final_dict, ensure_ascii=False)
 
 
 def package():

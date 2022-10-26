@@ -1,0 +1,5 @@
+- - rdl
+  - !!python/name:orchard.scan.sources.discord.DiscordScraper
+  - bot_token: !!python/object/apply:orchard.utils.env.const_from_env ["BOT_TOKEN"]
+    channel_id: 1034453263031992481
+    after: 0
