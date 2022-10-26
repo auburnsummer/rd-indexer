@@ -173,6 +173,20 @@
 			"name": "sha1",
 			"type": "string",
 			"optional": true
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "discord_metadata__user_id",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "discord_metadata__timestamp",
+			"type": "string",
+			"optional": true
 		}
 	]
 }
