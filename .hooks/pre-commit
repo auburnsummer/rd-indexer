@@ -1,8 +1,0 @@
-#!/bin/bash
-
-changes=$(git diff --cached --name-only --diff-filter=ACM | grep poetry.lock | wc -l)
-if [ $changes == 1 ]
-then
-  poetry export -f requirements.txt --output requirements.txt
-  echo "poetry.lock changed, requirements.txt updated"
-fi
