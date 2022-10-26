@@ -40,7 +40,7 @@ jobs:
 
       - name: install pypy
         id: setup-pypy
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: 'pypy-3.8'
           cache: 'poetry'
@@ -56,9 +56,6 @@ jobs:
         env:
           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
- 
-      - name: print b2 account info
-        run: b2 get-account-info
         
       - name: download current db if it exists...
         run: b2 download-file-by-name rdsqlite backups/orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
@@ -100,7 +97,7 @@ jobs:
 
       - name: install pypy
         id: setup-pypy
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: 'pypy-3.8'
           cache: 'poetry'
