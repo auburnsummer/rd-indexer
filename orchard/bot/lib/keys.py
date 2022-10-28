@@ -8,7 +8,7 @@ from orchard.bot.constants import SECRET_KEY_ORCH
 
 from cryptography.fernet import Fernet
 
-f = Fernet(base64.b64encode(SECRET_KEY_ORCH))
+f = Fernet(SECRET_KEY_ORCH)
 
 
 def gen_passcode():

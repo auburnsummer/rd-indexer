@@ -1,21 +1,21 @@
 from dotenv import load_dotenv
 
-from orchard.utils.env import const_from_env
+from orchard.utils.env import const_from_env, const_from_env_must
 
 load_dotenv()
 
 BOT_VERSION = "0.0.2"
 
-BOT_TOKEN = const_from_env("BOT_TOKEN")
-PUBLIC_KEY = const_from_env("PUBLIC_KEY")
+BOT_TOKEN = const_from_env_must("BOT_TOKEN")
+PUBLIC_KEY = const_from_env_must("PUBLIC_KEY")
 
 # If specified, register guild-specific commands instead of global.
 # this is because guild commands refresh instantly whereas global takes ~1 hr
-DEV_GUILD = const_from_env("DEV_GUILD")
-APPLICATION_ID = const_from_env("APPLICATION_ID")
+DEV_GUILD = const_from_env_must("DEV_GUILD")
+APPLICATION_ID = const_from_env_must("APPLICATION_ID")
 PATHLAB_ROLE = const_from_env("PATHLAB_ROLE")
 
-SECRET_KEY_ORCH = bytes.fromhex(const_from_env("SECRET_KEY_ORCH"))
+SECRET_KEY_ORCH = const_from_env("SECRET_KEY_ORCH")
 
 TYPESENSE_URL = const_from_env("TYPESENSE_URL")
 TYPESENSE_API_KEY = "nicolebestgirl"
