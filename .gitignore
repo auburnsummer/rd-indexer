@@ -157,6 +157,8 @@ cython_debug/
 
 *.db
 *.db-journal
+*.db-shm
+*.db-wal
 *.jsonl
 
 *.dev.yml

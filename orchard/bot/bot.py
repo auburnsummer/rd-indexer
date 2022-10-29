@@ -197,7 +197,9 @@ app = Starlette(
 # Discord requires HTTPS. Suggest using a localhost https proxy such as ngrok
 # e.g. run separately: ngrok http 8000
 if __name__ == "__main__":
-    db = SqliteExtDatabase(sys.argv[1])
+    db = SqliteExtDatabase(sys.argv[1], pragmas=[
+        ('journal_mode', 'wal')
+    ])
     Status.bind(db)
     app.state.db = db
     if len(sys.argv) >= 3:
