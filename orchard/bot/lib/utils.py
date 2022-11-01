@@ -1,7 +1,10 @@
 import asyncio
+import json
 import sqlite3
 import itertools
+from typing import Any
 
+from starlette.responses import JSONResponse
 
 # wrap a function that takes a httpx.client that calls discord. if discord asks for more time, give it and retry later.
 import httpx
@@ -30,3 +33,9 @@ def grouper(n, iterable):
         if not chunk:
             return
         yield chunk
+
+
+# https://www.starlette.io/responses/#jsonresponse
+class OrchardJSONResponse(JSONResponse):
+    def render(self, content: Any) -> str:
+        return json.dumps(content, ensure_ascii=False, default=str).encode('utf-8')

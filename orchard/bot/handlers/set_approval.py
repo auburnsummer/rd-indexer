@@ -1,11 +1,15 @@
 from playhouse.shortcuts import model_to_dict
 from starlette.responses import JSONResponse
 
-from orchard.bot.lib.db import set_status
+from orchard.bot.lib.db import get_status, set_status
 from orchard.bot.lib import keys
 from orchard.bot.lib.typesense import ts_get_by_id
+from orchard.bot.lib.utils import OrchardJSONResponse
 from orchard.db.models import Status
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 async def set_approval(request):
     # authorization...
@@ -18,7 +22,7 @@ async def set_approval(request):
         keys.check_passcode(token)
 
     except Exception as e:
-        return JSONResponse({"error": str(e)}, 401)
+        return OrchardJSONResponse({"error": str(e)}, 401)
 
     # get stuff out from the body?
     id = request.path_params["id"]
@@ -33,7 +37,8 @@ async def set_approval(request):
             set_status(id, body)
 
         # then get it back.
-        return JSONResponse(model_to_dict(Status.get_by_id(id)))
+        final = model_to_dict(get_status(id))
+        return OrchardJSONResponse(final)
 
     except Exception as e:
-        return JSONResponse({"error": str(e)}, 500)
+        return OrchardJSONResponse({"error": str(e)}, 500)
