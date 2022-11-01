@@ -13,7 +13,7 @@ def get_status(id):
 def set_status(id, value):
     current = get_status(id)
     # update indexed if this is newly approved.
-    if "approval" in value and value["approval"] >= 10 and current.approval < 10 and value["indexed"] is None:
+    if "approval" in value and value["approval"] >= 10 and current.approval < 10 and current.indexed is None:
         value["indexed"] = datetime.now()
 
     q = Status.update(**value).where(Status.id == id)
