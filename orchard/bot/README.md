@@ -14,11 +14,32 @@ This non-deterministic data is stored in a "status database", which is a seperat
 from the scan step. This bot is used to modify the status database. Eventually, this database is
 read by the [package](../scan/README.md) step to produce the final api.rhythm.cafe package.
 
+This bot package also provides a HTTP API. This API is currently only used for the peer review
+workflow.
+
 # usage
 
-`poetry run python ./orchard/bot/bot.py <path to status db>`
+`python -m orchard.bot <path to status db> <port>`
+
+`<port> defaults to 8000 if not given.`
 
 This uses the Discord HTTP interactions API, so you then have to go to [the developer portal](https://discord.com/developers/applications)
 and change the URL it's talking to to `{url}/interactions`. For local development, usage of
 [ngrok](https://ngrok.com/) is suggested.
+
+# environment variables
+
+`
+`KEY_ID`: B2 key id. Used only if Litestream is enabled.
+`B2_ACCESS_KEY`: B2 application key. Used only if Litestream is enabled.
+`BOT_TOKEN`: Discord bot token from the developer portal.
+`PUBLIC_KEY`: Discord public key from the developer portal.
+`APPLICATION_ID`: Discord application ID from the developer portal.
+`DEV_GUILD`: Name of guild the bot operates in. This bot is only designed to operate in a single guild.
+`PATHLAB_ROLE`: ID of the role which is able to access peer review commands.
+
+`SECRET_KEY_ORCH`: A 32 byte base64 encoded string. Used in peer review.
+`TYPESENSE_URL`: This should be `https://api.rhythm.cafe/typesense`
+
+`GITHUB_TOKEN`: A github access token. Used only for the `plsausage` command.
 

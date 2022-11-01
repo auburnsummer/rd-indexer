@@ -1,0 +1,13 @@
+access-key-id: $KEY_ID
+secret-access-key: $B2_ACCESS_KEY
+
+dbs:
+  - path: $LITESTREAM_DB
+    replicas:
+      - type: s3
+        bucket: rdsqlite
+        path: litestream/$LITESTREAM_PATH # change to whatever path you want
+        endpoint: s3.us-west-000.backblazeb2.com  # change this
+        force-path-style: true
+        validation-interval: 6h
+        retention: 720h  # 1 month 

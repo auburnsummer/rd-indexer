@@ -20,9 +20,9 @@ SECRET_KEY_ORCH = const_from_env("SECRET_KEY_ORCH")
 TYPESENSE_URL = const_from_env("TYPESENSE_URL")
 TYPESENSE_API_KEY = "nicolebestgirl"
 
-POST_STATUS_DOT_DB_TOKEN = const_from_env("POST_STATUS_DOT_DB_TOKEN")
-
 GITHUB_TOKEN = const_from_env("GITHUB_TOKEN")
+
+LITESTREAM_ON = const_from_env("LITESTREAM_ON") == "true"
 
 
 class ComponentType:
