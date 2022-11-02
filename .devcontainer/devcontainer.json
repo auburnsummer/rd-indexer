@@ -10,5 +10,9 @@
 				"ms-python.python"
 			]
 		}
+	},
+	"remoteUser": "ada",
+	"features": {
+		"docker-in-docker": "latest"
 	}
 }
