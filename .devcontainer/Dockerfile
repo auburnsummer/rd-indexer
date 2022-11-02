@@ -7,11 +7,9 @@ RUN apt-get update && apt-get install -y \
   vim \
   git \
   git-lfs \
-  podman \
   python3-pip \
   pypy3 \
-  python3-venv \
-  podman-docker 
+  python3-venv
 
 # create a user, they can sudo for free
 RUN useradd -rm -d /home/ada -s /bin/bash -g root -G sudo -u 1001 ada
