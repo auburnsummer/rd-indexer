@@ -4,7 +4,7 @@ import pathlib
 import subprocess
 from playhouse.sqlite_ext import SqliteExtDatabase
 import uvicorn
-from orchard.bot.constants import LITESTREAM_ON
+from orchard.bot.lib.constants import LITESTREAM_ON
 from orchard.db.models import Status
 from .bot import app
 
@@ -62,7 +62,7 @@ async def start_litestream():
     try:
         await process.wait()
     except KeyboardInterrupt:
-        await process.kill()
+        await process.terminate()
 
 async def main():
     await asyncio.gather(

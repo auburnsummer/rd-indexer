@@ -1,5 +1,5 @@
 from starlette.background import BackgroundTask
-from orchard.bot.constants import ResponseType
+from orchard.bot.lib.constants import ResponseType
 from starlette.responses import JSONResponse
 
 EVERY_PERMISSION = str(2**41 - 1)

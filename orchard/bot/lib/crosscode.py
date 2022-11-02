@@ -1,5 +1,5 @@
 import asyncio
-from orchard.bot.constants import ResponseType
+from orchard.bot.lib.constants import ResponseType
 from uuid import uuid4
 import textwrap
 

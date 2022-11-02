@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from orchard.bot.constants import DEFAULT_DB_STATUS_VALUE
+from orchard.bot.lib.constants import DEFAULT_DB_STATUS_VALUE
 from orchard.db.models import Status
 
 def get_status(id):

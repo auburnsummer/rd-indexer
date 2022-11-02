@@ -15,7 +15,7 @@ from starlette.routing import Route
 import orchard.bot.lib.crosscode as crosscode
 
 import orchard.bot.commands as commands
-from orchard.bot.constants import (
+from orchard.bot.lib.constants import (
     OptionType,
     PUBLIC_KEY,
     ResponseType,
@@ -24,7 +24,7 @@ from orchard.bot.lib.register import (
     update_slash_commands
 )
 
-from orchard.bot.slash_router import (
+from orchard.bot.lib.slash_router import (
     SlashOption,
     SlashRoute,
     SlashRouter,
