@@ -3,6 +3,7 @@ from starlette.responses import JSONResponse
 
 from orchard.bot.constants import DEFAULT_DB_STATUS_VALUE
 from orchard.bot.lib import keys
+from orchard.bot.lib.utils import OrchardJSONResponse
 from orchard.db.models import Status
 
 
@@ -16,7 +17,7 @@ async def get_approval_multi(request):
             raise ValueError("Token type should be Bearer.")
         keys.check_passcode(token)
     except Exception as e:
-        return JSONResponse({"error": str(e)}, 401)
+        return OrchardJSONResponse({"error": str(e)}, 401)
 
     body = await request.json()
 
@@ -27,4 +28,4 @@ async def get_approval_multi(request):
         )[0]) for id in body
     ]
 
-    return JSONResponse(result)
+    return OrchardJSONResponse(result)
