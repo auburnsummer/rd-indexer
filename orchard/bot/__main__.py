@@ -28,7 +28,7 @@ if LITESTREAM_ON:
         **os.environ,
         "LITESTREAM_DB": sys.argv[1]
     }
-    subprocess.run(["litestream", "restore", "-config", str(litestream_path), sys.argv[1]], env=env)
+    subprocess.run(["litestream", "restore", "-config", str(litestream_path), sys.argv[1]], env=env, check=True)
 
 
 async def start_app():
@@ -65,10 +65,13 @@ async def start_litestream():
         await process.terminate()
 
 async def main():
-    await asyncio.gather(
-        start_litestream(),
-        start_app()
-    )
+    if LITESTREAM_ON:
+        await asyncio.gather(
+            start_litestream(),
+            start_app()
+        )
+    else:
+        await start_app()
 
 try:
     asyncio.run(main())

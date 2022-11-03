@@ -36,7 +36,6 @@ and change the URL it's talking to to `{url}/interactions`. For local developmen
 `PUBLIC_KEY`: Discord public key from the developer portal.
 `APPLICATION_ID`: Discord application ID from the developer portal.
 `DEV_GUILD`: Name of guild the bot operates in. This bot is only designed to operate in a single guild.
-`PATHLAB_ROLE`: ID of the role which is able to access peer review commands.
 
 `SECRET_KEY_ORCH`: A 32 byte base64 encoded string. Used in peer review.
 `TYPESENSE_URL`: This should be `https://api.rhythm.cafe/typesense`

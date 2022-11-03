@@ -13,7 +13,6 @@ PUBLIC_KEY = const_from_env("PUBLIC_KEY")
 # this is because guild commands refresh instantly whereas global takes ~1 hr
 DEV_GUILD = const_from_env("DEV_GUILD")
 APPLICATION_ID = const_from_env("APPLICATION_ID")
-PATHLAB_ROLE = const_from_env("PATHLAB_ROLE")
 
 SECRET_KEY_ORCH = const_from_env("SECRET_KEY_ORCH")
 
