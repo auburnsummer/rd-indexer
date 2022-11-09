@@ -6,21 +6,21 @@ authors = ["auburn <auburnete@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-antlr4-python3-runtime = "4.9.3"
-Pillow = "^9.0.1"
+Pillow = "^9.3.0"
 base58 = "^2.1.1"
 python-slugify = {extras = ["unidecode"], version = "6.0.1"}
 sqlite-utils = "^3.24"
 python-dotenv = "^0.19.2"
 b2sdk = "^1.14.0"
 requests = "^2.27.1"
-uvicorn = "^0.17.5"
+uvicorn = "^0.19.0"
 starlette = "^0.18.0"
 httpx = "^0.22.0"
 cryptography = "^36.0.2"
 PyYAML = "^6.0"
 toml = "^0.10.2"
 peewee = "^3.15.1"
+Unidecode = "1.3.4"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"

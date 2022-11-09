@@ -1,4 +1,4 @@
-from orchard.bot.constants import ButtonStyle, ComponentType
+from orchard.bot.lib.constants import ButtonStyle, ComponentType
 
 
 class MessageBuilder:

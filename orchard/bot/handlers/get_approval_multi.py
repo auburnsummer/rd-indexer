@@ -1,7 +1,7 @@
 from playhouse.shortcuts import model_to_dict
 from starlette.responses import JSONResponse
 
-from orchard.bot.constants import DEFAULT_DB_STATUS_VALUE
+from orchard.bot.lib.constants import DEFAULT_DB_STATUS_VALUE
 from orchard.bot.lib import keys
 from orchard.bot.lib.utils import OrchardJSONResponse
 from orchard.db.models import Status

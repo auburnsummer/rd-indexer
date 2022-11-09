@@ -1,6 +1,6 @@
 import httpx
 
-from orchard.bot.constants import TYPESENSE_URL, TYPESENSE_API_KEY
+from orchard.bot.lib.constants import TYPESENSE_URL, TYPESENSE_API_KEY
 
 AUTH_HEADERS = {"x-typesense-api-key": TYPESENSE_API_KEY}
 

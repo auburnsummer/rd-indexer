@@ -1,6 +1,6 @@
 import httpx
 
-from orchard.bot.constants import DEFAULT_DB_STATUS_VALUE
+from orchard.bot.lib.constants import DEFAULT_DB_STATUS_VALUE
 from orchard.bot.lib import db
 from orchard.bot.lib.db import get_status
 from orchard.bot.lib.interactions import Interactor

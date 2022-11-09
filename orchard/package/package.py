@@ -6,7 +6,7 @@ from math import floor
 from playhouse.shortcuts import model_to_dict
 from playhouse.sqlite_ext import SqliteExtDatabase
 
-from orchard.bot.constants import DEFAULT_DB_STATUS_VALUE
+from orchard.bot.lib.constants import DEFAULT_DB_STATUS_VALUE
 from orchard.db.models import Level, Status, Combined
 
 

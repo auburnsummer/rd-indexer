@@ -1,4 +1,4 @@
-from orchard.bot.constants import ResponseType
+from orchard.bot.lib.constants import ResponseType
 from starlette.responses import JSONResponse
 
 from orchard.bot.lib.utils import get_slash_args

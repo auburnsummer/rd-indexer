@@ -4,7 +4,7 @@ import base64
 
 from datetime import datetime, timedelta
 
-from orchard.bot.constants import SECRET_KEY_ORCH
+from orchard.bot.lib.constants import SECRET_KEY_ORCH
 
 from cryptography.fernet import Fernet
 

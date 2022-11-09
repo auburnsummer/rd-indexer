@@ -1,4 +1,4 @@
-from orchard.bot.constants import ResponseType, BOT_VERSION
+from orchard.bot.lib.constants import ResponseType, BOT_VERSION
 from starlette.responses import JSONResponse
 from orchard.bot.lib.message_builder import MessageBuilder as M, Embed
 

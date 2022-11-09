@@ -166,4 +166,11 @@ cython_debug/
 tmp
 
 *-litestream/
+
 *.deb
+
+flyctl
+
+.fly
+
+scratch.txt

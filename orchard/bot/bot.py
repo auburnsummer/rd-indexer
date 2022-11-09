@@ -15,7 +15,7 @@ from starlette.routing import Route
 import orchard.bot.lib.crosscode as crosscode
 
 import orchard.bot.commands as commands
-from orchard.bot.constants import (
+from orchard.bot.lib.constants import (
     OptionType,
     PUBLIC_KEY,
     ResponseType,
@@ -24,7 +24,7 @@ from orchard.bot.lib.register import (
     update_slash_commands
 )
 
-from orchard.bot.slash_router import (
+from orchard.bot.lib.slash_router import (
     SlashOption,
     SlashRoute,
     SlashRouter,
@@ -157,9 +157,10 @@ async def prerun_update_slash_commands():
     """
     print("updating slash commands...")
     payload = router.api()
-    print(payload)
+    # print(payload)
     resp = (await update_slash_commands(payload)).json()
-    print(resp)
+    # print(resp)
+    print("done!")
 
 
 async def prerun_check_db():
@@ -193,18 +194,3 @@ app = Starlette(
         )
     ],
 )
-
-# Discord requires HTTPS. Suggest using a localhost https proxy such as ngrok
-# e.g. run separately: ngrok http 8000
-if __name__ == "__main__":
-    db = SqliteExtDatabase(sys.argv[1], pragmas=[
-        ('journal_mode', 'wal')
-    ])
-    Status.bind(db)
-    app.state.db = db
-    if len(sys.argv) >= 3:
-        port = int(sys.argv[2])
-    else:
-        port = 8000
-    # noinspection PyTypeChecker
-    uvicorn.run(app, host="0.0.0.0", port=port)

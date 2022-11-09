@@ -1,5 +1,5 @@
 from orchard.utils.client import Client
-from orchard.bot.constants import BOT_TOKEN, APPLICATION_ID, DEV_GUILD
+from orchard.bot.lib.constants import BOT_TOKEN, APPLICATION_ID, DEV_GUILD
 from orchard.utils.constants import DISCORD_API_URL
 
 bot_auth = {"Authorization": f"Bot {BOT_TOKEN}"}

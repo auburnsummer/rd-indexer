@@ -1,6 +1,6 @@
 import httpx
 
-from orchard.bot.constants import GITHUB_TOKEN
+from orchard.bot.lib.constants import GITHUB_TOKEN
 from orchard.bot.lib.interactions import Interactor
 
 from orchard.bot.lib.message_builder import MessageBuilder as M, ActionRow, Button
