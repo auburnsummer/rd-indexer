@@ -6,7 +6,7 @@ authors = ["auburn <auburnete@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Pillow = "^9.0.1"
+Pillow = "^9.3.0"
 base58 = "^2.1.1"
 python-slugify = {extras = ["unidecode"], version = "6.0.1"}
 sqlite-utils = "^3.24"

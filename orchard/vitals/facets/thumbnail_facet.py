@@ -22,7 +22,7 @@ def thumbnail_facet(obj, z: ZipFile):
         orig = image.copy()
         image.thumbnail((THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT), Image.Resampling.LANCZOS)
 
-        orig.save(orig_file_p, format="png", save_all=True)
+        orig.save(orig_file_p, format="png")
         image.save(thumb_file_p, format="png")
 
     return orig_file_p, thumb_file_p

@@ -4,6 +4,7 @@ from orchard.db.models import Level
 from orchard.scan.sources.interface import RDLevelScraper
 from unittest.mock import patch
 from datetime import datetime
+import os
 
 @pytest.fixture
 def patch_vitals():
