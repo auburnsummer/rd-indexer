@@ -11,6 +11,9 @@ BUF_SIZE = 65536  # lets read stuff in 64kb chunks!
 
 @with_arguments("file")
 def sha1_facet(f: BinaryIO):
+    return _sha1(f)
+
+def _sha1(f: BinaryIO):
     sha1 = hashlib.sha1()
     f.seek(0)
     while True:
