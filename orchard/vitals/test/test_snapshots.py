@@ -1,7 +1,4 @@
 import pytest
-from syrupy.extensions.single_file import SingleFileSnapshotExtension
-from orchard.vitals.test.conftest import pt_download_file
-
 from orchard.vitals.vitals import main
 from syrupy.filters import props
 
