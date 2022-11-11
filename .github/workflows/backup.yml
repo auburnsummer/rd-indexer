@@ -28,6 +28,19 @@ jobs:
       
       - name: print litestream version
         run: litestream version
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: get the file from litestream
+        run: litestream restore -config orchard/bot/litestream.yml
+        env:
+          KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_ACCESS_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          LITESTREAM_PATH: status-main
+          LITESTREAM_DB: ./status.db
+
+      # - name: upload to b2
       # - name: configure b2
       #   run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
       #   env:
