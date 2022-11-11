@@ -29,16 +29,18 @@ and change the URL it's talking to to `{url}/interactions`. For local developmen
 
 # environment variables
 
-`
-`KEY_ID`: B2 key id. Used only if Litestream is enabled.
-`B2_ACCESS_KEY`: B2 application key. Used only if Litestream is enabled.
-`BOT_TOKEN`: Discord bot token from the developer portal.
-`PUBLIC_KEY`: Discord public key from the developer portal.
-`APPLICATION_ID`: Discord application ID from the developer portal.
-`DEV_GUILD`: Name of guild the bot operates in. This bot is only designed to operate in a single guild.
 
-`SECRET_KEY_ORCH`: A 32 byte base64 encoded string. Used in peer review.
-`TYPESENSE_URL`: This should be `https://api.rhythm.cafe/typesense`
+- `KEY_ID`: B2 key id. Used only if Litestream is enabled.
+- `B2_ACCESS_KEY`: B2 application key. Used only if Litestream is enabled.
+- `LITESTREAM_ON`: Set to `true` to enable Litestream
+- `LITESTREAM_PATH`: path to the b2 bucket litestream should replicate from. Used only if Litestream is enabled.
+- `BOT_TOKEN`: Discord bot token from the developer portal.
+- `PUBLIC_KEY`: Discord public key from the developer portal.
+- `APPLICATION_ID`: Discord application ID from the developer portal.
+- `DEV_GUILD`: Name of guild the bot operates in. This bot is only designed to operate in a single guild.
 
-`GITHUB_TOKEN`: A github access token. Used only for the `plsausage` command.
+- `SECRET_KEY_ORCH`: A 32 byte base64 encoded string. Used in peer review.
+- `TYPESENSE_URL`: This should be `https://api.rhythm.cafe/typesense`
+
+- `GITHUB_TOKEN`: A github access token. Used only for the `plsausage` command.
 
