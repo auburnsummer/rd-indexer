@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lts/ubuntu:22.04_stable
+FROM mcr.microsoft.com/devcontainers/base:jammy
 
 RUN apt-get update && apt-get install -y \
   sudo \
@@ -12,17 +12,10 @@ RUN apt-get update && apt-get install -y \
   python3-venv
 
 RUN curl -L https://fly.io/install.sh | FLYCTL_INSTALL=/usr/local sh
-RUN chmod 1777 -R /tmp
- 
-# create a user, they can sudo for free
-RUN useradd -rm -d /home/ada -s /bin/bash -g root -G sudo -u 1001 ada
-RUN sh -c 'echo "ada ALL=(ALL:ALL) NOPASSWD: ALL"  | sudo tee /etc/sudoers.d/ada'
-USER ada
-WORKDIR /home/ada
+RUN wget https://github.com/benbjohnson/litestream/releases/download/v0.3.9/litestream-v0.3.9-linux-amd64.deb
+RUN dpkg -i litestream-v0.3.9-linux-amd64.deb
 
+USER vscode
 RUN python3 -m pip install --user pipx
-ENV PATH="${PATH}:/home/ada/.local/bin"
-
-
+ENV PATH="${PATH}:/home/vscode/.local/bin"
 RUN pipx install poetry
-
