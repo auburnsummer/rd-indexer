@@ -24,7 +24,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: install litestream
-        run: wget https://github.com/benbjohnson/litestream/releases/download/v0.3.9/litestream-v0.3.9-linux-amd64.deb && dpkg -i litestream-v0.3.9-linux-amd64.deb
+        run: wget https://github.com/benbjohnson/litestream/releases/download/v0.3.9/litestream-v0.3.9-linux-amd64.deb && sudo dpkg -i litestream-v0.3.9-linux-amd64.deb
       
       - name: print litestream version
         run: litestream version
