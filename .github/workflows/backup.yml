@@ -40,18 +40,20 @@ jobs:
           LITESTREAM_PATH: status-main
           LITESTREAM_DB: ./status.db
 
-      # - name: upload to b2
-      # - name: configure b2
-      #   run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
-      #   env:
-      #     B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
-      #     B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
- 
-      # - name: print b2 account info
-      #   run: b2 get-account-info
-      # - name: Download the old DB
-      #   run: curl https://botprod.auburn.dev/status.db -o status.db
-      # - name: shasum of it
-      #   run: sha1sum status.db
-      # - name: upload to b2
-      #   run: b2 upload-file rdsqlite status.db backups/status.db        
+      - name: install b2
+        run: pipx install b2
+        
+      - name: configure b2
+        run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
+        env:
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+
+      - name: print b2 account info
+        run: b2 get-account-info
+
+      - name: shasum of it
+        run: sha1sum status.db
+
+      - name: upload to b2
+        run: b2 upload-file rdsqlite status.db backups/status.db
