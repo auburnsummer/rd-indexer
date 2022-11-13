@@ -7,9 +7,14 @@
 		"vscode": {
 			"extensions": [
 				"ms-python.python"
-			]
+			],
+			"settings": {
+				"python.envFile": "${workspaceFolder}/orchard/.env",
+				"python.formatting.provider": "black",
+				"python.defaultInterpreterPath": "${workspaceFolder}/orchard/.venv/bin/python"
+			}
 		}
-	}
+	},
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
 	// "features": {},
 
@@ -17,7 +22,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	"postCreateCommand": "./.devcontainer/postCreateCommand.sh"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
