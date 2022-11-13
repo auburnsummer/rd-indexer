@@ -23,6 +23,23 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: install litestream
+        run: wget https://github.com/benbjohnson/litestream/releases/download/v0.3.9/litestream-v0.3.9-linux-amd64.deb && sudo dpkg -i litestream-v0.3.9-linux-amd64.deb
+      
+      - name: print litestream version
+        run: litestream version
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: get the file from litestream
+        run: litestream restore -v -config orchard/bot/litestream.yml ./status.db
+        env:
+          KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_ACCESS_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          LITESTREAM_PATH: status-main
+          LITESTREAM_DB: ./status.db
+
       - name: install b2
         run: pipx install b2
         
@@ -31,12 +48,12 @@ jobs:
         env:
           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
- 
+
       - name: print b2 account info
         run: b2 get-account-info
-      - name: Download the old DB
-        run: curl https://botprod.auburn.dev/status.db -o status.db
+
       - name: shasum of it
         run: sha1sum status.db
+
       - name: upload to b2
-        run: b2 upload-file rdsqlite status.db backups/status.db        
+        run: b2 upload-file rdsqlite status.db backups/status.db

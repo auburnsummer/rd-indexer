@@ -87,11 +87,14 @@ jobs:
     steps:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v3.x
+
+      - name: install litestream
+        run: wget https://github.com/benbjohnson/litestream/releases/download/v0.3.9/litestream-v0.3.9-linux-amd64.deb && sudo dpkg -i litestream-v0.3.9-linux-amd64.deb
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout
         uses: actions/checkout@v3
-        
+
       - name: Install poetry
         run: pipx install poetry
 
@@ -120,10 +123,14 @@ jobs:
       - name: download DB from previous job
         run: b2 download-file-by-name rdsqlite backups/orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
         working-directory: ./orchard/package
-        
-      - name: download status DB from bot
-        run: curl https://botprod.auburn.dev/status.db -o status.db
-        working-directory: ./orchard/package
+
+      - name: get the file from litestream
+        run: litestream restore -v -config orchard/bot/litestream.yml ./orchard/package/status.db
+        env:
+          KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_ACCESS_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          LITESTREAM_PATH: status-main
+          LITESTREAM_DB: ./orchard/package/status.db
 
       - name: print out hashes of the aforementioned dbs
         run: sha1sum *.db
