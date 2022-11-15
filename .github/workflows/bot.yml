@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v3.x
+        uses: rlespinasse/github-slug-action@v4
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout
@@ -43,6 +43,7 @@ jobs:
           --env LITESTREAM_PATH=status-main
           --env LITESTREAM_ON=true
           --env TYPESENSE_URL=https://api.rhythm.cafe/typesense
+          --env BOT_VERSION=${{ env.GITHUB_SHA_SHORT }}
         env:
          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
          KEY_ID: ${{ secrets.B2_KEY_ID }}
