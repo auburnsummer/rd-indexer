@@ -124,7 +124,7 @@ jobs:
         run: b2 download-file-by-name rdsqlite backups/orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
         working-directory: ./orchard/package
 
-      - name: get the file from litestream
+      - name: get the status db from litestream
         run: litestream restore -v -config orchard/bot/litestream.yml ./orchard/package/status.db
         env:
           KEY_ID: ${{ secrets.B2_KEY_ID }}
