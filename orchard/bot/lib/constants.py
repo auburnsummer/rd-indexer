@@ -4,7 +4,7 @@ from orchard.utils.env import const_from_env
 
 load_dotenv()
 
-BOT_VERSION = "0.0.2"
+BOT_VERSION = const_from_env("BOT_VERSION", "dev")
 
 BOT_TOKEN = const_from_env("BOT_TOKEN")
 PUBLIC_KEY = const_from_env("PUBLIC_KEY")
