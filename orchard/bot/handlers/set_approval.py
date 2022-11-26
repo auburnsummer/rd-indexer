@@ -1,9 +1,9 @@
 from playhouse.shortcuts import model_to_dict
 from starlette.responses import JSONResponse
 
-from orchard.bot.lib.db import get_status, set_status
-from orchard.bot.lib import keys
-from orchard.bot.lib.typesense import ts_get_by_id
+from orchard.bot.lib.entities.status import get_status, set_status
+from orchard.bot.lib.auth import keys
+from orchard.bot.lib.entities.typesense import ts_get_by_id
 from orchard.bot.lib.utils import OrchardJSONResponse
 from orchard.db.models import Status
 

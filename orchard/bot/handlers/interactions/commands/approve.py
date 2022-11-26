@@ -1,11 +1,11 @@
 import httpx
 
 from orchard.bot.lib.constants import DEFAULT_DB_STATUS_VALUE
-from orchard.bot.lib import db
-from orchard.bot.lib.db import get_status
-from orchard.bot.lib.interactions import Interactor
-from orchard.bot.lib.message_builder import MessageBuilder as M, Embed
-from orchard.bot.lib.typesense import ts_get_by_id
+from orchard.bot.lib.entities import status
+from orchard.bot.lib.entities.status import get_status
+from orchard.bot.lib.comm.interactor import Interactor
+from orchard.bot.lib.comm.message_builder import MessageBuilder as M, Embed
+from orchard.bot.lib.entities.typesense import ts_get_by_id
 from orchard.bot.lib.utils import get_slash_args
 from orchard.db.models import Status
 
@@ -28,7 +28,7 @@ async def approve(body, request):
             # so we should get approval from our local sqlite db.
             if approval is not None:
                 # setting approval route
-                db.set_status(id, {'approval': approval})
+                status.set_status(id, {'approval': approval})
 
             local_data = get_status(id)
             message = M()

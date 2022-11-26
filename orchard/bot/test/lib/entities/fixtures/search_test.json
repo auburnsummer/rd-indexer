@@ -1,0 +1,684 @@
+{
+	"facet_counts": [],
+	"found": 56,
+	"hits": [
+		{
+			"document": {
+				"approval": -1,
+				"artist": "Kawai Sprite",
+				"artist_tokens": [
+					"Kawai Sprite"
+				],
+				"authors": [
+					"Penny (dusky_purple)"
+				],
+				"description": "Friday Night Funkin's unused song but I charted it to Rhythm Doctor.",
+				"description_ct": "[{\"len\": 68, \"color\": \"default\"}]",
+				"difficulty": 0,
+				"has_classics": true,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": true,
+				"has_skipshots": false,
+				"has_squareshots": true,
+				"has_window_dance": false,
+				"hue": 0.6,
+				"icon": "https://codex.rhythm.cafe/test-iUhc4zYREpb_icon.png",
+				"id": "test-iUhc4zYREpb",
+				"image": "https://codex.rhythm.cafe/test-iUhc4zYREpb.png",
+				"last_updated": 1621208478,
+				"max_bpm": 150.0,
+				"min_bpm": 150.0,
+				"rdlevel_sha1": "c15d8e44108107cc5ff7b1b0af1c012019c0d792",
+				"seizure_warning": false,
+				"sha1": "f79dd36df77db6c667062bc62e255be52b204ed8",
+				"single_player": true,
+				"song": "test",
+				"song_ct": "[{\"len\": 4, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/843740890165542912/Kawai_Sprite_-_test.rdzip",
+				"tags": [
+					"test",
+					"friday night funkin",
+					"fnf",
+					"unused"
+				],
+				"thumb": "https://codex.rhythm.cafe/test-iUhc4zYREpb_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/843740890165542912/Kawai_Sprite_-_test.rdzip",
+				"url2": "https://codex.rhythm.cafe/test-iUhc4zYREpb.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "song",
+					"matched_tokens": [
+						"test"
+					],
+					"snippet": "<mark>test</mark>"
+				},
+				{
+					"field": "tags",
+					"indices": [
+						0
+					],
+					"matched_tokens": [
+						[
+							"test"
+						]
+					],
+					"snippets": [
+						"<mark>test</mark>"
+					]
+				}
+			],
+			"text_match": 3946155805768287
+		},
+		{
+			"document": {
+				"approval": -1,
+				"artist": "Kawai Sprite",
+				"artist_tokens": [
+					"Kawai Sprite"
+				],
+				"authors": [
+					"Hugh#8158"
+				],
+				"description": "This is just a test. ",
+				"description_ct": "[{\"len\": 21, \"color\": \"default\"}]",
+				"difficulty": 1,
+				"has_classics": true,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": true,
+				"has_oneshots": false,
+				"has_skipshots": false,
+				"has_squareshots": false,
+				"has_window_dance": false,
+				"hue": 0.63,
+				"icon": "https://codex.rhythm.cafe/test-6YB4xw1voRz_icon.png",
+				"id": "test-6YB4xw1voRz",
+				"image": "https://codex.rhythm.cafe/test-6YB4xw1voRz.png",
+				"last_updated": 1622341536,
+				"max_bpm": 150.0,
+				"min_bpm": 150.0,
+				"rdlevel_sha1": "92ff4d04853dd63e905d57a4054bab6d515b73c8",
+				"seizure_warning": true,
+				"sha1": "156d4763ae6eefbba9f2c389040cd32a2052d3ef",
+				"single_player": true,
+				"song": "Test",
+				"song_ct": "[{\"len\": 4, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/848371824575643718/Kawai_Sprite_-_Test.rdzip",
+				"tags": [],
+				"thumb": "https://codex.rhythm.cafe/test-6YB4xw1voRz_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/848371824575643718/Kawai_Sprite_-_Test.rdzip",
+				"url2": "https://codex.rhythm.cafe/test-6YB4xw1voRz.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "song",
+					"matched_tokens": [
+						"Test"
+					],
+					"snippet": "<mark>Test</mark>"
+				},
+				{
+					"field": "description",
+					"matched_tokens": [
+						"test."
+					],
+					"snippet": "This is just a <mark>test.</mark> "
+				}
+			],
+			"text_match": 3101730875570526
+		},
+		{
+			"document": {
+				"approval": -1,
+				"artist": "fel#7947",
+				"artist_tokens": [
+					"fel#7947"
+				],
+				"authors": [
+					"fel#7947"
+				],
+				"description": "i wanted to test something out because i havent played or made anything with rhythm doctor in like 2 months LMAO",
+				"description_ct": "[{\"len\": 112, \"color\": \"default\"}]",
+				"difficulty": 1,
+				"has_classics": true,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": true,
+				"has_skipshots": false,
+				"has_squareshots": false,
+				"has_window_dance": false,
+				"hue": 1.0,
+				"icon": "https://codex.rhythm.cafe/rd-test-8nbXE8EoBoW_icon.png",
+				"id": "rd-test-8nbXE8EoBoW",
+				"image": "https://codex.rhythm.cafe/rd-test-8nbXE8EoBoW.png",
+				"last_updated": 1641029028,
+				"max_bpm": 150.0,
+				"min_bpm": 150.0,
+				"rdlevel_sha1": "b701dc10000c84fff2bd89bfdcea30aae1fd004e",
+				"seizure_warning": false,
+				"sha1": "7cdefd572484cba31552d698f8f9f759300ebf39",
+				"single_player": true,
+				"song": "rd test",
+				"song_ct": "[{\"len\": 7, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/926858705092349952/fel7947_-_rd_test.rdzip",
+				"tags": [
+					"test"
+				],
+				"thumb": "https://codex.rhythm.cafe/rd-test-8nbXE8EoBoW_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/926858705092349952/fel7947_-_rd_test.rdzip",
+				"url2": "https://codex.rhythm.cafe/rd-test-8nbXE8EoBoW.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "tags",
+					"indices": [
+						0
+					],
+					"matched_tokens": [
+						[
+							"test"
+						]
+					],
+					"snippets": [
+						"<mark>test</mark>"
+					]
+				},
+				{
+					"field": "song",
+					"matched_tokens": [
+						"test"
+					],
+					"snippet": "rd <mark>test</mark>"
+				},
+				{
+					"field": "description",
+					"matched_tokens": [
+						"test"
+					],
+					"snippet": "i wanted to <mark>test</mark> something out because i havent played or made anything with rhythm doctor in like 2 months LMAO"
+				}
+			],
+			"text_match": 2820255898989914
+		},
+		{
+			"document": {
+				"approval": 10,
+				"artist": "auburnsummer",
+				"artist_tokens": [
+					"auburnsummer"
+				],
+				"authors": [
+					"auburnsummer"
+				],
+				"description": "This is a test level for the peer review system.",
+				"description_ct": "[{\"len\": 48, \"color\": \"default\"}]",
+				"difficulty": 0,
+				"discord_metadata__timestamp": "2022-06-13T12:17:56.579000+00:00",
+				"discord_metadata__user_id": "297727909609603083",
+				"has_classics": false,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": true,
+				"has_skipshots": true,
+				"has_squareshots": false,
+				"has_window_dance": false,
+				"hue": 0.91,
+				"icon": "https://codex.rhythm.cafe/test-lev-a6UQTeHDx9H_icon.png",
+				"id": "test-lev-a6UQTeHDx9H",
+				"image": "https://codex.rhythm.cafe/test-lev-a6UQTeHDx9H.png",
+				"indexed": 1667302065,
+				"last_updated": 1655158624,
+				"max_bpm": 75.0,
+				"min_bpm": 75.0,
+				"rdlevel_sha1": "a70f5aaa4707d957e5839f3537c5b39c9b524e60",
+				"seizure_warning": false,
+				"sha1": "ccf93e69a8256c66f22e5ee0ca355413eebd9638",
+				"single_player": true,
+				"song": "test level",
+				"song_ct": "[{\"len\": 10, \"color\": \"default\"}]",
+				"source": "rdl",
+				"source_iid": "985880703864561684|985880703176675368",
+				"tags": [
+					"test"
+				],
+				"thumb": "https://codex.rhythm.cafe/test-lev-a6UQTeHDx9H_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/985880703176675368/auburnsummer_-_test_level.rdzip",
+				"url2": "https://codex.rhythm.cafe/test-lev-a6UQTeHDx9H.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "tags",
+					"indices": [
+						0
+					],
+					"matched_tokens": [
+						[
+							"test"
+						]
+					],
+					"snippets": [
+						"<mark>test</mark>"
+					]
+				},
+				{
+					"field": "song",
+					"matched_tokens": [
+						"test"
+					],
+					"snippet": "<mark>test</mark> level"
+				},
+				{
+					"field": "description",
+					"matched_tokens": [
+						"test"
+					],
+					"snippet": "This is a <mark>test</mark> level for the peer review system."
+				}
+			],
+			"text_match": 2820255898989914
+		},
+		{
+			"document": {
+				"approval": 10,
+				"artist": "Nister",
+				"artist_tokens": [
+					"Nister"
+				],
+				"authors": [
+					"Teennis"
+				],
+				"description": "?",
+				"description_ct": "[{\"len\": 1, \"color\": \"default\"}]",
+				"difficulty": 0,
+				"has_classics": false,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": false,
+				"has_skipshots": false,
+				"has_squareshots": true,
+				"has_window_dance": false,
+				"hue": 0.0,
+				"icon": "https://codex.rhythm.cafe/test-7jTkRnxB3LB_icon.png",
+				"id": "test-7jTkRnxB3LB",
+				"image": "https://codex.rhythm.cafe/test-7jTkRnxB3LB.png",
+				"indexed": 1650443941,
+				"last_updated": 1645385744,
+				"max_bpm": 192.0,
+				"min_bpm": 192.0,
+				"rdlevel_sha1": "ce3caae1b83704e27ded31105ca4091a877eba90",
+				"seizure_warning": false,
+				"sha1": "ae1697a418243c5dd644c94c750228a0582c765e",
+				"single_player": true,
+				"song": "Test",
+				"song_ct": "[{\"len\": 4, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/944905353517232128/Nister_-_Test.rdzip",
+				"tags": [
+					"?"
+				],
+				"thumb": "https://codex.rhythm.cafe/test-7jTkRnxB3LB_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/944905353517232128/Nister_-_Test.rdzip",
+				"url2": "https://codex.rhythm.cafe/test-7jTkRnxB3LB.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "song",
+					"matched_tokens": [
+						"Test"
+					],
+					"snippet": "<mark>Test</mark>"
+				}
+			],
+			"text_match": 2820255898795619
+		},
+		{
+			"document": {
+				"approval": 10,
+				"artist": "HyperBeast43",
+				"artist_tokens": [
+					"HyperBeast43"
+				],
+				"authors": [
+					"HyperBeast43"
+				],
+				"description": "Good luck.",
+				"description_ct": "[{\"len\": 10, \"color\": \"default\"}]",
+				"difficulty": 2,
+				"has_classics": false,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": true,
+				"has_skipshots": false,
+				"has_squareshots": false,
+				"has_window_dance": false,
+				"hue": 0.52,
+				"icon": "https://codex.rhythm.cafe/enduranc-EcyoCn13u9e_icon.png",
+				"id": "enduranc-EcyoCn13u9e",
+				"image": "https://codex.rhythm.cafe/enduranc-EcyoCn13u9e.png",
+				"indexed": 1650443941,
+				"last_updated": 1628073568,
+				"max_bpm": 300.0,
+				"min_bpm": 60.0,
+				"rdlevel_sha1": "8832fdbd481539afc5dad8ce4af6368282df9ce0",
+				"seizure_warning": false,
+				"sha1": "d27ac65b05bbe5af1d150df864e734ad498e5d99",
+				"single_player": true,
+				"song": "Endurance Test",
+				"song_ct": "[{\"len\": 14, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/872504082059911168/HyperBeast43_-_Endurance_Test.rdzip",
+				"tags": [
+					"oneshot",
+					"test"
+				],
+				"thumb": "https://codex.rhythm.cafe/enduranc-EcyoCn13u9e_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/872504082059911168/HyperBeast43_-_Endurance_Test.rdzip",
+				"url2": "https://codex.rhythm.cafe/enduranc-EcyoCn13u9e.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "tags",
+					"indices": [
+						1
+					],
+					"matched_tokens": [
+						[
+							"test"
+						]
+					],
+					"snippets": [
+						"<mark>test</mark>"
+					]
+				},
+				{
+					"field": "song",
+					"matched_tokens": [
+						"Test"
+					],
+					"snippet": "Endurance <mark>Test</mark>"
+				}
+			],
+			"text_match": 2538780922215007
+		},
+		{
+			"document": {
+				"approval": 10,
+				"artist": "Hafiz Azman, LeoMassaFM",
+				"artist_tokens": [
+					"Hafiz Azman",
+					"LeoMassaFM"
+				],
+				"authors": [
+					"LeoMassaFM"
+				],
+				"description": "This *whipcrack* is *whipcrack* a *whipcrack* cool *whipcrack* level! *whipcrack*",
+				"description_ct": "[{\"len\": 81, \"color\": \"default\"}]",
+				"difficulty": 1,
+				"has_classics": true,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": false,
+				"has_skipshots": false,
+				"has_squareshots": false,
+				"has_window_dance": false,
+				"hue": 0.17,
+				"icon": "https://codex.rhythm.cafe/classy-b-EDE8bxvhFLX_icon.png",
+				"id": "classy-b-EDE8bxvhFLX",
+				"image": "https://codex.rhythm.cafe/classy-b-EDE8bxvhFLX.png",
+				"indexed": 1650443941,
+				"last_updated": 1578960118,
+				"max_bpm": 115.0,
+				"min_bpm": 115.0,
+				"rdlevel_sha1": "d6306932ef1b24b400bb0bcdcb7550dbfef44684",
+				"seizure_warning": false,
+				"sha1": "4709c1bb32225829016f8807cc0874e83fce7c45",
+				"single_player": true,
+				"song": "Classy but it's an average episode of Johnny Test",
+				"song_ct": "[{\"len\": 49, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/666477501283041290/Hafiz_Azman_LeoMassaFM_-_Classy_but_its_an_average_episode_of_Johnny_Test.rdzip",
+				"tags": [
+					"johnny test",
+					"whipcrack",
+					"meme",
+					"shitpost",
+					"classy"
+				],
+				"thumb": "https://codex.rhythm.cafe/classy-b-EDE8bxvhFLX_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/666477501283041290/Hafiz_Azman_LeoMassaFM_-_Classy_but_its_an_average_episode_of_Johnny_Test.rdzip",
+				"url2": "https://codex.rhythm.cafe/classy-b-EDE8bxvhFLX.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "song",
+					"matched_tokens": [
+						"Test"
+					],
+					"snippet": "Classy but it's an average episode of Johnny <mark>Test</mark>"
+				},
+				{
+					"field": "tags",
+					"indices": [
+						0
+					],
+					"matched_tokens": [
+						[
+							"test"
+						]
+					],
+					"snippets": [
+						"johnny <mark>test</mark>"
+					]
+				}
+			],
+			"text_match": 1975830968793695
+		},
+		{
+			"document": {
+				"approval": -1,
+				"artist": "かめりあ (Camellia)",
+				"artist_tokens": [
+					"かめりあ (Camellia)"
+				],
+				"authors": [
+					"Aimee Métanoia (Sport Version)"
+				],
+				"description": "\"Camellia\" created music capable of ending the lives of rhythm gamers all over the world.\nNow, this music is brought to \"Rhythm Doctor\". A new harbinger rises over the barren hospital, forcing you to relieve the torturous days of your childhood...",
+				"description_ct": "[{\"len\": 247, \"color\": \"default\"}]",
+				"difficulty": 3,
+				"has_classics": false,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": true,
+				"has_skipshots": true,
+				"has_squareshots": false,
+				"has_window_dance": false,
+				"hue": 0.86,
+				"icon": "https://codex.rhythm.cafe/circles-UycgBWGcBBk_icon.png",
+				"id": "circles-UycgBWGcBBk",
+				"image": "https://codex.rhythm.cafe/circles-UycgBWGcBBk.png",
+				"last_updated": 1629076972,
+				"max_bpm": 200.0,
+				"min_bpm": 35.0,
+				"rdlevel_sha1": "67747ad2356799c654092742c1f462f651fb33c6",
+				"seizure_warning": false,
+				"sha1": "5f7a7980f4566685109c385f20c216c81e56b9b1",
+				"single_player": true,
+				"song": "Circles of Death (+Fitnessgram Pacer Test)",
+				"song_ct": "[{\"len\": 42, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/876622105024798780/Camellia_-_Circles_of_Death__Fitnessgram_Pacer_Test.rdzip",
+				"tags": [
+					"memes"
+				],
+				"thumb": "https://codex.rhythm.cafe/circles-UycgBWGcBBk_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/876622105024798780/Camellia_-_Circles_of_Death__Fitnessgram_Pacer_Test.rdzip",
+				"url2": "https://codex.rhythm.cafe/circles-UycgBWGcBBk.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "song",
+					"matched_tokens": [
+						"Test)"
+					],
+					"snippet": "Circles of Death (+Fitnessgram Pacer <mark>Test)</mark>"
+				}
+			],
+			"text_match": 1412881015242339
+		},
+		{
+			"document": {
+				"approval": 10,
+				"artist": "auburnsummer",
+				"artist_tokens": [
+					"auburnsummer"
+				],
+				"authors": [
+					"auburnsummer",
+					"Xeno"
+				],
+				"description": "A two-handed level. The eloquent blend between thirds and halves.",
+				"description_ct": "[{\"len\": 65, \"color\": \"default\"}]",
+				"difficulty": 2,
+				"has_classics": true,
+				"has_freetimes": false,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": true,
+				"has_skipshots": false,
+				"has_squareshots": true,
+				"has_window_dance": false,
+				"hue": 0.66,
+				"icon": "https://codex.rhythm.cafe/triplet-i721TW9qCsy_icon.png",
+				"id": "triplet-i721TW9qCsy",
+				"image": "https://codex.rhythm.cafe/triplet-i721TW9qCsy.png",
+				"indexed": 1650443941,
+				"last_updated": 1592569872,
+				"max_bpm": 110.0,
+				"min_bpm": 110.0,
+				"rdlevel_sha1": "d5416eded99eb85f9e154bc49ebc75564d1e023a",
+				"seizure_warning": false,
+				"sha1": "22dda7ada494f7e762d2d623566d8ec1a5a1735a",
+				"single_player": false,
+				"song": "Triplet Test",
+				"song_ct": "[{\"len\": 12, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/724381052591931442/auburnsummer_-_Triplet_Test.rdzip",
+				"tags": [
+					"Piano",
+					"2p",
+					"Two-handed"
+				],
+				"thumb": "https://codex.rhythm.cafe/triplet-i721TW9qCsy_thumbnail.png",
+				"two_player": true,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/724381052591931442/auburnsummer_-_Triplet_Test.rdzip",
+				"url2": "https://codex.rhythm.cafe/triplet-i721TW9qCsy.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "song",
+					"matched_tokens": [
+						"Test"
+					],
+					"snippet": "Triplet <mark>Test</mark>"
+				}
+			],
+			"text_match": 1412881015242339
+		},
+		{
+			"document": {
+				"approval": 10,
+				"artist": "angie8051",
+				"artist_tokens": [
+					"angie8051"
+				],
+				"authors": [
+					"Qerewe"
+				],
+				"description": "The famous gnome video now accessible in a Rhythm Doctor near you!",
+				"description_ct": "[{\"len\": 66, \"color\": \"default\"}]",
+				"difficulty": 0,
+				"has_classics": true,
+				"has_freetimes": true,
+				"has_freezeshots": false,
+				"has_holds": false,
+				"has_oneshots": false,
+				"has_skipshots": false,
+				"has_squareshots": false,
+				"has_window_dance": false,
+				"hue": 0.0,
+				"icon": "https://codex.rhythm.cafe/youve-be-EuD9z2wcRE5_icon.png",
+				"id": "youve-be-EuD9z2wcRE5",
+				"image": "https://codex.rhythm.cafe/youve-be-EuD9z2wcRE5.png",
+				"indexed": 1650443941,
+				"last_updated": 1597530386,
+				"max_bpm": 198.0,
+				"min_bpm": 198.0,
+				"rdlevel_sha1": "8961105528198a1dcd9495e1e17cf7ae5f45f5f2",
+				"seizure_warning": false,
+				"sha1": "ae2c9c8ad76779feb11523fbc2ff21ba156a04a5",
+				"single_player": true,
+				"song": "youve been gnomed.wmv",
+				"song_ct": "[{\"len\": 21, \"color\": \"default\"}]",
+				"source": "yeoldesheet",
+				"source_iid": "https://cdn.discordapp.com/attachments/611380148431749151/744381703296122950/angie8051_-_youve_been_gnomed.wmv.rdzip",
+				"tags": [
+					"gnomed",
+					"video",
+					"test",
+					"experiment"
+				],
+				"thumb": "https://codex.rhythm.cafe/youve-be-EuD9z2wcRE5_thumbnail.png",
+				"two_player": false,
+				"url": "https://cdn.discordapp.com/attachments/611380148431749151/744381703296122950/angie8051_-_youve_been_gnomed.wmv.rdzip",
+				"url2": "https://codex.rhythm.cafe/youve-be-EuD9z2wcRE5.rdzip"
+			},
+			"highlights": [
+				{
+					"field": "tags",
+					"indices": [
+						2
+					],
+					"matched_tokens": [
+						[
+							"test"
+						]
+					],
+					"snippets": [
+						"<mark>test</mark>"
+					]
+				}
+			],
+			"text_match": 1128107503450976
+		}
+	],
+	"out_of": 3932,
+	"page": 1,
+	"request_params": {
+		"collection_name": "levels",
+		"per_page": 10,
+		"q": "test"
+	},
+	"search_cutoff": false,
+	"search_time_ms": 2
+}

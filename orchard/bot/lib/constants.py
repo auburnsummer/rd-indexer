@@ -6,11 +6,9 @@ load_dotenv()
 
 BOT_VERSION = const_from_env("BOT_VERSION", "dev")
 
-BOT_TOKEN = const_from_env("BOT_TOKEN")
 PUBLIC_KEY = const_from_env("PUBLIC_KEY")
+BOT_TOKEN = const_from_env("BOT_TOKEN")
 
-# If specified, register guild-specific commands instead of global.
-# this is because guild commands refresh instantly whereas global takes ~1 hr
 DEV_GUILD = const_from_env("DEV_GUILD")
 APPLICATION_ID = const_from_env("APPLICATION_ID")
 

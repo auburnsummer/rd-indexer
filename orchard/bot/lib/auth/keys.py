@@ -10,7 +10,6 @@ from cryptography.fernet import Fernet
 
 f = Fernet(SECRET_KEY_ORCH)
 
-
 def gen_passcode():
     """
     Generate a passcode. they have an expiry of one week

@@ -6,7 +6,7 @@ from playhouse.sqlite_ext import SqliteExtDatabase
 import uvicorn
 from orchard.bot.lib.constants import LITESTREAM_ON
 from orchard.db.models import Status
-from .bot import app
+from .bot import OrchardBotApp
 
 import sys
 
@@ -38,13 +38,13 @@ async def start_app():
         ('synchronous', 'NORMAL')
     ])
     Status.bind(db)
-    app.state.db = db
+    OrchardBotApp.state.db = db
     if len(sys.argv) >= 3:
         port = int(sys.argv[2])
     else:
         port = 8000
     
-    config = uvicorn.Config(app, host="0.0.0.0", port=port, log_level="info")
+    config = uvicorn.Config(OrchardBotApp, host="0.0.0.0", port=port, log_level="info")
     server = uvicorn.Server(config)
     await server.serve()
 

@@ -1,5 +1,4 @@
 import pytest
-from playhouse.sqlite_ext import SqliteExtDatabase
 from orchard.db.models import Level
 from orchard.scan.sources.interface import RDLevelScraper
 from unittest.mock import patch
@@ -72,7 +71,3 @@ def make_mock_scraper():
     
     return MockLevelScraper
 
-@pytest.fixture
-def empty_db():
-    db = SqliteExtDatabase(":memory:")
-    return db

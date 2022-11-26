@@ -17,17 +17,20 @@ read by the [package](../scan/README.md) step to produce the final api.rhythm.ca
 This bot package also provides a HTTP API. This API is currently only used for the peer review
 workflow.
 
-# usage
+# Usage
 
 `python -m orchard.bot <path to status db> <port>`
 
 `<port> defaults to 8000 if not given.`
 
 This uses the Discord HTTP interactions API, so you then have to go to [the developer portal](https://discord.com/developers/applications)
-and change the URL it's talking to to `{url}/interactions`. For local development, usage of
+and change the URL it's talking to to `{url}/interactions` or `{url}/interactions2`. For local development, usage of
 [ngrok](https://ngrok.com/) is suggested.
 
-# environment variables
+ > 💡 The `/interactions` and `/interactions2` are the same endpoint. Sometimes Discord caches
+ > the DNS incorrectly, so you might have to change it to counteract this.
+
+# Environment Variables
 
 
 - `KEY_ID`: B2 key id. Used only if Litestream is enabled.

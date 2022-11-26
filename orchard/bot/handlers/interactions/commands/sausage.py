@@ -1,10 +1,10 @@
 import httpx
 
 from orchard.bot.lib.constants import GITHUB_TOKEN
-from orchard.bot.lib.interactions import Interactor
+from orchard.bot.lib.comm.interactor import Interactor
 
-from orchard.bot.lib.message_builder import MessageBuilder as M, ActionRow, Button
-import orchard.bot.lib.crosscode as cc
+from orchard.bot.lib.comm.message_builder import MessageBuilder as M, ActionRow, Button
+import orchard.bot.lib.comm.crosscode as cc
 
 SUCCESS_MESSAGE = """
 A sausage has been scheduled. See status here: <https://github.com/auburnsummer/rd-indexer/actions>

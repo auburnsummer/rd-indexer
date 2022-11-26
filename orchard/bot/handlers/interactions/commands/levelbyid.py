@@ -1,9 +1,9 @@
 import httpx
 
-from orchard.bot.lib.interactions import Interactor
-from orchard.bot.lib.typesense import ts_get_by_id
+from orchard.bot.lib.comm.interactor import Interactor
+from orchard.bot.lib.entities.typesense import ts_get_by_id
 from orchard.bot.lib.utils import get_slash_args, grouper
-from orchard.bot.lib.message_builder import MessageBuilder as M, Embed
+from orchard.bot.lib.comm.message_builder import MessageBuilder as M, Embed
 
 
 async def levelbyid(body, _):

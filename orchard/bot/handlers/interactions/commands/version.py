@@ -1,6 +1,6 @@
 from orchard.bot.lib.constants import ResponseType, BOT_VERSION
 from starlette.responses import JSONResponse
-from orchard.bot.lib.message_builder import MessageBuilder as M, Embed
+from orchard.bot.lib.comm.message_builder import MessageBuilder as M, Embed
 
 
 def version(body, _):
