@@ -6,11 +6,11 @@ from cryptography.fernet import Fernet, InvalidToken
 import pytest
 from unittest.mock import patch
 
-def test_gen_passcode():
+def test_gen_passcode(fake_key):
     passcode = gen_passcode()
     assert check_passcode(passcode) is True
 
-def test_gen_passcode_wrong():
+def test_gen_passcode_wrong(fake_key):
     key = Fernet.generate_key()
     f = Fernet(key)
     now = datetime.now()
@@ -21,7 +21,7 @@ def test_gen_passcode_wrong():
     with pytest.raises(InvalidToken):
         check_passcode(passcode)
 
-def test_gen_passcode_expired():
+def test_gen_passcode_expired(fake_key):
     passcode = gen_passcode()
     
     # go 4 weeks into the future

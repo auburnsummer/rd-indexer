@@ -8,14 +8,9 @@ def test_fill_in_params():
 def test_fill_in_params_number():
     assert fill_in_params("SELECT * FROM orchard WHERE param = ?", [2]) == "SELECT * FROM orchard WHERE param = 2"
 
-
-
 @pytest.mark.asyncio
-async def test_uhhhh(empty_db):
+async def test_datasette_request(empty_db, datasette_responses):
     Level.bind(empty_db)
-    my_select = Level.select().where(Level.artist == "auburnsummer")
-    raw_sql = fill_in_params(*my_select.sql())
-    result = await datasette_request(raw_sql)
-    print(result)
-    print(result[0].authors)
-    assert False
+    result = await datasette_request(Level.select().where(Level.artist == "auburnsummer"))
+    for r in result:
+        assert r.artist == "auburnsummer"

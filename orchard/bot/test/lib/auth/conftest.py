@@ -8,6 +8,15 @@ from orchard.bot.lib.auth.discord_public_key import \
 
 from starlette.testclient import TestClient
 
+from cryptography.fernet import Fernet
+from unittest.mock import patch
+
+@pytest.fixture
+def fake_key():
+    orchard_key = Fernet.generate_key().decode('utf-8')
+    wraps = lambda: Fernet(orchard_key)
+    with patch("orchard.bot.lib.auth.keys._get_fernet", wraps=wraps):
+        yield
 
 @pytest.fixture
 def disc_private_key(monkeypatch):

@@ -17,7 +17,7 @@ def fill_in_params(sql, params):
         text = text.replace('?', replace, 1)
     return text
 
-async def datasette_request(s):
+async def _datasette_request(s):
     async with httpx.AsyncClient() as client:
         r = await client.get("https://api.rhythm.cafe/datasette/orchard.json", params={"sql": s})
         rj = r.json()
@@ -26,3 +26,8 @@ async def datasette_request(s):
             Level(**{col: value for col, value in zip(rj['columns'], row)}) for row in rj['rows']
         ]
         return levels
+
+async def datasette_request(query):
+    raw_sql = fill_in_params(*query.sql())
+    result = await _datasette_request(raw_sql)
+    return result

@@ -1,4 +1,4 @@
-from orchard.bot.handlers.interactions.commands import approve, levelbyid, passcode, ping, sausage, version
+from orchard.bot.handlers.interactions.commands import approve, passcode, ping, sausage, version
 from orchard.bot.lib.constants import OptionType
 from orchard.bot.lib.slash_commands.slash_router import SlashOption, SlashRoute, SlashRouter
 
@@ -27,21 +27,6 @@ router = SlashRouter(
             ],
             default_permission=False,
             handler=passcode,
-            defer=True,
-        ),
-        SlashRoute(
-            name="levelbyid",
-            description="get a level by its id",
-            options=[
-                SlashOption(
-                    type=OptionType.STRING,
-                    name="id",
-                    description="id of the level",
-                    required=True,
-                ),
-            ],
-            default_permission=False,
-            handler=levelbyid,
             defer=True,
         ),
         SlashRoute(
