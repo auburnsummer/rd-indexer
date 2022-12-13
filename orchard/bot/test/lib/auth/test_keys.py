@@ -1,10 +1,14 @@
 from datetime import datetime, timedelta
 import json
-from orchard.bot.lib.auth.keys import check_passcode, gen_passcode
+from orchard.bot.lib.auth.keys import check_passcode, gen_passcode, with_passcode
 from orchard.bot.lib.auth import keys
 from cryptography.fernet import Fernet, InvalidToken
 import pytest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
+from starlette.requests import Request
+from starlette.responses import Response
+from starlette.testclient import TestClient
+
 
 def test_gen_passcode(fake_key):
     passcode = gen_passcode()
@@ -33,3 +37,23 @@ def test_gen_passcode_expired(fake_key):
         with pytest.raises(Exception) as e_info:
             check_passcode(passcode)
         assert e_info.match("expired")
+
+def test_with_passcode(test_client2):
+    passcode = gen_passcode()
+
+    resp = test_client2.post('/', headers={
+        "Authorization": f"Bearer {passcode}"
+    })
+    assert resp.status_code == 204
+
+def test_with_passcode_negative(test_client2):
+    passcode = "helloworld"
+
+    resp = test_client2.post('/', headers={
+        "Authorization": f"Bearer {passcode}"
+    })
+    assert resp.status_code == 401
+
+def test_with_passcode_no_header(test_client2):
+    resp = test_client2.post('/')
+    assert resp.status_code == 401

@@ -11,6 +11,8 @@ from starlette.testclient import TestClient
 from cryptography.fernet import Fernet
 from unittest.mock import patch
 
+from orchard.bot.lib.auth.keys import with_passcode
+
 @pytest.fixture
 def fake_key():
     orchard_key = Fernet.generate_key().decode('utf-8')
@@ -36,6 +38,21 @@ def test_client():
         request = Request(scope, receive)
 
         @with_discord_public_key_verification
+        async def inner(request):
+            response = Response(status_code=204)
+            return response
+
+        resp = await inner(request)
+        await resp(scope, receive, send)
+
+    return TestClient(app)
+
+@pytest.fixture
+def test_client2(fake_key):
+    async def app(scope, receive, send):
+        request = Request(scope, receive)
+
+        @with_passcode
         async def inner(request):
             response = Response(status_code=204)
             return response

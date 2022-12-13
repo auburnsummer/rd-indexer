@@ -14,3 +14,9 @@ async def test_datasette_request(empty_db, datasette_responses):
     result = await datasette_request(Level.select().where(Level.artist == "auburnsummer"))
     for r in result:
         assert r.artist == "auburnsummer"
+
+@pytest.mark.asyncio
+async def test_datasette_request_empty(empty_db):
+    Level.bind(empty_db)
+    result = await datasette_request(Level.select().where(Level.artist == "fjaiwpejpawjopfawefawe"))
+    assert result == []

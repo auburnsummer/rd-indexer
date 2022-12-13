@@ -1,4 +1,5 @@
 
+import functools
 import json
 import base64
 
@@ -44,6 +45,7 @@ def with_passcode(func):
     """
     A decorator. Adds token authentication to the handler.
     """
+    @functools.wraps(func)
     async def inner(request):
         try:
             if "authorization" not in request.headers:

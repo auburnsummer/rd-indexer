@@ -9,5 +9,5 @@ from orchard.db.models import Status
 @keys.with_passcode
 async def get_approval_multi(request):
     body = await request.json()
-    result = [get_status(id) for id in body]
+    result = [model_to_dict(get_status(id)) for id in body]
     return OrchardJSONResponse(result)
