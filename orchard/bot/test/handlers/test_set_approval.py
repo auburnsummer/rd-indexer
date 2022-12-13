@@ -34,7 +34,7 @@ def test_set_approval_works_with_get(empty_db_with_status_bind, test_client, moc
         "approval_reasons": None
     }
 
-def test_set_approval_works_with_post(empty_db_with_status_bind, test_client, mock_datasette_request, debug):
+def test_set_approval_works_with_post(empty_db_with_status_bind, test_client, mock_datasette_request):
     Status.bulk_create([
         Status(id="a", approval=15)
     ])
