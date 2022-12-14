@@ -1,12 +1,12 @@
 import logging
 
-from orchard.bot.lib.message_builder import MessageBuilder
+from orchard.bot.lib.comm.message_builder import MessageBuilder
 import httpx
 
 from orchard.bot.lib.constants import APPLICATION_ID
 from orchard.utils.constants import DISCORD_API_URL
 
-import orchard.bot.lib.crosscode as cc
+import orchard.bot.lib.comm.crosscode as cc
 
 base_url = f"{DISCORD_API_URL}/webhooks/{APPLICATION_ID}"
 

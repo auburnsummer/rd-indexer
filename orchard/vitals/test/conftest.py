@@ -34,7 +34,7 @@ def _pt_download_file(url, sha1):
 
     # if we're here it doesn't exist yet, or the sha1 is incorrect.
     with file_path.open("wb") as f:
-        with httpx.stream("GET", url) as r:
+        with httpx.stream("GET", url, timeout=httpx.Timeout(None)) as r:
             for data in r.iter_bytes():
                 f.write(data)
     

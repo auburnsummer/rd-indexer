@@ -99,7 +99,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/banas-QbMoyaG2nfK.rdzip-862f1ad3d2f6ae0580055700d79b8ae30c8771b2]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/banas-QbMoyaG2nfK.rdzip-862f1ad3d2f6ae0580055700d79b8ae30c8771b2]
   dict({
     'artist': 'placeboing',
     'artist_tokens': list([
@@ -160,7 +160,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/ennui-og-3VFE7LSmzSo.rdzip-250da27a5bff4285dcbf22f13c9c287f7eaf30d7]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/ennui-og-3VFE7LSmzSo.rdzip-250da27a5bff4285dcbf22f13c9c287f7eaf30d7]
   dict({
     'artist': 'Pseuu',
     'artist_tokens': list([
@@ -218,7 +218,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/jimmy-s-Ccby1RK3XJK.rdzip-5bb2d7298237d15b44fbb0a9ca963c00ecb58866]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/jimmy-s-Ccby1RK3XJK.rdzip-5bb2d7298237d15b44fbb0a9ca963c00ecb58866]
   dict({
     'artist': 'toonlink, Kenichi Nishikami, Takeru Kanazaki',
     'artist_tokens': list([
@@ -270,7 +270,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/know-you-2zRJRCjPqJx.rdzip-f2ad0f76bbfedf96bec3451eb9ead014accb3047]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/know-you-2zRJRCjPqJx.rdzip-f2ad0f76bbfedf96bec3451eb9ead014accb3047]
   dict({
     'artist': 'Andrew Huang',
     'artist_tokens': list([
@@ -318,7 +318,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/one-forg-NqVywpSrZs1.rdzip-a75d03f274c9032a6f75fa32ac57005615c04b47]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/one-forg-NqVywpSrZs1.rdzip-a75d03f274c9032a6f75fa32ac57005615c04b47]
   dict({
     'artist': 'Quree',
     'artist_tokens': list([
@@ -366,7 +366,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/one-uncu-eqSkB1ZX7Xz.rdzip-1bf690214be382e78daa98a5c7e73b79a59cf610]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/one-uncu-eqSkB1ZX7Xz.rdzip-1bf690214be382e78daa98a5c7e73b79a59cf610]
   dict({
     'artist': 'Samario (Making A Mistake)',
     'artist_tokens': list([
@@ -417,7 +417,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/pull-EpgEYcGYPnU.rdzip-bdbd0b30d6ea29f8a6d2e8602b8829508dcbfc02]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/pull-EpgEYcGYPnU.rdzip-bdbd0b30d6ea29f8a6d2e8602b8829508dcbfc02]
   dict({
     'artist': 'Hot Freaks',
     'artist_tokens': list([
@@ -466,7 +466,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/rgb-7krFijAGF4D.rdzip-88f48cdbd6a63773fcf44a38f5ed1ece00f399be]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/rgb-7krFijAGF4D.rdzip-88f48cdbd6a63773fcf44a38f5ed1ece00f399be]
   dict({
     'artist': 'Green wisteria',
     'artist_tokens': list([
@@ -521,7 +521,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/sol-e-ma-dVMtiNt856v.rdzip-f909b918e876d72fe8c3d385ba03940f85b3b906]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/sol-e-ma-dVMtiNt856v.rdzip-f909b918e876d72fe8c3d385ba03940f85b3b906]
   dict({
     'artist': 'Masssive New Krew',
     'artist_tokens': list([
@@ -567,7 +567,7 @@
     'two_player': False,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/swing-c2QGYcw8GLq.rdzip-933bbbbd9c1d79a8c3d2946e5748548a414488ea]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/swing-c2QGYcw8GLq.rdzip-933bbbbd9c1d79a8c3d2946e5748548a414488ea]
   dict({
     'artist': 'JustMe',
     'artist_tokens': list([
@@ -622,7 +622,7 @@
     'two_player': True,
   })
 # ---
-# name: test_snapshot[https://codex.rhythm.cafe/yi-xiao-Hg3afme47nr.rdzip-82dfb357c88904400fbf7eebc2ff2d1820ad9f8f]
+# name: test_snapshot[https://f000.backblazeb2.com/file/rdcodex/yi-xiao-Hg3afme47nr.rdzip-82dfb357c88904400fbf7eebc2ff2d1820ad9f8f]
   dict({
     'artist': '遊助',
     'artist_tokens': list([
