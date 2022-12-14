@@ -1,19 +1,16 @@
-
-
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.routing import Route
 from orchard.bot.handlers.interactions.router import router
 from orchard.bot.handlers.interactions.handler import interaction_handler
-
+from orchard.bot.handlers.set_approval import set_approval
+from orchard.bot.handlers.get_approval_multi import get_approval_multi
 
 from orchard.bot.lib.slash_commands.register import (
     update_slash_commands
 )
 
-
-from orchard.bot import handlers
 
 # All the routes we're using go here.
 from orchard.db.models import Status
@@ -47,8 +44,8 @@ OrchardBotApp = Starlette(
     routes=[
         Route("/interactions", interaction_handler, methods=["POST"]),
         Route("/interactions2", interaction_handler, methods=["POST"]),
-        Route('/approval/{id}', handlers.set_approval, methods=['POST', 'GET']),
-        Route('/multi/approval', handlers.get_approval_multi, methods=['POST'])
+        Route('/approval/{id}', set_approval, methods=['POST', 'GET']),
+        Route('/multi/approval', get_approval_multi, methods=['POST'])
     ],
     on_startup=[
         prerun_update_slash_commands,
