@@ -14,7 +14,7 @@ RUN pip install "datasette~=0.61.1"
 
 RUN mkdir /etc/ts /etc/logs
 
-RUN curl --output /bin/typesense.tar.gz https://dl.typesense.org/releases/0.23.0.rc20/typesense-server-0.23.0.rc20-linux-amd64.tar.gz \
+RUN curl --output /bin/typesense.tar.gz https://dl.typesense.org/releases/0.23.1/typesense-server-0.23.1-linux-amd64.tar.gz \
   && tar -xvf /bin/typesense.tar.gz --directory /bin
 
 # Overmind
