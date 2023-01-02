@@ -40,7 +40,7 @@ processes = []
 
   [[services.http_checks]]
     interval = 10000
-    grace_period = "5s"
+    grace_period = "10s"
     method = "get"
     path = "/typesense/health"
     restart_limit = 5
