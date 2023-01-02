@@ -44,5 +44,5 @@ processes = []
     method = "get"
     path = "/typesense/health"
     restart_limit = 5
-    protocol = "https"
+    protocol = "http"
     timeout = 2000
