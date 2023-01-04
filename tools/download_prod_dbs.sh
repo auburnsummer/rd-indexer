@@ -10,4 +10,4 @@ ls
 cd ./orchard/package
 
 wget https://f000.backblazeb2.com/file/rdsqlite/backups/status.db
-wget https://f000.backblazeb2.com/file/rdsqlite/backups/orchard-main.db -o orchard.db
+wget --output-document orchard.db https://f000.backblazeb2.com/file/rdsqlite/backups/orchard-main.db 

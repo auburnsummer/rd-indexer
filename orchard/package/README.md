@@ -17,3 +17,8 @@ Which is served using the [Caddy](https://caddyserver.com/) server, currently de
  3. run: `poetry run python ./package/package.py <path to scan database> <path to status database>`
  4. this produces a file called `orchard.jsonl` in this directory.
  5. use the Dockerfile to build the package.
+ 6. the resulting image can be ran like this:
+
+```
+docker run -p 8080:8080 rdindexer
+```
