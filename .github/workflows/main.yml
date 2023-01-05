@@ -57,8 +57,13 @@ jobs:
           B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
           B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
         
-      - name: download current db if it exists...
-        run: b2 download-file-by-name rdsqlite backups/orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
+#       - name: download current db if it exists...
+#         run: b2 download-file-by-name rdsqlite backups/orchard-${{ env.GITHUB_REF_SLUG }}.db orchard.db
+#         working-directory: ./orchard/scan
+#         continue-on-error: true
+
+      - name: download backup db
+        run: b2 download-file-by-id 4_z280f08127af90a41804b091b_f103b273b4f8bfa84_d20230105_m023929_c000_v0001065_t0057_u01672886369393 orchard.db
         working-directory: ./orchard/scan
         continue-on-error: true
         
