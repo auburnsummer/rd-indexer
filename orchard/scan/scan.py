@@ -1,6 +1,7 @@
 import asyncio
 from io import BytesIO
 import logging
+import os
 import sys
 
 from playhouse.sqlite_ext import SqliteExtDatabase
@@ -116,6 +117,10 @@ async def main(db: SqliteExtDatabase, sources):
 
 
 if __name__ == "__main__":
+    if os.environ.get("ORCHARD_DEBUG"):
+        import debugpy
+        debugpy.listen(5678)
+        debugpy.wait_for_client()  # blocks execution until client is attached
     database_file_name = sys.argv[1]
     sources_file_name = sys.argv[2]
     db = SqliteExtDatabase(database_file_name)
