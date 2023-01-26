@@ -33,6 +33,9 @@ jobs:
 
       - name: install deps 
         run: poetry install --no-interaction
+
+      - name: download fixtures
+        run: ./orchard/tools/download_rdzip_fixtures.sh
         
       - name: test
         run: poetry run pytest

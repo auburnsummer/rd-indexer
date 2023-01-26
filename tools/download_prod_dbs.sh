@@ -6,8 +6,7 @@ set -Eeuo pipefail
 
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
-ls
-cd ./orchard/package
+cd ../orchard/package
 
 wget https://f000.backblazeb2.com/file/rdsqlite/backups/status.db
 wget --output-document orchard.db https://f000.backblazeb2.com/file/rdsqlite/backups/orchard-main.db 

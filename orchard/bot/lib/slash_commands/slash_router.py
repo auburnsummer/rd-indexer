@@ -94,6 +94,4 @@ class SlashRouter:
                     background=deferred_task,
                 )
         else:
-            # Otherwise, return a default response. The default response has a 200 return code.
-            # The key 'type' is 4, and the key 'data.content' is something like "oh no"
-            return JSONResponse({"type": 4, "data": {"content": "oh no"}})
+            return JSONResponse({"type": 4, "data": {"content": f"I don't know what to do with the requested route {route_name}. This is always a bug; ping auburn now!"}})

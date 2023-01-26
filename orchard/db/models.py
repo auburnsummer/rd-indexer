@@ -104,3 +104,14 @@ class Combined(Model):
     approval_reasons = TextField(null=True)
     indexed = DateTimeField(null=True)
 
+
+# The info table contains info about the database. This table typically only has one row.
+class Info(Model):
+    id = IntegerField(primary_key=True, constraints=[Check('id = 0')])
+    schema_version = IntegerField()
+
+
+# The user table contains info about Discord users. The id is the discord id.
+class User(Model):
+    id = TextField(primary_key=True)
+    selected_level = ForeignKeyField(Status, null=True)

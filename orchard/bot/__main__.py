@@ -5,7 +5,7 @@ import subprocess
 from playhouse.sqlite_ext import SqliteExtDatabase
 import uvicorn
 from orchard.bot.lib.constants import LITESTREAM_ON
-from orchard.db.models import Status
+from orchard.db.models import Info, Status
 from .bot import OrchardBotApp
 
 import sys
@@ -20,7 +20,6 @@ db_filename = sys.argv[1]
 
 # run litestream restore
 # we're not in async land yet, so this is the normal python subprocess.
-print(LITESTREAM_ON)
 if LITESTREAM_ON: 
     logger.info("Restoring from litestream now...")
     litestream_path = pathlib.Path(__file__).parent / "litestream.yml"
@@ -38,6 +37,7 @@ async def start_app():
         ('synchronous', 'NORMAL')
     ])
     Status.bind(db)
+    Info.bind(db)
     OrchardBotApp.state.db = db
     if len(sys.argv) >= 3:
         port = int(sys.argv[2])

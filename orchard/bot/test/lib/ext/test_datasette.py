@@ -16,7 +16,7 @@ async def test_datasette_request(empty_db, datasette_responses):
         assert r.artist == "auburnsummer"
 
 @pytest.mark.asyncio
-async def test_datasette_request_empty(empty_db):
+async def test_datasette_request_empty(empty_db, datasette_responses):
     Level.bind(empty_db)
     result = await datasette_request(Level.select().where(Level.artist == "fjaiwpejpawjopfawefawe"))
     assert result == []

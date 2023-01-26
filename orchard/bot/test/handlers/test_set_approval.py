@@ -16,11 +16,14 @@ def test_client():
     return tc
 
 @pytest.fixture
-def mock_datasette_request():
-    with patch("orchard.bot.handlers.set_approval.datasette_request", wraps=lambda _: True):
+def patch_get_level():
+    async def fake_get_level(_):
+        return True
+    with patch("orchard.bot.lib.entities.status.get_level", wraps=fake_get_level):
         yield
 
-def test_set_approval_works_with_get(empty_db_with_status_bind, test_client, mock_datasette_request):
+
+def test_set_approval_works_with_get(empty_db_with_status_bind, patch_get_level, test_client):
     Status.bulk_create([
         Status(id="a", approval=15)
     ])
@@ -34,7 +37,7 @@ def test_set_approval_works_with_get(empty_db_with_status_bind, test_client, moc
         "approval_reasons": None
     }
 
-def test_set_approval_works_with_post(empty_db_with_status_bind, test_client, mock_datasette_request):
+def test_set_approval_works_with_post(empty_db_with_status_bind, patch_get_level, test_client):
     Status.bulk_create([
         Status(id="a", approval=15)
     ])

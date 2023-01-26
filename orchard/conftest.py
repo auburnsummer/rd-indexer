@@ -1,7 +1,10 @@
+import httpx
 import pytest
 import debugpy
 from playhouse.sqlite_ext import SqliteExtDatabase
 import tempfile
+
+from unittest.mock import patch
 
 @pytest.fixture
 def empty_db():
@@ -15,3 +18,12 @@ def empty_db():
 def debug():
     debugpy.listen(5678)
     debugpy.wait_for_client()  # blocks execution until client is attached
+
+
+@pytest.fixture(autouse=True)
+def block_httpx(httpx_mock):
+    yield
+
+@pytest.fixture
+def assert_all_responses_were_requested(autouse=True) -> bool:
+    return False

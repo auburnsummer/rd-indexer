@@ -35,7 +35,7 @@ class Interactor:
             logger.error("Error", exc_info=True)
             await self.edit(
                 MessageBuilder().content(
-                    f"An unknown error occured! This is a bug. {repr(exc_type)} {exc_value}"
+                    f"An error occured! {repr(exc_type)} {exc_value}"
                 ),
                 "@original",
             )
