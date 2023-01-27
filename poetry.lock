@@ -1057,6 +1057,18 @@ slack = ["slack-sdk"]
 telegram = ["requests"]
 
 [[package]]
+name = "types-peewee"
+version = "3.15.0.5"
+description = "Typing stubs for peewee"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-peewee-3.15.0.5.tar.gz", hash = "sha256:5a907a87317878c7684800fe3eee901ba22467dbc3dffbf110ee62fd0bfa0008"},
+    {file = "types_peewee-3.15.0.5-py3-none-any.whl", hash = "sha256:1323a3a2e3831754a9acaa1fdf395283c545fc74bae34b2ff78099a8a1379ce6"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.4.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -1119,4 +1131,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "bcec5629ca82592e91e597e4c5888d7015ba0d639f65b410ca89958155723ca5"
+content-hash = "b1c046c7f7b6aeb8e8fadb8e487a7b637a652c57b43ac4804cb9c2b677703c82"
