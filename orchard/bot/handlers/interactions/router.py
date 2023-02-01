@@ -1,4 +1,4 @@
-from orchard.bot.handlers.interactions.commands import approve, passcode, ping, sausage, version
+from orchard.bot.handlers.interactions.commands import approve, passcode, ping, sausage, version, select_by_id
 from orchard.bot.lib.constants import OptionType
 from orchard.bot.lib.slash_commands.slash_router import SlashOption, SlashRoute, SlashRouter
 
@@ -55,6 +55,21 @@ router = SlashRouter(
             description="trigger a rescan now!",
             default_permission=False,
             handler=sausage,
+            defer=True
+        ),
+        SlashRoute(
+            name="select_by_id",
+            description="Select a level",
+            options=[
+                SlashOption(
+                    type=OptionType.STRING,
+                    name="id",
+                    description="id of the level to select",
+                    required=True
+                )
+            ],
+            default_permission=True,
+            handler=select_by_id,
             defer=True
         )
     ]

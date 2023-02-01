@@ -70,6 +70,15 @@ class Embed:
         self._dict["fields"].append({"name": name, "value": value, "inline": inline})
         return self
 
+    def footer(self, text=None, icon_url=None):
+        new_footer = {}
+        if text:
+            new_footer["text"] = text
+        if icon_url:
+            new_footer["icon_url"] = icon_url
+        self._dict["footer"] = new_footer
+        return self
+
 
 class ActionRow:
     def __init__(self, *components):

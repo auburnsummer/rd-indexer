@@ -36,7 +36,7 @@ async def prerun_check_db():
     if not db.table_exists("info"):
         print("Info table not found, making it now.")
         db.create_tables([Info])
-        Info.insert(id=0, schema_version=1)
+        Info.create(id=0, schema_version=1)
     if not db.table_exists("user"):
         print("User table not found, making it now.")
         db.create_tables([User])

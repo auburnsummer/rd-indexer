@@ -64,6 +64,11 @@ async def start_litestream():
     except KeyboardInterrupt:
         await process.terminate()
 
+if os.environ.get("ORCHARD_DEBUG"):
+    import debugpy
+    debugpy.listen(5678)
+    debugpy.wait_for_client()  # blocks execution until client is attached
+
 async def main():
     if LITESTREAM_ON:
         await asyncio.gather(

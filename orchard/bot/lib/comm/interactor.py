@@ -1,6 +1,6 @@
 import logging
 
-from orchard.bot.lib.comm.message_builder import MessageBuilder
+from orchard.bot.lib.comm.message_builder import Embed, MessageBuilder
 import httpx
 
 from orchard.bot.lib.constants import APPLICATION_ID
@@ -34,10 +34,8 @@ class Interactor:
         if exc_type is not None:
             logger.error("Error", exc_info=True)
             await self.edit(
-                MessageBuilder().content(
-                    f"An error occured! {repr(exc_type)} {exc_value}"
-                ),
-                "@original",
+                MessageBuilder().embed(Embed().title("An error occured!").description(str(exc_value)).footer(text=repr(exc_type))),
+                "@original"
             )
         await self.client.aclose()
         return True  # don't propogate any error
