@@ -4,6 +4,7 @@ from orchard.bot.lib.auth import keys
 from orchard.bot.lib.entities.status import _get_status
 from orchard.bot.lib.utils import OrchardJSONResponse
 
+
 @keys.with_passcode
 async def get_approval_multi(request):
     body = await request.json()

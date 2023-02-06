@@ -5,6 +5,7 @@ from starlette.responses import JSONResponse
 
 from .router import router
 
+
 @with_discord_public_key_verification
 async def interaction_handler(request):
     """

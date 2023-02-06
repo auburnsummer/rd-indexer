@@ -33,7 +33,9 @@ def main(f: BinaryIO):
         "artist_tokens": artist_list_facet,
         ("song", "song_ct"): make_color_enabled_key_facet(["settings", "song"]),
         "seizure_warning": make_key_facet(["settings", "seizureWarning"], True),
-        ("description", "description_ct"): make_color_enabled_key_facet(["settings", "description"]),
+        ("description", "description_ct"): make_color_enabled_key_facet(
+            ["settings", "description"]
+        ),
         "hue": make_key_facet(["settings", "songNameHue"], 0.0),
         "authors": author_facet,
         ("max_bpm", "min_bpm"): bpm_facet,
@@ -51,10 +53,10 @@ def main(f: BinaryIO):
             "has_freetimes",
             "has_holds",
             "has_skipshots",
-            "has_window_dance"
+            "has_window_dance",
         ): event_type_facet,
         "sha1": sha1_facet,
-        "rdlevel_sha1": rdlevel_sha1_facet
+        "rdlevel_sha1": rdlevel_sha1_facet,
     }
 
     try:
@@ -65,15 +67,15 @@ def main(f: BinaryIO):
 
                 # get the TOML comment if there is one.
                 # there can be only one
-                comments = [evt for evt in parsed['events'] if evt['type'] == 'Comment']
+                comments = [evt for evt in parsed["events"] if evt["type"] == "Comment"]
                 toml_comment = None
                 for comment in comments:
                     try:
-                        content = comment['text']
+                        content = comment["text"]
                         if "#orchard" not in content:
                             continue
                         toml_comment = toml.loads(content)
-                        break # only consider the first valid comment we find.
+                        break  # only consider the first valid comment we find.
                     except:
                         # it's fine if there isn't a comment.
                         continue
@@ -81,12 +83,9 @@ def main(f: BinaryIO):
                 final = {}
                 for key, func in facets.items():
                     try:
-                        result = func({
-                            "obj": parsed,
-                            "zip": z,
-                            "file": f,
-                            "toml": toml_comment
-                        })
+                        result = func(
+                            {"obj": parsed, "zip": z, "file": f, "toml": toml_comment}
+                        )
                         if isinstance(key, tuple):
                             # multiple keys with (expected) multiple values that map to the keys.
                             for k, v in zip(key, result):
@@ -106,4 +105,3 @@ def main(f: BinaryIO):
         )
     except KeyError:
         raise VitalsException("vitals: there is no main.rdlevel in the zip.")
-

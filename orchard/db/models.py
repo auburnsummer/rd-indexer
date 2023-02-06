@@ -11,6 +11,7 @@ MyJsonField = functools.partial(JSONField, json_dumps=my_json_dumps)
 # this is entirely deterministic based on the rdzip. there is no stateful data here.
 # NOTE TO SELF: changes here must be reflected in Combined below.
 
+
 class Level(Model):
     artist = TextField()
     artist_tokens = MyJsonField()
@@ -63,6 +64,7 @@ class Status(Model):
 # the combined model combines a Level and Status.'
 # this is only used for the Datasette representation in package.py.
 
+
 class Combined(Model):
     artist = TextField()
     artist_tokens = MyJsonField()
@@ -107,7 +109,7 @@ class Combined(Model):
 
 # The info table contains info about the database. This table typically only has one row.
 class Info(Model):
-    id = IntegerField(primary_key=True, constraints=[Check('id = 0')])
+    id = IntegerField(primary_key=True, constraints=[Check("id = 0")])
     schema_version = IntegerField()
 
 

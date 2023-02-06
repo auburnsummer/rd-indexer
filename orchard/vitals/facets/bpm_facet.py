@@ -13,10 +13,15 @@ def get_bpm_from_event(evt):
     except KeyError:
         return evt["beatsPerMinute"]
 
+
 @with_arguments("obj", "toml")
 def bpm_facet(obj, toml):
     # is it declared in the TOML?
-    if toml is not None and try_dig(["bpm", "max"], toml) and try_dig(["bpm", "min"], toml):
+    if (
+        toml is not None
+        and try_dig(["bpm", "max"], toml)
+        and try_dig(["bpm", "min"], toml)
+    ):
         return try_dig(["bpm", "max"], toml), try_dig(["bpm", "min"], toml)
 
     bpms = [get_bpm_from_event(e) for e in obj["events"] if is_bpm_event(e)]

@@ -13,6 +13,7 @@ from orchard.vitals.color_tagged_string import parse_color_tagged_string
 
 ARTIST_REGEX = r"\s*?(?:ft\.|feat\.|×|,)\s*?"
 
+
 @with_arguments("obj", "toml")
 def artist_list_facet(obj, toml):
     if toml is not None and try_dig(["artists", "tokens"], toml):

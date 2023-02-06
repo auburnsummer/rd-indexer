@@ -6,6 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 @keys.with_passcode
 async def set_approval(request):
     """

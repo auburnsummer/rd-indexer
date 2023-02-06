@@ -6,6 +6,7 @@ import tempfile
 
 from unittest.mock import patch
 
+
 @pytest.fixture
 def empty_db():
     # Use an actual file, as sqlite will terminate in-memory databases early if the connection is closed.
@@ -13,6 +14,7 @@ def empty_db():
         db = SqliteExtDatabase(f.name)
         yield db
         db.close()
+
 
 @pytest.fixture
 def debug():
@@ -23,6 +25,7 @@ def debug():
 @pytest.fixture(autouse=True)
 def block_httpx(httpx_mock):
     yield
+
 
 @pytest.fixture
 def assert_all_responses_were_requested(autouse=True) -> bool:

@@ -53,6 +53,6 @@ def event_type_facet(obj):
             is_freetime,
             is_hold,
             is_skipshot,
-            is_window_dance
+            is_window_dance,
         ]
     )

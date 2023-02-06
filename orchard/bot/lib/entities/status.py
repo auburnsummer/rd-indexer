@@ -5,6 +5,7 @@ from orchard.bot.lib.constants import DEFAULT_DB_STATUS_VALUE
 from orchard.bot.lib.entities.level import get_level
 from orchard.db.models import Status
 
+
 class StatusHelper:
     status: Status
 
@@ -29,9 +30,7 @@ class StatusHelper:
     def to_dict(self):
         return model_to_dict(self.status)
 
+
 def _get_status(id: str) -> Status:
-    current, _ = Status.get_or_create(
-        id=id,
-        defaults=DEFAULT_DB_STATUS_VALUE
-    )
+    current, _ = Status.get_or_create(id=id, defaults=DEFAULT_DB_STATUS_VALUE)
     return current

@@ -3,6 +3,7 @@ import pytest
 from orchard.bot.lib.comm.crosscode import future, clean, _registry, resolve, wait
 from unittest.mock import MagicMock
 
+
 @pytest.mark.asyncio
 async def test_future():
     uuid = future()

@@ -12,6 +12,7 @@ base_url = f"{DISCORD_API_URL}/webhooks/{APPLICATION_ID}"
 
 logger = logging.getLogger(__name__)
 
+
 class Interactor:
     """
     A class that contains methods for handling a slash command interaction.
@@ -34,8 +35,13 @@ class Interactor:
         if exc_type is not None:
             logger.error("Error", exc_info=True)
             await self.edit(
-                MessageBuilder().embed(Embed().title("An error occured!").description(str(exc_value)).footer(text=repr(exc_type))),
-                "@original"
+                MessageBuilder().embed(
+                    Embed()
+                    .title("An error occured!")
+                    .description(str(exc_value))
+                    .footer(text=repr(exc_type))
+                ),
+                "@original",
             )
         await self.client.aclose()
         return True  # don't propogate any error

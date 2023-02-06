@@ -30,6 +30,7 @@ def make_jsonl_from_combined(combined):
         def inner(col_name, col_value, final_dict):
             final_dict[col_name] = func(col_value)
             return final_dict
+
         return inner
 
     def source_metadata_step(col_name, col_value, final_dict):
@@ -38,7 +39,7 @@ def make_jsonl_from_combined(combined):
         final_dict["discord_metadata__user_id"] = col_value["user_id"]
         final_dict["discord_metadata__timestamp"] = col_value["timestamp"]
         return final_dict
-        
+
     # dict of keys to functions that do stuff with the value.
     # we run through the functions to build a final object which then gets JSON serialised into the jsonl.
     steps = {
@@ -46,7 +47,7 @@ def make_jsonl_from_combined(combined):
         "indexed": with_func(datetime_to_epoch),
         "song_ct": with_func(json.dumps),
         "description_ct": with_func(json.dumps),
-        "source_metadata": source_metadata_step
+        "source_metadata": source_metadata_step,
     }
 
     final_dict = {}
@@ -67,10 +68,7 @@ def package():
     for row in Level.select():
         status, _ = Status.get_or_create(id=row.id, defaults=DEFAULT_DB_STATUS_VALUE)
         print(row)
-        to_insert = {
-            **model_to_dict(row),
-            **model_to_dict(status)
-        }
+        to_insert = {**model_to_dict(row), **model_to_dict(status)}
         Combined.create(**to_insert)
 
     # produce a jsonlines file for typesense.

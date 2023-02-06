@@ -20,5 +20,3 @@ async def update_slash_commands(commands):
     async with Client() as client:
         r = await client.put(f"{base_url}", json=commands, headers=bot_auth)
     return r
-
-
