@@ -14,7 +14,7 @@ class MessageBuilder:
         self._dict["flags"] = 64 if yes else 0
         return self
 
-    def embed(self, embed):
+    def embed(self, embed: "Embed"):
         if "embeds" not in self._dict:
             self._dict["embeds"] = []
 
@@ -68,6 +68,24 @@ class Embed:
             self._dict["fields"] = []
 
         self._dict["fields"].append({"name": name, "value": value, "inline": inline})
+        return self
+
+    def footer(self, text=None, icon_url=None):
+        new_footer = {}
+        if text:
+            new_footer["text"] = text
+        if icon_url:
+            new_footer["icon_url"] = icon_url
+        self._dict["footer"] = new_footer
+        return self
+
+    def author(self, name=None, icon_url=None):
+        new_author = {}
+        if name:
+            new_author["name"] = name
+        if icon_url:
+            new_author["icon_url"] = icon_url
+        self._dict["author"] = new_author
         return self
 
 

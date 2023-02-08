@@ -2,6 +2,7 @@
 # returns a tuple of the string _without_ the colors, then what bits are colored by 0-indexed ranges.
 import re
 
+
 class InvalidColorException(Exception):
     pass
 
@@ -24,19 +25,18 @@ def parse_color_tagged_string(s: str):
 
     for match in matches:
         # from curr_pos to the starting position of this match is a literal.
-        literal = s[curr_pos:match.start()]
+        literal = s[curr_pos : match.start()]
         literals.append(literal)
         # ...which is whatever color is previous (at the top of the stack.)
-        tokens.append({
-            "len": len(literal),
-            "color": color_stack[-1]
-        })
+        tokens.append({"len": len(literal), "color": color_stack[-1]})
 
         opening, color, closing = match.groups()
         if opening:
             # it's an opening tag, so add a new color to the stack.
             if not color:
-                raise InvalidColorException("Opening color tag found without a given color.")
+                raise InvalidColorException(
+                    "Opening color tag found without a given color."
+                )
             color_stack.append(color)
         if closing:
             color_stack.pop()
@@ -48,14 +48,8 @@ def parse_color_tagged_string(s: str):
     if leftover:
         # it's whatever color is left.
         literals.append(leftover)
-        tokens.append({
-            "len": len(leftover),
-            "color": color_stack.pop()
-        })
+        tokens.append({"len": len(leftover), "color": color_stack.pop()})
 
-    tokens = [t for t in tokens if t['len'] > 0]
+    tokens = [t for t in tokens if t["len"] > 0]
 
     return "".join(literals), tokens
-
-
-

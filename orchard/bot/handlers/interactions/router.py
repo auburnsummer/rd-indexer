@@ -1,18 +1,33 @@
-from orchard.bot.handlers.interactions.commands import approve, passcode, ping, sausage, version
+from orchard.bot.handlers.interactions.commands import (
+    approve,
+    passcode,
+    ping,
+    sausage,
+    show,
+    version,
+    select_by_id,
+)
 from orchard.bot.lib.constants import OptionType
-from orchard.bot.lib.slash_commands.slash_router import SlashOption, SlashRoute, SlashRouter
+from orchard.bot.lib.slash_commands.slash_router import (
+    SlashOption,
+    SlashRoute,
+    SlashRouter,
+)
 
 
 router = SlashRouter(
     routes=[
         SlashRoute(
-            name="ping", description="responds with pong!", handler=ping, default_permission=False
+            name="ping",
+            description="responds with pong!",
+            handler=ping,
+            default_permission=False,
         ),
         SlashRoute(
             name="version",
             description="print the version of this bot",
             handler=version,
-            default_permission=False
+            default_permission=False,
         ),
         SlashRoute(
             name="plpasscode",
@@ -55,9 +70,29 @@ router = SlashRouter(
             description="trigger a rescan now!",
             default_permission=False,
             handler=sausage,
-            defer=True
-        )
+            defer=True,
+        ),
+        SlashRoute(
+            name="select_by_id",
+            description="Select a level",
+            options=[
+                SlashOption(
+                    type=OptionType.STRING,
+                    name="id",
+                    description="id of the level to select",
+                    required=True,
+                )
+            ],
+            default_permission=True,
+            handler=select_by_id,
+            defer=True,
+        ),
+        SlashRoute(
+            name="print",
+            description="Show the selected level.",
+            default_permission=True,
+            handler=show,
+            defer=True,
+        ),
     ]
 )
-
-

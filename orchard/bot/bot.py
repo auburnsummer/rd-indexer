@@ -7,13 +7,10 @@ from orchard.bot.handlers.interactions.handler import interaction_handler
 from orchard.bot.handlers.set_approval import set_approval
 from orchard.bot.handlers.get_approval_multi import get_approval_multi
 
-from orchard.bot.lib.slash_commands.register import (
-    update_slash_commands
-)
-
+from orchard.bot.lib.slash_commands.register import update_slash_commands
 
 # All the routes we're using go here.
-from orchard.db.models import Status
+from orchard.db.models import Info, Status, User
 
 
 async def prerun_update_slash_commands():
@@ -35,6 +32,13 @@ async def prerun_check_db():
     if not db.table_exists("status"):
         print("Status table not found, making it now...")
         db.create_tables([Status])
+    if not db.table_exists("info"):
+        print("Info table not found, making it now.")
+        db.create_tables([Info])
+        Info.create(id=0, schema_version=1)
+    if not db.table_exists("user"):
+        print("User table not found, making it now.")
+        db.create_tables([User])
 
 
 # two identical routes. this is so i can change it in discord developer options to check
@@ -44,8 +48,8 @@ OrchardBotApp = Starlette(
     routes=[
         Route("/interactions", interaction_handler, methods=["POST"]),
         Route("/interactions2", interaction_handler, methods=["POST"]),
-        Route('/approval/{id}', set_approval, methods=['POST', 'GET']),
-        Route('/multi/approval', get_approval_multi, methods=['POST'])
+        Route("/approval/{id}", set_approval, methods=["POST", "GET"]),
+        Route("/multi/approval", get_approval_multi, methods=["POST"]),
     ],
     on_startup=[
         prerun_update_slash_commands,

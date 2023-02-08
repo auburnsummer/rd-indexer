@@ -73,7 +73,7 @@ def tokenize(stream):
             elif char == ":":
                 completed = True
                 now_token = (TOKEN_TYPE.OPERATOR, ":")
-            elif char == "\"":
+            elif char == '"':
                 next_state = __TOKENIZER_STATE.STRING
             elif char in "123456789":
                 next_state = __TOKENIZER_STATE.INTEGER
@@ -98,7 +98,7 @@ def tokenize(stream):
             elif char == ".":
                 next_state = __TOKENIZER_STATE.FLOATING_POINT_0
                 add_char = True
-            elif char == "e" or char == 'E':
+            elif char == "e" or char == "E":
                 next_state = __TOKENIZER_STATE.INTEGER_EXP_0
                 add_char = True
             elif is_delimiter(char):
@@ -106,18 +106,20 @@ def tokenize(stream):
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, int("".join(token)))
                 advance = False
-            elif char == "\"":
+            elif char == '"':
                 next_state = __TOKENIZER_STATE.STRING
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, int("".join(token)))
                 advance = True
             else:
-                raise ValueError("A number must contain only digits.  Got '{}'".format(char))
+                raise ValueError(
+                    "A number must contain only digits.  Got '{}'".format(char)
+                )
         elif state == __TOKENIZER_STATE.INTEGER_0:
             if char == ".":
                 next_state = __TOKENIZER_STATE.FLOATING_POINT_0
                 add_char = True
-            elif char == "e" or char == 'E':
+            elif char == "e" or char == "E":
                 next_state = __TOKENIZER_STATE.INTEGER_EXP_0
                 add_char = True
             elif is_delimiter(char):
@@ -125,13 +127,15 @@ def tokenize(stream):
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, 0)
                 advance = False
-            elif char == "\"":
+            elif char == '"':
                 next_state = __TOKENIZER_STATE.STRING
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, 0)
                 advance = True
             else:
-                raise ValueError("A 0 must be followed by a '.' or a 'e'.  Got '{0}'".format(char))
+                raise ValueError(
+                    "A 0 must be followed by a '.' or a 'e'.  Got '{0}'".format(char)
+                )
         elif state == __TOKENIZER_STATE.INTEGER_SIGN:
             if char == "0":
                 next_state = __TOKENIZER_STATE.INTEGER_0
@@ -140,13 +144,19 @@ def tokenize(stream):
                 next_state = __TOKENIZER_STATE.INTEGER
                 add_char = True
             else:
-                raise ValueError("A - must be followed by a digit.  Got '{0}'".format(char))
+                raise ValueError(
+                    "A - must be followed by a digit.  Got '{0}'".format(char)
+                )
         elif state == __TOKENIZER_STATE.INTEGER_EXP_0:
             if char == "+" or char == "-" or char in "0123456789":
                 next_state = __TOKENIZER_STATE.INTEGER_EXP
                 add_char = True
             else:
-                raise ValueError("An e in a number must be followed by a '+', '-' or digit.  Got '{0}'".format(char))
+                raise ValueError(
+                    "An e in a number must be followed by a '+', '-' or digit.  Got '{0}'".format(
+                        char
+                    )
+                )
         elif state == __TOKENIZER_STATE.INTEGER_EXP:
             if char in "0123456789":
                 add_char = True
@@ -155,13 +165,17 @@ def tokenize(stream):
                 now_token = (TOKEN_TYPE.NUMBER, float("".join(token)))
                 next_state = __TOKENIZER_STATE.WHITESPACE
                 advance = False
-            elif char == "\"":
+            elif char == '"':
                 next_state = __TOKENIZER_STATE.STRING
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, 0)
                 advance = True
             else:
-                raise ValueError("A number exponent must consist only of digits.  Got '{}'".format(char))
+                raise ValueError(
+                    "A number exponent must consist only of digits.  Got '{}'".format(
+                        char
+                    )
+                )
         elif state == __TOKENIZER_STATE.FLOATING_POINT:
             if char in "0123456789":
                 add_char = True
@@ -173,7 +187,7 @@ def tokenize(stream):
                 now_token = (TOKEN_TYPE.NUMBER, float("".join(token)))
                 next_state = __TOKENIZER_STATE.WHITESPACE
                 advance = False
-            elif char == "\"":
+            elif char == '"':
                 next_state = __TOKENIZER_STATE.STRING
                 completed = True
                 now_token = (TOKEN_TYPE.NUMBER, 0)
@@ -185,7 +199,9 @@ def tokenize(stream):
                 next_state = __TOKENIZER_STATE.FLOATING_POINT
                 add_char = True
             else:
-                raise ValueError("A number with a decimal point must be followed by a fractional part")
+                raise ValueError(
+                    "A number with a decimal point must be followed by a fractional part"
+                )
         elif state == __TOKENIZER_STATE.FALSE_1:
             if char == "a":
                 next_state = __TOKENIZER_STATE.FALSE_2
@@ -243,7 +259,7 @@ def tokenize(stream):
             else:
                 raise ValueError("Invalid JSON character: '{0}'".format(char))
         elif state == __TOKENIZER_STATE.STRING:
-            if char == "\"":
+            if char == '"':
                 completed = True
                 now_token = (TOKEN_TYPE.STRING, "".join(token))
                 next_state = __TOKENIZER_STATE.STRING_END
@@ -256,10 +272,14 @@ def tokenize(stream):
                 advance = False
                 next_state = __TOKENIZER_STATE.WHITESPACE
             else:
-                raise ValueError("Expected whitespace or an operator after strin.  Got '{}'".format(char))
+                raise ValueError(
+                    "Expected whitespace or an operator after strin.  Got '{}'".format(
+                        char
+                    )
+                )
         elif state == __TOKENIZER_STATE.STRING_ESCAPE:
             next_state = __TOKENIZER_STATE.STRING
-            if char == "\\" or char == "\"":
+            if char == "\\" or char == '"':
                 add_char = True
             elif char == "b":
                 char = "\b"
@@ -363,7 +383,7 @@ def parse(file):
     token_stream = tokenize(file)
     val, token_type, token = __parse(token_stream, next(token_stream))
     if token is not None:
-        if token == ',':
+        if token == ",":
             pass
         else:
             raise ValueError("Improperly closed JSON object")
@@ -419,8 +439,11 @@ def __parse(token_stream, first_token):
                             elif token == "[":
                                 stack.append([])
                             elif token != "]":
-                                raise ValueError("Array must either be empty or contain a value.  Got '{}'".
-                                                 format(token))
+                                raise ValueError(
+                                    "Array must either be empty or contain a value.  Got '{}'".format(
+                                        token
+                                    )
+                                )
                         else:
                             stack.append(token)
                     elif last_token == ",":
@@ -433,7 +456,9 @@ def __parse(token_stream, first_token):
                                 # trailing comma, ignore
                                 pass
                             else:
-                                raise ValueError("Array value expected.  Got '{}'".format(token))
+                                raise ValueError(
+                                    "Array value expected.  Got '{}'".format(token)
+                                )
                         else:
                             stack.append(token)
                     elif last_token == "]":
@@ -455,16 +480,20 @@ def __parse(token_stream, first_token):
                             elif isinstance(stack[-1], dict):
                                 stack[-1][value.key] = value.value
                             else:
-                                raise ValueError("Array items must be followed by a comma or closing bracket.  "
-                                                 "Got '{}'".format(value))
+                                raise ValueError(
+                                    "Array items must be followed by a comma or closing bracket.  "
+                                    "Got '{}'".format(value)
+                                )
                         else:
-                            raise ValueError("Array items must be followed by a comma or closing bracket.  "
-                                             "Got '{}'".format(value))
+                            raise ValueError(
+                                "Array items must be followed by a comma or closing bracket.  "
+                                "Got '{}'".format(value)
+                            )
                         # if what's following is a string, we're running into the next key without
                         # a comma. emit the comma now to compensate.
                         if token_type == TOKEN_TYPE.STRING:
                             override_stack.append((token_type, token))
-                            override_stack.append((TOKEN_TYPE.OPERATOR, ','))
+                            override_stack.append((TOKEN_TYPE.OPERATOR, ","))
                     elif last_token == "}":
                         raise ValueError("Array closed with a '}'")
                     else:
@@ -482,12 +511,16 @@ def __parse(token_stream, first_token):
                             elif token == "[":
                                 stack.append([])
                             elif token != "}":
-                                raise ValueError("Object must either be empty or contain key value pairs."
-                                                 "  Got '{}'".format(token))
+                                raise ValueError(
+                                    "Object must either be empty or contain key value pairs."
+                                    "  Got '{}'".format(token)
+                                )
                         elif token_type == TOKEN_TYPE.STRING:
                             stack.append(KVP(token))
                         else:
-                            raise ValueError("Object keys must be strings.  Got '{}'".format(token))
+                            raise ValueError(
+                                "Object keys must be strings.  Got '{}'".format(token)
+                            )
                     elif last_token == ",":
                         if token_type == TOKEN_TYPE.OPERATOR:
                             if token == "{":
@@ -497,11 +530,15 @@ def __parse(token_stream, first_token):
                             elif token == "}":
                                 pass  # trailing comma
                             else:
-                                raise ValueError("Object key expected.  Got '{}'".format(token))
+                                raise ValueError(
+                                    "Object key expected.  Got '{}'".format(token)
+                                )
                         elif token_type == TOKEN_TYPE.STRING:
                             stack.append(KVP(token))
                         else:
-                            raise ValueError("Object keys must be strings.  Got '{}'".format(token))
+                            raise ValueError(
+                                "Object keys must be strings.  Got '{}'".format(token)
+                            )
                     elif last_token == "}":
                         value = stack.pop()
                         if len(stack) == 0:
@@ -521,15 +558,22 @@ def __parse(token_stream, first_token):
                             elif isinstance(stack[-1], dict):
                                 stack[-1][value.key] = value.value
                             else:
-                                raise ValueError("Object key value pairs must be followed by a comma or "
-                                                 "closing bracket.  Got '{}'".format(value))
+                                raise ValueError(
+                                    "Object key value pairs must be followed by a comma or "
+                                    "closing bracket.  Got '{}'".format(value)
+                                )
                     elif last_token == "]":
                         raise ValueError("Object closed with a ']'")
                     else:
-                        raise ValueError("Object key value pairs should be separated by comma, not ':'")
+                        raise ValueError(
+                            "Object key value pairs should be separated by comma, not ':'"
+                        )
             elif isinstance(stack[-1], KVP):
                 if stack[-1].set:
-                    if token_type == TOKEN_TYPE.OPERATOR or token_type == TOKEN_TYPE.STRING:
+                    if (
+                        token_type == TOKEN_TYPE.OPERATOR
+                        or token_type == TOKEN_TYPE.STRING
+                    ):
                         if token_type == TOKEN_TYPE.STRING:
                             # we went straight into another string! this is the key of the next pair
                             # prepare that string for next iteration...
@@ -538,8 +582,11 @@ def __parse(token_stream, first_token):
                             token = ","
                             token_type = TOKEN_TYPE.OPERATOR
                         if token != "}" and token != ",":
-                            raise ValueError("Object key value pairs should be followed by ',' or '}'.  Got '"
-                                             + token + "'")
+                            raise ValueError(
+                                "Object key value pairs should be followed by ',' or '}'.  Got '"
+                                + token
+                                + "'"
+                            )
                         value = stack.pop()
                         if len(stack) == 0:
                             return value, token_type, token
@@ -548,15 +595,24 @@ def __parse(token_stream, first_token):
                         elif isinstance(stack[-1], dict):
                             stack[-1][value.key] = value.value
                         else:
-                            raise ValueError("Object key value pairs must be followed by a comma or closing bracket.  "
-                                             "Got '{}'".format(value))
+                            raise ValueError(
+                                "Object key value pairs must be followed by a comma or closing bracket.  "
+                                "Got '{}'".format(value)
+                            )
                         if token == "}" and len(stack) == 1:
                             return stack[0], None, None
                     else:
-                        raise ValueError("Object key value pairs should be followed by ',' or '}'.  Got '"
-                                         + token + "'")
+                        raise ValueError(
+                            "Object key value pairs should be followed by ',' or '}'.  Got '"
+                            + token
+                            + "'"
+                        )
                 else:
-                    if token_type == TOKEN_TYPE.OPERATOR and token == ":" and last_type == TOKEN_TYPE.STRING:
+                    if (
+                        token_type == TOKEN_TYPE.OPERATOR
+                        and token == ":"
+                        and last_type == TOKEN_TYPE.STRING
+                    ):
                         pass
                     elif last_type == TOKEN_TYPE.OPERATOR and last_token == ":":
                         if token_type == TOKEN_TYPE.OPERATOR:
@@ -565,13 +621,19 @@ def __parse(token_stream, first_token):
                             elif token == "[":
                                 stack.append([])
                             else:
-                                raise ValueError("Object property value expected.  Got '{}'".format(token))
+                                raise ValueError(
+                                    "Object property value expected.  Got '{}'".format(
+                                        token
+                                    )
+                                )
                         else:
                             stack[-1].value = token
                             stack[-1].set = True
                     else:
-                        raise ValueError("Object keys must be separated from values by a single ':'.  "
-                                         "Got '{}'".format(token))
+                        raise ValueError(
+                            "Object keys must be separated from values by a single ':'.  "
+                            "Got '{}'".format(token)
+                        )
             else:
                 value = stack.pop()
                 if isinstance(stack[-1], list):
@@ -579,8 +641,10 @@ def __parse(token_stream, first_token):
                 elif isinstance(stack[-1], dict):
                     stack[-1][value.key] = value.value
                 else:
-                    raise ValueError("Array items must be followed by a comma or closing bracket.  "
-                                     "Got '{}'".format(value))
+                    raise ValueError(
+                        "Array items must be followed by a comma or closing bracket.  "
+                        "Got '{}'".format(value)
+                    )
 
             last_type, last_token = token_type, token
             if override_stack:
@@ -597,7 +661,7 @@ def __parse(token_stream, first_token):
 def stream_array(token_stream):
     def process_token(token_type, token):
         if token_type == TOKEN_TYPE.OPERATOR:
-            if token == ']':
+            if token == "]":
                 return None, None, None
             elif token == ",":
                 token_type, token = next(token_stream)
@@ -605,18 +669,24 @@ def stream_array(token_stream):
                     if token == "[" or token == "{":
                         return __parse(token_stream, (token_type, token))
                     else:
-                        raise ValueError("Expected an array value.  Got '{}'".format(token))
+                        raise ValueError(
+                            "Expected an array value.  Got '{}'".format(token)
+                        )
                 else:
                     return token, None, None
             elif token == "[" or token == "{":
                 return __parse(token_stream, (token_type, token))
             else:
-                raise ValueError("Array entries must be followed by ',' or ']'.  Got '{}'".format(token))
+                raise ValueError(
+                    "Array entries must be followed by ',' or ']'.  Got '{}'".format(
+                        token
+                    )
+                )
         else:
             return token, None, None
 
     token_type, token = next(token_stream)
-    if token_type != TOKEN_TYPE.OPERATOR or token != '[':
+    if token_type != TOKEN_TYPE.OPERATOR or token != "[":
         raise ValueError("Array must start with '['.  Got '{}'".format(token))
 
     token_type, token = next(token_stream)
@@ -627,4 +697,3 @@ def stream_array(token_stream):
                 return
             yield value
         token_type, token = next(token_stream)
-

@@ -1,8 +1,11 @@
+import logging
 from orchard.bot.lib.utils import get_slash_args
 from orchard.bot.lib.comm.interactor import Interactor
 
 import orchard.bot.lib.auth.keys as keys
 from orchard.bot.lib.comm.message_builder import MessageBuilder as M
+
+logger = logging.getLogger(__name__)
 
 
 async def passcode(body, _):
@@ -15,7 +18,8 @@ async def passcode(body, _):
                 result = keys.check_passcode(check)
                 await i.edit(M().content("✅"), "@original")
             except Exception as e:
-                await i.edit(M().content(f"❌: {e}"), "@original")
+                logger.info("uhhhhh")
+                await i.edit(M().content(f"❌: {repr(e)} {str(e)}"), "@original")
         else:
             # branch where we're generating a passcode
             passcode = keys.gen_passcode()

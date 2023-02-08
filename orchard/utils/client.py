@@ -5,15 +5,17 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
+
 def wrapper(fn):
     """
     wrap httpx's methods to handle discord rate limits.
     """
+
     async def inner(*args, **kwargs):
         resp: httpx.Response = await fn(*args, **kwargs)
         while resp.status_code == 429:
             # retry
-            time_to_wait = float(resp.headers['x-ratelimit-reset-after']) + 0.1
+            time_to_wait = float(resp.headers["x-ratelimit-reset-after"]) + 0.1
             print(f"We are being rate limited! Waiting {time_to_wait} seconds...")
             await asyncio.sleep(time_to_wait)
             resp = await fn(*args, **kwargs)

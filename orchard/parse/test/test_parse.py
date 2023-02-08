@@ -65,13 +65,7 @@ def test_obj_1():
         "a": "hello",
         "b": "world",
         "c": "today",
-        "d": {
-            "e": "nesting now",
-            "f": {
-                "g": "even further",
-                "h": ["i", "j", "k"]
-            }
-        }
+        "d": {"e": "nesting now", "f": {"g": "even further", "h": ["i", "j", "k"]}},
     }
 
 
@@ -92,43 +86,30 @@ in an rdlevel even though
 it has literal newlines!"
         }
     """
-    assert parse(s) == {"a": "this is a valid value\nin an rdlevel even though\nit has literal newlines!"}
+    assert parse(s) == {
+        "a": "this is a valid value\nin an rdlevel even though\nit has literal newlines!"
+    }
 
 
 def test_space_seperated_key_value_pairs():
     s = r"""{ "bar": 1, "beat": 1.01, "endOpacity": 100 "ease": "Linear" }"""
 
-    assert parse(s) == {
-        "bar": 1,
-        "beat": 1.01,
-        "endOpacity": 100,
-        "ease": "Linear"
-    }
+    assert parse(s) == {"bar": 1, "beat": 1.01, "endOpacity": 100, "ease": "Linear"}
+
 
 def test_space_seperated_after_array_control():
     s = r"""{ "bar": 9, "rooms": [0], "strength": "High" }"""
 
-    assert parse(s) == {
-        "bar": 9,
-        "rooms": [0],
-        "strength": "High"
-    }
+    assert parse(s) == {"bar": 9, "rooms": [0], "strength": "High"}
+
 
 def test_space_seperated_after_array():
     s = r"""{ "bar": 9, "rooms": [0] "strength": "High" }"""
 
-    assert parse(s) == {
-        "bar": 9,
-        "rooms": [0],
-        "strength": "High"
-    }
+    assert parse(s) == {"bar": 9, "rooms": [0], "strength": "High"}
 
 
 def test_seperated_by_nothing_at_all():
     s = r"""{ "bar": 3"foo": 4"foobar": 5}"""
 
-    assert parse(s) == {
-        "bar": 3,
-        "foo": 4,
-        "foobar": 5
-    }
+    assert parse(s) == {"bar": 3, "foo": 4, "foobar": 5}

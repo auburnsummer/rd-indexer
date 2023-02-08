@@ -5,10 +5,11 @@ from unittest.mock import patch
 from datetime import datetime
 import os
 
+
 @pytest.fixture
 def patch_vitals():
     def fake_vitals(f):
-        iid = f.read().decode('utf-8')
+        iid = f.read().decode("utf-8")
         return {
             "id": f"unittest_{iid}",
             "artist": "Joe",
@@ -26,7 +27,11 @@ def patch_vitals():
             "single_player": True,
             "two_player": False,
             "last_updated": datetime.fromtimestamp(0),
-            "tags": ["1p", "unittest", "if you are seeing this in rhythm.cafe something has gone wrong"],
+            "tags": [
+                "1p",
+                "unittest",
+                "if you are seeing this in rhythm.cafe something has gone wrong",
+            ],
             "image": None,
             "thumb": None,
             "icon": None,
@@ -39,10 +44,12 @@ def patch_vitals():
             "has_skipshots": False,
             "has_window_dance": False,
             "sha1": "fejwoifjawpoefopjawopefpaowef",
-            "rdlevel_sha1": "wepaofawpoejfpawejfpoawefaew"
+            "rdlevel_sha1": "wepaofawpoejfpawejfpoawefaew",
         }
+
     with patch("orchard.scan.scan.analyze", wraps=fake_vitals) as mock_vitals:
         yield
+
 
 @pytest.fixture
 def make_mock_scraper():
@@ -56,18 +63,14 @@ def make_mock_scraper():
 
         async def download_iid(self, iid):
             # for the mock, return the iid itself as bytes.
-            return iid.encode('utf-8')
+            return iid.encode("utf-8")
 
         async def get_url(self, iid):
-            return f"this.is.a.mock.url.com/{iid}"       
+            return f"this.is.a.mock.url.com/{iid}"
 
         async def get_metadata(self, iid):
             if self.enable_metadata:
-                return {
-                    "first_letter": iid[0],
-                    "last_letter": iid[-1]
-                }
+                return {"first_letter": iid[0], "last_letter": iid[-1]}
             return None
-    
-    return MockLevelScraper
 
+    return MockLevelScraper

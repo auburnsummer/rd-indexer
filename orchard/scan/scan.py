@@ -21,9 +21,7 @@ logger = logging.getLogger(__name__)
 
 CODEX = "https://codex.rhythm.cafe"
 
-SCRAPER_MAP = {
-    "OldSheetScraper": OldSheetScraper
-}
+SCRAPER_MAP = {"OldSheetScraper": OldSheetScraper}
 
 
 async def main(db: SqliteExtDatabase, sources):
@@ -89,14 +87,16 @@ async def main(db: SqliteExtDatabase, sources):
 
                 # Add to database.
                 to_add = {
-                    "url": await scraper.get_url(iid),  # even if this is None that's fine
+                    "url": await scraper.get_url(
+                        iid
+                    ),  # even if this is None that's fine
                     "url2": f"{CODEX}/{rdzip_url}",
                     "image": f"{CODEX}/{image_url}",
                     "thumb": f"{CODEX}/{thumbnail_url}",
                     "icon": f"{CODEX}/{icon_url}",
                     "source": source_id,
                     "source_iid": iid,
-                    "source_metadata": await scraper.get_metadata(iid)
+                    "source_metadata": await scraper.get_metadata(iid),
                 }
 
                 if vit["icon"]:
@@ -119,12 +119,13 @@ async def main(db: SqliteExtDatabase, sources):
 if __name__ == "__main__":
     if os.environ.get("ORCHARD_DEBUG"):
         import debugpy
+
         debugpy.listen(5678)
         debugpy.wait_for_client()  # blocks execution until client is attached
     database_file_name = sys.argv[1]
     sources_file_name = sys.argv[2]
     db = SqliteExtDatabase(database_file_name)
-    with open(sources_file_name, 'r') as f:
+    with open(sources_file_name, "r") as f:
         loaded_sources = yaml.load(f.read(), Loader=yaml.Loader)
 
     db.connect()

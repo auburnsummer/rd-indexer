@@ -36,4 +36,4 @@ def grouper(n, iterable):
 # https://www.starlette.io/responses/#jsonresponse
 class OrchardJSONResponse(JSONResponse):
     def render(self, content: Any) -> str:
-        return json.dumps(content, ensure_ascii=False, default=str).encode('utf-8')
+        return json.dumps(content, ensure_ascii=False, default=str).encode("utf-8")

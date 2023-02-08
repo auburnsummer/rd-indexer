@@ -25,6 +25,9 @@
 	"postCreateCommand": "./.devcontainer/postCreateCommand.sh",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	"containerEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
 	}
 
 	// Configure tool-specific properties.

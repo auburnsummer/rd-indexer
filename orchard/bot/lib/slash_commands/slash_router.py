@@ -5,6 +5,7 @@ from starlette.responses import JSONResponse
 EVERY_PERMISSION = str(2**41 - 1)
 NO_PERMISSIONS = str(0)
 
+
 class SlashOptionChoice:
     def __init__(self, name, value):
         self._name = name
@@ -44,7 +45,7 @@ class SlashRoute:
         handler,
         default_permission=False,
         options=None,
-        defer=False
+        defer=False,
     ):
         self._name = name
         self._description = description
@@ -57,7 +58,9 @@ class SlashRoute:
         output = {
             "name": self._name,
             "description": self._description,
-            "default_member_permissions": EVERY_PERMISSION if self._default_permission else NO_PERMISSIONS
+            "default_member_permissions": EVERY_PERMISSION
+            if self._default_permission
+            else NO_PERMISSIONS,
         }
         if self._options is not None:
             output["options"] = [o.api() for o in self._options]
@@ -94,6 +97,11 @@ class SlashRouter:
                     background=deferred_task,
                 )
         else:
-            # Otherwise, return a default response. The default response has a 200 return code.
-            # The key 'type' is 4, and the key 'data.content' is something like "oh no"
-            return JSONResponse({"type": 4, "data": {"content": "oh no"}})
+            return JSONResponse(
+                {
+                    "type": 4,
+                    "data": {
+                        "content": f"I don't know what to do with the requested route {route_name}. This is always a bug; ping auburn now!"
+                    },
+                }
+            )

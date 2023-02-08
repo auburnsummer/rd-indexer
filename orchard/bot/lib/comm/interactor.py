@@ -1,6 +1,6 @@
 import logging
 
-from orchard.bot.lib.comm.message_builder import MessageBuilder
+from orchard.bot.lib.comm.message_builder import Embed, MessageBuilder
 import httpx
 
 from orchard.bot.lib.constants import APPLICATION_ID
@@ -11,6 +11,7 @@ import orchard.bot.lib.comm.crosscode as cc
 base_url = f"{DISCORD_API_URL}/webhooks/{APPLICATION_ID}"
 
 logger = logging.getLogger(__name__)
+
 
 class Interactor:
     """
@@ -34,8 +35,11 @@ class Interactor:
         if exc_type is not None:
             logger.error("Error", exc_info=True)
             await self.edit(
-                MessageBuilder().content(
-                    f"An unknown error occured! This is a bug. {repr(exc_type)} {exc_value}"
+                MessageBuilder().embed(
+                    Embed()
+                    .title("An error occured!")
+                    .description(str(exc_value))
+                    .footer(text=repr(exc_type))
                 ),
                 "@original",
             )

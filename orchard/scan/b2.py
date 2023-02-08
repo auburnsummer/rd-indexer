@@ -13,7 +13,9 @@ load_dotenv()
 
 BUCKET_NAME = "rdcodex"
 
-if ("KEY_ID" in os.environ and "B2_ACCESS_KEY" in os.environ) and "pytest" not in sys.modules:  # do not authenticate if we're running in pytest
+if (
+    "KEY_ID" in os.environ and "B2_ACCESS_KEY" in os.environ
+) and "pytest" not in sys.modules:  # do not authenticate if we're running in pytest
     b2_authenticated = True
     info = InMemoryAccountInfo()
     b2_api = B2Api(info)
