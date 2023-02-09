@@ -28,8 +28,8 @@ if LITESTREAM_ON:
         ["litestream", "restore", "-config", str(litestream_path), sys.argv[1]],
         env=env,
         check=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
+        stdout=sys.stdout,
+        stderr=subprocess.STDOUT
     )
 
 
@@ -65,7 +65,7 @@ async def start_litestream():
     litestream_path = pathlib.Path(__file__).parent / "litestream.yml"
     env = {**os.environ, "LITESTREAM_DB": sys.argv[1]}
     process = await asyncio.create_subprocess_exec(
-        "litestream", "replicate", "-config", str(litestream_path), env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        "litestream", "replicate", "-config", str(litestream_path), env=env, stdout=sys.stdout, stderr=subprocess.STDOUT
     )
     try:
         await process.wait()
