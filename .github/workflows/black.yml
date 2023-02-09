@@ -35,4 +35,4 @@ jobs:
         run: poetry install --no-interaction
 
       - name: lint
-        run: black orchard --check
+        run: poetry run black orchard --check
