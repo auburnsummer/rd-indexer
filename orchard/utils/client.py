@@ -24,12 +24,14 @@ def wrapper(fn):
 
         # wait a little longer, perhaps
         try:
-            if float(resp.headers['x-ratelimit-remaining']) < 1:
-                additional_wait_time = float(resp.headers['x-ratelimit-reset-after'])
-                logger.info(f"A ratelimit is imminent! waiting {additional_wait_time} seconds to avoid it...")
+            if float(resp.headers["x-ratelimit-remaining"]) < 1:
+                additional_wait_time = float(resp.headers["x-ratelimit-reset-after"])
+                logger.info(
+                    f"A ratelimit is imminent! waiting {additional_wait_time} seconds to avoid it..."
+                )
                 await asyncio.sleep(additional_wait_time)
         except KeyError:
-            # discord might not give us these. 
+            # discord might not give us these.
             pass
         return resp
 
