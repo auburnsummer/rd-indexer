@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
   pypy3 \
   curl \
   jq \
+  sqlite3 \
   && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/benbjohnson/litestream/releases/download/v0.3.9/litestream-v0.3.9-linux-amd64.deb --output-document /tmp/litestream.deb
