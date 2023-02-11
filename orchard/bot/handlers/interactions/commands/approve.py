@@ -21,7 +21,7 @@ async def approve(body, request):
             .start_embed()
             .field("id", id)
             .field("song", level.song)
-            .field("authors", level.authors)
+            .field("authors", str(level.authors))
             .field("approval", local_data.approval)
             .done(),
             "@original",
