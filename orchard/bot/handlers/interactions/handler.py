@@ -1,4 +1,4 @@
-from orchard.bot.lib.comm import crosscode
+from orchard.bot.lib.comm import pager
 from orchard.bot.lib.auth.discord_public_key import with_discord_public_key_verification
 from orchard.bot.lib.constants import ResponseType
 from starlette.responses import JSONResponse
@@ -24,7 +24,7 @@ async def interaction_handler(request):
     # handle components (button clicks, etc...)
     # under our model, all components are per-interaction (we don't have "permanent" buttons)
     if body["type"] == 3:
-        return await crosscode.handle(body)
+        return await pager.handle(body)
 
     # usually we shouldn't reach here
     print(body)
