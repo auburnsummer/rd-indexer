@@ -5,7 +5,7 @@ from orchard.bot.lib.entities.status import StatusHelper
 from orchard.bot.lib.entities.user import UserHelper
 from orchard.bot.lib.utils import get_slash_args
 from orchard.db.models import User
-from orchard.bot.lib.comm.message_builder import MessageBuilder as M
+from orchard.bot.lib.comm.message_builder import start_message
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ async def select_by_id(body, request):
         user.set_selected_level(sh.get())
         level = await get_level(id_to_select)
 
-        message = M().content(
+        message = start_message().content(
             f"Selected level is set to {level.song} by {','.join(level.authors)} (id: {level.id})"
         )
         await i.delete("@original")

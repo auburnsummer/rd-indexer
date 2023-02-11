@@ -1,10 +1,16 @@
 from orchard.bot.lib.constants import ResponseType, BOT_VERSION
 from starlette.responses import JSONResponse
-from orchard.bot.lib.comm.message_builder import MessageBuilder as M, Embed
+from orchard.bot.lib.comm.message_builder import start_message
 
 
 def version(body, _):
-    resp = M().embed(Embed().title("CLC Version").description(BOT_VERSION))
+    message = (
+        start_message()
+        .start_embed()
+        .title("CLC Version")
+        .description(BOT_VERSION)
+        .done()
+    )
     return JSONResponse(
-        {"data": resp.payload(), "type": ResponseType.CHANNEL_MESSAGE_WITH_SOURCE}
+        {"data": message.payload(), "type": ResponseType.CHANNEL_MESSAGE_WITH_SOURCE}
     )

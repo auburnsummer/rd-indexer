@@ -44,6 +44,7 @@ jobs:
           --env LITESTREAM_ON=true
           --env TYPESENSE_URL=https://api.rhythm.cafe/typesense
           --env BOT_VERSION=${{ env.GITHUB_SHA_SHORT }}
+          --env GITHUB_TOKEN=$MY_GITHUB_TOKEN
         env:
          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
          KEY_ID: ${{ secrets.B2_KEY_ID }}
@@ -53,4 +54,5 @@ jobs:
          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
          DEV_GUILD: ${{ secrets.DEV_GUILD }}
          SECRET_KEY_ORCH: ${{ secrets.SECRET_KEY_ORCH }}
+         MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         working-directory: .

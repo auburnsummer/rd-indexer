@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 
 from orchard.utils.env import const_from_env
 
+from enum import Enum
+
 load_dotenv()
 
 BOT_VERSION = const_from_env("BOT_VERSION", "dev")
@@ -22,9 +24,21 @@ GITHUB_TOKEN = const_from_env("GITHUB_TOKEN")
 LITESTREAM_ON = const_from_env("LITESTREAM_ON") == "true"
 
 
-class ComponentType:
+class RoleMentionType(Enum):
+    ROLE = "roles"
+    USER = "users"
+    EVERYONE = "everyone"
+
+
+class ComponentType(Enum):
     ACTION_ROW = 1
     BUTTON = 2
+    STRING_SELECT = 3
+    TEXT_INPUT = 4
+    USER_SELECT = 5
+    ROLE_SELECT = 6
+    MENTIONABLE_SELECT = 7
+    CHANNEL_SELECT = 8
 
 
 class OptionType:
@@ -47,7 +61,7 @@ class ResponseType:
     UPDATE_MESSAGE = 7
 
 
-class ButtonStyle:
+class ButtonStyle(Enum):
     PRIMARY = 1
     SECONDARY = 2
     SUCCESS = 3

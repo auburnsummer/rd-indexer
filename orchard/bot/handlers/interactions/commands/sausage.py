@@ -1,10 +1,11 @@
 import httpx
+import logging
 
 from orchard.bot.lib.constants import GITHUB_TOKEN
 from orchard.bot.lib.comm.interactor import Interactor
 
-from orchard.bot.lib.comm.message_builder import MessageBuilder as M, ActionRow, Button
-import orchard.bot.lib.comm.crosscode as cc
+from orchard.bot.lib.comm.message_builder import MessageBuilder, start_message
+from orchard.bot.lib.comm import pager
 
 SUCCESS_MESSAGE = """
 A sausage has been scheduled. See status here: <https://github.com/auburnsummer/rd-indexer/actions>
@@ -12,20 +13,25 @@ A sausage has been scheduled. See status here: <https://github.com/auburnsummer/
 Note that you will need a GitHub account to view the logs.
 """
 
+logger = logging.getLogger(__name__)
+
 
 async def sausage(body, _):
     async with Interactor(body["token"]) as i:
-        bid = await i.uuid()
+        bid = i.uuid()
         await i.edit(
-            M()
+            start_message()
             .content(
                 "Check at <https://github.com/auburnsummer/rd-indexer/actions> that there is no sausage in "
                 "process, then press the button."
             )
-            .row(ActionRow(Button(label="make sausage", custom_id=bid))),
+            .start_button()
+            .label("make sausage")
+            .uuid(bid)
+            .done(),
             "@original",
         )
-        await cc.button_press(bid)
+        await pager.wait(bid)
         try:
             async with httpx.AsyncClient() as client:
                 resp = await client.post(
@@ -34,8 +40,11 @@ async def sausage(body, _):
                     headers={"Authorization": f"token {GITHUB_TOKEN}"},
                 )
                 resp.raise_for_status()
-            await i.edit(M().content(SUCCESS_MESSAGE).clear_rows(), "@original")
+            await i.edit(
+                start_message().content(SUCCESS_MESSAGE).clear_rows(), "@original"
+            )
         except Exception as e:
             await i.edit(
-                M().content(f"An error occurred: {str(e)}").clear_rows(), "@original"
+                start_message().content(f"An error occurred: {str(e)}").clear_rows(),
+                "@original",
             )
