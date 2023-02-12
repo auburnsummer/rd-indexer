@@ -4,8 +4,9 @@ import logging
 from orchard.bot.lib.constants import GITHUB_TOKEN
 from orchard.bot.lib.comm.interactor import Interactor
 
-from orchard.bot.lib.comm.message_builder import MessageBuilder, start_message
+from orchard.bot.lib.comm.message_builder import start_message
 from orchard.bot.lib.comm import pager
+from orchard.bot.lib.slash_commands.slash_router import SlashRoute
 
 SUCCESS_MESSAGE = """
 A sausage has been scheduled. See status here: <https://github.com/auburnsummer/rd-indexer/actions>
@@ -16,7 +17,7 @@ Note that you will need a GitHub account to view the logs.
 logger = logging.getLogger(__name__)
 
 
-async def sausage(body, _):
+async def _sausage(body, _):
     async with Interactor(body["token"]) as i:
         bid = i.uuid()
         await i.edit(
@@ -48,3 +49,11 @@ async def sausage(body, _):
                 start_message().content(f"An error occurred: {str(e)}").clear_rows(),
                 "@original",
             )
+
+sausage = SlashRoute(
+    name="plsausage",
+    description="trigger a rescan now!",
+    default_permission=False,
+    handler=_sausage,
+    defer=True,
+)

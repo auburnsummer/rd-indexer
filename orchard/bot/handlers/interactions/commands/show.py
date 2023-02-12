@@ -2,13 +2,14 @@ import logging
 from orchard.bot.lib.comm.interactor import Interactor
 from orchard.bot.lib.entities.level import get_level
 from orchard.bot.lib.entities.user import UserHelper
+from orchard.bot.lib.slash_commands.slash_router import SlashRoute
 from orchard.bot.lib.utils import get_slash_args
 from orchard.bot.lib.comm.message_builder import start_message
 
 logger = logging.getLogger(__name__)
 
 
-async def show(body, request):
+async def _show(body, request):
     async with Interactor(body["token"]) as i:
         user = UserHelper.from_interaction(body)
         if user.get().selected_level is not None:
@@ -33,3 +34,11 @@ async def show(body, request):
                 ),
                 "@original",
             )
+
+show = SlashRoute(
+    name="print",
+    description="Show the selected level.",
+    default_permission=True,
+    handler=_show,
+    defer=True,
+)
