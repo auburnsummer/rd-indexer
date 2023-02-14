@@ -1,5 +1,7 @@
+from enum import Enum, auto
+from typing import Callable, Dict, List, Union, Any, Optional
 from starlette.background import BackgroundTask
-from orchard.bot.lib.constants import ResponseType
+from orchard.bot.lib.constants import OptionType, ResponseType
 from starlette.responses import JSONResponse
 
 EVERY_PERMISSION = str(2**41 - 1)
@@ -16,7 +18,14 @@ class SlashOptionChoice:
 
 
 class SlashOption:
-    def __init__(self, type, name, description, required=False, choices=None):
+    def __init__(
+        self,
+        type: OptionType,
+        name: str,
+        description: str,
+        required=False,
+        choices=None,
+    ):
         self._type = type
         self._name = name
         self._description = description
@@ -37,15 +46,21 @@ class SlashOption:
         return output
 
 
+class RouteType(Enum):
+    IMMEDIATE = auto()
+    DEFER_VISIBLE = auto()
+    DEFER_EPHEMERAL = auto()
+
+
 class SlashRoute:
     def __init__(
         self,
-        name,
-        description,
+        name: str,
+        description: str,
         handler,
         default_permission=False,
-        options=None,
-        defer=False,
+        options: Optional[List[SlashOption]] = None,
+        defer: Union[RouteType, Callable[[Any, Any], RouteType]] = RouteType.IMMEDIATE,
     ):
         self._name = name
         self._description = description
@@ -69,7 +84,9 @@ class SlashRoute:
 
 
 class SlashRouter:
-    def __init__(self, routes):
+    _route_map: Dict[str, SlashRoute]
+
+    def __init__(self, routes: List[SlashRoute]):
         self._routes = routes
         # build a mapping of route names to routes
         self._route_map = {}
@@ -84,16 +101,28 @@ class SlashRouter:
         route_name = body["data"]["name"]
         # Check if the route name is present in the mapping.
         if route_name in self._route_map:
-            # Execute the associated handler. If it's not deferred, we just return it straightaway.
-            if not self._route_map[route_name]._defer:
-                return self._route_map[route_name]._handler(body, request)
+            # Execute the associated handler. _defer can be a function that returns a RouteType.
+            route = self._route_map[route_name]
+            if callable(route._defer):
+                route_type = route._defer(body, request)
             else:
+                route_type = route._defer
+            # If it's an immediate route, just call the handler.
+            if route_type == RouteType.IMMEDIATE:
+                return route._handler(body, request)
+            else:
+                # 64 means the "clc is thinking..." is ephemeral
+                flags = 64 if route_type == RouteType.DEFER_EPHEMERAL else 0
                 # Return a deferred response, which is type 5.
                 deferred_task = BackgroundTask(
                     self._route_map[route_name]._handler, body, request
                 )
+                args = {
+                    "type": ResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+                    "data": {"flags": flags},
+                }
                 return JSONResponse(
-                    {"type": ResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE},
+                    args,
                     background=deferred_task,
                 )
         else:

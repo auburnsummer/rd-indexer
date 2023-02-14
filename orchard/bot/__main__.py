@@ -88,9 +88,13 @@ if os.environ.get("ORCHARD_DEBUG"):
 
 async def main():
     if LITESTREAM_ON:
-        await asyncio.gather(start_litestream(), start_app())
+        # https://textual.textualize.io/blog/2023/02/11/the-heisenbug-lurking-in-your-async-code/
+        task1 = start_litestream()
+        task2 = start_app()
+        await asyncio.gather(task1, task2)
     else:
-        await start_app()
+        task1 = start_app()
+        await task1
 
 
 try:
