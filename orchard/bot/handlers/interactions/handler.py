@@ -29,4 +29,3 @@ async def interaction_handler(request):
     # usually we shouldn't reach here
     print(body)
     return JSONResponse({"hello": "world"})
- 

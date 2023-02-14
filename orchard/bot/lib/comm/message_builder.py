@@ -244,8 +244,7 @@ class MessageBuilder:
         return self
 
     def clear_rows(self):
-        if "components" in self._dict:
-            del self._dict["components"]
+        self._dict["components"] = []
         return self
 
     def payload(self):

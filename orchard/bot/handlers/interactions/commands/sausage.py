@@ -6,7 +6,7 @@ from orchard.bot.lib.comm.interactor import Interactor
 
 from orchard.bot.lib.comm.message_builder import start_message
 from orchard.bot.lib.comm import pager
-from orchard.bot.lib.slash_commands.slash_router import SlashRoute
+from orchard.bot.lib.slash_commands.slash_router import RouteType, SlashRoute
 
 SUCCESS_MESSAGE = """
 A sausage has been scheduled. See status here: <https://github.com/auburnsummer/rd-indexer/actions>
@@ -50,10 +50,11 @@ async def _sausage(body, _):
                 "@original",
             )
 
+
 sausage = SlashRoute(
     name="plsausage",
     description="trigger a rescan now!",
     default_permission=False,
     handler=_sausage,
-    defer=True,
+    defer=RouteType.DEFER_VISIBLE,
 )

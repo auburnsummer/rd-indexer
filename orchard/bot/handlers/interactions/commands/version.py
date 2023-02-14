@@ -16,8 +16,7 @@ def _version(body, _):
         {"data": message.payload(), "type": ResponseType.CHANNEL_MESSAGE_WITH_SOURCE}
     )
 
+
 version = SlashRoute(
-    name="version",
-    description="print the version of this bot",
-    handler=_version
+    name="version", description="print the version of this bot", handler=_version
 )

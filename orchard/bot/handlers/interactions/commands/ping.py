@@ -9,8 +9,5 @@ def _ping(body, _):
         {"type": ResponseType.CHANNEL_MESSAGE_WITH_SOURCE, "data": {"content": "pong"}}
     )
 
-ping = SlashRoute(
-    name="ping",
-    description="responds with pong!",
-    handler=_ping
-)
+
+ping = SlashRoute(name="ping", description="responds with pong!", handler=_ping)

@@ -1,6 +1,10 @@
 import logging
 from orchard.bot.lib.constants import OptionType
-from orchard.bot.lib.slash_commands.slash_router import SlashOption, SlashRoute
+from orchard.bot.lib.slash_commands.slash_router import (
+    RouteType,
+    SlashOption,
+    SlashRoute,
+)
 from orchard.bot.lib.utils import get_slash_args
 from orchard.bot.lib.comm.interactor import Interactor
 
@@ -33,6 +37,7 @@ async def _passcode(body, _):
 
             await i.post(start_message().content(passcode).ephemeral())
 
+
 passcode = SlashRoute(
     name="plpasscode",
     description="return a passcode for pathlab use (pathlab people only)",
@@ -45,5 +50,5 @@ passcode = SlashRoute(
         )
     ],
     handler=_passcode,
-    defer=True,
+    defer=RouteType.DEFER_VISIBLE,
 )

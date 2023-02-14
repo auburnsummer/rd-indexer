@@ -1,6 +1,3 @@
-from orchard.bot.handlers.interactions.commands.approve import approve
-from orchard.bot.handlers.interactions.commands.passcode import passcode
-
 from orchard.bot.handlers.interactions.commands import (
     approve,
     passcode,
@@ -10,18 +7,8 @@ from orchard.bot.handlers.interactions.commands import (
     version,
     select_by_id,
 )
-from orchard.bot.lib.slash_commands.slash_router import (
-    SlashRouter
-)
+from orchard.bot.lib.slash_commands.slash_router import SlashRouter
 
 router = SlashRouter(
-    routes=[
-        ping,
-        version,
-        passcode,
-        approve,
-        sausage,
-        select_by_id,
-        show
-    ]
+    routes=[ping, version, passcode, approve, sausage, select_by_id, show]
 )

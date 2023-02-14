@@ -4,7 +4,11 @@ from orchard.bot.lib.constants import OptionType
 from orchard.bot.lib.entities.level import get_level
 from orchard.bot.lib.entities.status import StatusHelper
 from orchard.bot.lib.entities.user import UserHelper
-from orchard.bot.lib.slash_commands.slash_router import SlashOption, SlashRoute
+from orchard.bot.lib.slash_commands.slash_router import (
+    RouteType,
+    SlashOption,
+    SlashRoute,
+)
 from orchard.bot.lib.utils import get_slash_args
 from orchard.db.models import User
 from orchard.bot.lib.comm.message_builder import start_message
@@ -27,6 +31,7 @@ async def _select_by_id(body, request):
         await i.delete("@original")
         await i.post(message.ephemeral())
 
+
 select_by_id = SlashRoute(
     name="select_by_id",
     description="Select a level",
@@ -40,5 +45,5 @@ select_by_id = SlashRoute(
     ],
     default_permission=True,
     handler=_select_by_id,
-    defer=True,
+    defer=RouteType.DEFER_VISIBLE,
 )

@@ -2,7 +2,11 @@ from orchard.bot.lib.entities.level import get_level
 from orchard.bot.lib.entities.status import StatusHelper
 from orchard.bot.lib.comm.interactor import Interactor
 from orchard.bot.lib.comm.message_builder import start_message
-from orchard.bot.lib.slash_commands.slash_router import SlashRoute, SlashOption
+from orchard.bot.lib.slash_commands.slash_router import (
+    RouteType,
+    SlashRoute,
+    SlashOption,
+)
 from orchard.bot.lib.constants import OptionType
 from orchard.bot.lib.utils import get_slash_args
 
@@ -48,5 +52,5 @@ approve = SlashRoute(
         ),
     ],
     handler=_approve,
-    defer=True,
+    defer=RouteType.DEFER_VISIBLE,
 )
