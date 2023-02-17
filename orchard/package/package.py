@@ -120,7 +120,6 @@ def package():
     with open("./orchard.ndjson", "w") as f:
         for row in Combined.select():
             f.write(make_meili_ndjson_from_combined(row) + "\n")
-    
 
 
 if __name__ == "__main__":
