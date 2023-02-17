@@ -8,6 +8,8 @@ http://orchard.fly.dev:8080, :8080 {
         method GET HEAD OPTIONS TRACE
     }
     @allowed_meili {
+        # meili is running unprotected, so we need to guard routes.
+        # these are the only routes allowed publicly.
         path /indexes/levels/search /stats /health /static/*
     }
     rewrite /datasette /datasette/
