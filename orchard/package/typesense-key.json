@@ -1,6 +1,0 @@
-{
-  "description": "Search-only key.",
-  "value": "nicolebestgirl",
-  "actions": ["documents:search", "documents:get", "aliases:list", "metrics.json:list"],
-  "collections": ["levels"]
-}

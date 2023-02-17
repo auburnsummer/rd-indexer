@@ -1,0 +1,192 @@
+{
+	"name": "levels",
+	"fields": [
+		{
+			"facet": true,
+			"index": true,
+			"name": "artist",
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "artist_tokens",
+			"type": "string[]"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "authors",
+			"type": "string[]"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "description",
+			"type": "string"
+		},
+		{
+			"facet": false,
+			"index": false,
+			"name": "description_ct",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "difficulty",
+			"type": "int32"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_classics",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_freetimes",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_freezeshots",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_holds",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_oneshots",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_squareshots",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_skipshots",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "has_window_dance",
+			"type": "bool"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "last_updated",
+			"type": "int64"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "max_bpm",
+			"type": "float"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "min_bpm",
+			"type": "float"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "seizure_warning",
+			"type": "bool"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "single_player",
+			"type": "bool"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "song",
+			"type": "string"
+		},
+		{
+			"facet": false,
+			"index": false,
+			"name": "song_ct",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "source",
+			"type": "string"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "tags",
+			"type": "string[]"
+		},
+		{
+			"facet": true,
+			"index": true,
+			"name": "two_player",
+			"type": "bool"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "approval",
+			"type": "int32"
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "indexed",
+			"type": "int64",
+			"optional": true
+		},
+		{
+			"facet": false,
+			"index": false,
+			"name": "approval_reasons",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"facet": false,
+			"index": false,
+			"name": "sha1",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "discord_metadata__user_id",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"facet": false,
+			"index": true,
+			"name": "discord_metadata__timestamp",
+			"type": "string",
+			"optional": true
+		}
+	]
+}

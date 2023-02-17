@@ -160,6 +160,7 @@ cython_debug/
 *.db-shm
 *.db-wal
 *.jsonl
+*.ndjson
 
 *.dev.yml
 

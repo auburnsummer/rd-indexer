@@ -1,0 +1,28 @@
+{
+    auto_https off
+}
+
+
+http://orchard.fly.dev:8080, :8080 {
+    @readonly {
+        method GET HEAD OPTIONS TRACE
+    }
+    @allowed_meili {
+        path /indexes/levels/search /stats /health /static/*
+    }
+    rewrite /datasette /datasette/
+    rewrite /typesense /typesense/
+    rewrite /meili /meili/
+    handle_path /datasette/* {
+        reverse_proxy * http://localhost:5100
+    }
+    handle_path /typesense/* {
+        reverse_proxy @readonly http://localhost:5000
+    }
+    handle_path /meili/* {
+        reverse_proxy @allowed_meili http://localhost:7700
+    }
+    handle_path /static
+    root * /app/www
+    file_server
+}

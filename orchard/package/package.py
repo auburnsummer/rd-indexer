@@ -58,6 +58,46 @@ def make_jsonl_from_combined(combined):
     return json.dumps(final_dict, ensure_ascii=False)
 
 
+def make_meili_ndjson_from_combined(combined):
+    combined_dict = model_to_dict(combined)
+
+    def datetime_to_epoch(s):
+        if s is None:
+            return None
+        if isinstance(s, str):
+            return floor(datetime.fromisoformat(s).timestamp())
+        if isinstance(s, datetime):
+            return floor(s.timestamp())
+        return None
+
+    def default_step(col_name, col_value, final_dict):
+        final_dict[col_name] = col_value
+        return final_dict
+
+    def with_func(func):
+        def inner(col_name, col_value, final_dict):
+            final_dict[col_name] = func(col_value)
+            return final_dict
+
+        return inner
+
+    # dict of keys to functions that do stuff with the value.
+    # we run through the functions to build a final object which then gets JSON serialised into the jsonl.
+    steps = {
+        "last_updated": with_func(datetime_to_epoch),
+        "indexed": with_func(datetime_to_epoch),
+        "song_ct": with_func(json.dumps),
+        "description_ct": with_func(json.dumps),
+    }
+
+    final_dict = {}
+    for col_name, col_value in combined_dict.items():
+        step = steps[col_name] if col_name in steps else default_step
+        final_dict = step(col_name, col_value, final_dict)
+
+    return json.dumps(final_dict, ensure_ascii=False)
+
+
 def package():
     # create the combined db.
     combined = SqliteExtDatabase("./combined.db")
@@ -75,6 +115,12 @@ def package():
     with open("./orchard.jsonl", "w") as f:
         for row in Combined.select():
             f.write(make_jsonl_from_combined(row) + "\n")
+
+    # produce a jsonlines file for meilisearch. meili calls this "ndjson" instead.
+    with open("./orchard.ndjson", "w") as f:
+        for row in Combined.select():
+            f.write(make_meili_ndjson_from_combined(row) + "\n")
+    
 
 
 if __name__ == "__main__":
