@@ -1,14 +1,13 @@
 set -x
 
-
-overmind start -D -l typesense
+overmind start -f ../Procfile -D -l typesense
 sleep 1
 
 # loop until the health endpoint indicates we're good to continue.
 while : ; do
   sleep 1
   value=$(curl localhost:5000/health | jq ".ok")
-  if [ X"$value" = "Xtrue" ] # constant prefix to allow $value to be an empty string.
+  if [ X$value = "Xtrue" ] # constant prefix to allow $value to be an empty string.
   then
     break
   else
@@ -27,7 +26,7 @@ curl "localhost:5000/collections" \
 curl "localhost:5000/collections/levels/documents/import?action=create" \
   -X POST \
   -H "x-typesense-api-key: xyz" \
-  --data-binary @./orchard.jsonl
+  --data-binary @../orchard.jsonl
 
 # add the global search-only key.
 curl 'localhost:5000/keys' \

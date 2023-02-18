@@ -1,0 +1,2 @@
+db_path = "/etc/meili/data.ms"
+env = "development"
