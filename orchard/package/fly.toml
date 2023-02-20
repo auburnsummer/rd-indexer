@@ -55,12 +55,3 @@ processes = []
     restart_limit = 5
     protocol = "http"
     timeout = 2000
-
-  [[services.http_checks]]
-    interval = 10000
-    grace_period = "10s"
-    method = "get"
-    path = "/meili/health"
-    restart_limit = 5
-    protocol = "http"
-    timeout = 2000
