@@ -2,10 +2,6 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-## Meilisearch ##
-ENV MEILI_SERVER_PROVIDER=fly
-RUN echo "deb [trusted=yes] https://apt.fury.io/meilisearch/ /" | tee /etc/apt/sources.list.d/fury.list
-
 RUN apt-get update && apt-get install -y ca-certificates
 
 RUN apt-get update && apt-get install -y \
@@ -15,7 +11,6 @@ RUN apt-get update && apt-get install -y \
   curl \
   jq \
   tree \
-  meilisearch \
   && rm -rf /var/lib/apt/lists/*
 
 ## Datasette ##
@@ -40,7 +35,6 @@ COPY . /app
 WORKDIR /app
 
 RUN cd ./typesense && sh setup_typesense.sh
-RUN cd ./meili && sh setup_meili.sh
 
 RUN rm -f .overmind.sock
 
