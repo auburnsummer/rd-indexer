@@ -76,6 +76,7 @@ def package():
         for row in Combined.select():
             f.write(make_jsonl_from_combined(row) + "\n")
 
+
 if __name__ == "__main__":
     file = sys.argv[1]
     status_file = sys.argv[2]
