@@ -6,7 +6,8 @@
 			"index": true,
 			"infix": true,
 			"name": "artist",
-			"type": "string"
+			"type": "string",
+			"locale": "jp"
 		},
 		{
 			"facet": true,
@@ -122,7 +123,8 @@
 			"index": true,
 			"infix": true,
 			"name": "song",
-			"type": "string"
+			"type": "string",
+			"locale": "jp"
 		},
 		{
 			"facet": false,
