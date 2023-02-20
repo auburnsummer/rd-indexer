@@ -4,6 +4,7 @@
 		{
 			"facet": true,
 			"index": true,
+			"infix": true,
 			"name": "artist",
 			"type": "string"
 		},
@@ -119,6 +120,7 @@
 		{
 			"facet": false,
 			"index": true,
+			"infix": true,
 			"name": "song",
 			"type": "string"
 		},
