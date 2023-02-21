@@ -52,6 +52,12 @@ class RouteType(Enum):
     DEFER_EPHEMERAL = auto()
 
 
+class ApplicationCommandType(Enum):
+    CHAT_INPUT = 1
+    USER = 2
+    MESSAGE = 3
+
+
 class SlashRoute:
     def __init__(
         self,
@@ -61,6 +67,7 @@ class SlashRoute:
         default_permission=False,
         options: Optional[List[SlashOption]] = None,
         defer: Union[RouteType, Callable[[Any, Any], RouteType]] = RouteType.IMMEDIATE,
+        type: ApplicationCommandType = ApplicationCommandType.CHAT_INPUT,
     ):
         self._name = name
         self._description = description
@@ -68,11 +75,13 @@ class SlashRoute:
         self._default_permission = default_permission
         self._options = options
         self._defer = defer
+        self._type = type
 
     def api(self):
         output = {
             "name": self._name,
             "description": self._description,
+            "type": self._type.value,
             "default_member_permissions": EVERY_PERMISSION
             if self._default_permission
             else NO_PERMISSIONS,

@@ -4,7 +4,7 @@ import logging
 from orchard.bot.lib.comm.message_builder import MessageBuilder, start_message
 import httpx
 
-from orchard.bot.lib.constants import APPLICATION_ID
+from orchard.bot.lib.constants import APPLICATION_ID, BOT_TOKEN
 from orchard.utils.constants import DISCORD_API_URL
 
 from orchard.bot.lib.comm import pager
@@ -98,6 +98,13 @@ class Interactor:
         Wrapper around discord API delete message.
         """
         return await self.client.delete(f"{base_url}/{self._token}/messages/{id}")
+
+    @could_raise
+    async def react(self, channel_id, message_id, emoji):
+        return await self.client.put(
+            f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
+            headers={"Authorization": f"Bot {BOT_TOKEN}"},
+        )
 
     def uuid(self):
         """
