@@ -6,9 +6,10 @@ from orchard.bot.handlers.interactions.commands import (
     show,
     version,
     select_by_id,
+    reactx,
 )
 from orchard.bot.lib.slash_commands.slash_router import SlashRouter
 
 router = SlashRouter(
-    routes=[ping, version, passcode, approve, sausage, select_by_id, show]
+    routes=[ping, version, passcode, approve, sausage, select_by_id, show, reactx]
 )
