@@ -11,6 +11,9 @@ processes = []
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
+  
+[deploy]
+  strategy = bluegreen
 
 [[services]]
   internal_port = 8080
