@@ -4,9 +4,6 @@ from starlette.background import BackgroundTask
 from orchard.bot.lib.constants import OptionType, ResponseType
 from starlette.responses import JSONResponse
 
-EVERY_PERMISSION = str(2**41 - 1)
-NO_PERMISSIONS = str(0)
-
 
 class SlashOptionChoice:
     def __init__(self, name, value):
@@ -82,9 +79,7 @@ class SlashRoute:
             "name": self._name,
             "description": self._description,
             "type": self._type.value,
-            "default_member_permissions": EVERY_PERMISSION
-            if self._default_permission
-            else NO_PERMISSIONS,
+            "default_member_permissions": None if self._default_permission else 0,
         }
         if self._options is not None:
             output["options"] = [o.api() for o in self._options]
