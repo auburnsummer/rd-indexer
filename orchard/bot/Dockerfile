@@ -20,7 +20,7 @@ RUN dpkg -i /tmp/litestream.deb
 RUN python3 -m pip install pipx
 RUN python3 -m pipx ensurepath
 
-RUN pipx install poetry
+RUN pipx install poetry==1.4.0
 
 ENV PATH=/root/.local/bin:$PATH
 
