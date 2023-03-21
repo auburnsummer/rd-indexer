@@ -18,5 +18,8 @@ def _version(body, _):
 
 
 version = SlashRoute(
-    name="version", description="print the version of this bot", handler=_version
+    name="version",
+    description="print the version of this bot",
+    handler=_version,
+    default_permission=True,
 )

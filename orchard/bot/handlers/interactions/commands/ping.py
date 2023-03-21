@@ -10,4 +10,9 @@ def _ping(body, _):
     )
 
 
-ping = SlashRoute(name="ping", description="responds with pong!", handler=_ping)
+ping = SlashRoute(
+    name="ping",
+    description="responds with pong!",
+    handler=_ping,
+    default_permission=True,
+)
