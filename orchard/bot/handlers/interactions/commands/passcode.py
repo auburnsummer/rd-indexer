@@ -35,7 +35,7 @@ async def _passcode(body, _):
             # only the caller can see the actual passcode, the visible message is an emoji
             await i.edit(start_message().content("🙈"), "@original")
 
-            await i.post(start_message().content(passcode).ephemeral())
+            await i.post(start_message().content(f"`{passcode}`").ephemeral())
 
 
 passcode = SlashRoute(
