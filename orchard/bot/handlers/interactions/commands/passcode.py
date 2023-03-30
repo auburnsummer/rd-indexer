@@ -38,6 +38,11 @@ async def _passcode(body, _):
             await i.post(start_message().content(f"`{passcode}`").ephemeral())
 
 
+def _defer(body, request):
+    [private] = get_slash_args(["check"], body)
+    return RouteType.DEFER_EPHEMERAL if private else RouteType.DEFER_VISIBLE
+
+
 passcode = SlashRoute(
     name="plpasscode",
     description="return a passcode for pathlab use (pathlab people only)",
@@ -50,5 +55,5 @@ passcode = SlashRoute(
         )
     ],
     handler=_passcode,
-    defer=RouteType.DEFER_VISIBLE,
+    defer=_defer,
 )
