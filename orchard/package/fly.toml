@@ -43,7 +43,7 @@ processes = []
 
   [[services.http_checks]]
     interval = 10000
-    grace_period = "10s"
+    grace_period = "90s"
     method = "get"
     path = "/typesense/health"
     restart_limit = 5
@@ -52,7 +52,7 @@ processes = []
 
   [[services.http_checks]]
     interval = 10000
-    grace_period = "10s"
+    grace_period = "90s"
     method = "get"
     path = "/datasette"
     restart_limit = 5
