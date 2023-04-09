@@ -1,6 +1,6 @@
 # fly.toml file generated for orchard on 2022-04-03T10:50:15+10:00
 
-app = "orchard"
+app = "orchardtest1"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
@@ -37,18 +37,18 @@ processes = []
 
   [[services.http_checks]]
     interval = 10000
-    grace_period = "90s"
+    grace_period = "300s"
     method = "get"
     path = "/typesense/health"
-    restart_limit = 15
+    restart_limit = 150
     protocol = "http"
-    timeout = 2000
+    timeout = 20000
 
   [[services.http_checks]]
     interval = 10000
-    grace_period = "90s"
+    grace_period = "300s"
     method = "get"
     path = "/datasette"
-    restart_limit = 15
+    restart_limit = 150
     protocol = "http"
-    timeout = 2000
+    timeout = 20000
