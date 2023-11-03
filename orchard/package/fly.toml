@@ -13,7 +13,7 @@ processes = []
   auto_rollback = true
   
 [deploy]
-  strategy = "bluegreen"
+  strategy = "rolling"
 
 [[services]]
   internal_port = 8080
