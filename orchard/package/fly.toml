@@ -34,21 +34,3 @@ processes = []
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
-
-  [[services.http_checks]]
-    interval = 10000
-    grace_period = "300s"
-    method = "get"
-    path = "/typesense/health"
-    restart_limit = 150
-    protocol = "http"
-    timeout = 20000
-
-  [[services.http_checks]]
-    interval = 10000
-    grace_period = "300s"
-    method = "get"
-    path = "/datasette"
-    restart_limit = 150
-    protocol = "http"
-    timeout = 20000
