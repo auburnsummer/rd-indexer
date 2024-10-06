@@ -160,7 +160,7 @@ class DiscordScraper(RDLevelScraper):
                             #  note: the channel id is not required because channels are immutable by source id.
                             #  note2: attachment id is required because it's possible to delete an attachment
                             #         w/o deleting the post.
-                            iid = f"{post['id']}|{post["attachments"][i]['id']}"
+                            iid = f"{post['id']}|{post['attachments'][i]['id']}"
                             #  cache of message objects for later use, if needed.
                             self.iid_cache[iid] = post
                             iids.append(iid)
