@@ -10,6 +10,8 @@ from orchard.utils.constants import DISCORD_API_URL
 from orchard.bot.lib.comm import pager
 from typing import Callable, List, Awaitable
 
+import urllib.parse
+
 base_url = f"{DISCORD_API_URL}/webhooks/{APPLICATION_ID}"
 
 logger = logging.getLogger(__name__)
@@ -103,6 +105,13 @@ class Interactor:
     async def react(self, channel_id, message_id, emoji):
         return await self.client.put(
             f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
+            headers={"Authorization": f"Bot {BOT_TOKEN}"},
+        )
+
+    @could_raise
+    async def get_reactions(self, channel_id, message_id, emoji):
+        return await self.client.get(
+            f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}/reactions/{urllib.parse.quote(emoji)}",
             headers={"Authorization": f"Bot {BOT_TOKEN}"},
         )
 
