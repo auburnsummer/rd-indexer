@@ -138,7 +138,7 @@ class DiscordScraper(RDLevelScraper):
                         current_after = int(post["id"])
 
                     # check the post does not have a :no-entry-sign: by the OP.
-                    remove_attachments = self.check_reaction(post, "🚫")
+                    remove_attachments = await self.check_reaction(post, "🚫")
 
                     # a message can only have a maximum of 10 attachments, so we use number reactions
                     number_reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
@@ -148,7 +148,7 @@ class DiscordScraper(RDLevelScraper):
                     attachment_numbers = []
                     for i, attachment in enumerate(post["attachments"]):
                         if attachment["filename"].endswith(".rdzip"):
-                            if remove_attachments and self.check_reaction(post, number_reactions[i]):
+                            if remove_attachments and await self.check_reaction(post, number_reactions[i]):
                                 ignore_all_attachments = False
                                 continue
                             attachment_numbers.append(i)
