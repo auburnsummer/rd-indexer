@@ -1,6 +1,7 @@
 import logging
 
 import httpx
+import urllib.parse
 
 from orchard.scan.sources.interface import RDLevelScraper
 from orchard.utils.client import Client
@@ -79,6 +80,33 @@ class DiscordScraper(RDLevelScraper):
 
         return {"user_id": message["author"]["id"], "timestamp": message["timestamp"]}
 
+    async def check_reaction(self, post, emoji):
+        if not "reactions" in post:
+            return False
+        
+        if emoji not in [react["emoji"]["name"] for react in post["reactions"]]:
+            return False
+        
+        async with Client() as client:
+            react_params = {"limit": 100}
+            reactors = await client.get(
+                f"{DISCORD_API_URL}/channels/{self.channel_id}/messages/{post['id']}/reactions/{urllib.parse.quote(emoji)}",
+                headers = {
+                    "user-agent": USER_AGENT,
+                    "Authorization": f"Bot {self.bot_token}",
+                },
+                params=react_params,
+            )
+
+            for reactor in reactors.json():
+                if (
+                    reactor["id"] == post["author"]["id"]
+                    or reactor["id"] == self.bot_id
+                ):
+                    return True
+
+            return False
+
     async def get_iids(self):
         iids = []
         current_after = self.after
@@ -110,36 +138,29 @@ class DiscordScraper(RDLevelScraper):
                         current_after = int(post["id"])
 
                     # check the post does not have a :no-entry-sign: by the OP.
-                    has_no_entry = False
-                    if "reactions" in post:
-                        for react in post["reactions"]:
-                            if react["emoji"]["name"] == "🚫":
-                                # it has a no-entry-sign, but it might not be the OP...
-                                # unfortunately, we have to do another API get to see who reacted.
-                                react_params = {"limit": 100}
-                                reactors = await client.get(
-                                    f"{DISCORD_API_URL}/channels/{self.channel_id}/messages/{post['id']}/reactions/%F0%9F%9A%AB",
-                                    headers=headers,
-                                    params=react_params,
-                                )
-                                for reactor in reactors.json():
-                                    if (
-                                        reactor["id"] == post["author"]["id"]
-                                        or reactor["id"] == self.bot_id
-                                    ):
-                                        has_no_entry = True
-                                        break
-                                break
-                    if has_no_entry:
-                        continue
+                    remove_attachments = check_reactions(post, "🚫"):
+
+                    # a message can only have a maximum of 10 attachments, so we use number reactions
+                    number_reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+
+                    # check all attachments and corresponding number reactions. if no number reaction is found, then we ignore every attachment
+                    ignore_all_attachments = True
+                    attachment_numbers = []
                     for i, attachment in enumerate(post["attachments"]):
                         if attachment["filename"].endswith(".rdzip"):
+                            if remove_attachments and check_reaction(post, number_reactions[i]):
+                                ignore_all_attachments = False
+                                continue
+                            attachment_numbers.append(i)
+
+                    if (not remove_attachments) or (not ignore_all_attachments):
+                        for i in attachment_numbers:
                             # the iid is a concatenation of:
                             #  message id, attachment id
                             #  note: the channel id is not required because channels are immutable by source id.
                             #  note2: attachment id is required because it's possible to delete an attachment
                             #         w/o deleting the post.
-                            iid = f"{post['id']}|{attachment['id']}"
+                            iid = f"{post['id']}|{post["attachments"][i]['id']}"
                             #  cache of message objects for later use, if needed.
                             self.iid_cache[iid] = post
                             iids.append(iid)
