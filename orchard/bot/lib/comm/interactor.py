@@ -107,7 +107,7 @@ class Interactor:
             f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
             headers={"Authorization": f"Bot {BOT_TOKEN}"},
         )
-    
+
     @could_raise
     async def get_reactions(self, channel_id, message_id, emoji):
         return await self.client.get(

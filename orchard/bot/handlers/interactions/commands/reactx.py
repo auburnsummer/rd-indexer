@@ -13,11 +13,24 @@ async def _reactx(body, _):
         token = body["token"]
         user_id = body["member"]["user"]["id"]
         messages = body["data"]["resolved"]["messages"]
-        number_reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+        number_reactions = [
+            "1️⃣",
+            "2️⃣",
+            "3️⃣",
+            "4️⃣",
+            "5️⃣",
+            "6️⃣",
+            "7️⃣",
+            "8️⃣",
+            "9️⃣",
+            "🔟",
+        ]
         for key, value in messages.items():
             message_id = value["id"]
             for reaction in number_reactions:
-                if reaction not in [react["emoji"]["name"] for react in value["reactions"]]:
+                if reaction not in [
+                    react["emoji"]["name"] for react in value["reactions"]
+                ]:
                     continue
                 reaction_users = await i.get_reactions(channel_id, message_id, reaction)
                 if user_id in [reactor["id"] for reactor in reaction_users.json()]:

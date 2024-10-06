@@ -83,15 +83,15 @@ class DiscordScraper(RDLevelScraper):
     async def check_reaction(self, post, emoji):
         if not "reactions" in post:
             return False
-        
+
         if emoji not in [react["emoji"]["name"] for react in post["reactions"]]:
             return False
-        
+
         async with Client() as client:
             react_params = {"limit": 100}
             reactors = await client.get(
                 f"{DISCORD_API_URL}/channels/{self.channel_id}/messages/{post['id']}/reactions/{urllib.parse.quote(emoji)}",
-                headers = {
+                headers={
                     "user-agent": USER_AGENT,
                     "Authorization": f"Bot {self.bot_token}",
                 },
@@ -141,14 +141,27 @@ class DiscordScraper(RDLevelScraper):
                     remove_attachments = await self.check_reaction(post, "🚫")
 
                     # a message can only have a maximum of 10 attachments, so we use number reactions
-                    number_reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+                    number_reactions = [
+                        "1️⃣",
+                        "2️⃣",
+                        "3️⃣",
+                        "4️⃣",
+                        "5️⃣",
+                        "6️⃣",
+                        "7️⃣",
+                        "8️⃣",
+                        "9️⃣",
+                        "🔟",
+                    ]
 
                     # check all attachments and corresponding number reactions. if no number reaction is found, then we ignore every attachment
                     ignore_all_attachments = True
                     attachment_numbers = []
                     for i, attachment in enumerate(post["attachments"]):
                         if attachment["filename"].endswith(".rdzip"):
-                            if remove_attachments and await self.check_reaction(post, number_reactions[i]):
+                            if remove_attachments and await self.check_reaction(
+                                post, number_reactions[i]
+                            ):
                                 ignore_all_attachments = False
                                 continue
                             attachment_numbers.append(i)
