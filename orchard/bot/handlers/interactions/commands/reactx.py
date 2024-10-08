@@ -40,7 +40,7 @@ async def _reactx(body, _):
 
 
 reactx = SlashRoute(
-    name="Ignore rdzip attachments",
+    name="reactx",
     description="",
     handler=_reactx,
     default_permission=False,
