@@ -28,6 +28,8 @@ async def _reactx(body, _):
         for key, value in messages.items():
             message_id = value["id"]
             for reaction in number_reactions:
+                if "reactions" not in value:
+                    continue
                 if reaction not in [
                     react["emoji"]["name"] for react in value["reactions"]
                 ]:
