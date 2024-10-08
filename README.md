@@ -1,5 +1,7 @@
 # RD Indexer
 
+> This repo will receive minimal updates as I focus on rhythm cafe v3 here: https://github.com/auburnsummer/orchard2
+
 This is a set of Python scripts that produce [api.rhythm.cafe](https://api.rhythm.cafe),
 the backend for [rhythm.cafe](https://rhythm.cafe).
 
