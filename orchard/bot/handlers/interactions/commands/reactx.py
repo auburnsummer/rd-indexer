@@ -8,10 +8,11 @@ from orchard.bot.lib.comm.interactor import Interactor
 
 
 async def _reactx(body, _):
-    async with Interactor(body["token"]) as i:
+    async with Interactor(body["token"]) as interactor:
         channel_id = body["channel_id"]
         token = body["token"]
         user_id = body["member"]["user"]["id"]
+        bot_id = body["application_id"]
         messages = body["data"]["resolved"]["messages"]
         number_reactions = [
             "1️⃣",
@@ -25,20 +26,42 @@ async def _reactx(body, _):
             "9️⃣",
             "🔟",
         ]
+        ignored_rdzips = []
         for key, value in messages.items():
             message_id = value["id"]
-            for reaction in number_reactions:
+            rdzip_attachments = [
+                attachment["filename"]
+                for attachment in value["attachments"]
+                if attachment["filename"].endswith(".rdzip")
+            ]
+            for i, reaction in enumerate(number_reactions):
                 if "reactions" not in value:
                     continue
                 if reaction not in [
                     react["emoji"]["name"] for react in value["reactions"]
                 ]:
                     continue
-                reaction_users = await i.get_reactions(channel_id, message_id, reaction)
-                if user_id in [reactor["id"] for reactor in reaction_users.json()]:
-                    await i.react(channel_id, message_id, reaction)
-            await i.react(channel_id, message_id, "🚫")
-        await i.edit(MessageBuilder().content("done."), "@original")
+                if i >= len(rdzip_attachments):
+                    continue
+                reaction_users = await interactor.get_reactions(
+                    channel_id, message_id, reaction
+                )
+                for reactor in reaction_users.json():
+                    if bot_id == reactor["id"]:
+                        ignored_rdzips.append(rdzip_attachments[i])
+                        continue
+                    if user_id == reactor["id"]:
+                        ignored_rdzips.append(rdzip_attachments[i])
+                        await interactor.react(channel_id, message_id, reaction)
+            await interactor.react(channel_id, message_id, "🚫")
+        result = "Done, now ignoring all rdzips."
+        if len(ignored_rdzips) > 0:
+            result = (
+                "Done, now ignoring the following rdzips:\n```"
+                + "\n".join(ignored_rdzips)
+                + "\n```"
+            )
+        await interactor.edit(MessageBuilder().content(result), "@original")
 
 
 reactx = SlashRoute(
