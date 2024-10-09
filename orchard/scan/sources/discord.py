@@ -46,7 +46,7 @@ class DiscordScraper(RDLevelScraper):
         return httpx.get(url).content
 
     async def get_message(self, iid):
-        "Get the discord Message object relating to an iid. Has an internal cache."
+        """Get the discord Message object relating to an iid. Has an internal cache."""
         if iid in self.iid_cache:
             return self.iid_cache[iid]
         else:
@@ -161,7 +161,7 @@ class DiscordScraper(RDLevelScraper):
                     for i, attachment in enumerate(post["attachments"]):
                         if attachment["filename"].endswith(".rdzip"):
                             if remove_attachments and await self.check_reaction(
-                                post, number_reactions[relative_position], True
+                                post, number_reactions[relative_position]
                             ):
                                 ignore_all_attachments = False
                                 continue
