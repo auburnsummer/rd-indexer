@@ -7,6 +7,8 @@ import httpx
 from orchard.bot.lib.constants import APPLICATION_ID, BOT_TOKEN
 from orchard.utils.constants import DISCORD_API_URL
 
+from orchard.utils.client import Client
+
 from orchard.bot.lib.comm import pager
 from typing import Callable, List, Awaitable
 
@@ -15,19 +17,6 @@ import urllib.parse
 base_url = f"{DISCORD_API_URL}/webhooks/{APPLICATION_ID}"
 
 logger = logging.getLogger(__name__)
-
-
-def could_raise(func: Callable[[], Awaitable[httpx.Response]]):
-    """
-    Decorator. Apply to an async function that returns a Response, and it will call raise_for_status first.
-    """
-
-    async def inner(*args, **kwargs):
-        resp = await func(*args, **kwargs)
-        resp.raise_for_status()
-        return resp
-
-    return inner
 
 
 class Interactor:
@@ -41,7 +30,7 @@ class Interactor:
 
     def __init__(self, token):
         self._token = token
-        self.client = httpx.AsyncClient()
+        self.client = Client()
         # list of crosscode uuids which this interactor owns
         self.crosscode_uuids = []
 
@@ -67,14 +56,12 @@ class Interactor:
         await self.client.aclose()
         return True  # don't propogate any error
 
-    @could_raise
     async def get(self, id):
         """
         Wrapper around discord API get message (from this webhook)
         """
         return await self.client.get(f"{base_url}/{self._token}/messages/{id}")
 
-    @could_raise
     async def edit(self, mb: MessageBuilder, id):
         """
         Wrapper around discord API edit message.
@@ -85,7 +72,6 @@ class Interactor:
             f"{base_url}/{self._token}/messages/{id}", json=mb.payload()
         )
 
-    @could_raise
     async def post(self, mb: MessageBuilder):
         """
         Wrapper around discord API post message.
@@ -94,21 +80,18 @@ class Interactor:
         """
         return await self.client.post(f"{base_url}/{self._token}", json=mb.payload())
 
-    @could_raise
     async def delete(self, id):
         """
         Wrapper around discord API delete message.
         """
         return await self.client.delete(f"{base_url}/{self._token}/messages/{id}")
 
-    @could_raise
     async def react(self, channel_id, message_id, emoji):
         return await self.client.put(
             f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me",
             headers={"Authorization": f"Bot {BOT_TOKEN}"},
         )
 
-    @could_raise
     async def get_reactions(self, channel_id, message_id, emoji):
         return await self.client.get(
             f"{DISCORD_API_URL}/channels/{channel_id}/messages/{message_id}/reactions/{urllib.parse.quote(emoji)}",
