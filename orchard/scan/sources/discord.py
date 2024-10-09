@@ -157,16 +157,16 @@ class DiscordScraper(RDLevelScraper):
                     # check all attachments and corresponding number reactions. if no number reaction is found, then we ignore every attachment
                     ignore_all_attachments = True
                     attachment_numbers = []
-                    relative_position = 0
+                    relative_position = -1
                     for i, attachment in enumerate(post["attachments"]):
                         if attachment["filename"].endswith(".rdzip"):
+                            relative_position += 1
                             if remove_attachments and await self.check_reaction(
                                 post, number_reactions[relative_position]
                             ):
                                 ignore_all_attachments = False
                                 continue
                             attachment_numbers.append(i)
-                            relative_position += 1
 
                     if (not remove_attachments) or (not ignore_all_attachments):
                         for i in attachment_numbers:
