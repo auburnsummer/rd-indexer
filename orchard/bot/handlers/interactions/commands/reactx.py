@@ -49,12 +49,12 @@ async def _reactx(body, _):
                     continue
                 if user_id in reaction_users:
                     ignored_rdzips.append(attachment)
-                    interactor.react(channel_id, message_id, number_reactions[i])
+                    await interactor.react(channel_id, message_id, number_reactions[i])
             await interactor.react(channel_id, message_id, "🚫")
         result = "Done, now ignoring all rdzips."
         if len(ignored_rdzips) > 0:
             result = (
-                "Done, now ignoring the following rdzips:\n```"
+                "Done, now ignoring the following rdzips:\n```\n"
                 + "\n".join(ignored_rdzips)
                 + "\n```"
             )
