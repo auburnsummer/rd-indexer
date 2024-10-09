@@ -40,18 +40,16 @@ async def _reactx(body, _):
                     react["emoji"]["name"] for react in value["reactions"]
                 ]:
                     continue
-                reaction_users = await interactor.get_reactions(
+                reactions = await interactor.get_reactions(
                     channel_id, message_id, number_reactions[i]
                 )
-                for reactor in reaction_users.json():
-                    if bot_id == reactor["id"]:
-                        ignored_rdzips.append(rdzip_attachments[i])
-                        break
-                    if user_id == reactor["id"]:
-                        ignored_rdzips.append(rdzip_attachments[i])
-                        await interactor.react(
-                            channel_id, message_id, number_reactions[i]
-                        )
+                reaction_users = [react["id"] for react in reactions.json()]
+                if bot_id in reaction_users:
+                    ignored_rdzips.append(attachment)
+                    continue
+                if user_id in reaction_users:
+                    ignored_rdzips.append(attachment)
+                    interactor.react(channel_id, message_id, number_reactions[i])
             await interactor.react(channel_id, message_id, "🚫")
         result = "Done, now ignoring all rdzips."
         if len(ignored_rdzips) > 0:
