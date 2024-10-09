@@ -16,7 +16,9 @@ def get_slash_args(args, body):
         options = body["data"]["options"]
         options_dict = {option["name"]: option["value"] for option in options}
         return [options_dict[arg] if arg in options_dict else None for arg in args]
-    except KeyError:  # No arguments were given (e.g. all arguments are optional and we didn't get any of them)
+    except (
+        KeyError
+    ):  # No arguments were given (e.g. all arguments are optional and we didn't get any of them)
         return [None for _ in args]
 
 

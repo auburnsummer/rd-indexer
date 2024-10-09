@@ -25,7 +25,6 @@ SCRAPER_MAP = {"OldSheetScraper": OldSheetScraper}
 
 
 async def main(db: SqliteExtDatabase, sources):
-
     Level.bind(db)
 
     if not db.table_exists("level"):

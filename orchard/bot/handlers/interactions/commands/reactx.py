@@ -10,7 +10,6 @@ from orchard.bot.lib.comm.interactor import Interactor
 async def _reactx(body, _):
     async with Interactor(body["token"]) as interactor:
         channel_id = body["channel_id"]
-        token = body["token"]
         user_id = body["member"]["user"]["id"]
         bot_id = body["application_id"]
         messages = body["data"]["resolved"]["messages"]
@@ -34,25 +33,25 @@ async def _reactx(body, _):
                 for attachment in value["attachments"]
                 if attachment["filename"].endswith(".rdzip")
             ]
-            for i, reaction in enumerate(number_reactions):
+            for i, attachment in enumerate(rdzip_attachments):
                 if "reactions" not in value:
                     continue
-                if reaction not in [
+                if number_reactions[i] not in [
                     react["emoji"]["name"] for react in value["reactions"]
                 ]:
                     continue
-                if i >= len(rdzip_attachments):
-                    continue
                 reaction_users = await interactor.get_reactions(
-                    channel_id, message_id, reaction
+                    channel_id, message_id, number_reactions[i]
                 )
                 for reactor in reaction_users.json():
                     if bot_id == reactor["id"]:
                         ignored_rdzips.append(rdzip_attachments[i])
-                        continue
+                        break
                     if user_id == reactor["id"]:
                         ignored_rdzips.append(rdzip_attachments[i])
-                        await interactor.react(channel_id, message_id, reaction)
+                        await interactor.react(
+                            channel_id, message_id, number_reactions[i]
+                        )
             await interactor.react(channel_id, message_id, "🚫")
         result = "Done, now ignoring all rdzips."
         if len(ignored_rdzips) > 0:
