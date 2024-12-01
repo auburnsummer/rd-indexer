@@ -3,6 +3,11 @@
   - bot_token: !!python/object/apply:orchard.utils.env.const_from_env ["BOT_TOKEN"]
     channel_id: 611380148431749151
     after: 973188856134377532
+- - prescriptions
+  - !!python/name:orchard.scan.sources.discord.DiscordScraper
+  - bot_token: !!python/object/apply:orchard.utils.env.const_from_env ["BOT_TOKEN"]
+    channel_id: 1312585102953287720
+    after: 1312586066129190963
 - - yeoldesheet
   - !!python/name:orchard.scan.sources.old_sheet.OldSheetScraper
   - {}
