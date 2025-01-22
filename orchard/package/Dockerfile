@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 ## Datasette ##
-RUN pip install "datasette~=0.61.1"
+RUN pip install "datasette~=0.65.1"
 
 ## Typesense ##
 RUN mkdir /etc/ts /etc/logs
