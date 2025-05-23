@@ -38,7 +38,11 @@ RUN cd ./typesense && sh setup_typesense.sh
 
 RUN rm -f .overmind.sock
 
+COPY combined.db www/combined.db
+
 EXPOSE 8080
+
+ENV OVERMIND_AUTO_RESTART=datasette
 
 CMD ["overmind", "start"]
 
