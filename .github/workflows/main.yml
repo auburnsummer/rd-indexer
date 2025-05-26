@@ -148,15 +148,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN  }}
-          
-      - name: Build image and push to registry
-        uses: docker/build-push-action@v4
-        with:
-          context: ./orchard/package
-          file: ./orchard/package/Dockerfile
-          platforms: linux/amd64
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         
       - name: package...
         run: poetry run python package.py orchard.db status.db
@@ -168,6 +159,15 @@ jobs:
         
       - name: install flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Build image and push to registry
+        uses: docker/build-push-action@v4
+        with:
+          context: ./orchard/package
+          file: ./orchard/package/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
       
       - name: fly me to the moon
         run: flyctl deploy --remote-only
