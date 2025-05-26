@@ -20,7 +20,7 @@ on:
   
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: auburn-rd-index-cafe
+  IMAGE_NAME: auburnsummer/auburn-rd-index-cafe
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
