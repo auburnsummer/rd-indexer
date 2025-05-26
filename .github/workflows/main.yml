@@ -174,3 +174,7 @@ jobs:
         env:
          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         working-directory: ./orchard/package
+
+      - name: ...and let me play among the stars
+        run: | 
+         curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
