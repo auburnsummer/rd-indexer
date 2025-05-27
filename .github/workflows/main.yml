@@ -177,4 +177,6 @@ jobs:
 
       - name: ...and let me play among the stars
         run: | 
-         curl --location --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
+          curl --location --request POST \
+            --url '${{ secrets.COOLIFY_WEBHOOK }}' \
+            --header 'authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
