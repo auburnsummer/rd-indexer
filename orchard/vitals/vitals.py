@@ -20,6 +20,7 @@ from orchard.vitals.facets.player_facet import player_facet
 from orchard.vitals.facets.tags_facet import tags_facet
 from orchard.vitals.facets.thumbnail_facet import thumbnail_facet
 from orchard.vitals.facets.updated_facet import updated_facet
+from orchard.vitals.facets.rdlevel_md5_facet import rdlevel_md5_facet
 
 
 class VitalsException(Exception):
@@ -57,6 +58,7 @@ def main(f: BinaryIO):
         ): event_type_facet,
         "sha1": sha1_facet,
         "rdlevel_sha1": rdlevel_sha1_facet,
+        "rdlevel_md5": rdlevel_md5_facet
     }
 
     try:

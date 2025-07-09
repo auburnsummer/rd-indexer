@@ -45,6 +45,7 @@ def patch_vitals():
             "has_window_dance": False,
             "sha1": "fejwoifjawpoefopjawopefpaowef",
             "rdlevel_sha1": "wepaofawpoejfpawejfpoawefaew",
+            "md5": "iauogrfosahdgkljshdgkjdfsgh0"
         }
 
     with patch("orchard.scan.scan.analyze", wraps=fake_vitals) as mock_vitals:
