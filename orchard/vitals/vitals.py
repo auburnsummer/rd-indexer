@@ -58,7 +58,7 @@ def main(f: BinaryIO):
         ): event_type_facet,
         "sha1": sha1_facet,
         "rdlevel_sha1": rdlevel_sha1_facet,
-        "rdlevel_md5": rdlevel_md5_facet
+        "rdlevel_md5": rdlevel_md5_facet,
     }
 
     try:

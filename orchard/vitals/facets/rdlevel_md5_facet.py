@@ -1,5 +1,5 @@
 # this is the md5 hash of the .rdlevel file based on the author/artist/song fields
-# which should be identical to what RD uses to save custom level scores. 
+# which should be identical to what RD uses to save custom level scores.
 import hashlib
 
 from orchard.vitals.arguments_decorator import with_arguments
