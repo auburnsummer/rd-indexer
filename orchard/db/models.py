@@ -48,7 +48,6 @@ class Level(Model):
     two_player = BooleanField()
     url = TextField(null=True)
     url2 = TextField()
-    rdlevel_md5 = TextField()
 
 
 # a status is stateful data about a level.
@@ -102,7 +101,6 @@ class Combined(Model):
     two_player = BooleanField()
     url = TextField(null=True)
     url2 = TextField()
-    rdlevel_md5 = TextField()
     # STATUS
     approval = IntegerField()
     approval_reasons = TextField(null=True)
