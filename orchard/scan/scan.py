@@ -6,7 +6,7 @@ import sys
 
 from playhouse.sqlite_ext import SqliteExtDatabase
 
-from orchard.db.models import Level
+from orchard.db.models import Level, Info
 from orchard.scan.b2 import upload
 
 from orchard.scan.db_funcs import get_source_set, level_exists, add_level, delete_level
@@ -14,6 +14,8 @@ from orchard.scan.sources.old_sheet import OldSheetScraper
 from orchard.vitals import analyze
 import traceback
 import yaml
+from playhouse.migrate import *
+from peewee import *
 
 logging.basicConfig(level=logging.INFO)
 
@@ -23,13 +25,25 @@ CODEX = "https://codex.rhythm.cafe"
 
 SCRAPER_MAP = {"OldSheetScraper": OldSheetScraper}
 
+def migrate_0_1(db: SqliteExtDatabase):
+    migrator = SqliteMigrator(db)
+    migrate(
+        migrator.add_column('level', 'rd_md5', TextField(null=True))
+    )
 
 async def main(db: SqliteExtDatabase, sources):
     Level.bind(db)
+    Info.bind(db)
 
     if not db.table_exists("level"):
         logger.info("The DB doesn't contain a 'level' table. Making it now...")
         db.create_tables([Level])
+
+    if not db.table_exists("info"):
+        logger.info("MIGRATE 0 -> 1")
+        migrate_0_1(db)
+        db.create_tables([Info])
+        Info.create(id=0, schema_version=1)
 
     for source_id, scraper_class, kwargs in sources:
         # Initiate the scraper and get the current list of iids.

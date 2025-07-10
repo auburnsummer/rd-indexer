@@ -11,7 +11,6 @@ MyJsonField = functools.partial(JSONField, json_dumps=my_json_dumps)
 # this is entirely deterministic based on the rdzip. there is no stateful data here.
 # NOTE TO SELF: changes here must be reflected in Combined below.
 
-
 class Level(Model):
     artist = TextField()
     artist_tokens = MyJsonField()
@@ -48,6 +47,7 @@ class Level(Model):
     two_player = BooleanField()
     url = TextField(null=True)
     url2 = TextField()
+    rd_md5 = TextField(null=True)
 
 
 # a status is stateful data about a level.
@@ -101,10 +101,13 @@ class Combined(Model):
     two_player = BooleanField()
     url = TextField(null=True)
     url2 = TextField()
+    rd_md5 = TextField(null=True)
+
     # STATUS
     approval = IntegerField()
     approval_reasons = TextField(null=True)
     indexed = DateTimeField(null=True)
+
 
 
 # The info table contains info about the database. This table typically only has one row.
