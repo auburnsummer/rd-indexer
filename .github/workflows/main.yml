@@ -51,7 +51,7 @@ jobs:
         run: poetry install --no-interaction
 
       - name: install b2
-        run: pipx install b2==3.11.0
+        run: pipx install b2==4.4.1
         
       - name: configure b2
         run: b2 authorize-account $B2_KEY_ID $B2_APPLICATION_KEY
