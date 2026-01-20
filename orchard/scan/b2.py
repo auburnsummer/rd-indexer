@@ -30,7 +30,7 @@ else:
 
 def file_exists(filename):
     url = f"https://f000.backblazeb2.com/file/{BUCKET_NAME}/{filename}"
-    resp = httpx.head(url)
+    resp = httpx.head(url, timeout=15.0)
     return resp.status_code == httpx.codes.OK
 
 
