@@ -22,13 +22,15 @@ class DiscordScraper(RDLevelScraper):
     Scrape a discord server for rdzips. It works on a specific channel.
     bot_token : token for the bot user that does the scraping.
     channel_id: id of the channel. not sure how this will work with forum channels?
-    start_timestamp: when to start scanning from. this is a discord snowflake
+    after: when to start scanning from. this is a discord snowflake
+    before: when to stop scanning. if not given, continues until no more files. this is also a snowflake.
     """
 
-    def __init__(self, bot_token, channel_id, after):
+    def __init__(self, bot_token, channel_id, after, before=None):
         self.bot_token = bot_token
         self.channel_id = channel_id
         self.after = after
+        self.before = before
         self.iid_cache = {}  # cache of iids to discord Message objects.
         # self.iid_url_map = {}
         # get our id.
@@ -136,6 +138,10 @@ class DiscordScraper(RDLevelScraper):
                     # note2: even if the post has a :no-entry-sign:, we still need to think about it for pagination.
                     if int(post["id"]) > current_after:
                         current_after = int(post["id"])
+
+                    if self.before is not None and int(post["id"]) > self.before:
+                        print("Hit before point. We're done now.")
+                        break
 
                     # check the post does not have a :no-entry-sign: by the OP.
                     remove_attachments = await self.check_reaction(post, "🚫")
